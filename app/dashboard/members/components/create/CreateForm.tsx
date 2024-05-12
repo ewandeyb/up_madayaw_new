@@ -24,35 +24,20 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
-import { createMember, updateMemberById } from "../../actions";
+import { createMember} from "../../actions";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { cn } from "@/lib/utils";
-
-const FormSchema = z
-	.object({
-		name: z.string().min(2, {
-			message: "Username must be at least 2 characters.",
-		}),
-		role: z.enum(["user", "admin"]),
-		status: z.enum(["active", "resigned"]),
-		email: z.string().email(),
-		password: z
-			.string()
-			.min(6, { message: "Password should be 6 characters" }),
-		confirm: z
-			.string()
-			.min(6, { message: "Password should be 6 characters" }),
-	})
-	.refine((data) => data.confirm === data.password, {
-		message: "Passowrd doesn't match",
-		path: ["confirm"],
-	});
+import {FormSchema} from "./schema"
+import {FormFields} from "./types"
+import { useTransition } from "react";
 
 export default function MemberForm() {
+
+	const [isPending,startTransition] = useTransition();
 	const roles = ["admin", "user"];
 	const status = ["active", "resigned"];
 
-	const form = useForm<z.infer<typeof FormSchema>>({
+	const form = useForm<FormFields>({
 		resolver: zodResolver(FormSchema),
 		defaultValues: {
 			name: "",
@@ -62,20 +47,28 @@ export default function MemberForm() {
 		},
 	});
 
-	function onSubmit(data: z.infer<typeof FormSchema>) {
-		createMember();
+	function onSubmit(data:FormFields) {
 
-		document.getElementById("create-trigger")?.click();
-
-		toast({
-			title: "You submitted the following values:",
-			description: (
-				<pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-					<code className="text-white">
-						{JSON.stringify(data, null, 2)}
-					</code>
-				</pre>
-			),
+		startTransition(async () =>{
+			const result = await createMember(data);
+			const {error} = JSON.parse(result);
+			if(error?.message){
+				toast({
+					title: "Failed to create member",
+					description: (
+						<pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+							<code className="text-white">
+								{error.message}
+							</code>
+						</pre>
+					),
+				});
+			}else{
+				document.getElementById("create-trigger")?.click();
+				toast({
+					title: "Sucessfully created member",
+				});
+			}
 		});
 	}
 
@@ -233,7 +226,7 @@ export default function MemberForm() {
 				>
 					Submit{" "}
 					<AiOutlineLoading3Quarters
-						className={cn("animate-spin", { hidden: true })}
+						className={cn("animate-spin", { hidden: !isPending })}
 					/>
 				</Button>
 			</form>
