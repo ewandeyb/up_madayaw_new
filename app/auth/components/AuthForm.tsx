@@ -18,7 +18,7 @@ import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { cn } from "@/lib/utils";
-import { useTransition } from "react";
+import { useState, useTransition } from "react";
 import { loginWithEmailAndPassword } from "../actions";
 import { AuthTokenResponse } from "@supabase/supabase-js";
 
@@ -29,7 +29,6 @@ const FormSchema = z.object({
 
 export default function AuthForm() {
 	const [isPending, startTransition] = useTransition();
-
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
 		defaultValues: {
@@ -37,7 +36,7 @@ export default function AuthForm() {
 			password: "",
 		},
 	});
-
+	
 	function onSubmit(data: z.infer<typeof FormSchema>) {
 		startTransition(async () => {
 			const { error } = JSON.parse(
@@ -54,9 +53,11 @@ export default function AuthForm() {
 					),
 				});
 			} else {
+				console.log(data.email);
 				toast({
 					title: "Successfully login 🎉",
 				});
+
 			}
 		});
 	}
@@ -75,7 +76,7 @@ export default function AuthForm() {
 							<FormItem>
 								<FormLabel>Email</FormLabel>
 								<FormControl>
-									<Input placeholder="shadcn" {...field} />
+									<Input placeholder="member@gmail.com" {...field} />
 								</FormControl>
 
 								<FormMessage />
@@ -90,14 +91,14 @@ export default function AuthForm() {
 								<FormLabel>Password</FormLabel>
 								<FormControl>
 									<Input
-										placeholder="shadcn"
+										placeholder="*******"
 										{...field}
 										type="password"
 									/>
 								</FormControl>
 								<FormDescription>
 									{
-										"contact your admin if you forgot your password"
+										"Contact your admin if you forgot your password."
 									}
 								</FormDescription>
 								<FormMessage />

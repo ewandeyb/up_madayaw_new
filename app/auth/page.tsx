@@ -2,6 +2,7 @@ import React from "react";
 import AuthForm from "./components/AuthForm";
 import { readUserSession } from "@/lib/actions";
 import { redirect } from "next/navigation";
+import Header from "@/components/Header";
 
 export default async function page() {
 	const { data: userSession } = await readUserSession();
@@ -10,8 +11,11 @@ export default async function page() {
 		return redirect("/dashboard");
 	}
 	return (
-		<div className="flex items-center justify-center h-screen">
-			<AuthForm />
-		</div>
+		<>
+			{/* <Header /> */}
+			<div className="flex items-center justify-center h-screen p-4">
+				<AuthForm />
+			</div>
+		</>
 	);
 }
