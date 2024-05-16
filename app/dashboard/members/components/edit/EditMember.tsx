@@ -1,5 +1,5 @@
 import React from "react";
-import DailogForm from "../DialogForm";
+import DialogForm from "../DialogForm";
 import { Button } from "@/components/ui/button";
 import { Pencil1Icon } from "@radix-ui/react-icons";
 import EditForm from "./EditorForm";
@@ -7,7 +7,7 @@ import { IPermission } from "@/lib/types";
 
 export default function EditMember({isAdmin,permission}:{isAdmin:boolean,permission:IPermission}) {
 	return (
-		<DailogForm
+		<DialogForm
 			id="update-trigger"
 			title="Edit Member"
 			Trigger={
