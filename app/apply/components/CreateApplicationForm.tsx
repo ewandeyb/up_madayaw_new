@@ -100,7 +100,7 @@ export default function ApplicationForm() {
         />
         <FormField
           control={form.control}
-          name="LastName"
+          name="MiddleName"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Middle Name</FormLabel>
@@ -120,7 +120,7 @@ export default function ApplicationForm() {
         />
         <FormField
           control={form.control}
-          name="MiddleName"
+          name="LastName"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Last Name</FormLabel>
@@ -282,7 +282,7 @@ export default function ApplicationForm() {
           name="OfficeTitle"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Position Title</FormLabel>
+              <FormLabel>Office Title</FormLabel>
               <FormControl>
                 <Input
                   type="text"
