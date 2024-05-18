@@ -3,10 +3,11 @@ import { Applications, columns } from "./columns"
 import { DataTable } from "./data-table"
 import { createSupabaseAdmin, createSupbaseServerClient } from "@/lib/supabase";
 import { revalidatePath, unstable_noStore } from "next/cache";
+import { createClient } from "@supabase/supabase-js";
 
 async function getApplicationData(): Promise<Applications[]> {
   
-  const supabase = await createSupabaseAdmin();
+  const supabase = await createSupbaseServerClient();
   const { data: permissions, error: permissionsError } = await supabase
   .from('Permissions')
   .select(`
