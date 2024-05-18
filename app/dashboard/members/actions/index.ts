@@ -4,16 +4,33 @@ import { createSupabaseAdmin, createSupbaseServerClient } from "@/lib/supabase";
 import { revalidatePath, unstable_noStore } from "next/cache";
 
 export async function createMember(data: {
-  name: string;
-  role: "user" | "admin";
-  status: "active" | "resigned";
-  email: string;
-  password: string;
-  confirm: string;
+  /*MembershipNo: string,
+  MemberType: string,
+  MiddleName: string,
+  LastName: string,
+  Suffix: string,
+  Sex: string,
+  BirthDate: string,
+  Birthplace: string,
+  SpouseFirstName: string,
+  SpouseMiddleName: string,
+  SpouseLastName: string,
+  SpouseSuffix: string,
+  SpouseOccupation: string,
+  NearestRelativeFirstName: string,
+  NearestRelativeLastName: string, */
+
+  FirstName: string,
+  Role: string,
+  Status: string,
+  Email: string,
+  password: string,
+  confirm: string,
 }) {
   //Prevent User from accessing admin stuff
   const { data: userSession } = await readUserSession();
-  if (userSession.session?.user.user_metadata.role !== "admin") {
+  
+  if (userSession.session?.user.user_metadata.Role !== "admin") {
     return JSON.stringify({
       error: { message: "You are not allowed to access this!" },
     });
@@ -23,11 +40,12 @@ export async function createMember(data: {
   // create account
 
   const createResult = await supabase.auth.admin.createUser({
-    email: data.email,
+    email: data.Email,
     password: data.password,
     email_confirm: true,
     user_metadata: {
-      role: data.role,
+      Role: data.Role,  
+      Status: data.Status,
     },
   });
 
@@ -35,15 +53,15 @@ export async function createMember(data: {
     return JSON.stringify(createResult);
   } else {
     const memberResult = await supabase
-      .from("members")
-      .insert({ name: data.name, id: createResult.data.user?.id, email:data.email });
+      .from("MemberData")
+      .insert({ FirstName: data.FirstName, MembershipID: createResult.data.user?.id, Email: data.Email});
     if (memberResult.error?.message) {
       return JSON.stringify(memberResult);
     } else {
-      const permissionResult = await supabase.from("permissions").insert({
-        role: data.role,
-        member_id: createResult.data.user?.id,
-        status: data.status,
+      const permissionResult = await supabase.from("Permissions").insert({
+        Role: data.Role,
+        PermissionsID: createResult.data.user?.id,
+        Status: data.Status,
       });
 			revalidatePath("/dashboard/member");
       return JSON.stringify(permissionResult);
@@ -98,7 +116,7 @@ export async function readMembers() {
 
 	unstable_noStore(); //Cache
 
-	const supbase = await createSupbaseServerClient()
+	const supabase = await createSupbaseServerClient()
 
-	return await supbase.from("permissions").select("*,members(*)");
+	return await supabase.from("Permissions").select("*,MemberData(*)");
 }

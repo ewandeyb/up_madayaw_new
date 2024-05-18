@@ -24,31 +24,48 @@ import {
 import { createMember} from "../../actions";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { cn } from "@/lib/utils";
-import {FormSchema} from "./schema"
-import {FormFields} from "./types"
+import {MemberSchema} from "./schema"
+import {MemberFields} from "./types"
 import { useTransition } from "react";
 
 export default function MemberForm() {
 
 	const [isPending,startTransition] = useTransition();
-	const roles = ["admin", "user"];
-	const status = ["active", "resigned"];
+	const Roles = ["admin", "user"];
+	const MemberType = ["Regular Membership", "Associate (NGS/Project-Based)"]
+	const Status = ["active","resigned"]
 
-	const form = useForm<FormFields>({
-		resolver: zodResolver(FormSchema),
+	const form = useForm<MemberFields>({
+		resolver: zodResolver(MemberSchema),
 		defaultValues: {
-			name: "",
-			role: "user",
-			status: "active",
-			email: "",
+			/* MembershipNo: "1",
+			MemberType: "Regular Membership",
+			MiddleName: "Hue",
+			LastName: "Doe",
+			Suffix: "Jr.",
+			Sex: "Male",
+			BirthDate: "2024/05/06",
+			Birthplace: "Davao",
+			SpouseFirstName: "Jane",
+			SpouseMiddleName: "Go",
+			SpouseLastName: "Tan",
+			SpouseSuffix: "Sr.",
+			SpouseOccupation: "Teacher",
+			NearestRelativeFirstName: "Johnny",
+			NearestRelativeLastName: "Du", */
+			FirstName: "John",
+			Email: "upmadayaw@up.edu.ph",
+			Role: "user",
+			Status: "active",
 		},
 	});
 
-	function onSubmit(data:FormFields) {
+	function onSubmit(data:MemberFields) {
 
 		startTransition(async () =>{
 			const result = await createMember(data);
-			const {error} = JSON.parse(result);
+			const {error} = JSON.parse(result || '{}');
+			console.log();
 			if(error?.message){
 				toast({
 					title: "Failed to create member",
@@ -77,7 +94,7 @@ export default function MemberForm() {
 			>
 				<FormField
 					control={form.control}
-					name="email"
+					name="Email"
 					render={({ field }) => (
 						<FormItem>
 							<FormLabel>Email</FormLabel>
@@ -129,18 +146,18 @@ export default function MemberForm() {
 				/>
 				<FormField
 					control={form.control}
-					name="name"
+					name="FirstName"
 					render={({ field }) => (
 						<FormItem>
 							<FormLabel>Username</FormLabel>
 							<FormControl>
 								<Input
-									placeholder="display name"
+									placeholder="First Name"
 									onChange={field.onChange}
 								/>
 							</FormControl>
 							<FormDescription>
-								This is your public display name.
+								This is your first name.
 							</FormDescription>
 							<FormMessage />
 						</FormItem>
@@ -148,7 +165,7 @@ export default function MemberForm() {
 				/>
 				<FormField
 					control={form.control}
-					name="role"
+					name="Role"
 					render={({ field }) => (
 						<FormItem>
 							<FormLabel>Role</FormLabel>
@@ -162,7 +179,7 @@ export default function MemberForm() {
 									</SelectTrigger>
 								</FormControl>
 								<SelectContent>
-									{roles.map((role, index) => {
+									{Roles.map((role, index) => {
 										return (
 											<SelectItem
 												value={role}
@@ -181,7 +198,7 @@ export default function MemberForm() {
 				/>
 				<FormField
 					control={form.control}
-					name="status"
+					name="Status"
 					render={({ field }) => (
 						<FormItem>
 							<FormLabel>Status</FormLabel>
@@ -195,7 +212,7 @@ export default function MemberForm() {
 									</SelectTrigger>
 								</FormControl>
 								<SelectContent>
-									{status.map((status, index) => {
+									{Status.map((status, index) => {
 										return (
 											<SelectItem
 												value={status}
