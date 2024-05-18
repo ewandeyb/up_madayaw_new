@@ -10,7 +10,8 @@ export const ApplicationFormSchema = z
   PositionTitle:z.string().min(2),
   Email: z.string().email(),
   Sex: z.enum(["Male","Female","Other","Prefer not to Say"]),
-
+  NatureOfEmployment: z.enum(["Casual", "NGS", "Permanent"]),
+  OfficeTitle: z.string().min(2)
 });
 
 /* 
