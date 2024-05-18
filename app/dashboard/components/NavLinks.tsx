@@ -19,6 +19,11 @@ export default function NavLinks() {
 			text: "Member Applications",
 			Icon: CrumpledPaperIcon,
 		},
+		{
+			href: "/dashboard/profile",
+			text: "Member Profile",
+			Icon: PersonIcon,
+		},
 	];
 
 	return (
