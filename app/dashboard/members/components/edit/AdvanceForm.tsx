@@ -99,7 +99,7 @@ export default function AdvanceForm({permission}:{permission:IPermission}) {
 				/>
 				<FormField
 					control={form.control}
-					name="status"
+					name="Status"
 					render={({ field }) => (
 						<FormItem>
 							<FormLabel>Status</FormLabel>
@@ -113,7 +113,7 @@ export default function AdvanceForm({permission}:{permission:IPermission}) {
 									</SelectTrigger>
 								</FormControl>
 								<SelectContent>
-									{status.map((status, index) => {
+									{Status.map((status, index) => {
 										return (
 											<SelectItem
 												value={status}

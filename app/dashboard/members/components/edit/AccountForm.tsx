@@ -21,7 +21,7 @@ import { IPermission } from "@/lib/types";
 
 const FormSchema = z
 	.object({
-		email: z.string().email(),
+		Email: z.string().email(),
 		password: z.string().optional(),
 		confirm: z.string().optional(),
 	})
@@ -34,7 +34,7 @@ export default function AccountForm({permission}:{permission:IPermission}) {
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
 		defaultValues: {
-			email: permission.members.email,
+			Email: permission.MemberData.Email,
 			password: "",
 			confirm: "",
 		},
@@ -61,7 +61,7 @@ export default function AccountForm({permission}:{permission:IPermission}) {
 			>
 				<FormField
 					control={form.control}
-					name="email"
+					name="Email"
 					render={({ field }) => (
 						<FormItem>
 							<FormLabel>Email</FormLabel>
