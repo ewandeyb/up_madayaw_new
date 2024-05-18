@@ -20,9 +20,11 @@ import { cn } from "@/lib/utils";
 import { IPermission } from "@/lib/types";
 import { useTransition } from "react";
 import { updateMemberBasicById } from "../../actions";
+import { MemberSchema } from "../create/schema";
+import { MemberFields } from "../create/types";
 
 const FormSchema = z.object({
-	name: z.string().min(2, {
+	FirstName: z.string().min(2, {
 		message: "Name must be at least 2 characters.",
 	}),
 });
@@ -33,14 +35,15 @@ export default function BasicForm({permission}:{permission:IPermission}) {
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
 		defaultValues: {
-			name: permission.members.name,
+			FirstName: permission.MemberData.FirstName,
 		},
 	});
 
 	function onSubmit(data: z.infer<typeof FormSchema>) {
 
 		startTransition(async () => {
-			const {error} = JSON.parse(await updateMemberBasicById(permission.member_id, data));
+			const {error} = JSON.parse(await updateMemberBasicById(permission.PermissionsID, data));
+			console.log("hi");
 
 			if(error?.message){
 				toast({
@@ -60,7 +63,7 @@ export default function BasicForm({permission}:{permission:IPermission}) {
 			}
 		})
 	}
-
+	
 	return (
 		<Form {...form}>
 			<form
@@ -69,12 +72,14 @@ export default function BasicForm({permission}:{permission:IPermission}) {
 			>
 				<FormField
 					control={form.control}
-					name="name"
+					name="FirstName"
 					render={({ field }) => (
 						<FormItem>
-							<FormLabel>Display Name</FormLabel>
+							<FormLabel>First Name</FormLabel>
 							<FormControl>
-								<Input placeholder="shadcn" {...field} />
+								<Input placeholder="shadcn" 
+								{...field}
+								onChange={field.onChange} />
 							</FormControl>
 							<FormMessage />
 						</FormItem>

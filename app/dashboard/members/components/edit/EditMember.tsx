@@ -8,8 +8,8 @@ import { IPermission } from "@/lib/types";
 export default function EditMember({isAdmin,permission}:{isAdmin:boolean,permission:IPermission}) {
 	return (
 		<DialogForm
-			id="update-trigger"
-			title="Edit Member"
+		id="update-trigger"
+		title="Edit Member"
 			Trigger={
 				<Button variant="outline">
 					<Pencil1Icon />

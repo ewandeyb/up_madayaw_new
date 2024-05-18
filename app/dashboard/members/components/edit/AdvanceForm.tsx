@@ -25,21 +25,23 @@ import { toast } from "@/components/ui/use-toast";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { cn } from "@/lib/utils";
 import { IPermission } from "@/lib/types";
+import { MemberFields } from "../create/types";
+import { MemberSchema } from "../create/schema";
 
 const FormSchema = z.object({
-	role: z.enum(["admin", "user"]),
-	status: z.enum(["active", "resigned"]),
+	Role: z.enum(["admin", "user"]),
+	Status: z.enum(["active", "resigned"]),
 });
 
 export default function AdvanceForm({permission}:{permission:IPermission}) {
-	const roles = ["admin", "user"];
-	const status = ["active", "resigned"];
+	const Roles = ["admin", "user"];
+	const Status = ["active", "resigned"];
 
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
 		defaultValues: {
-			role: permission.role,
-			status: permission.status,
+			Role: permission.Role,
+			Status: permission.Status,
 		},
 	});
 
@@ -64,7 +66,7 @@ export default function AdvanceForm({permission}:{permission:IPermission}) {
 			>
 				<FormField
 					control={form.control}
-					name="role"
+					name="Role"
 					render={({ field }) => (
 						<FormItem>
 							<FormLabel>Role</FormLabel>
@@ -78,7 +80,7 @@ export default function AdvanceForm({permission}:{permission:IPermission}) {
 									</SelectTrigger>
 								</FormControl>
 								<SelectContent>
-									{roles.map((role, index) => {
+									{Roles.map((role, index) => {
 										return (
 											<SelectItem
 												value={role}

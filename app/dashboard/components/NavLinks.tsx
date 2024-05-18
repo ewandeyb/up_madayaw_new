@@ -10,6 +10,11 @@ export default function NavLinks() {
 
 	const links = [
 		{
+			href: "/dashboard",
+			text: "Profile",
+			Icon: PersonIcon,
+		},
+		{
 			href: "/dashboard/members",
 			text: "Members",
 			Icon: PersonIcon,
@@ -18,11 +23,6 @@ export default function NavLinks() {
 			href: "/dashboard/todo",
 			text: "Member Applications",
 			Icon: CrumpledPaperIcon,
-		},
-		{
-			href: "/dashboard/profile",
-			text: "Member Profile",
-			Icon: PersonIcon,
 		},
 	];
 

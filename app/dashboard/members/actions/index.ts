@@ -46,6 +46,7 @@ export async function createMember(data: {
     user_metadata: {
       Role: data.Role,  
       Status: data.Status,
+      Email : data.Email,
     },
   });
 
@@ -68,47 +69,47 @@ export async function createMember(data: {
     }
   }
 
-  // Create Member
-  // create permission
-  console.log("create user");
 }
 export async function updateMemberBasicById(
 	id: string, 
 	data: {
-		name: string;
+		FirstName: string,
 	}
 ) {
+  console.log("hello");
+  const supabase = await createSupbaseServerClient();
 
-	const supabase = await createSupbaseServerClient();
-
-	const result = await supabase.from("members").update(data).eq("id", id)
-	revalidatePath("/dashboard/members")
-	return JSON.stringify(result)
-
+  const result = await supabase.from("MemberData").update(data).eq("MembershipID",id);
+  revalidatePath("/dashboard/members");
+  return JSON.stringify(result);
+	
 }
 
 export async function deleteMemberById(user_id: string) {
 	
 	const { data: userSession } = await readUserSession();
-  if (userSession.session?.user.user_metadata.role !== "admin") { // if not admin, not allowed
+  
+  if (userSession.session?.user.user_metadata.Role !== "admin") {
     return JSON.stringify({
       error: { message: "You are not allowed to access this!" },
     });
   } 
-
+  
 	// delete account
 	const supabaseAdmin = await createSupabaseAdmin();
 
 	const deleteResult = await supabaseAdmin.auth.admin.deleteUser(user_id);
 
 	if (deleteResult.error?.message) {
+
     return JSON.stringify(deleteResult);
   }else{
-		const supbase = await createSupbaseServerClient()
+		const supbase = await createSupbaseServerClient();
 
-		const result =  await supbase.from("members").delete().eq("id", user_id);
-		revalidatePath("/dashboard/member");
-		return JSON.stringify(result);
+		const result =  await supbase.from("MemberData").delete().eq("MembershipID", user_id);
+		revalidatePath("/dashboard/members");
+    console.log(result);
+		return JSON.stringify(result);  
 	}
 }
 

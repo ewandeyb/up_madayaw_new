@@ -12,7 +12,7 @@ export default function DeleteMember({ user_id }: {user_id: string}){
   const onSubmit = () => {
     startTransition(async () => {
       const result = JSON.parse(await deleteMemberById(user_id));
-
+      console.log(result);
         if(result?.error?.message){
           toast({
             title: "Failed to delete member."

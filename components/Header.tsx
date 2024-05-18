@@ -4,11 +4,13 @@ import { Button } from "@/components/ui/button"
 import { SheetTrigger, SheetContent, Sheet } from "@/components/ui/sheet"
 import { AlignJustify } from "lucide-react"
 import logo from "../components/img/logo.png"
-
+import { readUserSession } from "@/lib/actions";
 
 export default async function Header() {
+  const {data: userSession} = await readUserSession();
+  const isLoggedIn = userSession.session?.user.user_metadata.Role === "admin" || userSession.session?.user.user_metadata.Role === "user";
+  const email = userSession.session?.user.email;
   
-
   return (
     
     <header className="flex h-16 w-full items-center justify-between bg-up_color px-4 shadow-sm dark:bg-gray-950 sm:px-6 lg:px-8">
@@ -23,9 +25,13 @@ export default async function Header() {
         <Link className="text-sm text-gray font-medium hover:underline hover:underline-offset-4" href="/about">
           About
         </Link>
-        <Link className="text-sm text-gray font-medium hover:underline hover:underline-offset-4" href="/auth">
-          Login
-        </Link>
+        {isLoggedIn ? (
+          <Link className="hover:underline hover:underline-offset-4 text-sm text-gray font-normal" href="/auth">Welcome <span className=" font-normal text-upcolor ">{email}</span></Link>
+        ) : (
+          <Link className="text-sm text-gray font-medium hover:underline hover:underline-offset-4" href="/auth">
+            Login
+          </Link>
+        )}
         <Button size="sm" variant="up" className=" text-white font-bold border ">
           <a href="/apply">Apply Now</a>
         </Button>
