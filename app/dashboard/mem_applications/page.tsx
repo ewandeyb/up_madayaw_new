@@ -39,8 +39,14 @@ if (memberDataError) {
 const joinedData = permissions.map(permission => {
   const matchingMember = memberData.find(member => member.MembershipID === permission.PermissionsID);
   return {
-    ...permission,
-    ...matchingMember
+    MembershipID: matchingMember?.MembershipID || '', // Ensure MembershipID is present
+    FirstName: matchingMember?.FirstName || '',       // Ensure FirstName is present
+    LastName: matchingMember?.LastName || '',         // Ensure LastName is present
+    Email: matchingMember?.Email || '',               // Ensure Email is present
+    MemberType: matchingMember?.MemberType || '',     // Ensure MemberType is present
+    Role: permission.Role,
+    Status: permission.Status,
+    PermissionsID: permission.PermissionsID
   };
 });
 

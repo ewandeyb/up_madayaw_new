@@ -17,7 +17,7 @@ export async function createApplication(data: {
   NatureOfEmployment: string
 }) {
 
-  /* const new_uuid = crypto.randomUUID();
+  const new_uuid = crypto.randomUUID();
   const supabase = await createSupbaseServerClient();
   // modification? may or may not work.
   const addMemberData = await supabase.from("MemberData").insert({
@@ -52,7 +52,7 @@ export async function createApplication(data: {
   } else {
     revalidatePath("/apply");
     return JSON.stringify(addOccupation);
-  } */
+  }
 }
 
 /* CODE BELOW NOT UPDATED */

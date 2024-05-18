@@ -35,23 +35,23 @@ export default function ApplicationForm() {
   const form = useForm<ApplicationFormFields>({
     resolver: zodResolver(ApplicationFormSchema),
     defaultValues: {
-      FirstName: "",
-      MiddleName: "",
-      LastName: "",
-      Suffix: "",
+      FirstName: "A",
+      MiddleName: "A",
+      LastName: "A",
+      Suffix: "A",
       CivilStatus: "Single",
-      PositionTitle: "",
-      Email: "",
+      PositionTitle: "A",
+      Email: "A",
       Sex: "Male",
       NatureOfEmployment: "Casual",
-      OfficeTitle: ""
+      OfficeTitle: "A"
     },
   });
 
   function onSubmit(data: ApplicationFormFields) {
     startTransition(async () => {
       const result = await createApplication(data);
-      const { error } = JSON.parse(result);
+      const { error } = JSON.parse(result || '{}');
       if (error?.message) {
         toast({
           title: "Failed to create application",

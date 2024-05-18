@@ -2,7 +2,7 @@
 import { readUserSession } from "@/lib/actions";
 import { createSupabaseAdmin, createSupbaseServerClient } from "@/lib/supabase";
 import { revalidatePath, unstable_noStore } from "next/cache";
-
+/* NOT USED FILE */
 export async function createApplication(data: {
   /*MembershipNo: string,
   MemberType: string,

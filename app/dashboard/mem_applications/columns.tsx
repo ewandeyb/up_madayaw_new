@@ -24,7 +24,6 @@ import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 
 export type Applications = {
-  id: string;
   Role: "user" | "admin";
   Status: "accepted" | "rejected" | "pending" | "active";
   PermissionsID: string;
