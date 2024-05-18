@@ -54,9 +54,13 @@ export default async function Header() {
             <Link className="text-sm font-medium hover:underline hover:underline-offset-4" href="/contact">
               Contact
             </Link>
-            <Link className="text-sm font-medium hover:underline hover:underline-offset-4" href="/auth">
-              Login
-            </Link>
+            {isLoggedIn ? (
+              <Link className="hover:underline hover:underline-offset-4 text-sm text-gray font-normal" href="/auth">Welcome <span className=" font-normal text-upcolor ">{email}</span></Link>
+            ) : (
+              <Link className="text-sm text-gray font-medium hover:underline hover:underline-offset-4" href="/auth">
+                Login
+              </Link>
+            )}
             <Button size="sm" variant="up" className=" text-white font-bold border ">
               Apply
             </Button>

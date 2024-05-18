@@ -1,13 +1,13 @@
 import React from "react";
 import ListOfTodo from "./ListOfTodo";
-import Table from "@/components/ui/Table";
+import OldTable from "@/components/ui/OldTable";
 
 export default function TodoTable() {
 	const tableHeader = ["Title", "Status", "Created at", "Created by"];
 
 	return (
-		<Table headers={tableHeader}>
+		<OldTable headers={tableHeader}>
 			<ListOfTodo />
-		</Table>
+		</OldTable>
 	);
 }

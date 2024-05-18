@@ -21,6 +21,11 @@ export default function NavLinks() {
 		},
 		{
 			href: "/dashboard/todo",
+			text: "Todo",
+			Icon: CrumpledPaperIcon,
+		},
+		{
+			href: "/dashboard/mem_applications",
 			text: "Member Applications",
 			Icon: CrumpledPaperIcon,
 		},
