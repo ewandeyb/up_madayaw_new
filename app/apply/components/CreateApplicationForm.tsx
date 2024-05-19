@@ -675,84 +675,102 @@ export default function ApplicationForm() {
         </div>
             
         <hr></hr>
-
-        <div className="p-2">
-          <h1 className="text-upcolor font-bold">Occupation</h1>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
-            <FormField
-              control={form.control}
-              name="PositionTitle"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Position Title</FormLabel>
+        <h1>Occupation</h1>
+        <div className="grid md:grid-cols-4 gap-2 p-2">
+          <FormField
+            control={form.control}
+            name="PositionTitle"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Position Title</FormLabel>
+                <FormControl>
+                  <Input
+                    type="text"
+                    {...field}
+                    onChange={field.onChange} />
+                </FormControl>
+                <FormDescription>
+                  What office title do you hold?
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="NatureOfEmployment"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Nature of Employment</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
                   <FormControl>
-                    <Input
-                      type="text"
-                      {...field}
-                      onChange={field.onChange} />
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select nature of employment" />
+                    </SelectTrigger>
                   </FormControl>
-                  <FormDescription>
-                    What office title do you hold?
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="NatureOfEmployment"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Nature of Employment</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select nature of employment" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {NatureOfEmployment.map((NatureOfEmployment, index) => {
-                        return (
-                          <SelectItem
-                            value={NatureOfEmployment}
-                            key={index}
-                          >
-                            {NatureOfEmployment}
-                          </SelectItem>
-                        );
-                      })}
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="OfficeTitle"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Office Title</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="text"
-                      {...field}
-                      onChange={field.onChange} />
-                  </FormControl>
-                  <FormDescription>
-                    What office do you work under?.
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
+                  <SelectContent>
+                    {NatureOfEmployment.map((NatureOfEmployment, index) => {
+                      return (
+                        <SelectItem
+                          value={NatureOfEmployment}
+                          key={index}
+                        >
+                          {NatureOfEmployment}
+                        </SelectItem>
+                      );
+                    })}
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="OfficeTitle"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Office Title</FormLabel>
+                <FormControl>
+                  <Input
+                    type="text"
+                    {...field}
+                    onChange={field.onChange} />
+                </FormControl>
+                <FormDescription>
+                  What office do you work under?.
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="YearsOfService"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Years of Service</FormLabel>
+                <FormControl>
+                  <Input
+                    type="number"
+                    {...field}
+                    onChange={field.onChange} />
+                </FormControl>
+                <FormDescription>
+                  How many years have you been working in this position?
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
         </div>
-        <div className="flex justify-center col-span-2">
-          <Button variant="up" type="submit" className="w-1/3 mb-4">Submit</Button>
+
+
+        <div className="flex justify-center col-span-3">
+          <Button variant="up" type="submit">Submit</Button>
         </div>
       </form>
     </Form >

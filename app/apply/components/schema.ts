@@ -7,8 +7,8 @@ export const ApplicationFormSchema = z
   LastName: z.string().min(2),
   Suffix: z.string().max(5),
   CivilStatus: z.enum(["Single","Married","Divorced","Widowed","Annulled","Legally Seperated"]),
-  PositionTitle:z.string().min(2),
   Email: z.string().email(),
+  Sex: z.enum(["Male","Female","Other","Prefer not to Say"]),
   BirthDate: z.date({
     required_error: "A date of birth is required.",
   }),
@@ -20,15 +20,16 @@ export const ApplicationFormSchema = z
   SpouseSuffix: z.string(),
   SpouseOccupation: z.string(),
 
-  Sex: z.enum(["Male","Female","Other","Prefer not to Say"]),
+  PositionTitle: z.string().min(2),
   NatureOfEmployment: z.enum(["Casual", "NGS", "Permanent"]),
   OfficeTitle: z.string().min(2),
+  YearsOfService: z.number().nonnegative(),
 
   MemLine1: z.string().min(2),
   MemBarangay: z.string().min(2),
   MemMunicipalityCity: z.string().min(2),
   MemProvince: z.string().min(2),
-  MemZipCode: z.number(),
+  MemZipCode: z.coerce.number(),
 
   NearestRelativeFirstName: z.string().min(2),
   NearestRelativeLastName: z.string().min(2),
@@ -37,7 +38,7 @@ export const ApplicationFormSchema = z
   RelativeBarangay: z.string().min(2),
   RelativeMunicipalityCity: z.string().min(2),
   RelativeProvince: z.string().min(2),
-  RelativeZipCode: z.number()
+  RelativeZipCode: z.coerce.number()
 });
 
 /* 
