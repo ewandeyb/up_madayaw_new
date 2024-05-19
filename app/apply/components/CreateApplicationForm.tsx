@@ -50,16 +50,16 @@ export default function ApplicationForm() {
   const form = useForm<ApplicationFormFields>({
     resolver: zodResolver(ApplicationFormSchema),
     defaultValues: {
-      FirstName: "John",
-      MiddleName: "Paul",
-      LastName: "Doe",
-      Suffix: "Jr.",
+      FirstName: "",
+      MiddleName: "",
+      LastName: "",
+      Suffix: "",
       CivilStatus: "Single",
-      PositionTitle: "Project Officer I",
-      Email: "johndoe@upmadayaw@up.edu.ph",
+      PositionTitle: "",
+      Email: "",
       Sex: "Male",
       NatureOfEmployment: "Casual",
-      OfficeTitle: "CEO"
+      OfficeTitle: ""
     },
   });
 
@@ -93,9 +93,12 @@ export default function ApplicationForm() {
         onSubmit={form.handleSubmit(onSubmit)}
         className="p-2"
       >
-        <h1>Personal Data</h1>
+        <hr></hr>
+        <div className="p-2">
 
-        <div className="grid md:grid-cols-4 gap-2 p-2">
+        <h1 className="font-bold text-upcolor">Personal Data</h1>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 p-2">
 
           <FormField
             control={form.control}
@@ -111,7 +114,7 @@ export default function ApplicationForm() {
                     onChange={field.onChange} />
                 </FormControl>
                 <FormDescription>
-                  This is your first name.
+                  
                 </FormDescription>
                 <FormMessage />
               </FormItem>
@@ -132,7 +135,7 @@ export default function ApplicationForm() {
                     onChange={field.onChange} />
                 </FormControl>
                 <FormDescription>
-                  This is your middle name.
+                  
                 </FormDescription>
                 <FormMessage />
               </FormItem>
@@ -153,7 +156,7 @@ export default function ApplicationForm() {
                     onChange={field.onChange} />
                 </FormControl>
                 <FormDescription>
-                  This is your last name.
+                  
                 </FormDescription>
                 <FormMessage />
               </FormItem>
@@ -174,7 +177,7 @@ export default function ApplicationForm() {
                     onChange={field.onChange} />
                 </FormControl>
                 <FormDescription>
-                  Optional.
+                  
                 </FormDescription>
                 <FormMessage />
               </FormItem>
@@ -264,45 +267,48 @@ export default function ApplicationForm() {
               </FormItem>
             )}
           />
+        
+          <FormField
+            control={form.control}
+            name="BirthDate"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Date of birth</FormLabel>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <Button
+                      variant={"outline"}
+                      className={cn("w-full flex justify-start text-left font-normal", !date && "text-muted-foreground")}
+                    >
+                      <CalendarIcon className="w-4 h-4 mr-2" />
+                      {date ? format(date, "PPP") : <span>Pick a date</span>}
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent align="start" className="w-auto p-0">
+                    <Calendar
+                      mode="single"
+                      captionLayout="dropdown-buttons"
+                      selected={date}
+                      onSelect={setDate}
+                      fromYear={1960}
+                      toYear={2030}
+                    />
+                  </PopoverContent>
+                </Popover>
+                <FormMessage />
+              </FormItem>
+            )}
+          />  
+        
 
-        <FormField
-          control={form.control}
-          name="BirthDate"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Date of birth</FormLabel>
-              <Popover>
-                <PopoverTrigger asChild>
-                  <Button
-                    variant={"outline"}
-                    className={cn("w-[240px] justify-start text-left font-normal", !date && "text-muted-foreground")}
-                  >
-                    <CalendarIcon className="mr-2 h-4 w-4" />
-                    {date ? format(date, "PPP") : <span>Pick a date</span>}
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent align="start" className=" w-auto p-0">
-                  <Calendar
-                    mode="single"
-                    captionLayout="dropdown-buttons"
-                    selected={date}
-                    onSelect={setDate}
-                    fromYear={1960}
-                    toYear={2030}
-                  />
-                </PopoverContent>
-              </Popover>
-              <FormMessage />
-            </FormItem>
-          )}
-        />  
 
+        </div>
         </div>
 
         <hr></hr>
         <div className="p-2">
-          <h1>Spouse Data</h1>
-          <div className="grid md:grid-cols-4 gap-2 p-2">
+          <h1 className="font-bold text-upcolor">Spouse Data</h1>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 p-2">
             <FormField
               control={form.control}
               name="SpouseFirstName"
@@ -317,7 +323,7 @@ export default function ApplicationForm() {
                       onChange={field.onChange} />
                   </FormControl>
                   <FormDescription>
-
+                    
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -338,7 +344,7 @@ export default function ApplicationForm() {
                       onChange={field.onChange} />
                   </FormControl>
                   <FormDescription>
-
+                  
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -411,7 +417,7 @@ export default function ApplicationForm() {
 
         <hr></hr>
         <div className="p-2">
-          <h1>Postal Address</h1>
+          <h1 className="font-bold text-upcolor" >Postal Address</h1>
           <div className="">
             <FormField
               control={form.control}
@@ -434,7 +440,7 @@ export default function ApplicationForm() {
               )}
             />
           </div>
-          <div className="grid md:grid-cols-4 gap-2">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
             <FormField
               control={form.control}
               name="MemBarangay"
@@ -519,8 +525,8 @@ export default function ApplicationForm() {
         </div>
 
         <div className="p-2">
-          <h1>Nearest Relative Data</h1>
-          <div className="grid md:grid-cols-3 gap-2">
+          <h1 className="text-upcolor font-bold">Nearest Relative Data</h1>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
           <FormField
             control={form.control}
             name="NearestRelativeFirstName"
@@ -561,6 +567,7 @@ export default function ApplicationForm() {
               </FormItem>
             )}
           />
+          </div>
 
             <FormField
               control={form.control}
@@ -576,14 +583,14 @@ export default function ApplicationForm() {
                       onChange={field.onChange} />
                   </FormControl>
                   <FormDescription>
-                    Line 1 of your postal address
+                    Line 1 of nearest relative&apos;s postal address
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
             />
-          </div>
-          <div className="grid md:grid-cols-4 gap-2">
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
             <FormField
               control={form.control}
               name="RelativeBarangay"
@@ -666,85 +673,86 @@ export default function ApplicationForm() {
             />
           </div>
         </div>
-
+            
         <hr></hr>
-        <h1>Occupation</h1>
-        <div className="grid md:grid-cols-4 gap-2 p-2">
-          <FormField
-            control={form.control}
-            name="PositionTitle"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Position Title</FormLabel>
-                <FormControl>
-                  <Input
-                    type="text"
-                    {...field}
-                    onChange={field.onChange} />
-                </FormControl>
-                <FormDescription>
-                  What office title do you hold?
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="NatureOfEmployment"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Nature of Employment</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
+
+        <div className="p-2">
+          <h1 className="text-upcolor font-bold">Occupation</h1>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+            <FormField
+              control={form.control}
+              name="PositionTitle"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Position Title</FormLabel>
                   <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select nature of employment" />
-                    </SelectTrigger>
+                    <Input
+                      type="text"
+                      {...field}
+                      onChange={field.onChange} />
                   </FormControl>
-                  <SelectContent>
-                    {NatureOfEmployment.map((NatureOfEmployment, index) => {
-                      return (
-                        <SelectItem
-                          value={NatureOfEmployment}
-                          key={index}
-                        >
-                          {NatureOfEmployment}
-                        </SelectItem>
-                      );
-                    })}
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="OfficeTitle"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Office Title</FormLabel>
-                <FormControl>
-                  <Input
-                    type="text"
-                    {...field}
-                    onChange={field.onChange} />
-                </FormControl>
-                <FormDescription>
-                  What office do you work under?.
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+                  <FormDescription>
+                    What office title do you hold?
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="NatureOfEmployment"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Nature of Employment</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select nature of employment" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {NatureOfEmployment.map((NatureOfEmployment, index) => {
+                        return (
+                          <SelectItem
+                            value={NatureOfEmployment}
+                            key={index}
+                          >
+                            {NatureOfEmployment}
+                          </SelectItem>
+                        );
+                      })}
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="OfficeTitle"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Office Title</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="text"
+                      {...field}
+                      onChange={field.onChange} />
+                  </FormControl>
+                  <FormDescription>
+                    What office do you work under?.
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
         </div>
-
-
-        <div className="flex justify-center col-span-3">
-          <Button variant="up" type="submit">Submit</Button>
+        <div className="flex justify-center col-span-2">
+          <Button variant="up" type="submit" className="w-1/3 mb-4">Submit</Button>
         </div>
       </form>
     </Form >
