@@ -38,16 +38,7 @@ export default function ApplicationForm() {
   const form = useForm<ApplicationFormFields>({
     resolver: zodResolver(ApplicationFormSchema),
     defaultValues: {
-      FirstName: "A",
-      MiddleName: "A",
-      LastName: "A",
-      Suffix: "A",
-      CivilStatus: "Single",
-      PositionTitle: "A",
-      Email: "A",
-      Sex: "Male",
-      NatureOfEmployment: "Casual",
-      OfficeTitle: "A"
+      
     },
   });
 
@@ -706,6 +697,25 @@ export default function ApplicationForm() {
                 </FormControl>
                 <FormDescription>
                   What office do you work under?.
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="YearsOfService"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Years of Service</FormLabel>
+                <FormControl>
+                  <Input
+                    type="number"
+                    {...field}
+                    onChange={field.onChange} />
+                </FormControl>
+                <FormDescription>
+                  How many years have you been working in this position?
                 </FormDescription>
                 <FormMessage />
               </FormItem>
