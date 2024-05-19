@@ -21,7 +21,8 @@ import { cn } from "@/lib/utils";
 import { useState, useTransition } from "react";
 import { loginWithEmailAndPassword } from "../actions";
 import { AuthTokenResponse } from "@supabase/supabase-js";
-
+import Image from "next/image";
+import coop from "@/components/img/coop_logo.jpg";
 const FormSchema = z.object({
 	email: z.string().email(),
 	password: z.string().min(1, { message: "Password can not be empty" }),
@@ -64,6 +65,16 @@ export default function AuthForm() {
 
 	return (
 		<div className="w-96">
+			{/* <Image 
+			alt="UP Madayaw Logo"
+			className="overflow-hidden rounded-xl object-cover object-center "
+			height="250"
+			src={coop}
+			width="250"
+			/> */}
+			<h2 className="py-12 text-center text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-50">
+        Sign in to your account
+      </h2>
 			<Form {...form}>
 				<form
 					onSubmit={form.handleSubmit(onSubmit)}
@@ -107,7 +118,7 @@ export default function AuthForm() {
 					/>
 					<Button
 						type="submit"
-						variant="outline"
+						variant="up"
 						className="w-full flex items-center gap-2"
 					>
 						Login{" "}

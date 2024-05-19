@@ -5,7 +5,8 @@ import { SheetTrigger, SheetContent, Sheet } from "@/components/ui/sheet"
 import { AlignJustify } from "lucide-react"
 import logo from "../components/img/logo.png"
 import { readUserSession } from "@/lib/actions";
-
+import ModeToggle from "./ToggleDarkMode";
+import coop from "@/components/img/coop_logo.jpg"
 export default async function Header() {
   const {data: userSession} = await readUserSession();
   const isLoggedIn = userSession.session?.user.user_metadata.Role === "admin" || userSession.session?.user.user_metadata.Role === "user";
@@ -13,11 +14,14 @@ export default async function Header() {
   
   return (
     
-    <header className="flex h-16 w-screen items-center justify-between bg-up_color px-4 shadow-sm dark:bg-gray-950 sm:px-6 lg:px-8">
-      <Link className="flex items-center gap-2 font-semibold" href="/">
-        <Image alt="logo" src={logo} width="48" height="10" />
-        <span className="text-xl font-extrabold text-gray">UP Madayaw</span>
-      </Link>
+    <header className="flex h-16 w-full items-center justify-between bg-up_color px-4 shadow-sm dark:bg-gray-950 sm:px-6 lg:px-8">
+      <div className="flex items-center gap-2">
+        <Link className="flex items-center gap-2 font-semibold" href="/">
+          <Image alt="logo" src={logo} width="48" height="10" />
+          <span className="text-xl font-extrabold text-gray">UP Madayaw</span>
+        </Link>
+        <ModeToggle />
+      </div>
       <nav className="hidden items-center gap-4 sm:flex">
         <Link className="text-sm text-gray font-medium hover:underline hover:underline-offset-4" href="/">
           Home

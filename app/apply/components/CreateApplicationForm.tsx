@@ -1,6 +1,7 @@
 "use client"
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/use-toast";
+import Link from "next/link"
 import React, { useState } from 'react';
 //Changed Date to string
 /* import DatePicker from 'react-datepicker';
@@ -47,6 +48,7 @@ export default function ApplicationForm() {
   const Sex = ["Male", "Female"]
   const NatureOfEmployment = ["Casual", "NGS", "Permanent"]
   const [date, setDate] = React.useState<Date>()
+  
   const form = useForm<ApplicationFormFields>({
     resolver: zodResolver(ApplicationFormSchema),
     defaultValues: {
@@ -98,7 +100,7 @@ export default function ApplicationForm() {
 
         <h1 className="font-bold text-upcolor">Personal Data</h1>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 p-2">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2 p-2">
 
           <FormField
             control={form.control}
@@ -308,7 +310,7 @@ export default function ApplicationForm() {
         <hr></hr>
         <div className="p-2">
           <h1 className="font-bold text-upcolor">Spouse Data</h1>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 p-2">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2 p-2">
             <FormField
               control={form.control}
               name="SpouseFirstName"
@@ -440,7 +442,7 @@ export default function ApplicationForm() {
               )}
             />
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2">
             <FormField
               control={form.control}
               name="MemBarangay"
@@ -526,7 +528,7 @@ export default function ApplicationForm() {
 
         <div className="p-2">
           <h1 className="text-upcolor font-bold">Nearest Relative Data</h1>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2">
           <FormField
             control={form.control}
             name="NearestRelativeFirstName"
@@ -590,7 +592,7 @@ export default function ApplicationForm() {
               )}
             />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2">
             <FormField
               control={form.control}
               name="RelativeBarangay"
@@ -675,102 +677,106 @@ export default function ApplicationForm() {
         </div>
             
         <hr></hr>
-        <h1>Occupation</h1>
-        <div className="grid md:grid-cols-4 gap-2 p-2">
-          <FormField
-            control={form.control}
-            name="PositionTitle"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Position Title</FormLabel>
-                <FormControl>
-                  <Input
-                    type="text"
-                    {...field}
-                    onChange={field.onChange} />
-                </FormControl>
-                <FormDescription>
-                  What office title do you hold?
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="NatureOfEmployment"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Nature of Employment</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
+        <div className= "p-2">
+          <h1 className="text-upcolor font-bold">Occupation</h1>
+          <div className="grid md:grid-cols-2 gap-2">
+            <FormField
+              control={form.control}
+              name="PositionTitle"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Position Title</FormLabel>
                   <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select nature of employment" />
-                    </SelectTrigger>
+                    <Input
+                      type="text"
+                      {...field}
+                      onChange={field.onChange} />
                   </FormControl>
-                  <SelectContent>
-                    {NatureOfEmployment.map((NatureOfEmployment, index) => {
-                      return (
-                        <SelectItem
-                          value={NatureOfEmployment}
-                          key={index}
-                        >
-                          {NatureOfEmployment}
-                        </SelectItem>
-                      );
-                    })}
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="OfficeTitle"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Office Title</FormLabel>
-                <FormControl>
-                  <Input
-                    type="text"
-                    {...field}
-                    onChange={field.onChange} />
-                </FormControl>
-                <FormDescription>
-                  What office do you work under?.
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="YearsOfService"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Years of Service</FormLabel>
-                <FormControl>
-                  <Input
-                    type="number"
-                    {...field}
-                    onChange={field.onChange} />
-                </FormControl>
-                <FormDescription>
-                  How many years have you been working in this position?
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+                  <FormDescription>
+                    What office title do you hold?
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="NatureOfEmployment"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Nature of Employment</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select nature of employment" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {NatureOfEmployment.map((NatureOfEmployment, index) => {
+                        return (
+                          <SelectItem
+                            value={NatureOfEmployment}
+                            key={index}
+                          >
+                            {NatureOfEmployment}
+                          </SelectItem>
+                        );
+                      })}
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="OfficeTitle"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Office Title</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="text"
+                      {...field}
+                      onChange={field.onChange} />
+                  </FormControl>
+                  <FormDescription>
+                    What office do you work under?.
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="YearsOfService"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Years of Service</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="number"
+                      {...field}
+                      onChange={field.onChange} />
+                  </FormControl>
+                  <FormDescription>
+                    How many years have you been working in this position?
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
         </div>
-
-
-        <div className="flex justify-center col-span-3">
+        <div className="flex justify-center col-span-3 gap-4">
           <Button variant="up" type="submit">Submit</Button>
+          {/* <h6>or</h6>
+				  <Button size="sm" variant="up" className="">
+            <a href="">Download Form</a>
+          </Button> */}
         </div>
       </form>
     </Form >

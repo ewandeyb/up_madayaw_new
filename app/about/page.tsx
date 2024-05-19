@@ -3,7 +3,7 @@ import up from '../../components/img/upmin.jpg'
 export default function About(){
   return (
     <>
-        <section className="w-full py-10 bg-gray-100 dark:bg-gray-800 min-h-[400px]">
+        <section className="w-full bg-gray-100 py-10 dark:bg-gray-800 min-h-[400px]">
           <div className="container px-4 md:px-6">
           <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">

@@ -195,7 +195,7 @@ export const columns: ColumnDef<Applications>[] = [
                   </DialogContent>
                 </Dialog> */}
               </DropdownMenuItem>
-            <DropdownMenuItem>View application details</DropdownMenuItem>
+            <DropdownMenuItem>View full application details</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       )

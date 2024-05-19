@@ -22,6 +22,7 @@ import {
   TableHeader,
   TableRow,
 } from "../../../components/ui/table"
+import CreateMember from "../members/components/create/CreateMember"
 
 interface DataTableProps<TData, TValue> {
 columns: ColumnDef<TData, TValue>[]
@@ -53,15 +54,20 @@ export function DataTable<TData,TValue>({
 
   return (
     <div>
-      <div className="flex items-center py-4">
-        <Input
-          placeholder="Filter emails..."
-          value={(table.getColumn("Email")?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
-            table.getColumn("Email")?.setFilterValue(event.target.value)
-          }
-          className="max-w-sm"
-        />
+      <div>
+        <div className="flex items-center py-4">
+          <Input
+            placeholder="Filter emails..."
+            value={(table.getColumn("Email")?.getFilterValue() as string) ?? ""}
+            onChange={(event) =>
+              table.getColumn("Email")?.setFilterValue(event.target.value)
+            }
+            className="max-w-sm"
+          />
+          <div className="ml-auto">
+            <CreateMember />
+          </div>
+        </div>
       </div>
     <div className="rounded-md border">
       <Table>
@@ -70,7 +76,7 @@ export function DataTable<TData,TValue>({
             <TableRow key = {headerGroup.id}>
               {headerGroup.headers.map((header) => {
                 return (
-                  <TableHead key = {header.id}>
+                  <TableHead key = {header.id} className="bg-slate-100">
                     {header.isPlaceholder
                       ? null
                       :flexRender(
@@ -89,6 +95,7 @@ export function DataTable<TData,TValue>({
               <TableRow 
                 key = {row.id}
                 data-state = {row.getIsSelected() && "selected"}
+                className="bg-white"
               >
                 {row.getVisibleCells().map((cell) => (
                   <TableCell key = {cell.id}>

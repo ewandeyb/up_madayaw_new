@@ -14,7 +14,7 @@ import { Mail } from "lucide-react";
 
 export default function Profile() {
   return (
-    <section className="w-full bg-gray-60 dark:bg-gray-800 h-grow">
+    <section className="w-full bg-gray-60 dark:bg-gray-800 ">
         <div className="gap-6 flex flex-row items-center justify-start space-x-4 text-left">
           <div className="inline-block rounded-lg bg-gray-60 px-3 py-1 text-sm dark:bg-gray-800 text-upcolor">
             <Image

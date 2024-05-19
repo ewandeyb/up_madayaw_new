@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { PersonIcon, CrumpledPaperIcon } from "@radix-ui/react-icons";
+import { PersonIcon, IdCardIcon, ReaderIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
@@ -12,7 +12,7 @@ export default function NavLinks() {
 		{
 			href: "/dashboard",
 			text: "Profile",
-			Icon: PersonIcon,
+			Icon: IdCardIcon,
 		},
 		{
 			href: "/dashboard/members",
@@ -20,14 +20,9 @@ export default function NavLinks() {
 			Icon: PersonIcon,
 		},
 		{
-			href: "/dashboard/todo",
-			text: "Todo",
-			Icon: CrumpledPaperIcon,
-		},
-		{
 			href: "/dashboard/mem_applications",
 			text: "Member Applications",
-			Icon: CrumpledPaperIcon,
+			Icon: ReaderIcon,
 		},
 	];
 

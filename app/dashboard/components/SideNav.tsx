@@ -2,7 +2,7 @@ import React from "react";
 import NavLinks from "./NavLinks";
 
 import { cn } from "@/lib/utils";
-import ModeToggle from "../todo/components/ToggleDarkMode";
+import ModeToggle from "../../../components/ToggleDarkMode";
 import { Button } from "@/components/ui/button";
 import SignOut from "./SignOut";
 
@@ -23,8 +23,6 @@ export const SideBar = ({ className }: { className?: string }) => {
 				<div className="flex-1 space-y-5">
 					<div className="flex items-center gap-2 flex-1">
 						<h1 className="text-3xl font-bold">Dashboard</h1>
-
-						<ModeToggle />
 					</div>
 					<NavLinks />
 				</div>
