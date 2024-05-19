@@ -10,12 +10,13 @@ import office from '@/components/img/4924628.png'
 import loan from '@/components/img/9903593.png'
 import amount from '@/components/img/5329260.png'
 import payment from '@/components/img/4108843.png'
+import { Mail } from "lucide-react";
 
 export default function Profile() {
   return (
-    <section className="w-full bg-gray-100 dark:bg-gray-800 min-h-[400px] p-10">
+    <section className="w-full bg-gray-60 dark:bg-gray-800 h-grow">
         <div className="gap-6 flex flex-row items-center justify-start space-x-4 text-left">
-          <div className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm dark:bg-gray-800 text-upcolor">
+          <div className="inline-block rounded-lg bg-gray-60 px-3 py-1 text-sm dark:bg-gray-800 text-upcolor">
             <Image
               alt="Image"
               className="overflow-hidden rounded-xl object-cover object-left lg:order-last"
@@ -32,7 +33,8 @@ export default function Profile() {
           </div>
         </div>
         <hr className="h-px my-6 bg-black border-0 dark:bg-white"></hr>
-        <div className="grid max-w-10xl items-center gap-6 py-12 lg:grid-cols-2 lg:gap-12">
+
+        <div className="grid max-w-10xl grid-cols-1 items-center gap-6 py-12 lg:grid-cols-2 lg:gap-12">
         <div className="flex flex-col justify-center space-y-4 border-2 border-black dark:border-white bg-white dark:bg-gray-900 rounded-xl p-10 pb-20">
             <ul className="grid gap-6">
               <li className="mb-6">
@@ -41,24 +43,25 @@ export default function Profile() {
                   <div className="flex items-center">
                     <Image
                       alt="Civil Status"
-                      className="overflow-hidden rounded-xl object-cover object-left"
-                      height="100"
+                      className="overflow-hidden rounded-xl object-cover object-left "
+                      height="60"
                       src={civil}
-                      width="100"
+                      width="60"
                     />
-                    <p className="ml-8 text-2xl text-gray-500 dark:text-gray-400">
+                    <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
                       Civil Status: Single
                     </p>
                   </div>
+
                   <div className="flex items-center">
                     <Image
                       alt="Date of Birth"
                       className="overflow-hidden rounded-xl object-cover object-left"
-                      height="100"
+                      height="60"
                       src={birth}
-                      width="100"
+                      width="60"
                     />
-                    <p className="ml-8 text-2xl text-gray-500 dark:text-gray-400">
+                    <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
                       Date of Birth: September 26, 2003
                     </p>
                   </div>
@@ -68,14 +71,8 @@ export default function Profile() {
                 <div className="grid gap-6">
                   <h3 className="text-3xl font-bold text-upcolor dark:text-white">Contact Information</h3>
                   <div className="flex items-center">
-                    <Image
-                      alt="Email"
-                      className="overflow-hidden rounded-xl object-cover object-left"
-                      height="100"
-                      src={email}
-                      width="100"
-                    />
-                    <p className="ml-8 text-2xl text-gray-500 dark:text-gray-400">
+                    <Mail className="w-20 h-10 float-left"/>
+                    <p className="ml-2 text-base text-gray-500 dark:text-gray-400">
                       Email: john@example.com
                     </p>
                   </div>
@@ -88,11 +85,11 @@ export default function Profile() {
                     <Image
                       alt="Membership Type"
                       className="overflow-hidden rounded-xl object-cover object-left"
-                      height="100"
+                      height="60"
                       src={memtype}
-                      width="100"
+                      width="60"
                     />
-                    <p className="ml-8 text-2xl text-gray-500 dark:text-gray-400">
+                    <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
                       Membership Type: Regular Membership
                     </p>
                   </div>
@@ -109,11 +106,11 @@ export default function Profile() {
                     <Image
                       alt="Position"
                       className="overflow-hidden rounded-xl object-cover object-left"
-                      height="100"
+                      height="60"
                       src={position}
-                      width="100"
+                      width="60"
                     />
-                    <p className="ml-8 text-2xl text-gray-500 dark:text-gray-400">
+                    <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
                       Position Title: Secretary
                     </p>
                   </div>
@@ -121,11 +118,11 @@ export default function Profile() {
                     <Image
                       alt="Office"
                       className="overflow-hidden rounded-xl object-cover object-left"
-                      height="100"
+                      height="60"
                       src={office}
-                      width="100"
+                      width="60"
                     />
-                    <p className="ml-8 text-2xl text-gray-500 dark:text-gray-400">
+                    <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
                       Office/Unit: Kalimudan House
                     </p>
                   </div>
@@ -138,11 +135,11 @@ export default function Profile() {
                     <Image
                       alt="Loan"
                       className="overflow-hidden rounded-xl object-cover object-left"
-                      height="100"
+                      height="60"
                       src={loan}
-                      width="100"
+                      width="60"
                     />
-                    <p className="ml-8 text-2xl text-gray-500 dark:text-gray-400">
+                    <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
                       I would like to apply for: Regular Loan
                     </p>
                   </div>
@@ -150,24 +147,24 @@ export default function Profile() {
                     <Image
                       alt="Amount"
                       className="overflow-hidden rounded-xl object-cover object-left"
-                      height="100"
+                      height="60"
                       src={amount}
-                      width="100"
+                      width="60"
                     />
-                    <p className="ml-8 text-2xl text-gray-500 dark:text-gray-400">
+                    <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
                       Amount in words: One thousand
-                      <span className="block text-2xl text-black-400 dark:text-black-500">(PhP 1000)</span>
+                      <span className="block text-base text-black-400 dark:text-black-500">(PhP 600)</span>
                     </p>
                   </div>
                   <div className="flex items-center">
                     <Image
                       alt="Payment"
                       className="overflow-hidden rounded-xl object-cover object-left"
-                      height="100"
+                      height="60"
                       src={payment}
-                      width="100"
+                      width="60"
                     />
-                    <p className="ml-8 text-2xl text-gray-500 dark:text-gray-400">
+                    <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
                       Payable in: 1 month
                     </p>
                   </div>
