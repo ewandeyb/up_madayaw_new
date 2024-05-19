@@ -23,24 +23,33 @@
     "@radix-ui/react-toast": "^1.1.5",
     "@supabase/ssr": "^0.0.10",
     "@supabase/supabase-js": "^2.38.4",
+<<<<<<< Updated upstream
     "@tanstack/react-table": "^8.17.3",
+=======
+    "add": "^2.0.6",
+>>>>>>> Stashed changes
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "lucide-react": "^0.378.0",
     "next": "^14.2.3",
     "next-themes": "^0.2.1",
+    "or": "^0.2.0",
     "react": "^18",
+    "react-date-picker": "^11.0.0",
+    "react-datepicker": "^6.9.0",
     "react-dom": "^18",
     "react-hook-form": "^7.48.2",
     "react-icons": "^4.11.0",
     "tailwind-merge": "^2.0.0",
     "tailwindcss-animate": "^1.0.7",
+    "yarn": "^1.22.22",
     "zod": "^3.22.4",
     "zustand": "^4.5.2"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18.3.2",
+    "@types/react-datepicker": "^6.2.0",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",
     "eslint": "^8",

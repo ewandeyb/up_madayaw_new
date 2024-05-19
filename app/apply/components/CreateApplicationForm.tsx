@@ -1,6 +1,9 @@
 "use client"
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/use-toast";
+import React, { useState } from 'react';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 //Need for forms
 import {
@@ -76,70 +79,74 @@ export default function ApplicationForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="grid md:grid-cols-3 gap-2 p-2"
+        className="p-2"
       >
-        <FormField
-          control={form.control}
-          name="FirstName"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>First Name</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="Aaron Dave"
-                  type="text"
-                  {...field}
-                  onChange={field.onChange} />
-              </FormControl>
-              <FormDescription>
-                This is your first name.
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="MiddleName"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Middle Name</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="Sia"
-                  type="text"
-                  {...field}
-                  onChange={field.onChange} />
-              </FormControl>
-              <FormDescription>
-                This is your middle name.
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="LastName"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Last Name</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="Acuna"
-                  type="text"
-                  {...field}
-                  onChange={field.onChange} />
-              </FormControl>
-              <FormDescription>
-                This is your middle name.
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <div
-          className="grid md:grid-cols-3 gap-2">
+        <h1>Personal Data</h1>
+        <div className="grid md:grid-cols-4 gap-2 p-2">
+
+          <FormField
+            control={form.control}
+            name="FirstName"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>First Name</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Aaron Dave"
+                    type="text"
+                    {...field}
+                    onChange={field.onChange} />
+                </FormControl>
+                <FormDescription>
+                  This is your first name.
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="MiddleName"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Middle Name</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Sia"
+                    type="text"
+                    {...field}
+                    onChange={field.onChange} />
+                </FormControl>
+                <FormDescription>
+                  This is your middle name.
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="LastName"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Last Name</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Acuna"
+                    type="text"
+                    {...field}
+                    onChange={field.onChange} />
+                </FormControl>
+                <FormDescription>
+                  This is your last name.
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
           <FormField
             control={form.control}
             name="Suffix"
@@ -160,6 +167,7 @@ export default function ApplicationForm() {
               </FormItem>
             )}
           />
+
           <FormField
             control={form.control}
             name="CivilStatus"
@@ -192,6 +200,7 @@ export default function ApplicationForm() {
               </FormItem>
             )}
           />
+
           <FormField
             control={form.control}
             name="Sex"
@@ -224,101 +233,492 @@ export default function ApplicationForm() {
               </FormItem>
             )}
           />
-        </div>
-        <div></div><div></div>
-        <FormField
-          control={form.control}
-          name="PositionTitle"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Position Title</FormLabel>
-              <FormControl>
-                <Input
-                  type="text"
-                  {...field}
-                  onChange={field.onChange} />
-              </FormControl>
-              <FormDescription>
-                What office title do you hold?
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="NatureOfEmployment"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Nature of Employment</FormLabel>
-              <Select
-                onValueChange={field.onChange}
-                defaultValue={field.value}
-              >
+
+          <FormField
+            control={form.control}
+            name="Email"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Email</FormLabel>
                 <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select nature of employment" />
-                  </SelectTrigger>
+                  <Input
+                    placeholder="username@example.com"
+                    type="email"
+                    {...field}
+                    onChange={field.onChange} />
                 </FormControl>
-                <SelectContent>
-                  {NatureOfEmployment.map((NatureOfEmployment, index) => {
-                    return (
-                      <SelectItem
-                        value={NatureOfEmployment}
-                        key={index}
-                      >
-                        {NatureOfEmployment}
-                      </SelectItem>
-                    );
-                  })}
-                </SelectContent>
-              </Select>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="OfficeTitle"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Office Title</FormLabel>
-              <FormControl>
-                <Input
-                  type="text"
-                  {...field}
-                  onChange={field.onChange} />
-              </FormControl>
-              <FormDescription>
-                What office do you work under?.
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="Email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="username@example.com"
-                  type="email"
-                  {...field}
-                  onChange={field.onChange} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="BirthDate"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>BirthDate</FormLabel>
+                <div className="p-1 place-content-center">
+                  <DatePicker selected={field.value}
+                    onChange={(date) => field.onChange(date)}
+                  />
+                </div>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+        </div>
+
+        <hr></hr>
+        <div className="p-2">
+          <h1>Spouse Data</h1>
+          <div className="grid md:grid-cols-4 gap-2 p-2">
+            <FormField
+              control={form.control}
+              name="SpouseFirstName"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>First Name</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder=""
+                      type="text"
+                      {...field}
+                      onChange={field.onChange} />
+                  </FormControl>
+                  <FormDescription>
+
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="SpouseMiddleName"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Middle Name</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder=""
+                      type="text"
+                      {...field}
+                      onChange={field.onChange} />
+                  </FormControl>
+                  <FormDescription>
+
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="SpouseLastName"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Last Name</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder=""
+                      type="text"
+                      {...field}
+                      onChange={field.onChange} />
+                  </FormControl>
+                  <FormDescription>
+
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="SpouseSuffix"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Suffix</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Jr./Sr./II/III"
+                      type="text"
+                      {...field}
+                      onChange={field.onChange} />
+                  </FormControl>
+                  <FormDescription>
+
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="SpouseOccupation"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Occupation</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="text"
+                      {...field}
+                      onChange={field.onChange} />
+                  </FormControl>
+                  <FormDescription>
+
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+        </div>
+
+        <hr></hr>
+        <div className="p-2">
+          <h1>Postal Address</h1>
+          <div className="">
+            <FormField
+              control={form.control}
+              name="MemLine1"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Address Line 1</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder=""
+                      type="text"
+                      {...field}
+                      onChange={field.onChange} />
+                  </FormControl>
+                  <FormDescription>
+                    Line 1 of your postal address
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+          <div className="grid md:grid-cols-4 gap-2">
+            <FormField
+              control={form.control}
+              name="MemBarangay"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Barangay</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder=""
+                      type="text"
+                      {...field}
+                      onChange={field.onChange} />
+                  </FormControl>
+                  <FormDescription>
+
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="MemMunicipalityCity"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Municipality / City</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder=""
+                      type="text"
+                      {...field}
+                      onChange={field.onChange} />
+                  </FormControl>
+                  <FormDescription>
+
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="MemProvince"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Province</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder=""
+                      type="text"
+                      {...field}
+                      onChange={field.onChange} />
+                  </FormControl>
+                  <FormDescription>
+
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="MemZipCode"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Zip Code</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder=""
+                      type="number"
+                      {...field}
+                      onChange={field.onChange} />
+                  </FormControl>
+                  <FormDescription>
+
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+        </div>
+
+        <div className="p-2">
+          <h1>Nearest Relative Data</h1>
+          <div className="grid md:grid-cols-3 gap-2">
+          <FormField
+            control={form.control}
+            name="NearestRelativeFirstName"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>First Name</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder=""
+                    type="text"
+                    {...field}
+                    onChange={field.onChange} />
+                </FormControl>
+                <FormDescription>
+                  
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="NearestRelativeLastName"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Last Name</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder=""
+                    type="text"
+                    {...field}
+                    onChange={field.onChange} />
+                </FormControl>
+                <FormDescription>
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+            <FormField
+              control={form.control}
+              name="RelativeLine1"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Address Line 1</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder=""
+                      type="text"
+                      {...field}
+                      onChange={field.onChange} />
+                  </FormControl>
+                  <FormDescription>
+                    Line 1 of your postal address
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+          <div className="grid md:grid-cols-4 gap-2">
+            <FormField
+              control={form.control}
+              name="RelativeBarangay"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Barangay</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder=""
+                      type="text"
+                      {...field}
+                      onChange={field.onChange} />
+                  </FormControl>
+                  <FormDescription>
+
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="RelativeMunicipalityCity"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Municipality / City</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder=""
+                      type="text"
+                      {...field}
+                      onChange={field.onChange} />
+                  </FormControl>
+                  <FormDescription>
+
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="RelativeProvince"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Province</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder=""
+                      type="text"
+                      {...field}
+                      onChange={field.onChange} />
+                  </FormControl>
+                  <FormDescription>
+
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="RelativeZipCode"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Zip Code</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder=""
+                      type="number"
+                      {...field}
+                      onChange={field.onChange} />
+                  </FormControl>
+                  <FormDescription>
+
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+        </div>
+
+        <hr></hr>
+        <h1>Occupation</h1>
+        <div className="grid md:grid-cols-4 gap-2 p-2">
+          <FormField
+            control={form.control}
+            name="PositionTitle"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Position Title</FormLabel>
+                <FormControl>
+                  <Input
+                    type="text"
+                    {...field}
+                    onChange={field.onChange} />
+                </FormControl>
+                <FormDescription>
+                  What office title do you hold?
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="NatureOfEmployment"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Nature of Employment</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select nature of employment" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {NatureOfEmployment.map((NatureOfEmployment, index) => {
+                      return (
+                        <SelectItem
+                          value={NatureOfEmployment}
+                          key={index}
+                        >
+                          {NatureOfEmployment}
+                        </SelectItem>
+                      );
+                    })}
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="OfficeTitle"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Office Title</FormLabel>
+                <FormControl>
+                  <Input
+                    type="text"
+                    {...field}
+                    onChange={field.onChange} />
+                </FormControl>
+                <FormDescription>
+                  What office do you work under?.
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+
 
         <div className="flex justify-center col-span-3">
           <Button variant="up" type="submit">Submit</Button>
         </div>
       </form>
-    </Form>
+    </Form >
   )
 
 }

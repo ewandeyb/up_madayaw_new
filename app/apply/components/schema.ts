@@ -9,9 +9,33 @@ export const ApplicationFormSchema = z
   CivilStatus: z.enum(["Single","Married","Divorced","Widowed","Annulled","Legally Seperated"]),
   PositionTitle:z.string().min(2),
   Email: z.string().email(),
+  BirthDate: z.date(),
+  BirthPlace: z.string(),
+
+  SpouseFirstName: z.string(),
+  SpouseMiddleName: z.string(),
+  SpouseLastName: z.string(),
+  SpouseSuffix: z.string(),
+  SpouseOccupation: z.string(),
+
   Sex: z.enum(["Male","Female","Other","Prefer not to Say"]),
   NatureOfEmployment: z.enum(["Casual", "NGS", "Permanent"]),
-  OfficeTitle: z.string().min(2)
+  OfficeTitle: z.string().min(2),
+
+  MemLine1: z.string().min(2),
+  MemBarangay: z.string().min(2),
+  MemMunicipalityCity: z.string().min(2),
+  MemProvince: z.string().min(2),
+  MemZipCode: z.number(),
+
+  NearestRelativeFirstName: z.string().min(2),
+  NearestRelativeLastName: z.string().min(2),
+
+  RelativeLine1: z.string().min(2),
+  RelativeBarangay: z.string().min(2),
+  RelativeMunicipalityCity: z.string().min(2),
+  RelativeProvince: z.string().min(2),
+  RelativeZipCode: z.number()
 });
 
 /* 
