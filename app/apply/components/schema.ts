@@ -9,7 +9,9 @@ export const ApplicationFormSchema = z
   CivilStatus: z.enum(["Single","Married","Divorced","Widowed","Annulled","Legally Seperated"]),
   PositionTitle:z.string().min(2),
   Email: z.string().email(),
-  BirthDate: z.date(),
+  BirthDate: z.date({
+    required_error: "A date of birth is required.",
+  }),
   BirthPlace: z.string(),
 
   SpouseFirstName: z.string(),

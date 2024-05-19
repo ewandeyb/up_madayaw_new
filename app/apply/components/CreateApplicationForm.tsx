@@ -2,8 +2,9 @@
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/use-toast";
 import React, { useState } from 'react';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
+//Changed Date to string
+/* import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css'; */
 
 //Need for forms
 import {
@@ -22,6 +23,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
+
+import { CalendarIcon } from "@radix-ui/react-icons"
+import { Calendar } from "@/components/ui/calendar"
+import { cn } from "@/lib/utils"
+import { format } from "date-fns"
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ApplicationFormSchema } from "./schema";
 import { ApplicationFormFields } from "./types";
@@ -35,19 +46,20 @@ export default function ApplicationForm() {
   const CivilStatus = ["Single", "Married", "Divorced", "Widowed", "Annulled", "Legally Seperated"];
   const Sex = ["Male", "Female"]
   const NatureOfEmployment = ["Casual", "NGS", "Permanent"]
+  const [date, setDate] = React.useState<Date>()
   const form = useForm<ApplicationFormFields>({
     resolver: zodResolver(ApplicationFormSchema),
     defaultValues: {
-      FirstName: "A",
-      MiddleName: "A",
-      LastName: "A",
-      Suffix: "A",
+      FirstName: "John",
+      MiddleName: "Paul",
+      LastName: "Doe",
+      Suffix: "Jr.",
       CivilStatus: "Single",
-      PositionTitle: "A",
-      Email: "A",
+      PositionTitle: "Project Officer I",
+      Email: "johndoe@upmadayaw@up.edu.ph",
       Sex: "Male",
       NatureOfEmployment: "Casual",
-      OfficeTitle: "A"
+      OfficeTitle: "CEO"
     },
   });
 
@@ -82,6 +94,7 @@ export default function ApplicationForm() {
         className="p-2"
       >
         <h1>Personal Data</h1>
+
         <div className="grid md:grid-cols-4 gap-2 p-2">
 
           <FormField
@@ -252,21 +265,37 @@ export default function ApplicationForm() {
             )}
           />
 
-          <FormField
-            control={form.control}
-            name="BirthDate"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>BirthDate</FormLabel>
-                <div className="p-1 place-content-center">
-                  <DatePicker selected={field.value}
-                    onChange={(date) => field.onChange(date)}
+        <FormField
+          control={form.control}
+          name="BirthDate"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Date of birth</FormLabel>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant={"outline"}
+                    className={cn("w-[240px] justify-start text-left font-normal", !date && "text-muted-foreground")}
+                  >
+                    <CalendarIcon className="mr-2 h-4 w-4" />
+                    {date ? format(date, "PPP") : <span>Pick a date</span>}
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent align="start" className=" w-auto p-0">
+                  <Calendar
+                    mode="single"
+                    captionLayout="dropdown-buttons"
+                    selected={date}
+                    onSelect={setDate}
+                    fromYear={1960}
+                    toYear={2030}
                   />
-                </div>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+                </PopoverContent>
+              </Popover>
+              <FormMessage />
+            </FormItem>
+          )}
+        />  
 
         </div>
 
