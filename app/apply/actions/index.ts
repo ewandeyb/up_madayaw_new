@@ -14,7 +14,7 @@ export async function createApplication(data: {
 
   PositionTitle: string,
   OfficeTitle: string,
-  NatureOfEmployment: string
+  NatureOfEmployment: string,
 }) {
 
   const new_uuid = crypto.randomUUID();
