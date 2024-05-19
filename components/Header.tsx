@@ -13,7 +13,7 @@ export default async function Header() {
   
   return (
     
-    <header className="flex h-16 w-full items-center justify-between bg-up_color px-4 shadow-sm dark:bg-gray-950 sm:px-6 lg:px-8">
+    <header className="flex h-16 w-screen items-center justify-between bg-up_color px-4 shadow-sm dark:bg-gray-950 sm:px-6 lg:px-8">
       <Link className="flex items-center gap-2 font-semibold" href="/">
         <Image alt="logo" src={logo} width="48" height="10" />
         <span className="text-xl font-extrabold text-gray">UP Madayaw</span>
@@ -50,9 +50,6 @@ export default async function Header() {
             </Link>
             <Link className="text-sm font-medium hover:underline hover:underline-offset-4" href="/about">
               About
-            </Link>
-            <Link className="text-sm font-medium hover:underline hover:underline-offset-4" href="/contact">
-              Contact
             </Link>
             {isLoggedIn ? (
               <Link className="hover:underline hover:underline-offset-4 text-sm text-gray font-normal" href="/auth">Welcome <span className=" font-normal text-upcolor ">{email}</span></Link>
