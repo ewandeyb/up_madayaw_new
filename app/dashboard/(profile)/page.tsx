@@ -26,9 +26,9 @@ export default function Profile() {
             />
           </div>
           <div className="space-y-2">
-          <h2 className="mt-2 text-3xl font-bold tracking-tighter text-center md:text-center lg:text-left sm:text-5xl">John Doe</h2>
+          <h2 className="mt-2 text-3xl font-bold tracking-tighter text-center md:text-center lg:text-left sm:text-5xl"></h2>
             <p className="max-w-[900px] text-gray-500 md:text-xl lg:text-base xl:text-xl dark:text-gray-400">
-              Membership Number: UPMIN001
+              Membership Number:
             </p>
           </div>
         </div>
@@ -48,7 +48,7 @@ export default function Profile() {
                       width="60"
                     />
                     <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
-                      Civil Status: Single
+                      Civil Status:
                     </p>
                   </div>
                   <div className="flex items-center">
@@ -60,7 +60,7 @@ export default function Profile() {
                       width="60"
                     />
                     <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
-                      Date of Birth: September 26, 2003
+                      Date of Birth:
                     </p>
                   </div>
                 </div>
@@ -71,7 +71,7 @@ export default function Profile() {
                   <div className="flex items-center">
                     <Mail className="w-[60px] h-[60px]"/>
                     <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
-                      Email: john@example.com
+                      Email:
                     </p>
                   </div>
                 </div>
@@ -88,7 +88,7 @@ export default function Profile() {
                       width="60"
                     />
                     <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
-                      Membership Type: Regular Membership
+                      Membership Type:
                     </p>
                   </div>
                 </div>
@@ -109,7 +109,7 @@ export default function Profile() {
                       width="60"
                     />
                     <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
-                      Position Title: Secretary
+                      Position Title:
                     </p>
                   </div>
                   <div className="flex items-center">
@@ -121,7 +121,7 @@ export default function Profile() {
                       width="60"
                     />
                     <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
-                      Office/Unit: Kalimudan House
+                      Office/Unit:
                     </p>
                   </div>
                 </div>
@@ -138,7 +138,7 @@ export default function Profile() {
                       width="60"
                     />
                     <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
-                      I would like to apply for: Regular Loan
+                      I would like to apply for:
                     </p>
                   </div>
                   <div className="flex items-center">
@@ -150,9 +150,9 @@ export default function Profile() {
                       width="60"
                     />
                     <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
-                      Amount in words: One thousand
+                      Amount in words:
                       <span className="block text-base text-black dark:text-black">
-                        (PhP 600)
+                        
                       </span>
                     </p>
                   </div>
@@ -165,7 +165,7 @@ export default function Profile() {
                       width="60"
                     />
                     <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
-                      Payable in: 1 month
+                      Payable in:
                     </p>
                   </div>
                 </div>
