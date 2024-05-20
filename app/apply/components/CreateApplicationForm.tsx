@@ -779,14 +779,57 @@ export default function ApplicationForm() {
         <hr></hr>
         <div className="p-2">
           <h1 className="text-upcolor font-bold">Dependents</h1>
-          <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-6 gap-2">
-            <div className="col-span-3">
+
+          <div className="grid grid-cols-1 md:grid-cols-7 lg:grid-cols-7 gap-2">
+            <div className="col-span-2">
               <FormField
                 control={form.control}
-                name="Dependent1Name"
+                name="Dependent1FirstName"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Depenent Name</FormLabel>
+                    <FormLabel>First Name</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="text"
+                        {...field}
+                        onChange={field.onChange} />
+                    </FormControl>
+                    <FormDescription>
+
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <div className="col-span-2">
+              <FormField
+                control={form.control}
+                name="Dependent1MiddleName"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Middle Name</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="text"
+                        {...field}
+                        onChange={field.onChange} />
+                    </FormControl>
+                    <FormDescription>
+
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <div className="col-span-2">
+              <FormField
+                control={form.control}
+                name="Dependent1LastName"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Last Name</FormLabel>
                     <FormControl>
                       <Input
                         type="text"
@@ -804,13 +847,13 @@ export default function ApplicationForm() {
             <div>
               <FormField
                 control={form.control}
-                name="Dependent1Age"
+                name="Dependent1Suffix"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Age</FormLabel>
+                    <FormLabel>Suffix</FormLabel>
                     <FormControl>
                       <Input
-                        type="number"
+                        type="text"
                         {...field}
                         onChange={field.onChange} />
                     </FormControl>
@@ -822,7 +865,40 @@ export default function ApplicationForm() {
                 )}
               />
             </div>
-            <div className="col-span-2">
+            <div className="col-span-3">
+              <FormField
+                control={form.control}
+                name="Dependent1BirthDate"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Date of birth</FormLabel>
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button
+                          variant={"outline"}
+                          className={cn("w-full flex justify-start text-left font-normal", !date && "text-muted-foreground")}
+                        >
+                          <CalendarIcon className="w-4 h-4 mr-2" />
+                          {date ? format(date, "PPP") : <span>Pick a date</span>}
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent align="start" className="w-auto p-0">
+                        <Calendar
+                          mode="single"
+                          captionLayout="dropdown-buttons"
+                          selected={date}
+                          onSelect={setDate}
+                          fromYear={1960}
+                          toYear={2030}
+                        />
+                      </PopoverContent>
+                    </Popover>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <div className="col-span-3">
               <FormField
                 control={form.control}
                 name="Dependent1Relation"
@@ -843,13 +919,94 @@ export default function ApplicationForm() {
                 )}
               />
             </div>
-            <div className="col-span-3">
+            <div>
+            <FormField
+              control={form.control}
+              name="Dependent1Sex"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Sex</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select Sex" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {Sex.map((Sex, index) => {
+                        return (
+                          <SelectItem
+                            value={Sex}
+                            key={index}
+                          >
+                            {Sex}
+                          </SelectItem>
+                        );
+                      })}
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            </div>
+
+          </div>
+
+              <hr></hr>
+          <div className="grid grid-cols-1 md:grid-cols-7 lg:grid-cols-7 gap-2">
+            <div className="col-span-2">
               <FormField
                 control={form.control}
-                name="Dependent2Name"
+                name="Dependent2FirstName"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Depenent Name</FormLabel>
+                    <FormLabel>First Name</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="text"
+                        {...field}
+                        onChange={field.onChange} />
+                    </FormControl>
+                    <FormDescription>
+
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <div className="col-span-2">
+              <FormField
+                control={form.control}
+                name="Dependent2MiddleName"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Middle Name</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="text"
+                        {...field}
+                        onChange={field.onChange} />
+                    </FormControl>
+                    <FormDescription>
+
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <div className="col-span-2">
+              <FormField
+                control={form.control}
+                name="Dependent2LastName"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Last Name</FormLabel>
                     <FormControl>
                       <Input
                         type="text"
@@ -867,13 +1024,13 @@ export default function ApplicationForm() {
             <div>
               <FormField
                 control={form.control}
-                name="Dependent2Age"
+                name="Dependent2Suffix"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Age</FormLabel>
+                    <FormLabel>Suffix</FormLabel>
                     <FormControl>
                       <Input
-                        type="number"
+                        type="text"
                         {...field}
                         onChange={field.onChange} />
                     </FormControl>
@@ -885,7 +1042,40 @@ export default function ApplicationForm() {
                 )}
               />
             </div>
-            <div className="col-span-2">
+            <div className="col-span-3">
+              <FormField
+                control={form.control}
+                name="Dependent2BirthDate"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Date of birth</FormLabel>
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button
+                          variant={"outline"}
+                          className={cn("w-full flex justify-start text-left font-normal", !date && "text-muted-foreground")}
+                        >
+                          <CalendarIcon className="w-4 h-4 mr-2" />
+                          {date ? format(date, "PPP") : <span>Pick a date</span>}
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent align="start" className="w-auto p-0">
+                        <Calendar
+                          mode="single"
+                          captionLayout="dropdown-buttons"
+                          selected={date}
+                          onSelect={setDate}
+                          fromYear={1960}
+                          toYear={2030}
+                        />
+                      </PopoverContent>
+                    </Popover>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <div className="col-span-3">
               <FormField
                 control={form.control}
                 name="Dependent2Relation"
@@ -906,13 +1096,94 @@ export default function ApplicationForm() {
                 )}
               />
             </div>
-            <div className="col-span-3">
+            <div>
+            <FormField
+              control={form.control}
+              name="Dependent2Sex"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Sex</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select Sex" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {Sex.map((Sex, index) => {
+                        return (
+                          <SelectItem
+                            value={Sex}
+                            key={index}
+                          >
+                            {Sex}
+                          </SelectItem>
+                        );
+                      })}
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            </div>
+
+          </div>
+
+              <hr></hr>
+          <div className="grid grid-cols-1 md:grid-cols-7 lg:grid-cols-7 gap-2">
+            <div className="col-span-2">
               <FormField
                 control={form.control}
-                name="Dependent3Name"
+                name="Dependent3FirstName"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Depenent Name</FormLabel>
+                    <FormLabel>First Name</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="text"
+                        {...field}
+                        onChange={field.onChange} />
+                    </FormControl>
+                    <FormDescription>
+
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <div className="col-span-2">
+              <FormField
+                control={form.control}
+                name="Dependent3MiddleName"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Middle Name</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="text"
+                        {...field}
+                        onChange={field.onChange} />
+                    </FormControl>
+                    <FormDescription>
+
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <div className="col-span-2">
+              <FormField
+                control={form.control}
+                name="Dependent3LastName"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Last Name</FormLabel>
                     <FormControl>
                       <Input
                         type="text"
@@ -930,13 +1201,13 @@ export default function ApplicationForm() {
             <div>
               <FormField
                 control={form.control}
-                name="Dependent3Age"
+                name="Dependent3Suffix"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Age</FormLabel>
+                    <FormLabel>Suffix</FormLabel>
                     <FormControl>
                       <Input
-                        type="number"
+                        type="text"
                         {...field}
                         onChange={field.onChange} />
                     </FormControl>
@@ -948,7 +1219,40 @@ export default function ApplicationForm() {
                 )}
               />
             </div>
-            <div className="col-span-2">
+            <div className="col-span-3">
+              <FormField
+                control={form.control}
+                name="Dependent3BirthDate"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Date of birth</FormLabel>
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button
+                          variant={"outline"}
+                          className={cn("w-full flex justify-start text-left font-normal", !date && "text-muted-foreground")}
+                        >
+                          <CalendarIcon className="w-4 h-4 mr-2" />
+                          {date ? format(date, "PPP") : <span>Pick a date</span>}
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent align="start" className="w-auto p-0">
+                        <Calendar
+                          mode="single"
+                          captionLayout="dropdown-buttons"
+                          selected={date}
+                          onSelect={setDate}
+                          fromYear={1960}
+                          toYear={2030}
+                        />
+                      </PopoverContent>
+                    </Popover>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <div className="col-span-3">
               <FormField
                 control={form.control}
                 name="Dependent3Relation"
@@ -969,9 +1273,45 @@ export default function ApplicationForm() {
                 )}
               />
             </div>
+            <div>
+            <FormField
+              control={form.control}
+              name="Dependent3Sex"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Sex</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select Sex" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {Sex.map((Sex, index) => {
+                        return (
+                          <SelectItem
+                            value={Sex}
+                            key={index}
+                          >
+                            {Sex}
+                          </SelectItem>
+                        );
+                      })}
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            </div>
+
           </div>
 
         </div>
+        
         <hr></hr>
         <div className="p-2">
           <h1 className="text-upcolor font-bold">Survey Questions</h1>

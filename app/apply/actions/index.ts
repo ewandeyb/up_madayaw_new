@@ -38,7 +38,35 @@ export async function createApplication(data: {
   RelativeBarangay: string,
   RelativeMunicipalityCity: string,
   RelativeProvince: string,
-  RelativeZipCode: number
+  RelativeZipCode: number,
+
+  Dependent1FirstName: string,
+  Dependent1MiddleName: string,
+  Dependent1LastName: string,
+  Dependent1Suffix: string,
+  Dependent1BirthDate: Date,
+  Dependent1Relation: string,
+  Dependent1Sex: string,
+
+  Dependent2FirstName: string,
+  Dependent2MiddleName: string,
+  Dependent2LastName: string,
+  Dependent2Suffix: string,
+  Dependent2BirthDate: Date,
+  Dependent2Relation: string,
+  Dependent2Sex: string,
+
+  Dependent3FirstName: string,
+  Dependent3MiddleName: string,
+  Dependent3LastName: string,
+  Dependent3Suffix: string,
+  Dependent3BirthDate: Date,
+  Dependent3Relation: string,
+  Dependent3Sex: string,
+
+  PrevMemberStatus: string,
+  LeaveReason: string,
+  ReferralName: string
 }) {
 
   const new_uuid = crypto.randomUUID();
@@ -61,7 +89,10 @@ export async function createApplication(data: {
       SpouseMiddleName: data.SpouseMiddleName,
       SpouseLastName: data.SpouseLastName,
       SpouseSuffix: data.SpouseSuffix,
-      SpouseOccupation: data.SpouseOccupation
+      SpouseOccupation: data.SpouseOccupation,
+
+      NearestRelativeFirstName: data.NearestRelativeFirstName,
+      NearestRelativeLastName: data.NearestRelativeLastName
   });
 
   const addOccupation = await supabase.from("Occupation").insert({
@@ -92,6 +123,13 @@ export async function createApplication(data: {
     MunicipalityCity: data.RelativeMunicipalityCity,
     Provice: data.RelativeProvince,
     ZipCode: data.RelativeZipCode
+  });
+
+  const addSurveyData = await supabase.from("SurveyData").insert({
+    AssocMemberID: new_uuid,
+    PrevMemberStatus: data.PrevMemberStatus,
+    LeaveReason: data.LeaveReason,
+    ReferralName: data.ReferralName
   });
 
   if (addMemberData.error?.message) {
