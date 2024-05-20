@@ -19,7 +19,7 @@ export default function SignOut() {
 				className="w-full flex items-center gap-2"
 				variant="outline"
 			>
-				SignOut{" "}
+				Sign Out{" "}
 				<AiOutlineLoading3Quarters
 					className={cn(" animate-spin", { hidden: !isPending })}
 				/>
