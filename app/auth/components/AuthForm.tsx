@@ -72,7 +72,7 @@ export default function AuthForm() {
 			src={coop}
 			width="250"
 			/> */}
-			<h2 className="py-12 text-center text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-50">
+			<h2 className="py-12 text-center text-4xl font-bold tracking-tight text-gray-900 dark:text-gray-50">
         Sign in to your account
       </h2>
 			<Form {...form}>
