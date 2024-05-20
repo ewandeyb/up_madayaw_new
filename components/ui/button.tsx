@@ -21,6 +21,8 @@ const buttonVariants = cva(
 				link: "text-primary underline-offset-4 hover:underline",
 				up:
 					"bg-upcolor text-white shadow-sm hover:bg-red-700 w-24 h-20",
+				dropdown:
+					"w-44 border-none "
 			},
 			size: {
 				default: "h-9 px-4 py-2",

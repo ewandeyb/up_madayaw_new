@@ -1,5 +1,5 @@
 "use client"
-
+import CreateMember from "../members/components/create/CreateMember"
 import {ColumnDef} from "@tanstack/react-table"
 import {
   Dialog,
@@ -9,6 +9,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
+  DialogClose
 } from "@/components/ui/dialog"
 import { ArrowUpDown, MoreHorizontal } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -147,57 +148,46 @@ export const columns: ColumnDef<Applications>[] = [
       const application = row.original
       
       return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(application.MembershipID)}
-            >
-              Copy application ID
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              View profile
-                {/* <Dialog>
-                  <DialogTrigger asChild>
-                    <Button variant="outline">Edit Profile</Button>
-                  </DialogTrigger>
-                  <DialogContent className="sm:max-w-[425px]">
-                    <DialogHeader>
-                      <DialogTitle>Edit profile</DialogTitle>
-                      <DialogDescription>
-                        Make changes to your profile here. Click save when youre done.
-                      </DialogDescription>
-                    </DialogHeader>
-                    <div className="grid gap-4 py-4">
-                      <div className="grid grid-cols-4 items-center gap-4">
-                        <Label htmlFor="name" className="text-right">
-                          Name
-                        </Label>
-                        <Input id="name" value="Pedro Duarte" className="col-span-3" />
-                      </div>
-                      <div className="grid grid-cols-4 items-center gap-4">
-                        <Label htmlFor="username" className="text-right">
-                          Username
-                        </Label>
-                        <Input id="username" value="@peduarte" className="col-span-3" />
-                      </div>
-                    </div>
-                    <DialogFooter>
-                      <Button type="submit">Save changes</Button>
-                    </DialogFooter>
-                  </DialogContent>
-                </Dialog> */}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="h-8 w-8 p-0">
+                <span className="sr-only">Open menu</span>
+                <MoreHorizontal className="h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuLabel>Actions</DropdownMenuLabel>
+              <DropdownMenuItem
+                onClick={(event) => {
+                  navigator.clipboard.writeText(application.MembershipID);
+                }}
+                className="pl-6"                
+              >
+                  Copy Application ID
               </DropdownMenuItem>
-            <DropdownMenuItem>View full application details</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem
+              onClick={(event) => {
+                event.preventDefault();
+              }} 
+              >
+                Edit
+              </DropdownMenuItem>
+              <DropdownMenuItem
+              onClick={(event) => {
+                event.preventDefault();
+              }} 
+              >
+                Delete
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={(event) => {
+                  event.preventDefault();
+                }}
+                className="pl-6"  
+              >View full application details</DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
       )
     },
   },
