@@ -119,60 +119,60 @@ export default function Profile() {
                       height="60"
                       src={office}
                       width="60"
-                      />
-                      <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
-                        Office/Unit: Kalimudan House
-                      </p>
-                    </div>
+                    />
+                    <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
+                      Office/Unit: Kalimudan House
+                    </p>
                   </div>
-                </li>
-                <li className="mb-6">
-                  <div className="grid gap-6">
-                    <h3 className="text-3xl font-bold text-upcolor dark:text-white">Loan Details</h3>
-                    <div className="flex items-center">
-                      <Image
-                        alt="Loan"
-                        className="overflow-hidden rounded-xl object-cover"
-                        height="60"
-                        src={loan}
-                        width="60"
-                      />
-                      <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
-                        I would like to apply for: Regular Loan
-                      </p>
-                    </div>
-                    <div className="flex items-center">
-                      <Image
-                        alt="Amount"
-                        className="overflow-hidden rounded-xl object-cover"
-                        height="60"
-                        src={amount}
-                        width="60"
-                      />
-                      <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
-                        Amount in words: One thousand
-                        <span className="block text-base text-black dark:text-black">
-                          (PhP 600)
-                        </span>
-                      </p>
-                    </div>
-                    <div className="flex items-center">
-                      <Image
-                        alt="Payment"
-                        className="overflow-hidden rounded-xl object-cover"
-                        height="60"
-                        src={payment}
-                        width="60"
-                      />
-                      <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
-                        Payable in: 1 month
-                      </p>
-                    </div>
+                </div>
+              </li>
+              <li className="mb-6">
+                <div className="grid gap-6">
+                  <h3 className="text-3xl font-bold text-upcolor dark:text-white">Loan Details</h3>
+                  <div className="flex items-center">
+                    <Image
+                      alt="Loan"
+                      className="overflow-hidden rounded-xl object-cover"
+                      height="60"
+                      src={loan}
+                      width="60"
+                    />
+                    <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
+                      I would like to apply for: Regular Loan
+                    </p>
                   </div>
-                </li>
-              </ul>
-            </div>
+                  <div className="flex items-center">
+                    <Image
+                      alt="Amount"
+                      className="overflow-hidden rounded-xl object-cover"
+                      height="60"
+                      src={amount}
+                      width="60"
+                    />
+                    <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
+                      Amount in words: One thousand
+                      <span className="block text-base text-black dark:text-black">
+                        (PhP 600)
+                      </span>
+                    </p>
+                  </div>
+                  <div className="flex items-center">
+                    <Image
+                      alt="Payment"
+                      className="overflow-hidden rounded-xl object-cover"
+                      height="60"
+                      src={payment}
+                      width="60"
+                    />
+                    <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
+                      Payable in: 1 month
+                    </p>
+                  </div>
+                </div>
+              </li>
+            </ul>
           </div>
-      </section>
-    )
-  }
+        </div>
+    </section>
+  )
+}
