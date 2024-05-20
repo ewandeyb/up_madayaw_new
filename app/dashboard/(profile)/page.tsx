@@ -33,7 +33,6 @@ export default function Profile() {
           </div>
         </div>
         <hr className="h-px my-6 bg-black border-0 dark:bg-white"></hr>
-
         <div className="grid max-w-10xl grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-12 py-12">
           <div className="flex flex-col justify-center space-y-4 border-2 border-black dark:border-white bg-white dark:bg-gray-900 rounded-xl p-10">
             <ul className="grid gap-6">
