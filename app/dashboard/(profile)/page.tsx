@@ -26,7 +26,7 @@ export default function Profile() {
             />
           </div>
           <div className="space-y-2">
-            <h2 className="mt-2 text-3xl font-bold tracking-tighter sm:text-5xl">John Doe</h2>
+          <h2 className="mt-2 text-3xl font-bold tracking-tighter text-center sm:text-left sm:text-5xl">John Doe</h2>
             <p className="max-w-[900px] text-gray-500 md:text-xl lg:text-base xl:text-xl dark:text-gray-400">
               Membership Number: UPMIN001
             </p>
