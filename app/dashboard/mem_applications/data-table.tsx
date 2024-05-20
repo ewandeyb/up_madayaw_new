@@ -6,6 +6,7 @@ import {
 ColumnDef,
 ColumnFiltersState,
 SortingState,
+VisibilityState,
 flexRender,
 getCoreRowModel,
 getFilteredRowModel,
@@ -13,6 +14,12 @@ getPaginationRowModel,
 getSortedRowModel,
 useReactTable,
 } from "@tanstack/react-table"
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 
 import {
   Table,
@@ -37,6 +44,8 @@ export function DataTable<TData,TValue>({
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   )
+  const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
+  const [rowSelection, setRowSelection] = React.useState({})
   const table = useReactTable({
     data,
     columns,
@@ -46,9 +55,13 @@ export function DataTable<TData,TValue>({
     getSortedRowModel: getSortedRowModel(),
     onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
+    onColumnVisibilityChange: setColumnVisibility,
+    onRowSelectionChange: setRowSelection,
     state: {
       sorting,
       columnFilters,
+      columnVisibility,
+      rowSelection,
     },
   })
 
@@ -64,9 +77,38 @@ export function DataTable<TData,TValue>({
             }
             className="max-w-sm"
           />
-          <div className="ml-auto">
+          <div className="ml-2">
             <CreateMember />
           </div>
+          <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="outline" className="ml-auto">
+              Columns
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            {table
+              .getAllColumns()
+              .filter(
+                (column) => column.getCanHide()
+              )
+              .map((column) => {
+                return (
+                  <DropdownMenuCheckboxItem
+                    key={column.id}
+                    className="capitalize"
+                    checked={column.getIsVisible()}
+                    onCheckedChange={(value) =>
+                      column.toggleVisibility(!!value)
+                    }
+                  >
+                    {column.id}
+                  </DropdownMenuCheckboxItem>
+                )
+              })}
+          </DropdownMenuContent>
+        </DropdownMenu>
+          
         </div>
       </div>
     <div className="rounded-md border">
@@ -114,7 +156,15 @@ export function DataTable<TData,TValue>({
         </TableBody>
       </Table>
     </div>
-    <div className="flex items-center justify-end space-x-2 py-4">
+    <div>
+      
+    </div>
+
+    <div className="flex-1 text-sm text-muted-foreground p-5">
+        {table.getFilteredSelectedRowModel().rows.length} of{" "}
+        {table.getFilteredRowModel().rows.length} row(s) selected.
+      </div>
+    <div className="flex items-center justify-end space-x-2">
     <Button
           variant="outline"
           size="sm"

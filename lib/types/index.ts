@@ -5,8 +5,9 @@ export type IPermission = {
   Status: "active" | "resigned";
   MemberData: {
     MembershipID: string;
-    created_at: string;
     FirstName: string;
+    LastName: string;
     Email: string;
+    MemberType: string;
   };
 };

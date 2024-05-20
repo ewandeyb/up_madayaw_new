@@ -11,7 +11,7 @@ export default function EditMember({isAdmin,permission}:{isAdmin:boolean,permiss
 		id="update-trigger"
 		title="Edit Member"
 			Trigger={
-				<Button variant="outline">
+				<Button variant="dropdown" className=" font-normal max-h-5 justify-start">
 					<Pencil1Icon />
 					Edit
 				</Button>

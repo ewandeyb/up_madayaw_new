@@ -8,7 +8,7 @@ export default function CreateMember() {
 		<DialogForm
 			id="create-trigger"
 			title="Create Member"
-			Trigger={<Button variant="up">Create</Button>}
+			Trigger={<Button variant="outline">Create</Button>}
 			form={<CreateForm />}
 		/>
 	);
