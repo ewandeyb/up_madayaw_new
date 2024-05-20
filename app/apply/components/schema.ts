@@ -14,11 +14,11 @@ export const ApplicationFormSchema = z
   }),
   BirthPlace: z.string(),
 
-  SpouseFirstName: z.optional(z.string()),
-  SpouseMiddleName: z.optional(z.string()),
-  SpouseLastName: z.optional(z.string()),
-  SpouseSuffix: z.optional(z.string()),
-  SpouseOccupation: z.optional(z.string()),
+  SpouseFirstName: z.string(),
+  SpouseMiddleName: z.string(),
+  SpouseLastName: z.string(),
+  SpouseSuffix: z.string(),
+  SpouseOccupation: z.string(),
 
   PositionTitle: z.string().min(2),
   NatureOfEmployment: z.enum(["Casual", "NGS", "Permanent"]),

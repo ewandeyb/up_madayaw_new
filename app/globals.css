@@ -78,3 +78,12 @@ body {
 .rdp-vhidden {
   @apply hidden;
 }
+@font-face {
+  font-family: 'Verdana';
+  src: url('../fonts/verdana.ttf') format('ttf'),
+  url('../fonts/verdana-bold.ttf') format('ttf'),
+  url('../fonts/verdana-bold-italic.ttf') format('ttf');
+  
+  font-weight: normal;
+  font-style: normal;
+}
