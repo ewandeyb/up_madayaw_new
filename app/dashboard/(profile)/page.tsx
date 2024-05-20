@@ -53,7 +53,7 @@ export default async function Profile() {
         </div>
         <div className="space-y-2">
           <h2 className="mt-2 text-3xl font-bold tracking-tighter text-center md:text-center lg:text-left sm:text-5xl">
-          {fullName}
+            {fullName}
           </h2>
           <p className="max-w-[900px] text-gray-500 tracking-tighter text-center md:text-center lg:text-left md:text-xl lg:text-base xl:text-xl dark:text-gray-400">
             Membership Number: {MemberData.MembershipNo ?? "NULL"}
