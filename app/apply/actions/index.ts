@@ -3,6 +3,7 @@
 import { createSupbaseServerClient } from "@/lib/supabase";
 import { revalidatePath, unstable_noStore } from "next/cache";
 
+type string_nul = string | undefined ;
 export async function createApplication(data: {
   FirstName: string,
   MiddleName: string,
@@ -14,7 +15,7 @@ export async function createApplication(data: {
   BirthDate: Date,
   BirthPlace: string,
 
-  SpouseFirstName: string,
+  SpouseFirstName: undefined | string,
   SpouseMiddleName: string,
   SpouseLastName: string,
   SpouseSuffix: string,
@@ -67,7 +68,9 @@ export async function createApplication(data: {
   PrevMemberStatus: string,
   LeaveReason: string,
   ReferralName: string
-}) {
+}): Promise<string> {
+
+  const FirstName =  data.FirstName != undefined ? data.FirstName : null;
 
   const new_uuid = crypto.randomUUID();
   const supabase = await createSupbaseServerClient();
@@ -75,7 +78,7 @@ export async function createApplication(data: {
   const addMemberData = await supabase.from("MemberData").insert({
       MembershipID: new_uuid,
       MemberType: "PENDING",
-      FirstName: data.FirstName,
+      FirstName: FirstName !== undefined ? data.FirstName : null,
       MiddleName: data.MiddleName,
       LastName: data.LastName,
       Suffix: data.Suffix,
@@ -124,6 +127,14 @@ export async function createApplication(data: {
     Provice: data.RelativeProvince,
     ZipCode: data.RelativeZipCode
   });
+
+  //Dependent1FirstName: string,
+  //Dependent1MiddleName: string,
+  //Dependent1LastName: string,
+  //Dependent1Suffix: string,
+  //Dependent1BirthDate: Date,
+  //Dependent1Relation: string,
+  //Dependent1Sex: string,'
 
   const addSurveyData = await supabase.from("SurveyData").insert({
     AssocMemberID: new_uuid,

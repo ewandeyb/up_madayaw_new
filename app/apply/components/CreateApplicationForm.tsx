@@ -321,8 +321,8 @@ export default function ApplicationForm() {
                   <FormLabel>First Name</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder=""
-                      type="text"
+                      placeholder="null"
+                      type="string"
                       {...field}
                       onChange={field.onChange} />
                   </FormControl>
