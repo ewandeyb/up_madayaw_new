@@ -48,7 +48,8 @@ export default function ApplicationForm() {
   const Sex = ["Male", "Female"]
   const NatureOfEmployment = ["Casual", "NGS", "Permanent"]
   const [date, setDate] = React.useState<Date>()
-  
+  const PrevMemberStatus = ["Yes", "No"]
+
   const form = useForm<ApplicationFormFields>({
     resolver: zodResolver(ApplicationFormSchema),
     defaultValues: {
@@ -61,7 +62,8 @@ export default function ApplicationForm() {
       Email: "",
       Sex: "Male",
       NatureOfEmployment: "Casual",
-      OfficeTitle: ""
+      OfficeTitle: "",
+      PrevMemberStatus: "No"
     },
   });
 
@@ -98,213 +100,213 @@ export default function ApplicationForm() {
         <hr></hr>
         <div className="p-2">
 
-        <h1 className="font-bold text-upcolor">Personal Data</h1>
+          <h1 className="font-bold text-upcolor">Personal Data</h1>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2 p-2">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2 p-2">
 
-          <FormField
-            control={form.control}
-            name="FirstName"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>First Name</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="Aaron Dave"
-                    type="text"
-                    {...field}
-                    onChange={field.onChange} />
-                </FormControl>
-                <FormDescription>
-                  
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="MiddleName"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Middle Name</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="Sia"
-                    type="text"
-                    {...field}
-                    onChange={field.onChange} />
-                </FormControl>
-                <FormDescription>
-                  
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="LastName"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Last Name</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="Acuna"
-                    type="text"
-                    {...field}
-                    onChange={field.onChange} />
-                </FormControl>
-                <FormDescription>
-                  
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="Suffix"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Suffix</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="Jr./Sr./II/III"
-                    type="text"
-                    {...field}
-                    onChange={field.onChange} />
-                </FormControl>
-                <FormDescription>
-                  
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="CivilStatus"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Civil Status</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
+            <FormField
+              control={form.control}
+              name="FirstName"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>First Name</FormLabel>
                   <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select Civil Status" />
-                    </SelectTrigger>
+                    <Input
+                      placeholder="Aaron Dave"
+                      type="text"
+                      {...field}
+                      onChange={field.onChange} />
                   </FormControl>
-                  <SelectContent>
-                    {CivilStatus.map((CivilStatus, index) => {
-                      return (
-                        <SelectItem
-                          value={CivilStatus}
-                          key={index}
-                        >
-                          {CivilStatus}
-                        </SelectItem>
-                      );
-                    })}
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+                  <FormDescription>
 
-          <FormField
-            control={form.control}
-            name="Sex"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Sex</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="MiddleName"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Middle Name</FormLabel>
                   <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select Sex" />
-                    </SelectTrigger>
+                    <Input
+                      placeholder="Sia"
+                      type="text"
+                      {...field}
+                      onChange={field.onChange} />
                   </FormControl>
-                  <SelectContent>
-                    {Sex.map((Sex, index) => {
-                      return (
-                        <SelectItem
-                          value={Sex}
-                          key={index}
-                        >
-                          {Sex}
-                        </SelectItem>
-                      );
-                    })}
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+                  <FormDescription>
 
-          <FormField
-            control={form.control}
-            name="Email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="username@example.com"
-                    type="email"
-                    {...field}
-                    onChange={field.onChange} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        
-          <FormField
-            control={form.control}
-            name="BirthDate"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Date of birth</FormLabel>
-                <Popover>
-                  <PopoverTrigger asChild>
-                    <Button
-                      variant={"outline"}
-                      className={cn("w-full flex justify-start text-left font-normal", !date && "text-muted-foreground")}
-                    >
-                      <CalendarIcon className="w-4 h-4 mr-2" />
-                      {date ? format(date, "PPP") : <span>Pick a date</span>}
-                    </Button>
-                  </PopoverTrigger>
-                  <PopoverContent align="start" className="w-auto p-0">
-                    <Calendar
-                      mode="single"
-                      captionLayout="dropdown-buttons"
-                      selected={date}
-                      onSelect={setDate}
-                      fromYear={1960}
-                      toYear={2030}
-                    />
-                  </PopoverContent>
-                </Popover>
-                <FormMessage />
-              </FormItem>
-            )}
-          />  
-        
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="LastName"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Last Name</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Acuna"
+                      type="text"
+                      {...field}
+                      onChange={field.onChange} />
+                  </FormControl>
+                  <FormDescription>
+
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="Suffix"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Suffix</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Jr./Sr./II/III"
+                      type="text"
+                      {...field}
+                      onChange={field.onChange} />
+                  </FormControl>
+                  <FormDescription>
+
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="CivilStatus"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Civil Status</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select Civil Status" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {CivilStatus.map((CivilStatus, index) => {
+                        return (
+                          <SelectItem
+                            value={CivilStatus}
+                            key={index}
+                          >
+                            {CivilStatus}
+                          </SelectItem>
+                        );
+                      })}
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="Sex"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Sex</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select Sex" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {Sex.map((Sex, index) => {
+                        return (
+                          <SelectItem
+                            value={Sex}
+                            key={index}
+                          >
+                            {Sex}
+                          </SelectItem>
+                        );
+                      })}
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="Email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Email</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="username@example.com"
+                      type="email"
+                      {...field}
+                      onChange={field.onChange} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="BirthDate"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Date of birth</FormLabel>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <Button
+                        variant={"outline"}
+                        className={cn("w-full flex justify-start text-left font-normal", !date && "text-muted-foreground")}
+                      >
+                        <CalendarIcon className="w-4 h-4 mr-2" />
+                        {date ? format(date, "PPP") : <span>Pick a date</span>}
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent align="start" className="w-auto p-0">
+                      <Calendar
+                        mode="single"
+                        captionLayout="dropdown-buttons"
+                        selected={date}
+                        onSelect={setDate}
+                        fromYear={1960}
+                        toYear={2030}
+                      />
+                    </PopoverContent>
+                  </Popover>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
 
-        </div>
+
+          </div>
         </div>
 
         <hr></hr>
@@ -325,7 +327,7 @@ export default function ApplicationForm() {
                       onChange={field.onChange} />
                   </FormControl>
                   <FormDescription>
-                    
+
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -346,7 +348,7 @@ export default function ApplicationForm() {
                       onChange={field.onChange} />
                   </FormControl>
                   <FormDescription>
-                  
+
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -526,57 +528,16 @@ export default function ApplicationForm() {
           </div>
         </div>
 
+        <hr></hr>
         <div className="p-2">
           <h1 className="text-upcolor font-bold">Nearest Relative Data</h1>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2">
-          <FormField
-            control={form.control}
-            name="NearestRelativeFirstName"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>First Name</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder=""
-                    type="text"
-                    {...field}
-                    onChange={field.onChange} />
-                </FormControl>
-                <FormDescription>
-                  
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="NearestRelativeLastName"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Last Name</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder=""
-                    type="text"
-                    {...field}
-                    onChange={field.onChange} />
-                </FormControl>
-                <FormDescription>
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          </div>
-
             <FormField
               control={form.control}
-              name="RelativeLine1"
+              name="NearestRelativeFirstName"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Address Line 1</FormLabel>
+                  <FormLabel>First Name</FormLabel>
                   <FormControl>
                     <Input
                       placeholder=""
@@ -585,13 +546,56 @@ export default function ApplicationForm() {
                       onChange={field.onChange} />
                   </FormControl>
                   <FormDescription>
-                    Line 1 of nearest relative&apos;s postal address
+
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
             />
 
+            <FormField
+              control={form.control}
+              name="NearestRelativeLastName"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Last Name</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder=""
+                      type="text"
+                      {...field}
+                      onChange={field.onChange} />
+                  </FormControl>
+                  <FormDescription>
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+
+          <FormField
+            control={form.control}
+            name="RelativeLine1"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Address Line 1</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder=""
+                    type="text"
+                    {...field}
+                    onChange={field.onChange} />
+                </FormControl>
+                <FormDescription>
+                  Line 1 of nearest relative&apos;s postal address
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <hr></hr>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2">
             <FormField
               control={form.control}
@@ -675,9 +679,9 @@ export default function ApplicationForm() {
             />
           </div>
         </div>
-            
+
         <hr></hr>
-        <div className= "p-2">
+        <div className="p-2">
           <h1 className="text-upcolor font-bold">Occupation</h1>
           <div className="grid md:grid-cols-2 gap-2">
             <FormField
@@ -771,6 +775,289 @@ export default function ApplicationForm() {
             />
           </div>
         </div>
+
+        <hr></hr>
+        <div className="p-2">
+          <h1 className="text-upcolor font-bold">Dependents</h1>
+          <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-6 gap-2">
+            <div className="col-span-3">
+              <FormField
+                control={form.control}
+                name="Dependent1Name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Depenent Name</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="text"
+                        {...field}
+                        onChange={field.onChange} />
+                    </FormControl>
+                    <FormDescription>
+
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <div>
+              <FormField
+                control={form.control}
+                name="Dependent1Age"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Age</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="number"
+                        {...field}
+                        onChange={field.onChange} />
+                    </FormControl>
+                    <FormDescription>
+
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <div className="col-span-2">
+              <FormField
+                control={form.control}
+                name="Dependent1Relation"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Relation</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="text"
+                        {...field}
+                        onChange={field.onChange} />
+                    </FormControl>
+                    <FormDescription>
+
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <div className="col-span-3">
+              <FormField
+                control={form.control}
+                name="Dependent2Name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Depenent Name</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="text"
+                        {...field}
+                        onChange={field.onChange} />
+                    </FormControl>
+                    <FormDescription>
+
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <div>
+              <FormField
+                control={form.control}
+                name="Dependent2Age"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Age</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="number"
+                        {...field}
+                        onChange={field.onChange} />
+                    </FormControl>
+                    <FormDescription>
+
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <div className="col-span-2">
+              <FormField
+                control={form.control}
+                name="Dependent2Relation"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Relation</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="text"
+                        {...field}
+                        onChange={field.onChange} />
+                    </FormControl>
+                    <FormDescription>
+
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <div className="col-span-3">
+              <FormField
+                control={form.control}
+                name="Dependent3Name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Depenent Name</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="text"
+                        {...field}
+                        onChange={field.onChange} />
+                    </FormControl>
+                    <FormDescription>
+
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <div>
+              <FormField
+                control={form.control}
+                name="Dependent3Age"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Age</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="number"
+                        {...field}
+                        onChange={field.onChange} />
+                    </FormControl>
+                    <FormDescription>
+
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <div className="col-span-2">
+              <FormField
+                control={form.control}
+                name="Dependent3Relation"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Relation</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="text"
+                        {...field}
+                        onChange={field.onChange} />
+                    </FormControl>
+                    <FormDescription>
+
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+          </div>
+
+        </div>
+        <hr></hr>
+        <div className="p-2">
+          <h1 className="text-upcolor font-bold">Survey Questions</h1>
+          <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-6 gap-2">
+            <div>
+              <FormField
+                control={form.control}
+                name="PrevMemberStatus"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Old Member?</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="No" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {PrevMemberStatus.map((PrevMemberStatus, index) => {
+                          return (
+                            <SelectItem
+                              value={PrevMemberStatus}
+                              key={index}
+                            >
+                              {PrevMemberStatus}
+                            </SelectItem>
+                          );
+                        })}
+                      </SelectContent>
+                    </Select>
+                    <FormDescription>
+                      Were you a previous member of this co-op?
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <div className="col-span-3">
+              <FormField
+                control={form.control}
+                name="LeaveReason"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Reason for leaving</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="text"
+                        {...field}
+                        onChange={field.onChange} />
+                    </FormControl>
+                    <FormDescription>
+                      What reasons (if any) did you have for leaving?
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <div className="col-span-2">
+              <FormField
+                control={form.control}
+                name="ReferralName"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Referral Name</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="text"
+                        {...field}
+                        onChange={field.onChange} />
+                    </FormControl>
+                    <FormDescription>
+                      Name of person who referred/recruited you to apply (if any)
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+          </div>
+        </div>
+
         <div className="flex justify-center col-span-3 gap-4">
           <Button variant="up" type="submit">Submit</Button>
           {/* <h6>or</h6>
