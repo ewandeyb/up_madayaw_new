@@ -14,16 +14,16 @@ export const ApplicationFormSchema = z
   }),
   BirthPlace: z.string(),
 
-  SpouseFirstName: z.string(),
-  SpouseMiddleName: z.string(),
-  SpouseLastName: z.string(),
-  SpouseSuffix: z.string(),
-  SpouseOccupation: z.string(),
+  SpouseFirstName: z.optional(z.string()),
+  SpouseMiddleName: z.optional(z.string()),
+  SpouseLastName: z.optional(z.string()),
+  SpouseSuffix: z.optional(z.string()),
+  SpouseOccupation: z.optional(z.string()),
 
   PositionTitle: z.string().min(2),
   NatureOfEmployment: z.enum(["Casual", "NGS", "Permanent"]),
   OfficeTitle: z.string().min(2),
-  YearsOfService: z.number().nonnegative(),
+  YearsOfService: z.coerce.number().nonnegative(),
 
   MemLine1: z.string().min(2),
   MemBarangay: z.string().min(2),
@@ -38,7 +38,21 @@ export const ApplicationFormSchema = z
   RelativeBarangay: z.string().min(2),
   RelativeMunicipalityCity: z.string().min(2),
   RelativeProvince: z.string().min(2),
-  RelativeZipCode: z.coerce.number()
+  RelativeZipCode: z.coerce.number(),
+
+  Dependent1Name: z.optional(z.string()),
+  Dependent1Age: z.optional(z.coerce.number().nonnegative()),
+  Dependent1Relation: z.optional(z.string()),
+  Dependent2Name: z.optional(z.string()),
+  Dependent2Age: z.optional(z.coerce.number().nonnegative()),
+  Dependent2Relation: z.optional(z.string()),
+  Dependent3Name: z.optional(z.string()),
+  Dependent3Age: z.optional(z.coerce.number().nonnegative()),
+  Dependent3Relation: z.optional(z.string()),
+  
+  PrevMemberStatus: z.string(),
+  LeaveReason: z.optional(z.string()),
+  ReferralName: z.optional(z.string())
 });
 
 /* 
