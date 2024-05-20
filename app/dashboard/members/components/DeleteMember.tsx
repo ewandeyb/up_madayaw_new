@@ -10,6 +10,7 @@ export default function DeleteMember({ user_id }: {user_id: string}){
   const[isPending,startTransition] = useTransition();
 
   const onSubmit = () => {
+    console.log("i reacherd here");
     startTransition(async () => {
       const result = JSON.parse(await deleteMemberById(user_id));
       console.log(result);
@@ -27,7 +28,7 @@ export default function DeleteMember({ user_id }: {user_id: string}){
 
   return (
     <form action={onSubmit}>
-      <Button variant="outline">
+      <Button variant="dropdown" className=" font-normal max-h-5 justify-start">
 				<TrashIcon />
 				Delete
 			</Button>

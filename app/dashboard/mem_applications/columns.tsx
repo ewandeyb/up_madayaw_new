@@ -1,5 +1,5 @@
 "use client"
-import CreateMember from "../members/components/create/CreateMember"
+
 import {ColumnDef} from "@tanstack/react-table"
 import {
   Dialog,
@@ -11,7 +11,7 @@ import {
   DialogTrigger,
   DialogClose
 } from "@/components/ui/dialog"
-import { ArrowUpDown, MoreHorizontal } from "lucide-react"
+import { ArrowUpDown, Edit, MoreHorizontal } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -21,9 +21,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { Label } from "@/components/ui/label"
-import { Input } from "@/components/ui/input"
-
+import { Checkbox } from "@/components/ui/checkbox"
+import EditMember from "../members/components/edit/EditMember"
+import DeleteMember from "../members/components/DeleteMember"
+import { IPermission } from "@/lib/types"
+import { useUserStore } from "@/lib/store/user";
+import { cn } from "@/lib/utils";
 export type Applications = {
   Role: "user" | "admin";
   Status: "accepted" | "rejected" | "pending" | "active";
@@ -34,11 +37,53 @@ export type Applications = {
   Email: string;
   MemberType: "Casual" | "NGS" | "Permanent";
 };
+const user = useUserStore.getState().user
+const isAdmin = user?.user_metadata.Role === "admin";
 
-
-export const columns: ColumnDef<Applications>[] = [
+export const columns: ColumnDef<IPermission>[] = [
   {
-    accessorKey: "MembershipID",
+    id: "select",
+    header: ({ table }) => (
+      <Checkbox
+        checked={
+          table.getIsAllPageRowsSelected() ||
+          (table.getIsSomePageRowsSelected() && "indeterminate")
+        }
+        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+        aria-label="Select all"
+      />
+    ),
+    cell: ({ row }) => (
+      <Checkbox
+        checked={row.getIsSelected()}
+        onCheckedChange={(value) => row.toggleSelected(!!value)}
+        aria-label="Select row"
+      />
+    ),
+    enableSorting: false,
+    enableHiding: false,
+  },
+  {
+    accessorKey: "created_at",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Created_At
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      )
+    },
+    cell: ({ row }) => {
+      const date = new Date(row.original.created_at);
+      return date.toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' });
+    }
+  }
+  ,
+  {
+    accessorKey: "MemberData.MembershipID",
     header: ({ column }) => {
       return (
         <Button
@@ -53,7 +98,7 @@ export const columns: ColumnDef<Applications>[] = [
   }
   ,
   {
-    accessorKey: "FirstName",
+    accessorKey: "MemberData.FirstName",
     header: ({ column }) => {
       return (
         <Button
@@ -68,7 +113,7 @@ export const columns: ColumnDef<Applications>[] = [
   }
   ,
   {
-    accessorKey: "LastName",
+    accessorKey: "MemberData.LastName",
     header: ({ column }) => {
       return (
         <Button
@@ -83,7 +128,7 @@ export const columns: ColumnDef<Applications>[] = [
   }
   ,
   {
-    accessorKey: "Email",
+    accessorKey: "MemberData.Email",
     header: ({ column }) => {
       return (
         <Button
@@ -98,7 +143,7 @@ export const columns: ColumnDef<Applications>[] = [
   }
   ,
   {
-    accessorKey: "MemberType",
+    accessorKey: "MemberData.MemberType",
     header: ({ column }) => {
       return (
         <Button
@@ -110,6 +155,7 @@ export const columns: ColumnDef<Applications>[] = [
         </Button>
       )
     },
+    
   }
   ,
   {
@@ -125,7 +171,7 @@ export const columns: ColumnDef<Applications>[] = [
         </Button>
       )
     },
-  }
+  } 
   ,
   {
     accessorKey: "Status",
@@ -148,46 +194,48 @@ export const columns: ColumnDef<Applications>[] = [
       const application = row.original
       
       return (
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="h-8 w-8 p-0">
-                <span className="sr-only">Open menu</span>
-                <MoreHorizontal className="h-4 w-4" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuLabel>Actions</DropdownMenuLabel>
-              <DropdownMenuItem
-                onClick={(event) => {
-                  navigator.clipboard.writeText(application.MembershipID);
-                }}
-                className="pl-6"                
-              >
-                  Copy Application ID
-              </DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" className="h-8 w-8 p-0">
+              <span className="sr-only">Open menu</span>
+              <MoreHorizontal className="h-4 w-4" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+            <DropdownMenuItem
+              onClick={(event) => {
+                navigator.clipboard.writeText(application.MemberData.MembershipID);
+              }}
+              className="pl-6"                
+            >
+                Copy Application ID
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem
+            onClick={(event) => {
+              event.preventDefault();
+              console.log(isAdmin);
+              console.log(user?.user_metadata.Role);
+            }} 
+            >
+            <EditMember isAdmin={isAdmin} permission={application}/>
+            </DropdownMenuItem>
+            <DropdownMenuItem
+            onClick={(event) => {
+              console.log("clicked");
+            }} 
+            >
+            <DeleteMember user_id={application.MemberData.MembershipID}/>
+            </DropdownMenuItem>
+            <DropdownMenuItem
               onClick={(event) => {
                 event.preventDefault();
-              }} 
-              >
-                Edit
-              </DropdownMenuItem>
-              <DropdownMenuItem
-              onClick={(event) => {
-                event.preventDefault();
-              }} 
-              >
-                Delete
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={(event) => {
-                  event.preventDefault();
-                }}
-                className="pl-6"  
-              >View full application details</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+              }}
+              className="pl-6"  
+            >View full application details</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       )
     },
   },
