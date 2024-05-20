@@ -1,5 +1,71 @@
 import { z } from "zod"
 
+export interface data1{
+  FirstName: string,
+  MiddleName: string,
+  LastName: string,
+  Suffix: string,
+  CivilStatus: string,
+  Email: string,
+  Sex: string,
+  BirthDate: Date,
+  BirthPlace: string,
+
+  SpouseFirstName: undefined | string,
+  SpouseMiddleName: string,
+  SpouseLastName: string,
+  SpouseSuffix: string,
+  SpouseOccupation: string,
+
+  PositionTitle: string,
+  OfficeTitle: string,
+  NatureOfEmployment: string,
+  YearsOfService: number,
+
+  MemLine1: string,
+  MemBarangay: string,
+  MemMunicipalityCity: string,
+  MemProvince: string,
+  MemZipCode: number,
+
+  NearestRelativeFirstName: string,
+  NearestRelativeLastName: string,
+
+  RelativeLine1: string,
+  RelativeBarangay: string,
+  RelativeMunicipalityCity: string,
+  RelativeProvince: string,
+  RelativeZipCode: number,
+
+  Dependent1FirstName: string,
+  Dependent1MiddleName: string,
+  Dependent1LastName: string,
+  Dependent1Suffix: string,
+  Dependent1BirthDate: Date,
+  Dependent1Relation: string,
+  Dependent1Sex: string,
+
+  Dependent2FirstName: string,
+  Dependent2MiddleName: string,
+  Dependent2LastName: string,
+  Dependent2Suffix: string,
+  Dependent2BirthDate: Date,
+  Dependent2Relation: string,
+  Dependent2Sex: string,
+
+  Dependent3FirstName: string,
+  Dependent3MiddleName: string,
+  Dependent3LastName: string,
+  Dependent3Suffix: string,
+  Dependent3BirthDate: Date,
+  Dependent3Relation: string,
+  Dependent3Sex: string,
+
+  PrevMemberStatus: string,
+  LeaveReason: string,
+  ReferralName: string
+}
+
 export const FullApplicationFormSchema = z
   .object({
     FirstName: z.string().min(2),
@@ -15,10 +81,10 @@ export const FullApplicationFormSchema = z
     BirthPlace: z.string(),
 
     SpouseFirstName: z.string().optional(),
-    SpouseMiddleName: z.string(),
-    SpouseLastName: z.string(),
-    SpouseSuffix: z.string(),
-    SpouseOccupation: z.string(),
+    SpouseMiddleName: z.string().optional(),
+    SpouseLastName: z.string().optional(),
+    SpouseSuffix: z.string().optional(),
+    SpouseOccupation: z.string().optional(),
 
     PositionTitle: z.string().min(2),
     NatureOfEmployment: z.enum(["Casual", "NGS", "Permanent"]),
@@ -40,33 +106,33 @@ export const FullApplicationFormSchema = z
     RelativeProvince: z.string().min(2),
     RelativeZipCode: z.coerce.number(),
 
-    Dependent1FirstName: z.string(),
-    Dependent1MiddleName: z.string(),
-    Dependent1LastName: z.string(),
-    Dependent1Suffix: z.string(),
-    Dependent1BirthDate: z.date(),
-    Dependent1Relation: z.string(),
-    Dependent1Sex: z.string(),
+    Dependent1FirstName: z.string().optional(),
+    Dependent1MiddleName: z.string().optional(),
+    Dependent1LastName: z.string().optional(),
+    Dependent1Suffix: z.string().optional(),
+    Dependent1BirthDate: z.date().optional(),
+    Dependent1Relation: z.string().optional(),
+    Dependent1Sex: z.string().optional(),
 
-    Dependent2FirstName: z.string(),
-    Dependent2MiddleName: z.string(),
-    Dependent2LastName: z.string(),
-    Dependent2Suffix: z.string(),
-    Dependent2BirthDate: z.date(),
-    Dependent2Relation: z.string(),
-    Dependent2Sex: z.string(),
+    Dependent2FirstName: z.string().optional(),
+    Dependent2MiddleName: z.string().optional(),
+    Dependent2LastName: z.string().optional(),
+    Dependent2Suffix: z.string().optional(),
+    Dependent2BirthDate: z.date().optional(),
+    Dependent2Relation: z.string().optional(),
+    Dependent2Sex: z.string().optional(),
 
-    Dependent3FirstName: z.string(),
-    Dependent3MiddleName: z.string(),
-    Dependent3LastName: z.string(),
-    Dependent3Suffix: z.string(),
-    Dependent3BirthDate: z.date(),
-    Dependent3Relation: z.string(),
-    Dependent3Sex: z.string(),
+    Dependent3FirstName: z.string().optional(),
+    Dependent3MiddleName: z.string().optional(),
+    Dependent3LastName: z.string().optional(),
+    Dependent3Suffix: z.string().optional(),
+    Dependent3BirthDate: z.date().optional(),
+    Dependent3Relation: z.string().optional(),
+    Dependent3Sex: z.string().optional(),
 
     PrevMemberStatus: z.string(),
-    LeaveReason: z.string(),
-    ReferralName: z.string()
+    LeaveReason: z.string().optional(),
+    ReferralName: z.string().optional()
   });
 
   export const ApplicationFormSchema = FullApplicationFormSchema;
