@@ -70,8 +70,8 @@ export default function Profile() {
                 <div className="grid gap-6">
                   <h3 className="text-3xl font-bold text-upcolor dark:text-white">Contact Information</h3>
                   <div className="flex items-center">
-                    <Mail className="w-10 h-10"/>
-                    <p className="ml-2 text-base text-gray-500 dark:text-gray-400">
+                    <Mail className="w-[60px] h-[60px]"/>
+                    <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
                       Email: john@example.com
                     </p>
                   </div>
