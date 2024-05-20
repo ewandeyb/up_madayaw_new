@@ -9,4 +9,4 @@ export async function getUser(supabase) {
     }
   
     return null;
-  }
+}
