@@ -1,6 +1,22 @@
+/* globals.css */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* globals.css */
+body {
+  font-family: 'Verdana', Geneva, sans-serif;
+}
+
+.font-verdana {
+  font-family: 'Verdana', Geneva, sans-serif;
+}
+
+/* Ensure other elements inherit the font-family if needed */
+* {
+  font-family: inherit;
+}
 
 @layer base {
 :root {

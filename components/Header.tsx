@@ -29,6 +29,9 @@ export default async function Header() {
         <Link className="text-sm text-gray font-medium hover:underline hover:underline-offset-4" href="/about">
           About
         </Link>
+        <Link className="text-sm text-gray font-medium hover:underline hover:underline-offset-4" href="/updates">
+          Updates
+        </Link>
         {isLoggedIn ? (
           <Link className="hover:underline hover:underline-offset-4 text-sm text-gray font-normal" href="/auth">Welcome <span className=" font-normal text-upcolor ">{email}</span></Link>
         ) : (
@@ -36,7 +39,7 @@ export default async function Header() {
             Login
           </Link>
         )}
-        <Button size="sm" variant="up" className=" text-white font-bold border ">
+        <Button size="sm" variant="up" className=" text-white font-bold border w-26">
           <a href="/apply">Apply Now</a>
         </Button>
       </nav>
@@ -54,6 +57,9 @@ export default async function Header() {
             </Link>
             <Link className="text-sm font-medium hover:underline hover:underline-offset-4" href="/about">
               About
+            </Link>
+            <Link className="text-sm font-medium hover:underline hover:underline-offset-4" href="/updates">
+              Updates
             </Link>
             {isLoggedIn ? (
               <Link className="hover:underline hover:underline-offset-4 text-sm text-gray font-normal" href="/auth">Welcome <span className=" font-normal text-upcolor ">{email}</span></Link>
