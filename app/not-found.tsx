@@ -9,7 +9,7 @@ export default function NotFound(){
           <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl text-up_color">Oops! Page not found.</h1>
           <p className="text-gray-500 dark:text-gray-400">The page you are looking for does not exist or has been moved.</p>
         </div>
-        <Button size="sm" variant="up" className=" text-white font-bold border ">
+        <Button size="sm" variant="up" className=" text-white font-bold border w-26">
           <a href="/">Go Back Home</a>
         </Button>
         </div>
