@@ -17,7 +17,7 @@ export default async function Header() {
     <header className="flex h-16 w-full items-center justify-between bg-up_color px-4 shadow-sm dark:bg-gray-950 sm:px-6 lg:px-8">
       <div className="flex items-center gap-2">
         <Link className="flex items-center gap-2 font-semibold" href="/">
-          <Image alt="logo" src={logo} width="48" height="10" />
+          <Image alt="coop" src={coop} width="48" height="10" />
           <span className="text-xl font-extrabold text-gray">UP Madayaw</span>
         </Link>
         <ModeToggle />
@@ -65,7 +65,7 @@ export default async function Header() {
             <Button size="sm" variant="up" className=" text-white font-bold border ">
               Apply
             </Button>
-            <Image src= {logo} width = "150" height="20" alt="logo" className="mx-auto block mt-12"/>
+            <Image src= {coop} width = "150" height="20" alt="coop" className="mx-auto block mt-12"/>
           </div>
         </SheetContent>
       </Sheet>
