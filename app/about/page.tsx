@@ -1,5 +1,7 @@
 import Image from 'next/image'
 import up from '../../components/img/upmin.jpg'
+import OrganizationalChart from '@/components/OrganizationalChart';
+
 export default function About(){
   return (
     <>
@@ -31,7 +33,7 @@ export default function About(){
                     <div className="grid gap-1">
                       <h3 className="text-xl font-bold text-upcolor">Mission</h3>
                       <p className="text-gray-500 dark:text-gray-400">
-                      The UPMMPC is a University Cooperative with a mission to provide quality service and sustainable socio-economic activities responsive to the needs of the members and the general public. In pursuit of this mission, the UPMMPC is committed to the spirit ofcooperativism, loyalty and honesty as a way of life.
+                      The UPMMPC is a University Cooperative with a mission to provide quality service and sustainable socio-economic activities responsive to the needs of the members and the general public. In pursuit of this mission, the UPMMPC is committed to the spirit of cooperativism, loyalty and honesty as a way of life.
                       </p>
                     </div>
                 </li>
@@ -47,6 +49,7 @@ export default function About(){
           </div>
           </div>
         </section>
+        <OrganizationalChart />
     </>
   )
 }
