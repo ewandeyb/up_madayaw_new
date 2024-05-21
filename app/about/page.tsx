@@ -1,7 +1,10 @@
+'use client'
+
 import Image from 'next/image';
 import up from '../../components/img/upmin.jpg';
 import OrganizationalChart from '@/components/OrganizationalChart';
 import Affiliations from '@/components/Affiliations';
+import Carousel from '@/components/Carousel'; // Import the Carousel component
 
 export default function About() {
   return (
@@ -40,13 +43,7 @@ export default function About() {
                 </li>
               </ul>
             </div>
-            <Image
-              alt="Image"
-              className="mx-auto aspect-video overflow-hidden rounded-xl object-cover object-center sm:w-full lg:order-last"
-              height="310"
-              src={up}
-              width="550"
-            />
+            <Carousel />
           </div>
         </div>
       </section>
