@@ -56,7 +56,7 @@ const OrganizationalChart = () => {
               <img
                 src={officer.photo}
                 alt={officer.name}
-                className="w-32 h-32 object-cover rounded-full mx-auto mb-4"
+                className="w-32 h-32 object-cover mx-auto mb-4"
               />
               <h3 className="text-xl font-semibold">{officer.name}</h3>
               <p className="text-gray-500">{officer.title}</p>
