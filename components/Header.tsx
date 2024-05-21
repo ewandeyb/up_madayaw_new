@@ -36,7 +36,7 @@ export default async function Header() {
             Login
           </Link>
         )}
-        <Button size="sm" variant="up" className=" text-white font-bold border ">
+        <Button size="sm" variant="up" className=" text-white font-bold border w-26">
           <a href="/apply">Apply Now</a>
         </Button>
       </nav>

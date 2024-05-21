@@ -8,7 +8,7 @@ export default function Home() {
         <h1 className=" text-4xl md:text-5xl lg:text-6xl font-bold text-black "><span className="text-upcolor font-sans">UP Madayaw</span> Multi-Purpose Cooperative</h1>
         <p className="text-lg text-black">Empowering communities through sustainable development.</p>
         
-          <Button size="sm" variant="up" className="text-white font-bold border mr-2">
+          <Button size="sm" variant="up" className="text-white font-bold border mr-2 w-26">
             <a href="/apply">Apply Now</a>
           </Button>
           
