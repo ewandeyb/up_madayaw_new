@@ -31,7 +31,19 @@ import {
   TableRow,
 } from "../../../components/ui/table";
 import CreateMember from "../members/components/create/CreateMember";
+import { Label } from "@/components/ui/label";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { useState } from "react";
+import { PageProps } from "../../../.next/types/app/(home)/page";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -54,6 +66,7 @@ export function DataTable<TData, TValue>({
   const handleColumnSelect = (column: any) => {
     setSelectedColumn(column);
   };
+
   const table = useReactTable({
     data,
     columns,
@@ -116,15 +129,55 @@ export function DataTable<TData, TValue>({
             className="max-w-sm "
           />
           <div className="ml-2">
-            <CreateMember />
+            <Button variant="outline">
+              <a href="/apply">Create New Application</a>
+            </Button>
           </div>
+          {/* OPTION 1 */}{" "}
+          {/* <Sheet>
+              <SheetTrigger asChild>
+                <Button variant="outline">Columns</Button>
+              </SheetTrigger>
+              <SheetContent className="h-screen overflow-y-auto">
+                <SheetHeader>
+                  <SheetTitle>Edit Columns</SheetTitle>
+                  <SheetDescription>
+                    Make changes to the columns here. Click save when
+                    you&apos;re done.
+                  </SheetDescription>
+                </SheetHeader>
+                <div className="grid gap-4 py-4">
+                  {table
+                    .getAllColumns()
+                    .filter((column) => column.getCanHide())
+                    .map((column) => (
+                      <div key={column.id} className="flex items-center">
+                        <input
+                          type="checkbox"
+                          checked={column.getIsVisible()}
+                          onChange={(e) =>
+                            column.toggleVisibility(e.target.checked)
+                          }
+                        />
+                        <label className="ml-2 capitalize">{column.id}</label>
+                      </div>
+                    ))}
+                </div>
+                <SheetFooter>
+                  <SheetClose asChild>
+                    <Button type="button">Save changes</Button>
+                  </SheetClose>
+                </SheetFooter>
+              </SheetContent>
+            </Sheet> */}
+          {/* Option 2 */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" className="ml-auto">
                 Columns
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
+            <DropdownMenuContent align="end" className="max-h-40 overflow-auto">
               {table
                 .getAllColumns()
                 .filter((column) => column.getCanHide())
@@ -172,10 +225,10 @@ export function DataTable<TData, TValue>({
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
-                  className="text-center"
+                  className=""
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id} className="text-center">
+                    <TableCell key={cell.id}>
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
@@ -199,6 +252,7 @@ export function DataTable<TData, TValue>({
       </div>
       <div></div>
       <div className="flex items-center justify-end space-x-2 py-5">
+        <p className="mr-auto ">Page *index* of {table.getPageCount()}</p>
         <Button
           variant="outline"
           size="sm"

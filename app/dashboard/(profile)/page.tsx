@@ -1,19 +1,21 @@
 import React from "react";
-import Image from 'next/image';
-import { createClient } from '@/utils/supabase/server';
-import { getUser } from '@/utils/supabase/auth'; // Assuming you have an auth utility to get the logged-in user
+import Image from "next/image";
+import { createClient } from "@/utils/supabase/server";
+import { getUser } from "@/utils/supabase/auth"; // Assuming you have an auth utility to get the logged-in user
 
-import pfp from '@/components/img/main-thumb-51062368-200-pnohclmjfcyvsrzdzwdzejscgiotevdv.jpeg';
-import civil from '@/components/img/4219711.png';
-import birth from '@/components/img/8926835.png';
-import email from '@/components/img/8743964.png';
-import memtype from '@/components/img/5455787.png';
-import position from '@/components/img/6214076.png';
-import office from '@/components/img/4924628.png';
-import loan from '@/components/img/9903593.png';
-import amount from '@/components/img/5329260.png';
-import payment from '@/components/img/4108843.png';
+import pfp from "@/components/img/main-thumb-51062368-200-pnohclmjfcyvsrzdzwdzejscgiotevdv.jpeg";
+import civil from "@/components/img/4219711.png";
+import birth from "@/components/img/8926835.png";
+import email from "@/components/img/8743964.png";
+import memtype from "@/components/img/5455787.png";
+import position from "@/components/img/6214076.png";
+import office from "@/components/img/4924628.png";
+import loan from "@/components/img/9903593.png";
+import amount from "@/components/img/5329260.png";
+import payment from "@/components/img/4108843.png";
 import { Mail } from "lucide-react";
+import EditMember from "../members/components/edit/EditMember";
+import { Button } from "@/components/ui/button";
 
 export default async function Profile() {
   const supabase = createClient();
@@ -28,7 +30,9 @@ export default async function Profile() {
   // Query to get the user-specific data
   const { data: MemberData, error } = await supabase
     .from("MemberData")
-    .select("MembershipNo, FirstName, LastName, CivilStatus, BirthDate, Email, MemberType")
+    .select(
+      "MembershipNo, FirstName, LastName, CivilStatus, BirthDate, Email, MemberType"
+    )
     .eq("MembershipID", user.id) // Assuming user_id is the foreign key in your table
     .single();
 
@@ -37,10 +41,16 @@ export default async function Profile() {
   }
 
   // Check if both FirstName and LastName are null
-  const fullName = MemberData.FirstName || MemberData.LastName ? `${MemberData.FirstName ?? ''} ${MemberData.LastName ?? ''}` : 'NULL';
+  const fullName =
+    MemberData.FirstName || MemberData.LastName
+      ? `${MemberData.FirstName ?? " "} ${MemberData.LastName ?? " "}`
+      : "NULL";
 
   return (
-    <section className="w-full bg-gray-60 dark:bg-gray-800 px-4 lg:px-8">
+    <section className="w-full p-10 bg-gray-60 dark:bg-gray-800 px-4 lg:px-8">
+      <Button className="float-right" variant="outline">
+        Edit{" "}
+      </Button>
       <div className="flex flex-col lg:flex-row items-center justify-start gap-4 lg:gap-6 text-left">
         <div className="inline-block rounded-lg bg-gray-60 px-3 py-1 text-sm dark:bg-gray-800">
           <Image
@@ -66,7 +76,9 @@ export default async function Profile() {
           <ul className="grid gap-6">
             <li className="mb-6">
               <div className="grid gap-6">
-                <h3 className="text-3xl font-bold text-upcolor dark:text-white">Personal Information</h3>
+                <h3 className="text-3xl font-bold text-upcolor dark:text-white">
+                  Personal Information
+                </h3>
                 <div className="flex items-center">
                   <Image
                     alt="Civil Status"
@@ -76,7 +88,10 @@ export default async function Profile() {
                     width="60"
                   />
                   <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
-                    Civil Status: {MemberData.CivilStatus ?? "NULL"}
+                    Civil Status:{" "}
+                    <span className="font-semibold">
+                      {MemberData.CivilStatus ?? "NULL"}
+                    </span>
                   </p>
                 </div>
                 <div className="flex items-center">
@@ -88,25 +103,41 @@ export default async function Profile() {
                     width="60"
                   />
                   <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
-                    Date of Birth: {MemberData.BirthDate ?? "NULL"}
+                    Date of Birth:{" "}
+                    <span className="font-semibold">
+                      {MemberData.BirthDate ?? "NULL"}
+                    </span>
                   </p>
                 </div>
               </div>
             </li>
             <li className="mb-6">
               <div className="grid gap-6">
-                <h3 className="text-3xl font-bold text-upcolor dark:text-white">Contact Information</h3>
+                <h3 className="text-3xl font-bold text-upcolor dark:text-white">
+                  Contact Information
+                </h3>
                 <div className="flex items-center">
-                  <Mail className="w-[60px] h-[60px]"/>
+                  <Image
+                    alt="Date of Birth"
+                    className="overflow-hidden rounded-xl object-cover"
+                    height="60"
+                    src={email}
+                    width="60"
+                  />
                   <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
-                    Email: {MemberData.Email ?? "NULL"}
+                    Email :{" "}
+                    <span className="font-semibold">
+                      {MemberData.Email ?? "NULL"}
+                    </span>
                   </p>
                 </div>
               </div>
             </li>
             <li className="mb-6">
               <div className="grid gap-6">
-                <h3 className="text-3xl font-bold text-upcolor dark:text-white">Membership Details</h3>
+                <h3 className="text-3xl font-bold text-upcolor dark:text-white">
+                  Membership Details
+                </h3>
                 <div className="flex items-center">
                   <Image
                     alt="Membership Type"
@@ -116,7 +147,10 @@ export default async function Profile() {
                     width="60"
                   />
                   <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
-                    Membership Type: {MemberData.MemberType ?? "NULL"}
+                    MemberType:{" "}
+                    <span className="font-semibold">
+                      {MemberData.MemberType ?? "NULL"}
+                    </span>
                   </p>
                 </div>
               </div>
@@ -127,7 +161,9 @@ export default async function Profile() {
           <ul className="grid gap-6">
             <li className="mb-6">
               <div className="grid gap-6">
-                <h3 className="text-3xl font-bold text-upcolor dark:text-white">Employment Information</h3>
+                <h3 className="text-3xl font-bold text-upcolor dark:text-white">
+                  Employment Information
+                </h3>
                 <div className="flex items-center">
                   <Image
                     alt="Position"
@@ -156,7 +192,9 @@ export default async function Profile() {
             </li>
             <li className="mb-6">
               <div className="grid gap-6">
-                <h3 className="text-3xl font-bold text-upcolor dark:text-white">Loan Details</h3>
+                <h3 className="text-3xl font-bold text-upcolor dark:text-white">
+                  Loan Details
+                </h3>
                 <div className="flex items-center">
                   <Image
                     alt="Loan"
@@ -166,7 +204,8 @@ export default async function Profile() {
                     width="60"
                   />
                   <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
-                    I would like to apply for: {/* Add corresponding data if available */}
+                    I would like to apply for:{" "}
+                    {/* Add corresponding data if available */}
                   </p>
                 </div>
                 <div className="flex items-center">
@@ -178,7 +217,7 @@ export default async function Profile() {
                     width="60"
                   />
                   <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
-                    Amount in words: 
+                    Amount in words:
                     <span className="block text-base text-black dark:text-black">
                       {/* Add corresponding data if available */}
                     </span>
