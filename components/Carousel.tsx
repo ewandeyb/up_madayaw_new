@@ -15,25 +15,25 @@ const Carousel = () => {
   };
 
   return (
-    <div className='mx-auto max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-xl'>
+    <div className="w-full">
       <Slider {...settings}>
-        <div>
-          <img src="/img/upmin.jpg" alt="Image 1" />
+        <div className="carousel-slide">
+          <img src="/img/upmin.jpg" alt="Image 1" className="w-full h-full object-cover" />
         </div>
-        <div>
-          <img src="/img/1.png" alt="Image 2" />
+        <div className="carousel-slide">
+          <img src="/img/1.png" alt="Image 2" className="w-full h-full object-cover" />
         </div>
-        <div>
-          <img src="/img/2.png" alt="Image 3" />
+        <div className="carousel-slide">
+          <img src="/img/2.png" alt="Image 3" className="w-full h-full object-cover" />
         </div>
-        <div>
-          <img src="/img/3.png" alt="Image 4" />
+        <div className="carousel-slide">
+          <img src="/img/3.png" alt="Image 4" className="w-full h-full object-cover" />
         </div>
-        <div>
-          <img src="/img/4.png" alt="Image 5" />
+        <div className="carousel-slide">
+          <img src="/img/4.png" alt="Image 5" className="w-full h-full object-cover" />
         </div>
-        <div>
-          <img src="/img/5.png" alt="Image 6" />
+        <div className="carousel-slide">
+          <img src="/img/5.png" alt="Image 6" className="w-full h-full object-cover" />
         </div>
         {/* Add more images as needed */}
       </Slider>
