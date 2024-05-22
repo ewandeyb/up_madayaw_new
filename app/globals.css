@@ -18,6 +18,32 @@ body {
   font-family: inherit;
 }
 
+.custom-next-arrow {
+  right: 20px;
+  z-index: 1;
+}
+
+.custom-prev-arrow {
+  left: 10px;
+  z-index: 1;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  font-size: 30px;
+  color: white; /* Adjust the color as needed */
+}
+
+.carousel-slide {
+  height: 1070px; /* Adjust the height as needed */
+}
+
+.carousel-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensure the entire image is visible */
+}
+
 @layer base {
 :root {
   --background: 0 0% 100%;
