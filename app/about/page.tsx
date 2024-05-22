@@ -1,5 +1,3 @@
-'use client'
-
 import Image from 'next/image';
 import up from '../../components/img/upmin.jpg';
 import OrganizationalChart from '@/components/OrganizationalChart';
