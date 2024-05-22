@@ -15,7 +15,7 @@ const Carousel = () => {
   };
 
   return (
-    <div className='mx-auto max-w-md'>
+    <div className='mx-auto max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-xl'>
       <Slider {...settings}>
         <div>
           <img src="/img/upmin.jpg" alt="Image 1" />
