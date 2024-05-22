@@ -3,7 +3,10 @@
 import { createSupbaseServerClient } from "@/lib/supabase";
 import { revalidatePath, unstable_noStore } from "next/cache";
 
-type string_nul = string | undefined ;
+function isUndefined(datum: string | Date | undefined){
+  return datum === undefined;
+}
+
 export async function createApplication(data: {
   FirstName: string,
   MiddleName: string,
@@ -12,7 +15,7 @@ export async function createApplication(data: {
   CivilStatus: string,
   Email: string,
   Sex: string,
-  BirthDate: Date,
+  BirthDate?: Date,
   BirthPlace: string,
 
   SpouseFirstName?: string,
@@ -70,15 +73,14 @@ export async function createApplication(data: {
   ReferralName?: string
 }): Promise<string> {
 
-  const FirstName =  data.FirstName != undefined ? data.FirstName : null;
-
+  
   const new_uuid = crypto.randomUUID();
   const supabase = await createSupbaseServerClient();
   // modification? may or may not work.
   const addMemberData = await supabase.from("MemberData").insert({
       MembershipID: new_uuid,
       MemberType: "PENDING",
-      FirstName: FirstName !== undefined ? data.FirstName : null,
+      FirstName: data.FirstName,
       MiddleName: data.MiddleName,
       LastName: data.LastName,
       Suffix: data.Suffix,
@@ -98,6 +100,10 @@ export async function createApplication(data: {
       NearestRelativeLastName: data.NearestRelativeLastName
   });
 
+  if (addMemberData.error?.message) {
+    return JSON.stringify(addMemberData);
+  }
+
   const addOccupation = await supabase.from("Occupation").insert({
     AssocMemberID: new_uuid,
     PositionTitle:data.PositionTitle,
@@ -105,6 +111,10 @@ export async function createApplication(data: {
     NatureOfEmployment: data.NatureOfEmployment,
     YearsOfService: data.YearsOfService
 });
+
+  if (addOccupation.error?.message) {
+    return JSON.stringify(addOccupation);
+  }
 
   const addMemberAddress = await supabase.from("Addresses").insert({
     AssocMemberID: new_uuid,
@@ -117,6 +127,10 @@ export async function createApplication(data: {
     ZipCode: data.MemZipCode
   });
 
+  if (addMemberAddress.error?.message) {
+    return JSON.stringify(addMemberAddress);
+  }
+
   const addRelativeAddress = await supabase.from("Addresses").insert({
     AssocMemberID: new_uuid,
     IsMemberAddress: false,
@@ -127,6 +141,67 @@ export async function createApplication(data: {
     Provice: data.RelativeProvince,
     ZipCode: data.RelativeZipCode
   });
+
+  if (addRelativeAddress.error?.message) {
+    return JSON.stringify(addRelativeAddress);
+  }
+
+  const DependentData1 = [data.Dependent1FirstName, data.Dependent1MiddleName, data.Dependent1LastName,
+    data.Dependent1BirthDate, data.Dependent1Relation, data.Dependent1Sex];
+  if(DependentData1.some(isUndefined)){
+    const addDependent1 = await supabase.from("Dependents").insert({
+      AssocMemberID: new_uuid,
+      FirstName: data.Dependent1FirstName,
+      MiddleName: data.Dependent1MiddleName,
+      LastName: data.Dependent1LastName,
+      Suffix: data.Dependent1Suffix,
+      BirthDate: data.Dependent1BirthDate,
+      Relationship: data.Dependent1Relation,
+      Sex: data.Dependent1Sex
+    }); 
+
+    if (addDependent1.error?.message) {
+      return JSON.stringify(addDependent1);
+    }
+  }
+
+  const DependentData2 = [data.Dependent2FirstName, data.Dependent2MiddleName, data.Dependent2LastName,
+    data.Dependent2BirthDate, data.Dependent2Relation, data.Dependent2Sex];
+  if(DependentData1.some(isUndefined)){
+    const addDependent2 = await supabase.from("Dependents").insert({
+      AssocMemberID: new_uuid,
+      FirstName: data.Dependent2FirstName,
+      MiddleName: data.Dependent2MiddleName,
+      LastName: data.Dependent2LastName,
+      Suffix: data.Dependent2Suffix,
+      BirthDate: data.Dependent2BirthDate,
+      Relationship: data.Dependent2Relation,
+      Sex: data.Dependent2Sex
+    }); 
+
+    if (addDependent2.error?.message) {
+      return JSON.stringify(addDependent2);
+    }
+  }
+
+  const DependentData3 = [data.Dependent3FirstName, data.Dependent3MiddleName, data.Dependent3LastName,
+    data.Dependent3BirthDate, data.Dependent3Relation, data.Dependent3Sex];
+  if(DependentData1.some(isUndefined)){
+    const addDependent3 = await supabase.from("Dependents").insert({
+      AssocMemberID: new_uuid,
+      FirstName: data.Dependent3FirstName,
+      MiddleName: data.Dependent3MiddleName,
+      LastName: data.Dependent3LastName,
+      Suffix: data.Dependent3Suffix,
+      BirthDate: data.Dependent3BirthDate,
+      Relationship: data.Dependent3Relation,
+      Sex: data.Dependent3Sex
+    }); 
+
+    if (addDependent3.error?.message) {
+      return JSON.stringify(addDependent3);
+    }
+  }
 
   //Dependent1FirstName: string,
   //Dependent1MiddleName: string,
@@ -143,19 +218,14 @@ export async function createApplication(data: {
     ReferralName: data.ReferralName
   });
 
-  if (addMemberData.error?.message) {
-    return JSON.stringify(addMemberData);
-  } else {
-    revalidatePath("/apply");
-    return JSON.stringify(addMemberData);
+  if (addSurveyData.error?.message) {
+    return JSON.stringify(addSurveyData);
   }
 
-  if (addOccupation.error?.message) {
-    return JSON.stringify(addOccupation);
-  } else {
-    revalidatePath("/apply");
-    return JSON.stringify(addOccupation);
-  }
+  revalidatePath("/apply");
+  return JSON.stringify(addMemberData);
+
+
 }
 
 /* CODE BELOW NOT UPDATED */

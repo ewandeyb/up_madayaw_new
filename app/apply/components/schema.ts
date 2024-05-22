@@ -11,7 +11,7 @@ export interface data1{
   BirthDate: Date,
   BirthPlace: string,
 
-  SpouseFirstName: undefined | string,
+  SpouseFirstName: string,
   SpouseMiddleName: string,
   SpouseLastName: string,
   SpouseSuffix: string,
@@ -77,7 +77,7 @@ export const FullApplicationFormSchema = z
     Sex: z.enum(["Male", "Female", "Other", "Prefer not to Say"]),
     BirthDate: z.date({
       required_error: "A date of birth is required.",
-    }),
+    }).optional(),
     BirthPlace: z.string(),
 
     SpouseFirstName: z.string().optional(),
