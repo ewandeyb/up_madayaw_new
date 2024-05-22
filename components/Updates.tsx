@@ -1,4 +1,4 @@
-// components/Affiliations.js
+// components/Updates.tsx
 import React from 'react';
 
 const updates = [
