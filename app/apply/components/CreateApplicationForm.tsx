@@ -47,7 +47,11 @@ export default function ApplicationForm() {
   const CivilStatus = ["Single", "Married", "Divorced", "Widowed", "Annulled", "Legally Seperated"];
   const Sex = ["Male", "Female"]
   const NatureOfEmployment = ["Casual", "NGS", "Permanent"]
-  const [date, setDate] = React.useState<Date>()
+  const [BirthDate, setDate] = React.useState<Date>()
+  const [date1, setDate1] = React.useState<Date>()
+  const [date2, setDate2] = React.useState<Date>()
+  const [date3, setDate3] = React.useState<Date>()
+
   const PrevMemberStatus = ["Yes", "No"]
 
   const form = useForm<ApplicationFormFields>({
@@ -68,6 +72,7 @@ export default function ApplicationForm() {
   });
 
   function onSubmit(data: ApplicationFormFields) {
+    console.log("AOIFdsoifjaodifjaodfjaoisdjf")
     startTransition(async () => {
       const result = await createApplication(data);
       const { error } = JSON.parse(result || '{}');
@@ -94,7 +99,7 @@ export default function ApplicationForm() {
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit(onSubmit)}
+        onSubmit={form.onSubmit}
         className="p-2"
       >
         <hr></hr>
@@ -282,17 +287,17 @@ export default function ApplicationForm() {
                     <PopoverTrigger asChild>
                       <Button
                         variant={"outline"}
-                        className={cn("w-full flex justify-start text-left font-normal", !date && "text-muted-foreground")}
+                        className={cn("w-full flex justify-start text-left font-normal", !BirthDate && "text-muted-foreground")}
                       >
                         <CalendarIcon className="w-4 h-4 mr-2" />
-                        {date ? format(date, "PPP") : <span>Pick a date</span>}
+                        {BirthDate ? format(BirthDate, "PPP") : <span>Pick a date</span>}
                       </Button>
                     </PopoverTrigger>
                     <PopoverContent align="start" className="w-auto p-0">
                       <Calendar
                         mode="single"
                         captionLayout="dropdown-buttons"
-                        selected={date}
+                        selected={BirthDate}
                         onSelect={setDate}
                         fromYear={1960}
                         toYear={2030}
@@ -876,18 +881,18 @@ export default function ApplicationForm() {
                       <PopoverTrigger asChild>
                         <Button
                           variant={"outline"}
-                          className={cn("w-full flex justify-start text-left font-normal", !date && "text-muted-foreground")}
+                          className={cn("w-full flex justify-start text-left font-normal", !date1 && "text-muted-foreground")}
                         >
                           <CalendarIcon className="w-4 h-4 mr-2" />
-                          {date ? format(date, "PPP") : <span>Pick a date</span>}
+                          {date1 ? format(date1, "PPP") : <span>Pick a date</span>}
                         </Button>
                       </PopoverTrigger>
                       <PopoverContent align="start" className="w-auto p-0">
                         <Calendar
                           mode="single"
                           captionLayout="dropdown-buttons"
-                          selected={date}
-                          onSelect={setDate}
+                          selected={date1}
+                          onSelect={setDate1}
                           fromYear={1960}
                           toYear={2030}
                         />
@@ -1053,18 +1058,18 @@ export default function ApplicationForm() {
                       <PopoverTrigger asChild>
                         <Button
                           variant={"outline"}
-                          className={cn("w-full flex justify-start text-left font-normal", !date && "text-muted-foreground")}
+                          className={cn("w-full flex justify-start text-left font-normal", !date2 && "text-muted-foreground")}
                         >
                           <CalendarIcon className="w-4 h-4 mr-2" />
-                          {date ? format(date, "PPP") : <span>Pick a date</span>}
+                          {date2 ? format(date2, "PPP") : <span>Pick a date</span>}
                         </Button>
                       </PopoverTrigger>
                       <PopoverContent align="start" className="w-auto p-0">
                         <Calendar
                           mode="single"
                           captionLayout="dropdown-buttons"
-                          selected={date}
-                          onSelect={setDate}
+                          selected={date2}
+                          onSelect={setDate2}
                           fromYear={1960}
                           toYear={2030}
                         />
@@ -1230,18 +1235,18 @@ export default function ApplicationForm() {
                       <PopoverTrigger asChild>
                         <Button
                           variant={"outline"}
-                          className={cn("w-full flex justify-start text-left font-normal", !date && "text-muted-foreground")}
+                          className={cn("w-full flex justify-start text-left font-normal", !date3 && "text-muted-foreground")}
                         >
                           <CalendarIcon className="w-4 h-4 mr-2" />
-                          {date ? format(date, "PPP") : <span>Pick a date</span>}
+                          {date3 ? format(date3, "PPP") : <span>Pick a date</span>}
                         </Button>
                       </PopoverTrigger>
                       <PopoverContent align="start" className="w-auto p-0">
                         <Calendar
                           mode="single"
                           captionLayout="dropdown-buttons"
-                          selected={date}
-                          onSelect={setDate}
+                          selected={date3}
+                          onSelect={setDate3}
                           fromYear={1960}
                           toYear={2030}
                         />
