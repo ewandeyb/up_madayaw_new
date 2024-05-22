@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import {ColumnDef} from "@tanstack/react-table"
+import { ColumnDef } from "@tanstack/react-table";
 import {
   Dialog,
   DialogContent,
@@ -9,10 +9,10 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-  DialogClose
-} from "@/components/ui/dialog"
-import { ArrowUpDown, Edit, MoreHorizontal } from "lucide-react"
-import { Button } from "@/components/ui/button"
+  DialogClose,
+} from "@/components/ui/dialog";
+import { ArrowUpDown, Edit, MoreHorizontal } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -20,13 +20,14 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Checkbox } from "@/components/ui/checkbox"
-import EditMember from "../members/components/edit/EditMember"
-import DeleteMember from "../members/components/DeleteMember"
-import { IPermission } from "@/lib/types"
+} from "@/components/ui/dropdown-menu";
+
+import EditMember from "../members/components/edit/EditMember";
+import DeleteMember from "../members/components/DeleteMember";
+import { IPermission } from "@/lib/types";
 import { useUserStore } from "@/lib/store/user";
 import { cn } from "@/lib/utils";
+
 export type Applications = {
   Role: "user" | "admin";
   Status: "accepted" | "rejected" | "pending" | "active";
@@ -37,32 +38,10 @@ export type Applications = {
   Email: string;
   MemberType: "Casual" | "NGS" | "Permanent";
 };
-const user = useUserStore.getState().user
+const user = useUserStore.getState().user;
 const isAdmin = user?.user_metadata.Role === "admin";
 
 export const columns: ColumnDef<IPermission>[] = [
-  {
-    id: "select",
-    header: ({ table }) => (
-      <Checkbox
-        checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && "indeterminate")
-        }
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Select all"
-      />
-    ),
-    cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Select row"
-      />
-    ),
-    enableSorting: false,
-    enableHiding: false,
-  },
   {
     accessorKey: "created_at",
     header: ({ column }) => {
@@ -74,14 +53,17 @@ export const columns: ColumnDef<IPermission>[] = [
           Created_At
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
-      )
+      );
     },
     cell: ({ row }) => {
       const date = new Date(row.original.created_at);
-      return date.toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' });
-    }
-  }
-  ,
+      return date.toLocaleDateString("en-US", {
+        month: "short",
+        day: "2-digit",
+        year: "numeric",
+      });
+    },
+  },
   {
     accessorKey: "MemberData.MembershipID",
     header: ({ column }) => {
@@ -93,10 +75,9 @@ export const columns: ColumnDef<IPermission>[] = [
           Membership ID
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
-      )
+      );
     },
-  }
-  ,
+  },
   {
     accessorKey: "MemberData.FirstName",
     header: ({ column }) => {
@@ -108,10 +89,9 @@ export const columns: ColumnDef<IPermission>[] = [
           First Name
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
-      )
+      );
     },
-  }
-  ,
+  },
   {
     accessorKey: "MemberData.LastName",
     header: ({ column }) => {
@@ -123,12 +103,11 @@ export const columns: ColumnDef<IPermission>[] = [
           Last Name
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
-      )
+      );
     },
-  }
-  ,
+  },
   {
-    accessorKey: "MemberData.Email",
+    accessorKey: "Email",
     header: ({ column }) => {
       return (
         <Button
@@ -138,10 +117,12 @@ export const columns: ColumnDef<IPermission>[] = [
           Email
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
-      )
+      );
     },
-  }
-  ,
+    cell: (info) => info.getValue(),
+    filterFn: "includesString",
+    accessorFn: (row) => row.MemberData?.Email ?? "",
+  },
   {
     accessorKey: "MemberData.MemberType",
     header: ({ column }) => {
@@ -153,11 +134,9 @@ export const columns: ColumnDef<IPermission>[] = [
           Membership Type
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
-      )
+      );
     },
-    
-  }
-  ,
+  },
   {
     accessorKey: "Role",
     header: ({ column }) => {
@@ -169,10 +148,9 @@ export const columns: ColumnDef<IPermission>[] = [
           Role
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
-      )
+      );
     },
-  } 
-  ,
+  },
   {
     accessorKey: "Status",
     header: ({ column }) => {
@@ -184,15 +162,14 @@ export const columns: ColumnDef<IPermission>[] = [
           Status
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
-      )
+      );
     },
-  }
-  ,
+  },
   {
     id: "actions",
     cell: ({ row }) => {
-      const application = row.original
-      
+      const application = row.original;
+
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -205,38 +182,42 @@ export const columns: ColumnDef<IPermission>[] = [
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem
               onClick={(event) => {
-                navigator.clipboard.writeText(application.MemberData.MembershipID);
+                navigator.clipboard.writeText(
+                  application.MemberData.MembershipID
+                );
               }}
-              className="pl-6"                
+              className="pl-6"
             >
-                Copy Application ID
+              Copy Application ID
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem
-            onClick={(event) => {
-              event.preventDefault();
-              console.log(isAdmin);
-              console.log(user?.user_metadata.Role);
-            }} 
+              onClick={(event) => {
+                event.preventDefault();
+                console.log(isAdmin); //true or false or undefined
+                console.log(application);
+              }}
             >
-            <EditMember isAdmin={isAdmin} permission={application}/>
+              <EditMember isAdmin={isAdmin} permission={application} />
             </DropdownMenuItem>
             <DropdownMenuItem
-            onClick={(event) => {
-              console.log("clicked");
-            }} 
+              onClick={(event) => {
+                console.log("clicked");
+              }}
             >
-            <DeleteMember user_id={application.MemberData.MembershipID}/>
+              <DeleteMember user_id={application.MemberData.MembershipID} />
             </DropdownMenuItem>
             <DropdownMenuItem
               onClick={(event) => {
                 event.preventDefault();
               }}
-              className="pl-6"  
-            >View full application details</DropdownMenuItem>
+              className="pl-6"
+            >
+              View full application details
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-      )
+      );
     },
   },
-]
+];
