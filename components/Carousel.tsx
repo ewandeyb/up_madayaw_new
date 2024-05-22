@@ -1,7 +1,8 @@
 import React from 'react';
-import Slider from 'react-slick';
+import Slider, { CustomArrowProps } from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import '@/app/globals.css';
 
 const Carousel = () => {
   const settings = {
@@ -12,6 +13,9 @@ const Carousel = () => {
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 5000,
+    arrows: true,
+    nextArrow: <SampleNextArrow />,
+    prevArrow: <SamplePrevArrow />,
   };
 
   return (
@@ -38,6 +42,28 @@ const Carousel = () => {
         {/* Add more images as needed */}
       </Slider>
     </div>
+  );
+};
+
+const SampleNextArrow: React.FC<CustomArrowProps> = (props) => {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={`${className} custom-next-arrow`}
+      style={{ ...style, display: 'block' }}
+      onClick={onClick}
+    />
+  );
+};
+
+const SamplePrevArrow: React.FC<CustomArrowProps> = (props) => {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={`${className} custom-prev-arrow`}
+      style={{ ...style, display: 'block' }}
+      onClick={onClick}
+    />
   );
 };
 
