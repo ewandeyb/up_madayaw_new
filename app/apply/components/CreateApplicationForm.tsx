@@ -57,26 +57,55 @@ export default function ApplicationForm() {
   const form = useForm<ApplicationFormFields>({
     resolver: zodResolver(ApplicationFormSchema),
     defaultValues: {
-      FirstName: "",
-      MiddleName: "",
-      LastName: "",
-      Suffix: "",
+      FirstName: "FTest",
+      MiddleName: "MTest",
+      LastName: "LTest",
       CivilStatus: "Single",
-      PositionTitle: "",
-      Email: "",
-      Sex: "Male",
-      NatureOfEmployment: "Casual",
-      OfficeTitle: "",
-      PrevMemberStatus: "No"
+      Email: "example@email.com",
+      BirthPlace: "PlaceTest",
+
+      PositionTitle: "PosTest",
+      NatureOfEmployment: "NGS",
+      OfficeTitle: "OfficeTest",
+      YearsOfService: 42,
+
+      MemLine1: "Line1",
+      MemBarangay: "Barangay",
+      MemMunicipalityCity: "Municipality",
+      MemProvince: "Province",
+      MemZipCode: 69,
+
+      NearestRelativeFirstName: "RelativeFirst",
+      NearestRelativeLastName: "RelativeLast",
+
+      RelativeLine1: "RelLine1",
+      RelativeBarangay: "RelBaran",
+      RelativeMunicipalityCity: "RelCity",
+      RelativeProvince: "RelProvicnce",
+      RelativeZipCode: 420,
+
+      Dependent1FirstName: "BAD UPLOAD FAILED TEST",
+
+      Dependent2FirstName: "Dep2F",
+      Dependent2MiddleName: "Dep2M",
+      Dependent2LastName: "Dep2L",
+      Dependent2Suffix: "Dep2S",
+      Dependent2BirthDate: new Date("2020-04-20"),
+      Dependent2Relation: "Dep2Rel",
+      Dependent2Sex: "Male",
+
+      PrevMemberStatus: "Yes",
+      LeaveReason: "form sucks",
+      ReferralName: "RefName"
     },
   });
 
   function onSubmit(data: ApplicationFormFields) {
-    console.log("AOIFdsoifjaodifjaodfjaoisdjf")
     startTransition(async () => {
       const result = await createApplication(data);
       const { error } = JSON.parse(result || '{}');
       if (error?.message) {
+        //console.log({error})
         toast({
           title: "Failed to create application",
           description: (
@@ -97,9 +126,9 @@ export default function ApplicationForm() {
   }
 
   return (
-    <Form {...form}>
+    <Form {...form} >
       <form
-        onSubmit={form.onSubmit}
+        onSubmit={form.handleSubmit(onSubmit)}
         className="p-2"
       >
         <hr></hr>
@@ -326,7 +355,7 @@ export default function ApplicationForm() {
                   <FormLabel>First Name</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="null"
+                      placeholder=""
                       type="string"
                       {...field}
                       onChange={field.onChange} />
@@ -925,43 +954,43 @@ export default function ApplicationForm() {
               />
             </div>
             <div>
-            <FormField
-              control={form.control}
-              name="Dependent1Sex"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Sex</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select Sex" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {Sex.map((Sex, index) => {
-                        return (
-                          <SelectItem
-                            value={Sex}
-                            key={index}
-                          >
-                            {Sex}
-                          </SelectItem>
-                        );
-                      })}
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+              <FormField
+                control={form.control}
+                name="Dependent1Sex"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Sex</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select Sex" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {Sex.map((Sex, index) => {
+                          return (
+                            <SelectItem
+                              value={Sex}
+                              key={index}
+                            >
+                              {Sex}
+                            </SelectItem>
+                          );
+                        })}
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
             </div>
 
           </div>
 
-              <hr></hr>
+          <hr></hr>
           <div className="grid grid-cols-1 md:grid-cols-7 lg:grid-cols-7 gap-2">
             <div className="col-span-2">
               <FormField
@@ -1102,43 +1131,43 @@ export default function ApplicationForm() {
               />
             </div>
             <div>
-            <FormField
-              control={form.control}
-              name="Dependent2Sex"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Sex</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select Sex" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {Sex.map((Sex, index) => {
-                        return (
-                          <SelectItem
-                            value={Sex}
-                            key={index}
-                          >
-                            {Sex}
-                          </SelectItem>
-                        );
-                      })}
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+              <FormField
+                control={form.control}
+                name="Dependent2Sex"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Sex</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select Sex" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {Sex.map((Sex, index) => {
+                          return (
+                            <SelectItem
+                              value={Sex}
+                              key={index}
+                            >
+                              {Sex}
+                            </SelectItem>
+                          );
+                        })}
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
             </div>
 
           </div>
 
-              <hr></hr>
+          <hr></hr>
           <div className="grid grid-cols-1 md:grid-cols-7 lg:grid-cols-7 gap-2">
             <div className="col-span-2">
               <FormField
@@ -1279,44 +1308,44 @@ export default function ApplicationForm() {
               />
             </div>
             <div>
-            <FormField
-              control={form.control}
-              name="Dependent3Sex"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Sex</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select Sex" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {Sex.map((Sex, index) => {
-                        return (
-                          <SelectItem
-                            value={Sex}
-                            key={index}
-                          >
-                            {Sex}
-                          </SelectItem>
-                        );
-                      })}
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+              <FormField
+                control={form.control}
+                name="Dependent3Sex"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Sex</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select Sex" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {Sex.map((Sex, index) => {
+                          return (
+                            <SelectItem
+                              value={Sex}
+                              key={index}
+                            >
+                              {Sex}
+                            </SelectItem>
+                          );
+                        })}
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
             </div>
 
           </div>
 
         </div>
-        
+
         <hr></hr>
         <div className="p-2">
           <h1 className="text-upcolor font-bold">Survey Questions</h1>

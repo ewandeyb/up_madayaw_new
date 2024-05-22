@@ -71,7 +71,7 @@ export const FullApplicationFormSchema = z
     FirstName: z.string().min(2),
     MiddleName: z.string().min(2),
     LastName: z.string().min(2),
-    Suffix: z.string().max(5),
+    Suffix: z.string().optional(),
     CivilStatus: z.enum(["Single", "Married", "Divorced", "Widowed", "Annulled", "Legally Seperated"]),
     Email: z.string().email(),
     Sex: z.enum(["Male", "Female", "Other", "Prefer not to Say"]),
