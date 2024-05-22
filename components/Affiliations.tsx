@@ -1,4 +1,4 @@
-// components/Affiliations.js
+// components/Affiliations.tsx
 import React from 'react';
 
 const affiliations = [
