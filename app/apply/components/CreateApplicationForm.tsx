@@ -62,7 +62,8 @@ export default function ApplicationForm() {
       LastName: "LTest",
       CivilStatus: "Single",
       Email: "example@email.com",
-      BirthPlace: "PlaceTest",
+      Birthplace: "PlaceTest",
+      ContactNumber: "555-69420",
 
       PositionTitle: "PosTest",
       NatureOfEmployment: "NGS",
@@ -338,8 +339,47 @@ export default function ApplicationForm() {
               )}
             />
 
+            <FormField
+              control={form.control}
+              name="Birthplace"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Birthplace</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Region, City"
+                      type="text"
+                      {...field}
+                      onChange={field.onChange} />
+                  </FormControl>
+                  <FormDescription>
 
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
+            <FormField
+              control={form.control}
+              name="ContactNumber"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Contact Number</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder=""
+                      type="text"
+                      {...field}
+                      onChange={field.onChange} />
+                  </FormControl>
+                  <FormDescription>
+
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
           </div>
         </div>
 

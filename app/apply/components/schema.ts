@@ -1,5 +1,7 @@
 import { z } from "zod";
+import validator from "validator";
 
+/*
 export interface data1 {
   MembershipID: string;
   MemberType: string;
@@ -12,6 +14,7 @@ export interface data1 {
   Sex: string;
   BirthDate: Date;
   BirthPlace: string;
+  ContactNumber: string;
 
   SpouseFirstName: string;
   SpouseMiddleName: string;
@@ -67,6 +70,7 @@ export interface data1 {
   LeaveReason: string;
   ReferralName: string;
 }
+*/
 
 export const FullApplicationFormSchema = z.object({
   FirstName: z.string().min(2),
@@ -86,9 +90,9 @@ export const FullApplicationFormSchema = z.object({
   BirthDate: z
     .date({
       required_error: "A date of birth is required.",
-    })
-    .optional(),
-  BirthPlace: z.string(),
+    }).optional(),
+  Birthplace: z.string(),
+  ContactNumber: z.string().refine(validator.isMobilePhone),
 
   SpouseFirstName: z.string().optional(),
   SpouseMiddleName: z.string().optional(),
