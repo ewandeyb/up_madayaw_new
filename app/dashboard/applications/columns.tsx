@@ -27,45 +27,15 @@ import DeleteMember from "../members/components/DeleteMember";
 import { IPermission } from "@/lib/types";
 import { useUserStore } from "@/lib/store/user";
 import { cn } from "@/lib/utils";
+import { data1 } from "@/app/apply/components/schema";
+import { FullApplicationFormSchema } from "@/app/apply/components/schema";
 
-export type Applications = {
-  Role: "user" | "admin";
-  Status: "accepted" | "rejected" | "pending" | "active";
-  PermissionsID: string;
-  MembershipID: string;
-  FirstName: string;
-  LastName: string;
-  Email: string;
-  MemberType: "Casual" | "NGS" | "Permanent";
-};
 const user = useUserStore.getState().user;
 const isAdmin = user?.user_metadata.Role === "admin";
 
-export const columns: ColumnDef<IPermission>[] = [
+export const columns: ColumnDef<data1>[] = [
   {
-    accessorKey: "created_at",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Created_At
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
-    cell: ({ row }) => {
-      const date = new Date(row.original.created_at);
-      return date.toLocaleDateString("en-US", {
-        month: "short",
-        day: "2-digit",
-        year: "numeric",
-      });
-    },
-  },
-  {
-    accessorKey: "MemberData.MembershipID",
+    accessorKey: "MembershipID",
     header: ({ column }) => {
       return (
         <Button
@@ -79,7 +49,43 @@ export const columns: ColumnDef<IPermission>[] = [
     },
   },
   {
-    accessorKey: "MemberData.FirstName",
+    accessorKey: "MemberType",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Membership Type
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+  },
+  {
+    accessorKey: "BirthDate",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Birth Date
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+    cell: ({ row }) => {
+      const date = new Date(row.original.BirthDate);
+      return date.toLocaleDateString("en-US", {
+        month: "short",
+        day: "2-digit",
+        year: "numeric",
+      });
+    },
+  },
+  {
+    accessorKey: "FirstName",
     header: ({ column }) => {
       return (
         <Button
@@ -91,9 +97,31 @@ export const columns: ColumnDef<IPermission>[] = [
         </Button>
       );
     },
+    /* cell: ({ row }) => {
+      const date = new Date(row.original.created_at);
+      return date.toLocaleDateString("en-US", {
+        month: "short",
+        day: "2-digit",
+        year: "numeric",
+      });
+    }, */
   },
   {
-    accessorKey: "MemberData.LastName",
+    accessorKey: "MiddleName",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Middle Name
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+  },
+  {
+    accessorKey: "LastName",
     header: ({ column }) => {
       return (
         <Button
@@ -101,6 +129,20 @@ export const columns: ColumnDef<IPermission>[] = [
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Last Name
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+  },
+  {
+    accessorKey: "Suffix",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Suffix
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
@@ -121,45 +163,91 @@ export const columns: ColumnDef<IPermission>[] = [
     },
     cell: (info) => info.getValue(),
     filterFn: "includesString",
-    accessorFn: (row) => row.MemberData?.Email ?? "",
+    accessorFn: (row) => row.Email ?? "",
   },
   {
-    accessorKey: "MemberData.MemberType",
+    accessorKey: "CivilStatus",
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Membership Type
+          Civil Status
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
     },
   },
   {
-    accessorKey: "Role",
+    accessorKey: "Sex",
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Role
+          Sex
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
     },
   },
   {
-    accessorKey: "Status",
+    accessorKey: "SpouseFirstName",
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className=" text-xs"
         >
-          Status
+          Spouse First Name
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+  },
+  {
+    accessorKey: "SpouseMiddleName",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className=" text-xs"
+        >
+          Spouse Middle Name
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+  },
+  {
+    accessorKey: "SpouseLastName",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className=" text-xs"
+        >
+          Spouse Last Name
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+  },
+  {
+    accessorKey: "SpouseSuffix",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          className=" text-xs"
+        >
+          Spouse Suffix
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
@@ -169,7 +257,7 @@ export const columns: ColumnDef<IPermission>[] = [
     id: "actions",
     cell: ({ row }) => {
       const application = row.original;
-      const isUserAdmin = application.Role === "admin";
+
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -182,9 +270,7 @@ export const columns: ColumnDef<IPermission>[] = [
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem
               onClick={(event) => {
-                navigator.clipboard.writeText(
-                  application.MemberData.MembershipID
-                );
+                navigator.clipboard.writeText(application.MembershipID);
               }}
               className="pl-6"
             >
@@ -194,18 +280,18 @@ export const columns: ColumnDef<IPermission>[] = [
             <DropdownMenuItem
               onClick={(event) => {
                 event.preventDefault();
-                console.log(isUserAdmin); //true or false or undefined
+                console.log(isAdmin); //true or false or undefined
                 console.log(application);
               }}
             >
-              <EditMember isAdmin={isUserAdmin} permission={application} />
+              {/* <EditMember isAdmin={isAdmin} permission={application} /> */}
             </DropdownMenuItem>
             <DropdownMenuItem
               onClick={(event) => {
                 console.log("clicked");
               }}
             >
-              <DeleteMember user_id={application.MemberData.MembershipID} />
+              <DeleteMember user_id={application.MembershipID} />
             </DropdownMenuItem>
             <DropdownMenuItem
               onClick={(event) => {

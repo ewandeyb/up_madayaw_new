@@ -47,23 +47,56 @@ export default function ApplicationForm() {
   const CivilStatus = ["Single", "Married", "Divorced", "Widowed", "Annulled", "Legally Seperated"];
   const Sex = ["Male", "Female"]
   const NatureOfEmployment = ["Casual", "NGS", "Permanent"]
-  const [date, setDate] = React.useState<Date>()
+  const [BirthDate, setDate] = React.useState<Date>()
+  const [date1, setDate1] = React.useState<Date>()
+  const [date2, setDate2] = React.useState<Date>()
+  const [date3, setDate3] = React.useState<Date>()
+
   const PrevMemberStatus = ["Yes", "No"]
 
   const form = useForm<ApplicationFormFields>({
     resolver: zodResolver(ApplicationFormSchema),
     defaultValues: {
-      FirstName: "",
-      MiddleName: "",
-      LastName: "",
-      Suffix: "",
+      FirstName: "FTest",
+      MiddleName: "MTest",
+      LastName: "LTest",
       CivilStatus: "Single",
-      PositionTitle: "",
-      Email: "",
-      Sex: "Male",
-      NatureOfEmployment: "Casual",
-      OfficeTitle: "",
-      PrevMemberStatus: "No"
+      Email: "example@email.com",
+      BirthPlace: "PlaceTest",
+
+      PositionTitle: "PosTest",
+      NatureOfEmployment: "NGS",
+      OfficeTitle: "OfficeTest",
+      YearsOfService: 42,
+
+      MemLine1: "Line1",
+      MemBarangay: "Barangay",
+      MemMunicipalityCity: "Municipality",
+      MemProvince: "Province",
+      MemZipCode: 69,
+
+      NearestRelativeFirstName: "RelativeFirst",
+      NearestRelativeLastName: "RelativeLast",
+
+      RelativeLine1: "RelLine1",
+      RelativeBarangay: "RelBaran",
+      RelativeMunicipalityCity: "RelCity",
+      RelativeProvince: "RelProvicnce",
+      RelativeZipCode: 420,
+
+      Dependent1FirstName: "BAD UPLOAD FAILED TEST",
+
+      Dependent2FirstName: "Dep2F",
+      Dependent2MiddleName: "Dep2M",
+      Dependent2LastName: "Dep2L",
+      Dependent2Suffix: "Dep2S",
+      Dependent2BirthDate: new Date("2020-04-20"),
+      Dependent2Relation: "Dep2Rel",
+      Dependent2Sex: "Male",
+
+      PrevMemberStatus: "Yes",
+      LeaveReason: "form sucks",
+      ReferralName: "RefName"
     },
   });
 
@@ -72,6 +105,7 @@ export default function ApplicationForm() {
       const result = await createApplication(data);
       const { error } = JSON.parse(result || '{}');
       if (error?.message) {
+        //console.log({error})
         toast({
           title: "Failed to create application",
           description: (
@@ -92,7 +126,7 @@ export default function ApplicationForm() {
   }
 
   return (
-    <Form {...form}>
+    <Form {...form} >
       <form
         onSubmit={form.handleSubmit(onSubmit)}
         className="p-2"
@@ -282,17 +316,17 @@ export default function ApplicationForm() {
                     <PopoverTrigger asChild>
                       <Button
                         variant={"outline"}
-                        className={cn("w-full flex justify-start text-left font-normal", !date && "text-muted-foreground")}
+                        className={cn("w-full flex justify-start text-left font-normal", !BirthDate && "text-muted-foreground")}
                       >
                         <CalendarIcon className="w-4 h-4 mr-2" />
-                        {date ? format(date, "PPP") : <span>Pick a date</span>}
+                        {BirthDate ? format(BirthDate, "PPP") : <span>Pick a date</span>}
                       </Button>
                     </PopoverTrigger>
                     <PopoverContent align="start" className="w-auto p-0">
                       <Calendar
                         mode="single"
                         captionLayout="dropdown-buttons"
-                        selected={date}
+                        selected={BirthDate}
                         onSelect={setDate}
                         fromYear={1960}
                         toYear={2030}
@@ -321,7 +355,7 @@ export default function ApplicationForm() {
                   <FormLabel>First Name</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="null"
+                      placeholder=""
                       type="string"
                       {...field}
                       onChange={field.onChange} />
@@ -876,18 +910,18 @@ export default function ApplicationForm() {
                       <PopoverTrigger asChild>
                         <Button
                           variant={"outline"}
-                          className={cn("w-full flex justify-start text-left font-normal", !date && "text-muted-foreground")}
+                          className={cn("w-full flex justify-start text-left font-normal", !date1 && "text-muted-foreground")}
                         >
                           <CalendarIcon className="w-4 h-4 mr-2" />
-                          {date ? format(date, "PPP") : <span>Pick a date</span>}
+                          {date1 ? format(date1, "PPP") : <span>Pick a date</span>}
                         </Button>
                       </PopoverTrigger>
                       <PopoverContent align="start" className="w-auto p-0">
                         <Calendar
                           mode="single"
                           captionLayout="dropdown-buttons"
-                          selected={date}
-                          onSelect={setDate}
+                          selected={date1}
+                          onSelect={setDate1}
                           fromYear={1960}
                           toYear={2030}
                         />
@@ -920,43 +954,43 @@ export default function ApplicationForm() {
               />
             </div>
             <div>
-            <FormField
-              control={form.control}
-              name="Dependent1Sex"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Sex</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select Sex" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {Sex.map((Sex, index) => {
-                        return (
-                          <SelectItem
-                            value={Sex}
-                            key={index}
-                          >
-                            {Sex}
-                          </SelectItem>
-                        );
-                      })}
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+              <FormField
+                control={form.control}
+                name="Dependent1Sex"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Sex</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select Sex" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {Sex.map((Sex, index) => {
+                          return (
+                            <SelectItem
+                              value={Sex}
+                              key={index}
+                            >
+                              {Sex}
+                            </SelectItem>
+                          );
+                        })}
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
             </div>
 
           </div>
 
-              <hr></hr>
+          <hr></hr>
           <div className="grid grid-cols-1 md:grid-cols-7 lg:grid-cols-7 gap-2">
             <div className="col-span-2">
               <FormField
@@ -1053,18 +1087,18 @@ export default function ApplicationForm() {
                       <PopoverTrigger asChild>
                         <Button
                           variant={"outline"}
-                          className={cn("w-full flex justify-start text-left font-normal", !date && "text-muted-foreground")}
+                          className={cn("w-full flex justify-start text-left font-normal", !date2 && "text-muted-foreground")}
                         >
                           <CalendarIcon className="w-4 h-4 mr-2" />
-                          {date ? format(date, "PPP") : <span>Pick a date</span>}
+                          {date2 ? format(date2, "PPP") : <span>Pick a date</span>}
                         </Button>
                       </PopoverTrigger>
                       <PopoverContent align="start" className="w-auto p-0">
                         <Calendar
                           mode="single"
                           captionLayout="dropdown-buttons"
-                          selected={date}
-                          onSelect={setDate}
+                          selected={date2}
+                          onSelect={setDate2}
                           fromYear={1960}
                           toYear={2030}
                         />
@@ -1097,43 +1131,43 @@ export default function ApplicationForm() {
               />
             </div>
             <div>
-            <FormField
-              control={form.control}
-              name="Dependent2Sex"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Sex</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select Sex" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {Sex.map((Sex, index) => {
-                        return (
-                          <SelectItem
-                            value={Sex}
-                            key={index}
-                          >
-                            {Sex}
-                          </SelectItem>
-                        );
-                      })}
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+              <FormField
+                control={form.control}
+                name="Dependent2Sex"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Sex</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select Sex" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {Sex.map((Sex, index) => {
+                          return (
+                            <SelectItem
+                              value={Sex}
+                              key={index}
+                            >
+                              {Sex}
+                            </SelectItem>
+                          );
+                        })}
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
             </div>
 
           </div>
 
-              <hr></hr>
+          <hr></hr>
           <div className="grid grid-cols-1 md:grid-cols-7 lg:grid-cols-7 gap-2">
             <div className="col-span-2">
               <FormField
@@ -1230,18 +1264,18 @@ export default function ApplicationForm() {
                       <PopoverTrigger asChild>
                         <Button
                           variant={"outline"}
-                          className={cn("w-full flex justify-start text-left font-normal", !date && "text-muted-foreground")}
+                          className={cn("w-full flex justify-start text-left font-normal", !date3 && "text-muted-foreground")}
                         >
                           <CalendarIcon className="w-4 h-4 mr-2" />
-                          {date ? format(date, "PPP") : <span>Pick a date</span>}
+                          {date3 ? format(date3, "PPP") : <span>Pick a date</span>}
                         </Button>
                       </PopoverTrigger>
                       <PopoverContent align="start" className="w-auto p-0">
                         <Calendar
                           mode="single"
                           captionLayout="dropdown-buttons"
-                          selected={date}
-                          onSelect={setDate}
+                          selected={date3}
+                          onSelect={setDate3}
                           fromYear={1960}
                           toYear={2030}
                         />
@@ -1274,44 +1308,44 @@ export default function ApplicationForm() {
               />
             </div>
             <div>
-            <FormField
-              control={form.control}
-              name="Dependent3Sex"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Sex</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select Sex" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {Sex.map((Sex, index) => {
-                        return (
-                          <SelectItem
-                            value={Sex}
-                            key={index}
-                          >
-                            {Sex}
-                          </SelectItem>
-                        );
-                      })}
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+              <FormField
+                control={form.control}
+                name="Dependent3Sex"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Sex</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select Sex" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {Sex.map((Sex, index) => {
+                          return (
+                            <SelectItem
+                              value={Sex}
+                              key={index}
+                            >
+                              {Sex}
+                            </SelectItem>
+                          );
+                        })}
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
             </div>
 
           </div>
 
         </div>
-        
+
         <hr></hr>
         <div className="p-2">
           <h1 className="text-upcolor font-bold">Survey Questions</h1>

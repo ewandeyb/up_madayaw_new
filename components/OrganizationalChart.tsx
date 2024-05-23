@@ -1,4 +1,4 @@
-// components/OrganizationalChart.js
+// components/OrganizationalChart.tsx
 import React from 'react';
 
 const officers = [
