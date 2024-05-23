@@ -35,7 +35,7 @@ export default function Home() {
   }, [api])
 
   return (
-    <section className="relative flex flex-col min-h-screen bg-gray-100 dark:bg-gray-900">
+    <section className="relative flex flex-col min-h-screen bg-gray-100 dark:bg-gray-800">
       <section className="top-0 left-0 w-full h-full flex items-center justify-center text-center flex-col gap-6 z-10 pointer-events-none">
         <div className="pointer-events-auto flex flex-col items-center space-y-6 w-full px-4"> {/* Added w-full and px-4 */}
           <h1 className="mt-[50px] text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-black dark:text-white p-4 rounded inline-block ">
