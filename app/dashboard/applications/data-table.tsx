@@ -87,7 +87,7 @@ export function DataTable<TData, TValue>({
   return (
     <div>
       <div>
-        <div className="flex items-center py-4">
+        <div className="flex items-center py-4 ">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" className="max-w-20">
@@ -199,7 +199,7 @@ export function DataTable<TData, TValue>({
           </DropdownMenu>
         </div>
       </div>
-      <div className="rounded-md border">
+      <div className="rounded-md border overflow-auto max-w-screen max-h-fit">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (

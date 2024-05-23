@@ -1,8 +1,6 @@
-import { Applications, columns } from "./columns";
+import { columns } from "./columns";
 import { DataTable } from "./data-table";
 import { createSupbaseServerClient } from "@/lib/supabase";
-import DeleteMember from "../members/components/DeleteMember";
-import { Delete } from "lucide-react";
 import { IPermission } from "@/lib/types";
 
 async function getApplicationData(): Promise<IPermission[]> {

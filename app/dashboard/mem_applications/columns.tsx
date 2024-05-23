@@ -169,7 +169,7 @@ export const columns: ColumnDef<IPermission>[] = [
     id: "actions",
     cell: ({ row }) => {
       const application = row.original;
-
+      const isUserAdmin = application.Role === "admin";
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -194,11 +194,11 @@ export const columns: ColumnDef<IPermission>[] = [
             <DropdownMenuItem
               onClick={(event) => {
                 event.preventDefault();
-                console.log(isAdmin); //true or false or undefined
+                console.log(isUserAdmin); //true or false or undefined
                 console.log(application);
               }}
             >
-              <EditMember isAdmin={isAdmin} permission={application} />
+              <EditMember isAdmin={isUserAdmin} permission={application} />
             </DropdownMenuItem>
             <DropdownMenuItem
               onClick={(event) => {
