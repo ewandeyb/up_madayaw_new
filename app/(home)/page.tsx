@@ -37,8 +37,8 @@ export default function Home() {
   return (
     <section className="relative flex flex-col min-h-screen bg-gray-100">
       <section className="top-0 left-0 w-full h-full flex items-center justify-center text-center flex-col gap-6 z-10 pointer-events-none">
-        <div className="pointer-events-auto flex flex-col items-center space-y-6"> {/* Added flex and items-center */}
-          <h1 className="mt-6 text-xl sm:4xl md:text-5xl lg:text-6xl font-bold text-black p-4 rounded inline-block ">
+        <div className="pointer-events-auto flex flex-col items-center space-y-6 w-full px-4"> {/* Added w-full and px-4 */}
+          <h1 className="mt-6 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-black p-4 rounded inline-block ">
             <span className="text-upcolor font-sans">UP Madayaw</span> Multi-Purpose Cooperative
           </h1>
           <p className="text-sm lg:text-lg text-black p-2 rounded inline-block">
@@ -109,12 +109,12 @@ export default function Home() {
                 <CarouselPrevious />
                 <CarouselNext />
               </Carousel>
-              <div className="py-5 pr-[25px] text-center text-sm text-muted-foreground">
+              <div className="py-5 text-center text-sm text-muted-foreground">
                   Slide {current} of {count}
               </div>
             </div>
-            <div className="w-full sm:w-3/5 mt-3 mb-[50px]">
-              <div className="max-w-[650px] ml-[100px] gap-6 bg-white dark:bg-gray-900 p-4 rounded-lg shadow-md sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl"> {/* Added max-w-lg */}
+            <div className="w-full sm:w-3/5 mt-3 sm:mt-0 mb-6 sm:mt-6"> {/* Adjusted mt-3 and sm:mt-0 */}
+              <div className="bg-white dark:bg-gray-900 p-4 rounded-lg shadow-md max-w-full mx-auto"> {/* Adjusted container styling */}
                 <h2 className="text-lg text-left font-bold mb-4">Announcements</h2>
                 <ul>
                   <li className="mb-2">
