@@ -1,4 +1,3 @@
-// components/Updates.tsx
 import React from 'react';
 
 const updates = [
@@ -32,18 +31,18 @@ const Updates = () => {
       <div className="container mx-auto px-4">
         <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-center mb-10 ">Latest Updates</h2>
         <div className="space-y-8">
-          {updates.map((updates, index) => (
-            <div key={index} className="flex items-center gap-6 bg-white dark:bg-gray-900 p-4 rounded-lg shadow-md">
+          {updates.map((update, index) => (
+            <div key={index} className="flex flex-col md:flex-row items-center gap-6 bg-white dark:bg-gray-900 p-4 rounded-lg shadow-md">
               <img
-                src={updates.picture}
-                alt={updates.name}
-                className="w-56 h-56 object-cover"
+                src={update.picture}
+                alt={update.name}
+                className="w-56 h-56 object-cover mb-4 md:mb-0 md:mr-6"
               />
               <div>
-                <h3 className="text-2xl font-semibold text-gray-900 mb-3 dark:text-gray-100">{updates.name}</h3>
-                <p className="text-sm text-gray-500 dark:text-gray-400">{updates.description}</p><br></br>
-                <p className="text-sm text-gray-500 dark:text-gray-400">{updates.description2}</p><br></br>
-                <p className="text-sm text-gray-500 dark:text-gray-400">{updates.description3}</p>
+                <h3 className="text-2xl font-semibold text-gray-900 mb-3 dark:text-gray-100">{update.name}</h3>
+                <p className="text-sm text-gray-500 dark:text-gray-400">{update.description}</p><br></br>
+                <p className="text-sm text-gray-500 dark:text-gray-400">{update.description2}</p><br></br>
+                <p className="text-sm text-gray-500 dark:text-gray-400">{update.description3}</p>
               </div>
             </div>
           ))}
