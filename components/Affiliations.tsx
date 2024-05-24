@@ -27,7 +27,7 @@ const Affiliations = () => {
         <h2 className="text-3xl font-bold text-center mb-6">Affiliations</h2>
         <div className="space-y-8">
           {affiliations.map((affiliation, index) => (
-            <div key={index} className="flex items-center gap-6 bg-white dark:bg-gray-900 p-4 rounded-lg shadow-md">
+            <div key={index} className="flex flex-col md:flex-row items-center gap-6 bg-white dark:bg-gray-900 p-4 rounded-lg shadow-md">
               <img
                 src={affiliation.logo}
                 alt={affiliation.name}

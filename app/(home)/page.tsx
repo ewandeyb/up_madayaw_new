@@ -35,16 +35,16 @@ export default function Home() {
   }, [api]);
 
   return (
-    <section className="relative flex flex-col min-h-screen bg-gray-100">
-      <section className="absolute top-0 left-0 w-full h-full flex items-center justify-center text-center flex-col gap-6 z-10 pointer-events-none">
-        <div className="pointer-events-auto flex flex-col items-center space-y-6">
+    <section className="relative flex flex-col min-h-screen bg-gray-100 dark:bg-gray-800">
+      <section className="top-0 left-0 w-full h-full flex items-center justify-center text-center flex-col gap-6 z-10 pointer-events-none">
+        <div className="pointer-events-auto flex flex-col items-center space-y-6 w-full px-4">
           {" "}
-          {/* Added flex and items-center */}
-          <h1 className="mt-6 text-4xl md:text-5xl lg:text-6xl font-bold text-black p-4 rounded inline-block ">
-            <span className="text-upcolor font-sans text-4xl">UP Madayaw</span>{" "}
+          {/* Added w-full and px-4 */}
+          <h1 className="mt-[50px] text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-black dark:text-white p-4 rounded inline-block ">
+            <span className="text-upcolor font-sans">UP Madayaw</span>{" "}
             Multi-Purpose Cooperative
           </h1>
-          <p className="text-lg text-black p-2 rounded inline-block">
+          <p className="text-sm lg:text-lg text-black dark:text-white p-2 rounded inline-block">
             Empowering communities through sustainable development.
           </p>
           <Button
@@ -58,108 +58,112 @@ export default function Home() {
             <div className="w-full sm:w-3/5">
               {" "}
               {/* Adjust the width as needed */}
-              <Carousel
-                setApi={setApi}
-                className="w-full sm:max-w-lg md:max-w-xl lg:max-w-2xl xl:max-w-3xl"
-                opts={{ align: "start", loop: true }}
-              >
-                <CarouselContent>
-                  <CarouselItem>
-                    <div className="p-1">
-                      <Card>
-                        <CardContent className="flex aspect-[16/9] items-center justify-center p-6">
-                          <Image
-                            src="/img/upmin.jpg"
-                            alt="Image 1"
-                            className="w-full h-full object-cover"
-                          />
-                        </CardContent>
-                      </Card>
-                    </div>
-                  </CarouselItem>
-                  <CarouselItem>
-                    <div className="p-1">
-                      <Card>
-                        <CardContent className="flex aspect-[16/9] items-center justify-center p-6">
-                          <Image
-                            src="/img/1.png"
-                            alt="Image 1"
-                            className="w-full h-full object-cover"
-                          />
-                        </CardContent>
-                      </Card>
-                    </div>
-                  </CarouselItem>
-                  <CarouselItem>
-                    <div className="p-1">
-                      <Card>
-                        <CardContent className="flex aspect-[16/9] items-center justify-center p-6">
-                          <Image
-                            src="/img/2.png"
-                            alt="Image 1"
-                            className="w-full h-full object-cover"
-                          />
-                        </CardContent>
-                      </Card>
-                    </div>
-                  </CarouselItem>
-                  <CarouselItem>
-                    <div className="p-1">
-                      <Card>
-                        <CardContent className="flex aspect-[16/9] items-center justify-center p-6">
-                          <Image
-                            src="/img/3.png"
-                            alt="Image 1"
-                            className="w-full h-full object-cover"
-                          />
-                        </CardContent>
-                      </Card>
-                    </div>
-                  </CarouselItem>
-                  <CarouselItem>
-                    <div className="p-1">
-                      <Card>
-                        <CardContent className="flex aspect-[16/9] items-center justify-center p-6">
-                          <Image
-                            src="/img/4.png"
-                            alt="Image 1"
-                            className="w-full h-full object-cover"
-                          />
-                        </CardContent>
-                      </Card>
-                    </div>
-                  </CarouselItem>
-                  <CarouselItem>
-                    <div className="p-1">
-                      <Card>
-                        <CardContent className="flex aspect-[16/9] items-center justify-center p-6">
-                          <Image
-                            src="/img/5.png"
-                            alt="Image 1"
-                            className="w-full h-full object-cover"
-                          />
-                        </CardContent>
-                      </Card>
-                    </div>
-                  </CarouselItem>
-                </CarouselContent>
-                <CarouselPrevious />
-                <CarouselNext />
-              </Carousel>
-              <div className="py-5 pr-[25px] text-center text-sm text-muted-foreground">
-                Slide {current} of {count}
+              <div className="relative">
+                {" "}
+                {/* Added relative container */}
+                <Carousel
+                  setApi={setApi}
+                  className="w-full sm:max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-4xl"
+                  opts={{ align: "start", loop: true }}
+                >
+                  <CarouselContent>
+                    <CarouselItem>
+                      <div className="p-1">
+                        <Card>
+                          <CardContent className="flex aspect-[16/9] items-center justify-center p-6">
+                            <img
+                              src="/img/upmin.jpg"
+                              alt="Image 1"
+                              className="w-full h-full object-cover"
+                            />
+                          </CardContent>
+                        </Card>
+                      </div>
+                    </CarouselItem>
+                    <CarouselItem>
+                      <div className="p-1">
+                        <Card>
+                          <CardContent className="flex aspect-[16/9] items-center justify-center p-6">
+                            <img
+                              src="/img/1.png"
+                              alt="Image 1"
+                              className="w-full h-full object-cover"
+                            />
+                          </CardContent>
+                        </Card>
+                      </div>
+                    </CarouselItem>
+                    <CarouselItem>
+                      <div className="p-1">
+                        <Card>
+                          <CardContent className="flex aspect-[16/9] items-center justify-center p-6">
+                            <img
+                              src="/img/2.png"
+                              alt="Image 1"
+                              className="w-full h-full object-cover"
+                            />
+                          </CardContent>
+                        </Card>
+                      </div>
+                    </CarouselItem>
+                    <CarouselItem>
+                      <div className="p-1">
+                        <Card>
+                          <CardContent className="flex aspect-[16/9] items-center justify-center p-6">
+                            <img
+                              src="/img/3.png"
+                              alt="Image 1"
+                              className="w-full h-full object-cover"
+                            />
+                          </CardContent>
+                        </Card>
+                      </div>
+                    </CarouselItem>
+                    <CarouselItem>
+                      <div className="p-1">
+                        <Card>
+                          <CardContent className="flex aspect-[16/9] items-center justify-center p-6">
+                            <img
+                              src="/img/4.png"
+                              alt="Image 1"
+                              className="w-full h-full object-cover"
+                            />
+                          </CardContent>
+                        </Card>
+                      </div>
+                    </CarouselItem>
+                    <CarouselItem>
+                      <div className="p-1">
+                        <Card>
+                          <CardContent className="flex aspect-[16/9] items-center justify-center p-6">
+                            <img
+                              src="/img/5.png"
+                              alt="Image 1"
+                              className="w-full h-full object-cover"
+                            />
+                          </CardContent>
+                        </Card>
+                      </div>
+                    </CarouselItem>
+                  </CarouselContent>
+                  <CarouselPrevious className="absolute left-0 top-1/2 transform -translate-y-1/2" />
+                  <CarouselNext className="absolute right-0 top-1/2 transform -translate-y-1/2" />
+                </Carousel>
+                <div className="py-5 text-center text-sm text-muted-foreground">
+                  Slide {current} of {count}
+                </div>
               </div>
             </div>
-            <div className="w-full sm:w-3/5 mt-3">
-              <div className="max-w-[650px] ml-[100px] gap-6 bg-white dark:bg-gray-900 p-4 rounded-lg shadow-md sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl">
+            <div className="w-full sm:w-3/5 mt-1 sm:mt-1 mb-6 sm:mb-6">
+              <div className="bg-white dark:bg-gray-900 p-4 rounded-lg shadow-md max-w-full mx-auto max-h-72 overflow-y-auto">
                 {" "}
-                {/* Added max-w-lg */}
+                {/* Added max-h-72 and overflow-y-auto */}
                 <h2 className="text-lg text-left font-bold mb-4">
                   Announcements
                 </h2>
                 <ul>
                   <li className="mb-2">
-                    <p className="text-sm text-left">
+                    <p className="text-sm sm:text-xs md:text-xs lg:text-xs xl:text-sm text-left">
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                       sed do eiusmod tempor incididunt ut labore et dolore magna
                       aliqua. Porta lorem mollis aliquam ut. Turpis massa
@@ -176,7 +180,7 @@ export default function Home() {
                     </p>
                   </li>
                   <li className="mb-2">
-                    <p className="text-sm text-left">
+                    <p className="text-sm sm:text-xs md:text-xs lg:text-xs xl:text-sm text-left">
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                       sed do eiusmod tempor incididunt ut labore et dolore magna
                       aliqua. Porta lorem mollis aliquam ut. Turpis massa
@@ -190,6 +194,30 @@ export default function Home() {
                       ut eu sem integer. Sed augue lacus viverra vitae congue eu
                       consequat ac. Convallis posuere morbi leo urna molestie at
                       elementum eu facilisis.
+                    </p>
+                  </li>
+                  <li className="mb-2">
+                    <p className="text-sm sm:text-xs md:text-xs lg:text-xs xl:text-sm text-left">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                      sed do eiusmod tempor incididunt ut labore et dolore magna
+                      aliqua. Porta lorem mollis aliquam ut. Turpis massa
+                      tincidunt dui ut ornare lectus sit amet. Sed faucibus
+                      turpis in eu mi bibendum. In dictum non consectetur a
+                      erat. Dignissim enim sit amet venenatis urna cursus eget
+                      nunc scelerisque. Varius duis at consectetur lorem donec
+                      massa sapien faucibus.
+                    </p>
+                  </li>
+                  <li className="mb-2">
+                    <p className="text-sm sm:text-xs md:text-xs lg:text-xs xl:text-sm text-left">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                      sed do eiusmod tempor incididunt ut labore et dolore magna
+                      aliqua. Porta lorem mollis aliquam ut. Turpis massa
+                      tincidunt dui ut ornare lectus sit amet. Sed faucibus
+                      turpis in eu mi bibendum. In dictum non consectetur a
+                      erat. Dignissim enim sit amet venenatis urna cursus eget
+                      nunc scelerisque. Varius duis at consectetur lorem donec
+                      massa sapien faucibus.
                     </p>
                   </li>
                 </ul>
