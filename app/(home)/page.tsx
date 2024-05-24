@@ -116,7 +116,7 @@ export default function Home() {
               </div>
             </div>
             <div className="w-full sm:w-3/5 mt-1 sm:mt-1 mb-6 sm:mb-6">
-              <div className="bg-white dark:bg-gray-900 p-4 rounded-lg shadow-md max-w-full mx-auto"> {/* Adjusted container styling */}
+              <div className="bg-white dark:bg-gray-900 p-4 rounded-lg shadow-md max-w-full mx-auto max-h-72 overflow-y-auto"> {/* Added max-h-72 and overflow-y-auto */}
                 <h2 className="text-lg text-left font-bold mb-4">Announcements</h2>
                 <ul>
                   <li className="mb-2">
