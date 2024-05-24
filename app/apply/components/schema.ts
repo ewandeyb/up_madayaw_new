@@ -1,7 +1,6 @@
 import { z } from "zod";
 import validator from "validator";
 
-/*
 export interface data1 {
   MembershipID: string;
   MemberType: string;
@@ -69,8 +68,7 @@ export interface data1 {
   PrevMemberStatus: string;
   LeaveReason: string;
   ReferralName: string;
-}
-*/
+} // "TEMPORARY" FIX. I DO NOT WANT TO MAINTAIN BOTH DEFs
 
 export const FullApplicationFormSchema = z.object({
   FirstName: z.string().min(2),
@@ -87,10 +85,7 @@ export const FullApplicationFormSchema = z.object({
   ]),
   Email: z.string().email(),
   Sex: z.enum(["Male", "Female", "Other", "Prefer not to Say"]),
-  BirthDate: z
-    .date({
-      required_error: "A date of birth is required.",
-    }).optional(),
+  BirthDate: z.date().optional(),
   Birthplace: z.string(),
   ContactNumber: z.string().refine(validator.isMobilePhone),
 
