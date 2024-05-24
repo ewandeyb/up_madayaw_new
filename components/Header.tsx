@@ -24,9 +24,10 @@ export default async function Header() {
         <Link className="flex items-center gap-2 font-semibold" href="/">
           <Image
             alt="coop"
-            src={isDarkModeClass ? coop : logo}
+            src={coop}
             width="48"
             height="10"
+            className="dark:invert"
           />
           <span className="text-xl font-extrabold text-gray">UP Madayaw</span>
         </Link>
@@ -56,7 +57,10 @@ export default async function Header() {
             className="hover:underline hover:underline-offset-4 text-sm text-gray font-normal"
             href="/auth"
           >
-            Welcome <span className=" font-normal text-upcolor ">{email}</span>
+            Welcome{" "}
+            <span className=" font-normal light:text-upcolor dark: text-white">
+              {email}
+            </span>
           </Link>
         ) : (
           <Link

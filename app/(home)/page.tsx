@@ -5,7 +5,7 @@ import * as React from "react";
 import { Button } from "@/components/ui/button";
 import Header from "../../components/Header";
 import Footer from "@/components/Footer";
-
+import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
 import {
   Carousel,
@@ -41,7 +41,7 @@ export default function Home() {
           {" "}
           {/* Added flex and items-center */}
           <h1 className="mt-6 text-4xl md:text-5xl lg:text-6xl font-bold text-black p-4 rounded inline-block ">
-            <span className="text-upcolor font-sans">UP Madayaw</span>{" "}
+            <span className="text-upcolor font-sans text-4xl">UP Madayaw</span>{" "}
             Multi-Purpose Cooperative
           </h1>
           <p className="text-lg text-black p-2 rounded inline-block">
@@ -68,7 +68,7 @@ export default function Home() {
                     <div className="p-1">
                       <Card>
                         <CardContent className="flex aspect-[16/9] items-center justify-center p-6">
-                          <img
+                          <Image
                             src="/img/upmin.jpg"
                             alt="Image 1"
                             className="w-full h-full object-cover"
@@ -81,7 +81,7 @@ export default function Home() {
                     <div className="p-1">
                       <Card>
                         <CardContent className="flex aspect-[16/9] items-center justify-center p-6">
-                          <img
+                          <Image
                             src="/img/1.png"
                             alt="Image 1"
                             className="w-full h-full object-cover"
@@ -94,7 +94,7 @@ export default function Home() {
                     <div className="p-1">
                       <Card>
                         <CardContent className="flex aspect-[16/9] items-center justify-center p-6">
-                          <img
+                          <Image
                             src="/img/2.png"
                             alt="Image 1"
                             className="w-full h-full object-cover"
@@ -107,7 +107,7 @@ export default function Home() {
                     <div className="p-1">
                       <Card>
                         <CardContent className="flex aspect-[16/9] items-center justify-center p-6">
-                          <img
+                          <Image
                             src="/img/3.png"
                             alt="Image 1"
                             className="w-full h-full object-cover"
@@ -120,7 +120,7 @@ export default function Home() {
                     <div className="p-1">
                       <Card>
                         <CardContent className="flex aspect-[16/9] items-center justify-center p-6">
-                          <img
+                          <Image
                             src="/img/4.png"
                             alt="Image 1"
                             className="w-full h-full object-cover"
@@ -133,7 +133,7 @@ export default function Home() {
                     <div className="p-1">
                       <Card>
                         <CardContent className="flex aspect-[16/9] items-center justify-center p-6">
-                          <img
+                          <Image
                             src="/img/5.png"
                             alt="Image 1"
                             className="w-full h-full object-cover"
