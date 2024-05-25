@@ -65,14 +65,14 @@ export default async function Profile() {
           <h2 className="mt-2 text-3xl font-bold tracking-tighter text-center md:text-center lg:text-left sm:text-5xl">
             {fullName}
           </h2>
-          <p className="max-w-[900px] text-gray-500 tracking-tighter text-center md:text-center lg:text-left md:text-xl lg:text-base xl:text-xl dark:text-gray-400">
+          <p className="max-w-[900px] text-gray-500 dark:text-white tracking-tighter text-center md:text-center lg:text-left md:text-xl lg:text-base xl:text-xl dark:text-gray-400">
             Membership Number: {MemberData.MembershipNo ?? "NULL"}
           </p>
         </div>
       </div>
       <hr className="h-px my-6 bg-black border-0 dark:bg-white"></hr>
       <div className="grid max-w-10xl grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-12 py-12">
-        <div className="flex flex-col justify-center space-y-4 border-2 border-black dark:border-white bg-white dark:bg-gray-900 rounded-xl p-10">
+        <div className="flex flex-col justify-center space-y-4 border-2 border-black dark:border-white bg-white dark:bg-black rounded-xl p-10">
           <ul className="grid gap-6">
             <li className="mb-6">
               <div className="grid gap-6">
@@ -157,7 +157,7 @@ export default async function Profile() {
             </li>
           </ul>
         </div>
-        <div className="flex flex-col justify-center space-y-4 border-2 border-black dark:border-white bg-white dark:bg-gray-900 rounded-xl p-10">
+        <div className="flex flex-col justify-center space-y-4 border-2 border-black dark:border-white bg-white dark:bg-black rounded-xl p-10">
           <ul className="grid gap-6">
             <li className="mb-6">
               <div className="grid gap-6">
