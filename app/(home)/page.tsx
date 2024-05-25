@@ -55,7 +55,7 @@ export default function Home() {
           <Button size="sm" variant="up" className="text-white font-bold border mr-2 w-26">
             <a href="/apply">Apply Now</a>
           </Button>
-          <div className="flex flex-col xl:flex-row justify-between w-full max-w-6xl gap-6"> {/* Flex container for carousel and announcement */}
+          <div className="flex flex-col lg:flex-row justify-between w-full max-w-5xl gap-6"> {/* Flex container for carousel and announcement */}
             <div className="flex-1 flex flex-col h-[400px] lg:h-[500px]"> {/* Adjust the height as needed */}
               <div className="relative h-full">
                 <Carousel setApi={setApi} className="w-full h-full" opts={{ align: "start", loop: true }}>
@@ -147,7 +147,7 @@ export default function Home() {
                 </Carousel>
               </div>
             </div>
-            <div className="flex-1 flex flex-col h-[390px] lg:h-[390px] mb-6"> {/* Ensure same height as carousel */}
+            <div className="flex-1 flex flex-col h-[333px] lg:h-[333px] mb-6"> {/* Ensure same height as carousel */}
               <div className="bg-white dark:bg-black p-4 rounded-lg shadow-md h-full overflow-y-auto"> {/* Adjusted for scroll */}
                 <h2 className="text-lg text-left font-bold mb-4">Announcements</h2>
                 <ul>
