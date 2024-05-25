@@ -28,7 +28,7 @@ const DemoPage = async () => {
   const data = await getApplicationData();
 
   return (
-    <div className=" overflow-y-auto space-y-5 w-full">
+    <div className="overflow-y-auto space-y-5 w-full max-w-screen-xl mx-auto">
       <h1 className="text-3xl font-bold">Member Applications</h1>
       <DataTable columns={columns} data={data} />
     </div>
