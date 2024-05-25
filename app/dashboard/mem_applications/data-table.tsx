@@ -32,8 +32,22 @@ import {
 } from "../../../components/ui/table";
 import CreateMember from "../members/components/create/CreateMember";
 import { useState } from "react";
-
-interface DataTableProps<TData, TValue> {
+import { useRouter } from "next/navigation";
+import { cn } from "@/lib/utils";
+interface TData {
+  PermissionsID: string;
+  created_at: string;
+  Role: "user" | "admin";
+  Status: "active" | "resigned";
+  MemberData: {
+    MembershipID: string;
+    FirstName: string;
+    LastName: string;
+    Email: string;
+    MemberType: string;
+  };
+}
+interface DataTableProps<TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
 }
@@ -41,14 +55,14 @@ interface DataTableProps<TData, TValue> {
 export function DataTable<TData, TValue>({
   columns,
   data,
-}: DataTableProps<TData, TValue>) {
+}: DataTableProps<TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
   );
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
-
+  const router = useRouter();
   const [selectedColumn, setSelectedColumn] = useState(null);
 
   const handleColumnSelect = (column: any) => {
@@ -175,7 +189,22 @@ export function DataTable<TData, TValue>({
                   className="text-center"
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id} className="text-center">
+                    <TableCell
+                      key={cell.id}
+                      className="text-center text-sm dark:text-zinc"
+                      onClick={() => {
+                        let shouldNavigate = true;
+                        if (cell.column.id === "actions") {
+                          shouldNavigate = false;
+                        }
+                        if (shouldNavigate) {
+                          const membershipId =
+                            row.original.MemberData.MembershipID;
+                          console.log(membershipId);
+                          router.push(`mem_applications/${membershipId}`);
+                        }
+                      }}
+                    >
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
@@ -199,6 +228,10 @@ export function DataTable<TData, TValue>({
       </div>
       <div></div>
       <div className="flex items-center justify-end space-x-2 py-5">
+        <p className="mr-auto text-sm">
+          {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}{" "}
+          pages.
+        </p>
         <Button
           variant="outline"
           size="sm"

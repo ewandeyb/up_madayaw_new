@@ -5,17 +5,17 @@ import { redirect } from "next/navigation";
 import Header from "@/components/Header";
 
 export default async function page() {
-	const { data: userSession } = await readUserSession();
+  const { data: userSession } = await readUserSession();
 
-	if (userSession.session) {
-		return redirect("/dashboard");
-	}
-	return (
-		<>
-			{/* <Header /> */}
-			<div className="flex justify-center h-screen p-4">
-				<AuthForm />
-			</div>
-		</>
-	);
+  if (userSession.session) {
+    return redirect("/dashboard");
+  }
+  return (
+    <>
+      {/* <Header /> */}
+      <div className="flex justify-center m-auto h-screen p-4">
+        <AuthForm />
+      </div>
+    </>
+  );
 }

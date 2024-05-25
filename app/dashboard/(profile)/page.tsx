@@ -16,13 +16,16 @@ import payment from "@/components/img/4108843.png";
 import { Mail } from "lucide-react";
 import EditMember from "../members/components/edit/EditMember";
 import { Button } from "@/components/ui/button";
+import { useUserStore } from "@/lib/store/user";
 
 export default async function Profile() {
   const supabase = createClient();
 
   // Fetch the currently logged-in user
   const user = await getUser(supabase);
+  const current_user = useUserStore.getState().user;
 
+  const isAdmin = user?.user_metadata.Role === "admin";
   if (!user) {
     return <div>Please log in to view your profile.</div>;
   }
@@ -48,9 +51,6 @@ export default async function Profile() {
 
   return (
     <section className="w-full p-10 bg-gray-60 dark:bg-gray-800 px-4 lg:px-8">
-      <Button className="float-right" variant="outline">
-        Edit{" "}
-      </Button>
       <div className="flex flex-col lg:flex-row items-center justify-start gap-4 lg:gap-6 text-left">
         <div className="inline-block rounded-lg bg-gray-60 px-3 py-1 text-sm dark:bg-gray-800">
           <Image
