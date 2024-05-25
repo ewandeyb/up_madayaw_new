@@ -62,7 +62,7 @@ export default async function Profile() {
           />
         </div>
         <div className="space-y-2">
-          <h2 className="mt-2 text-3xl font-bold tracking-tighter text-center md:text-center lg:text-left sm:text-5xl">
+          <h2 className="mt-2 text-3xl font-bold tracking-tighter text-center md:text-center lg:text-left sm:text-4xl">
             {fullName}
           </h2>
           <p className="max-w-[900px] text-gray-500 dark:text-white tracking-tighter text-center md:text-center lg:text-left md:text-xl lg:text-base xl:text-xl dark:text-gray-400">
@@ -71,173 +71,179 @@ export default async function Profile() {
         </div>
       </div>
       <hr className="h-px my-6 bg-black border-0 dark:bg-white"></hr>
-      <div className="grid max-w-10xl grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-12 py-12">
-        <div className="flex flex-col justify-center space-y-4 border-2 border-black dark:border-white bg-white dark:bg-black rounded-xl p-10">
-          <ul className="grid gap-6">
-            <li className="mb-6">
-              <div className="grid gap-6">
-                <h3 className="text-3xl font-bold text-upcolor dark:text-white">
-                  Personal Information
-                </h3>
-                <div className="flex items-center">
-                  <Image
-                    alt="Civil Status"
-                    className="overflow-hidden rounded-xl object-cover"
-                    height="60"
-                    src={civil}
-                    width="60"
-                  />
-                  <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
-                    Civil Status:{" "}
-                    <span className="font-semibold">
-                      {MemberData.CivilStatus ?? "NULL"}
-                    </span>
-                  </p>
-                </div>
-                <div className="flex items-center">
-                  <Image
-                    alt="Date of Birth"
-                    className="overflow-hidden rounded-xl object-cover"
-                    height="60"
-                    src={birth}
-                    width="60"
-                  />
-                  <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
-                    Date of Birth:{" "}
-                    <span className="font-semibold">
-                      {MemberData.BirthDate ?? "NULL"}
-                    </span>
-                  </p>
-                </div>
-              </div>
-            </li>
-            <li className="mb-6">
-              <div className="grid gap-6">
-                <h3 className="text-3xl font-bold text-upcolor dark:text-white">
-                  Contact Information
-                </h3>
-                <div className="flex items-center">
-                  <Image
-                    alt="Date of Birth"
-                    className="overflow-hidden rounded-xl object-cover"
-                    height="60"
-                    src={email}
-                    width="60"
-                  />
-                  <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
-                    Email :{" "}
-                    <span className="font-semibold">
-                      {MemberData.Email ?? "NULL"}
-                    </span>
-                  </p>
-                </div>
-              </div>
-            </li>
-            <li className="mb-6">
-              <div className="grid gap-6">
-                <h3 className="text-3xl font-bold text-upcolor dark:text-white">
-                  Membership Details
-                </h3>
-                <div className="flex items-center">
-                  <Image
-                    alt="Membership Type"
-                    className="overflow-hidden rounded-xl object-cover"
-                    height="60"
-                    src={memtype}
-                    width="60"
-                  />
-                  <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
-                    MemberType:{" "}
-                    <span className="font-semibold">
-                      {MemberData.MemberType ?? "NULL"}
-                    </span>
-                  </p>
-                </div>
-              </div>
-            </li>
-          </ul>
-        </div>
-        <div className="flex flex-col justify-center space-y-4 border-2 border-black dark:border-white bg-white dark:bg-black rounded-xl p-10">
-          <ul className="grid gap-6">
-            <li className="mb-6">
-              <div className="grid gap-6">
-                <h3 className="text-3xl font-bold text-upcolor dark:text-white">
-                  Employment Information
-                </h3>
-                <div className="flex items-center">
-                  <Image
-                    alt="Position"
-                    className="overflow-hidden rounded-xl object-cover"
-                    height="60"
-                    src={position}
-                    width="60"
-                  />
-                  <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
-                    Position Title: {/* Add corresponding data if available */}
-                  </p>
-                </div>
-                <div className="flex items-center">
-                  <Image
-                    alt="Office"
-                    className="overflow-hidden rounded-xl object-cover"
-                    height="60"
-                    src={office}
-                    width="60"
-                  />
-                  <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
-                    Office/Unit: {/* Add corresponding data if available */}
-                  </p>
-                </div>
-              </div>
-            </li>
-            <li className="mb-6">
-              <div className="grid gap-6">
-                <h3 className="text-3xl font-bold text-upcolor dark:text-white">
-                  Loan Details
-                </h3>
-                <div className="flex items-center">
-                  <Image
-                    alt="Loan"
-                    className="overflow-hidden rounded-xl object-cover"
-                    height="60"
-                    src={loan}
-                    width="60"
-                  />
-                  <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
-                    I would like to apply for:{" "}
-                    {/* Add corresponding data if available */}
-                  </p>
-                </div>
-                <div className="flex items-center">
-                  <Image
-                    alt="Amount"
-                    className="overflow-hidden rounded-xl object-cover"
-                    height="60"
-                    src={amount}
-                    width="60"
-                  />
-                  <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
-                    Amount in words:
-                    <span className="block text-base text-black dark:text-black">
-                      {/* Add corresponding data if available */}
-                    </span>
-                  </p>
-                </div>
-                <div className="flex items-center">
-                  <Image
-                    alt="Payment"
-                    className="overflow-hidden rounded-xl object-cover"
-                    height="60"
-                    src={payment}
-                    width="60"
-                  />
-                  <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
-                    Payable in: {/* Add corresponding data if available */}
-                  </p>
-                </div>
-              </div>
-            </li>
-          </ul>
+      <div className="flex justify-center">
+        <div className="flex flex-col lg:flex-row justify-between w-full max-w-5xl gap-6">
+          <div className="max-w-[600px] mx-auto">
+            <div className="flex flex-col justify-center space-y-4 border-2 border-black dark:border-white bg-white dark:bg-black rounded-xl p-10">
+              <ul className="grid gap-6">
+                <li className="mb-6">
+                  <div className="grid gap-6">
+                    <h3 className="text-3xl font-bold text-upcolor dark:text-white">
+                      Personal Information
+                    </h3>
+                    <div className="flex items-center">
+                      <Image
+                        alt="Civil Status"
+                        className="overflow-hidden rounded-xl object-cover"
+                        height="60"
+                        src={civil}
+                        width="60"
+                      />
+                      <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
+                        Civil Status:{" "}
+                        <span className="font-semibold">
+                          {MemberData.CivilStatus ?? "NULL"}
+                        </span>
+                      </p>
+                    </div>
+                    <div className="flex items-center">
+                      <Image
+                        alt="Date of Birth"
+                        className="overflow-hidden rounded-xl object-cover"
+                        height="60"
+                        src={birth}
+                        width="60"
+                      />
+                      <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
+                        Date of Birth:{" "}
+                        <span className="font-semibold">
+                          {MemberData.BirthDate ?? "NULL"}
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                </li>
+                <li className="mb-6">
+                  <div className="grid gap-6">
+                    <h3 className="text-3xl font-bold text-upcolor dark:text-white">
+                      Contact Information
+                    </h3>
+                    <div className="flex items-center">
+                      <Image
+                        alt="Date of Birth"
+                        className="overflow-hidden rounded-xl object-cover"
+                        height="60"
+                        src={email}
+                        width="60"
+                      />
+                      <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
+                        Email :{" "}
+                        <span className="font-semibold">
+                          {MemberData.Email ?? "NULL"}
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                </li>
+                <li className="mb-6">
+                  <div className="grid gap-6">
+                    <h3 className="text-3xl font-bold text-upcolor dark:text-white">
+                      Membership Details
+                    </h3>
+                    <div className="flex items-center">
+                      <Image
+                        alt="Membership Type"
+                        className="overflow-hidden rounded-xl object-cover"
+                        height="60"
+                        src={memtype}
+                        width="60"
+                      />
+                      <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
+                        MemberType:{" "}
+                        <span className="font-semibold">
+                          {MemberData.MemberType ?? "NULL"}
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div className="max-w-[600px] mx-auto">
+            <div className="flex flex-col justify-center space-y-4 border-2 border-black dark:border-white bg-white dark:bg-black rounded-xl p-10">
+              <ul className="grid gap-6">
+                <li className="mb-6">
+                  <div className="grid gap-6">
+                    <h3 className="text-3xl font-bold text-upcolor dark:text-white">
+                      Employment Information
+                    </h3>
+                    <div className="flex items-center">
+                      <Image
+                        alt="Position"
+                        className="overflow-hidden rounded-xl object-cover"
+                        height="60"
+                        src={position}
+                        width="60"
+                      />
+                      <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
+                        Position Title: {/* Add corresponding data if available */}
+                      </p>
+                    </div>
+                    <div className="flex items-center">
+                      <Image
+                        alt="Office"
+                        className="overflow-hidden rounded-xl object-cover"
+                        height="60"
+                        src={office}
+                        width="60"
+                      />
+                      <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
+                        Office/Unit: {/* Add corresponding data if available */}
+                      </p>
+                    </div>
+                  </div>
+                </li>
+                <li className="mb-6">
+                  <div className="grid gap-6">
+                    <h3 className="text-3xl font-bold text-upcolor dark:text-white">
+                      Loan Details
+                    </h3>
+                    <div className="flex items-center">
+                      <Image
+                        alt="Loan"
+                        className="overflow-hidden rounded-xl object-cover"
+                        height="60"
+                        src={loan}
+                        width="60"
+                      />
+                      <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
+                        I would like to apply for:{" "}
+                        {/* Add corresponding data if available */}
+                      </p>
+                    </div>
+                    <div className="flex items-center">
+                      <Image
+                        alt="Amount"
+                        className="overflow-hidden rounded-xl object-cover"
+                        height="60"
+                        src={amount}
+                        width="60"
+                      />
+                      <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
+                        Amount in words:
+                        <span className="block text-base text-black dark:text-black">
+                          {/* Add corresponding data if available */}
+                        </span>
+                      </p>
+                    </div>
+                    <div className="flex items-center">
+                      <Image
+                        alt="Payment"
+                        className="overflow-hidden rounded-xl object-cover"
+                        height="60"
+                        src={payment}
+                        width="60"
+                      />
+                      <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
+                        Payable in: {/* Add corresponding data if available */}
+                      </p>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </section>

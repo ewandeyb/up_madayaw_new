@@ -58,10 +58,11 @@ export default async function Header() {
             href="/auth"
           >
             Welcome{" "}
-            <span className=" font-normal light:text-upcolor dark: text-white">
+            <span className="font-normal text-upcolor dark:text-upcolor">
               {email}
             </span>
           </Link>
+
         ) : (
           <Link
             className="text-sm text-gray font-medium hover:underline hover:underline-offset-4"

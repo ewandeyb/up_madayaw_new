@@ -90,7 +90,7 @@ export function DataTable<TData, TValue>({
         <div className="flex items-center py-4 ">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline" className="max-w-20">
+              <Button variant="secondary" className="max-w-20">
                 Filter by {selectedColumn}
               </Button>
             </DropdownMenuTrigger>
@@ -116,8 +116,8 @@ export function DataTable<TData, TValue>({
             value={
               selectedColumn
                 ? (table
-                    .getColumn(selectedColumn)
-                    ?.getFilterValue() as typeof selectedColumn) ?? ""
+                  .getColumn(selectedColumn)
+                  ?.getFilterValue() as typeof selectedColumn) ?? ""
                 : ""
             }
             onChange={(event) =>
@@ -129,7 +129,7 @@ export function DataTable<TData, TValue>({
             className="max-w-sm "
           />
           <div className="ml-2">
-            <Button variant="outline">
+            <Button variant="secondary">
               <a href="/apply">Create New Application</a>
             </Button>
           </div>
@@ -173,7 +173,7 @@ export function DataTable<TData, TValue>({
           {/* Option 2 */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline" className="ml-auto">
+              <Button variant="secondary" className="ml-auto">
                 Columns
               </Button>
             </DropdownMenuTrigger>
@@ -210,9 +210,9 @@ export function DataTable<TData, TValue>({
                       {header.isPlaceholder
                         ? null
                         : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
                     </TableHead>
                   );
                 })}
@@ -254,14 +254,14 @@ export function DataTable<TData, TValue>({
       <div className="flex items-center justify-end space-x-2 py-5">
         <p className="mr-auto ">Page of {table.getPageCount()}</p>
         <Button
-          variant="outline"
+          variant="secondary"
           size="sm"
           onClick={() => table.setPageIndex(0)}
         >
           First Page
         </Button>
         <Button
-          variant="outline"
+          variant="secondary"
           size="sm"
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
@@ -269,7 +269,7 @@ export function DataTable<TData, TValue>({
           Previous
         </Button>
         <Button
-          variant="outline"
+          variant="secondary"
           size="sm"
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
@@ -277,7 +277,7 @@ export function DataTable<TData, TValue>({
           Next
         </Button>
         <Button
-          variant="outline"
+          variant="secondary"
           size="sm"
           onClick={() => table.setPageIndex(table.getPageCount() - 1)}
           disabled={!table.getCanNextPage()}

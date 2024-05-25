@@ -45,7 +45,7 @@ export default function Home() {
   return (
     <section className="relative flex flex-col min-h-screen bg-gradient-to-r from-[#FFFFFF] to-[#8E8E8E] dark:bg-gradient-to-r dark:from-[#B2B2B2] dark:to-[#202020]">
       <section className="top-0 left-0 w-full h-full flex items-center justify-center text-center flex-col gap-6 z-10 pointer-events-none">
-        <div className="pointer-events-auto flex flex-col items-center space-y-6 w-full px-4"> {/* Added w-full and px-4 */}
+        <div className="pointer-events-auto flex flex-col items-center space-y-6 w-full px-4">
           <h1 className="mt-[50px] text-5xl sm:text-5xl md:text-6xl lg:text-6xl font-bold text-black dark:text-white p-4 rounded inline-block ">
             <span className="text-upcolor font-sans">UP Madayaw</span> Multi-Purpose Cooperative
           </h1>
@@ -55,15 +55,15 @@ export default function Home() {
           <Button size="sm" variant="up" className="text-white font-bold border mr-2 w-26">
             <a href="/apply">Apply Now</a>
           </Button>
-          <div className="flex flex-col sm:flex-row justify-between w-full gap-6 md:gap-8 lg:gap-10 xl:gap-12"> {/* Added gap classes */}
-            <div className="w-full sm:w-3/5"> {/* Adjust the width as needed */}
-              <div className="relative"> {/* Added relative container */}
-                <Carousel setApi={setApi} className="w-full sm:max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-4xl" opts={{ align: "start", loop: true }}>
+          <div className="flex flex-col lg:flex-row justify-between w-full max-w-5xl gap-6"> {/* Flex container for carousel and announcement */}
+            <div className="flex-1 flex flex-col h-[400px] lg:h-[500px]"> {/* Adjust the height as needed */}
+              <div className="relative h-full">
+                <Carousel setApi={setApi} className="w-full h-full" opts={{ align: "start", loop: true }}>
                   <CarouselContent>
                     <CarouselItem>
-                      <div className="p-1">
-                        <Card>
-                          <CardContent className="flex aspect-[16/9] items-center justify-center p-6">
+                      <div className="p-1 h-full">
+                        <Card className="h-full">
+                          <CardContent className="flex items-center justify-center h-full p-6">
                             <Image
                               alt="Image1"
                               className="w-full h-full object-cover"
@@ -74,9 +74,9 @@ export default function Home() {
                       </div>
                     </CarouselItem>
                     <CarouselItem>
-                      <div className="p-1">
-                        <Card>
-                          <CardContent className="flex aspect-[16/9] items-center justify-center p-6">
+                      <div className="p-1 h-full">
+                        <Card className="h-full">
+                          <CardContent className="flex items-center justify-center h-full p-6">
                             <Image
                               alt="Image2"
                               className="w-full h-full object-cover"
@@ -87,9 +87,9 @@ export default function Home() {
                       </div>
                     </CarouselItem>
                     <CarouselItem>
-                      <div className="p-1">
-                        <Card>
-                          <CardContent className="flex aspect-[16/9] items-center justify-center p-6">
+                      <div className="p-1 h-full">
+                        <Card className="h-full">
+                          <CardContent className="flex items-center justify-center h-full p-6">
                             <Image
                               alt="Image3"
                               className="w-full h-full object-cover"
@@ -100,9 +100,9 @@ export default function Home() {
                       </div>
                     </CarouselItem>
                     <CarouselItem>
-                      <div className="p-1">
-                        <Card>
-                          <CardContent className="flex aspect-[16/9] items-center justify-center p-6">
+                      <div className="p-1 h-full">
+                        <Card className="h-full">
+                          <CardContent className="flex items-center justify-center h-full p-6">
                             <Image
                               alt="Image4"
                               className="w-full h-full object-cover"
@@ -113,9 +113,9 @@ export default function Home() {
                       </div>
                     </CarouselItem>
                     <CarouselItem>
-                      <div className="p-1">
-                        <Card>
-                          <CardContent className="flex aspect-[16/9] items-center justify-center p-6">
+                      <div className="p-1 h-full">
+                        <Card className="h-full">
+                          <CardContent className="flex items-center justify-center h-full p-6">
                             <Image
                               alt="Image5"
                               className="w-full h-full object-cover"
@@ -126,9 +126,9 @@ export default function Home() {
                       </div>
                     </CarouselItem>
                     <CarouselItem>
-                      <div className="p-1">
-                        <Card>
-                          <CardContent className="flex aspect-[16/9] items-center justify-center p-6">
+                      <div className="p-1 h-full">
+                        <Card className="h-full">
+                          <CardContent className="flex items-center justify-center h-full p-6">
                             <Image
                               alt="Image6"
                               className="w-full h-full object-cover"
@@ -139,21 +139,22 @@ export default function Home() {
                       </div>
                     </CarouselItem>
                   </CarouselContent>
-                  <CarouselPrevious className="absolute left-0 top-1/2 transform -translate-y-1/2" />
-                  <CarouselNext className="absolute right-0 top-1/2 transform -translate-y-1/2" />
+                  <CarouselPrevious className="absolute left-0 top-[40%] transform -translate-y-1/2" />
+                  <CarouselNext className="absolute right-0 top-[40%] transform -translate-y-1/2" />
+                  <div className="text-center text-sm text-black dark:text-white mt-3">
+                    Slide {current} of {count}
+                  </div>
                 </Carousel>
-                <div className="py-5 text-center text-sm text-black dark:text-white">
-                  Slide {current} of {count}
-                </div>
               </div>
             </div>
-            <div className="w-full sm:w-3/5 mt-1 sm:mt-1 mb-6 sm:mb-6">
-              <div className="bg-white dark:bg-black p-4 rounded-lg shadow-md max-w-full mx-auto max-h-[500px] sm:max-h-[200px] md:max-h-[240px] lg:max-h-[330px] xl:max-[450px] overflow-y-auto"> {/* Added max-h-72 and overflow-y-auto */}
+            <div className="flex-1 flex flex-col h-[328px] lg:h-[328px] mt-1 mb-6"> {/* Ensure same height as carousel */}
+              <div className="bg-white dark:bg-black p-4 rounded-lg shadow-md h-full overflow-y-auto"> {/* Adjusted for scroll */}
                 <h2 className="text-lg text-left font-bold mb-4">Announcements</h2>
                 <ul>
                   <li className="mb-2">
                     <p className="text-sm text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Porta lorem mollis aliquam ut. Turpis massa tincidunt dui ut ornare lectus sit amet. Sed faucibus turpis in eu mi bibendum. In dictum non consectetur a erat. Dignissim enim sit amet venenatis urna cursus eget nunc scelerisque. Varius duis at consectetur lorem donec massa sapien faucibus. Sit amet venenatis urna cursus eget. Tellus pellentesque eu.</p>
                   </li>
+                  {/* Add more announcements as needed */}
                 </ul>
               </div>
             </div>
