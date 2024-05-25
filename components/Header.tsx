@@ -24,9 +24,10 @@ export default async function Header() {
         <Link className="flex items-center gap-2 font-semibold" href="/">
           <Image
             alt="coop"
-            src={isDarkModeClass ? coop : logo}
+            src={coop}
             width="48"
             height="10"
+            className="dark:invert"
           />
           <span className="text-xl font-extrabold text-gray">UP Madayaw</span>
         </Link>
@@ -129,7 +130,7 @@ export default async function Header() {
               width="150"
               height="20"
               alt="coop"
-              className="mx-auto block mt-12"
+              className="mx-auto block mt-12 dark:invert"
             />
           </div>
         </SheetContent>
