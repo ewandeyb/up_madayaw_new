@@ -47,12 +47,12 @@ export default async function Profile() {
       : "NULL";
 
   return (
-    <section className="w-full p-10 bg-gray-60 dark:bg-gray-800 px-4 lg:px-8">
-      <Button className="float-right" variant="outline">
+    <section className="w-full p-10 px-4 lg:px-8">
+      <Button className="float-right" variant="secondary">
         Edit{" "}
       </Button>
       <div className="flex flex-col lg:flex-row items-center justify-start gap-4 lg:gap-6 text-left">
-        <div className="inline-block rounded-lg bg-gray-60 px-3 py-1 text-sm dark:bg-gray-800">
+        <div className="inline-block rounded-lg px-3 py-1 text-sm">
           <Image
             alt="Profile Picture"
             className="overflow-hidden rounded-xl object-cover lg:order-last"
