@@ -147,7 +147,7 @@ export default function Home() {
                 </Carousel>
               </div>
             </div>
-            <div className="flex-1 flex flex-col h-[328px] lg:h-[328px] mt-1"> {/* Ensure same height as carousel */}
+            <div className="flex-1 flex flex-col h-[328px] lg:h-[328px] mt-1 mb-6"> {/* Ensure same height as carousel */}
               <div className="bg-white dark:bg-black p-4 rounded-lg shadow-md h-full overflow-y-auto"> {/* Adjusted for scroll */}
                 <h2 className="text-lg text-left font-bold mb-4">Announcements</h2>
                 <ul>
