@@ -139,8 +139,8 @@ export default function Home() {
                       </div>
                     </CarouselItem>
                   </CarouselContent>
-                  <CarouselPrevious className="absolute left-0 top-1/2 transform -translate-y-1/2" />
-                  <CarouselNext className="absolute right-0 top-1/2 transform -translate-y-1/2" />
+                  <CarouselPrevious className="absolute left-0 top-[40%] transform -translate-y-1/2" />
+                  <CarouselNext className="absolute right-0 top-[40%] transform -translate-y-1/2" />
                   <div className="text-center text-sm text-black dark:text-white mt-3">
                     Slide {current} of {count}
                   </div>
