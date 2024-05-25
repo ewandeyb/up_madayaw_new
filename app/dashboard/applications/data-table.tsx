@@ -252,7 +252,7 @@ export function DataTable<TData, TValue>({
       </div>
       <div></div>
       <div className="flex items-center justify-end space-x-2 py-5">
-        <p className="mr-auto ">Page *index* of {table.getPageCount()}</p>
+        <p className="mr-auto ">Page of {table.getPageCount()}</p>
         <Button
           variant="outline"
           size="sm"
