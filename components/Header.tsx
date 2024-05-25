@@ -133,7 +133,7 @@ export default async function Header() {
               width="150"
               height="20"
               alt="coop"
-              className="mx-auto block mt-12"
+              className="mx-auto block mt-12 dark:invert"
             />
           </div>
         </SheetContent>

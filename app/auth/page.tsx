@@ -13,7 +13,7 @@ export default async function page() {
 	return (
 		<>
 			{/* <Header /> */}
-			<div className="flex justify-center h-screen p-4">
+			<div className="flex justify-center h-screen p-4 dark:bg-gray-900">
 				<AuthForm />
 			</div>
 		</>

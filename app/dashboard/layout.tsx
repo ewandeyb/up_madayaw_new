@@ -14,7 +14,7 @@ export default async function Layout({ children }: { children: ReactNode }) {
 	}
 
 
-	useUserStore.setState({user: userSession.session.user});
+	useUserStore.setState({ user: userSession.session.user });
 	return (
 		<div className="w-full flex ">
 			<div className="h-screen flex flex-col">
@@ -22,7 +22,7 @@ export default async function Layout({ children }: { children: ReactNode }) {
 				<MobileSideNav />
 			</div>
 
-			<div className="w-full sm:flex-1 p-5 sm:p-10 space-y-5 bg-gray-100 dark:bg-inherit">
+			<div className="w-full sm:flex-1 p-5 sm:p-10 space-y-5 bg-gradient-to-r from-[#FFFFFF] to-[#8E8E8E] dark:bg-gradient-to-r dark:from-[#B2B2B2] dark:to-[#202020]">
 				<ToggleSidebar />
 				{children}
 			</div>
