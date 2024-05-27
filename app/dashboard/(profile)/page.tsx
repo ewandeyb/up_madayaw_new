@@ -14,7 +14,9 @@ import loan from "@/components/img/9903593.png";
 import amount from "@/components/img/5329260.png";
 import payment from "@/components/img/4108843.png";
 import { Mail } from "lucide-react";
-import EditMember from "../members/components/edit/EditMember";
+import EditProfile from "./components/edit/EditProfile";
+import { readMembers } from "../members/actions";
+import { IPermission } from "@/lib/types";
 import { Button } from "@/components/ui/button";
 
 export default async function Profile() {
@@ -48,9 +50,9 @@ export default async function Profile() {
 
   return (
     <section className="w-full p-10 px-4 lg:px-8">
-      <Button className="float-right" variant="secondary">
-        Edit{" "}
-      </Button>
+      <div className="flex justify-end">
+        <EditProfile />
+      </div>
       <div className="flex flex-col lg:flex-row items-center justify-start gap-4 lg:gap-6 text-left">
         <div className="inline-block rounded-lg px-3 py-1 text-sm">
           <Image
@@ -149,7 +151,7 @@ export default async function Profile() {
                         width="60"
                       />
                       <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
-                        MemberType:{" "}
+                        Membership Type:{" "}
                         <span className="font-semibold">
                           {MemberData.MemberType ?? "NULL"}
                         </span>
