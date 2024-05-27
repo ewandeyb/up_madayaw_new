@@ -120,13 +120,13 @@ export default async function Profile() {
                     </h3>
                     <div className="flex items-center">
                       <Image
-                        alt="Date of Birth"
-                        className="overflow-hidden rounded-xl object-cover"
+                        alt="Email"
+                        className="rounded-xl object-cover"
                         height="60"
                         src={email}
                         width="60"
                       />
-                      <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
+                      <p className="ml-8 text-base text-gray-500 dark:text-gray-400 overflow-auto">
                         Email :{" "}
                         <span className="font-semibold">
                           {MemberData.Email ?? "NULL"}
