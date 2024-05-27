@@ -36,6 +36,9 @@ const FormSchema = z.object({
   BirthDate: z.string().min(2, {
     message: "Name must be at least 2 characters.",
   }),
+  Email: z.string().min(2, {
+    message: "Name must be at least 2 characters.",
+  }),
   MembershipNo: z.string().min(2, {
     message: "Name must be at least 2 characters.",
   }),
