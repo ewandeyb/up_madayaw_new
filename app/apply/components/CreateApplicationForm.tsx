@@ -316,7 +316,7 @@ export default function ApplicationForm() {
                   <Popover>
                     <PopoverTrigger asChild>
                       <Button
-                        variant={"outline"}
+                        variant={"default"}
                         className={cn("w-full flex justify-start text-left font-normal", !BirthDate && "text-muted-foreground")}
                       >
                         <CalendarIcon className="w-4 h-4 mr-2" />
@@ -949,7 +949,7 @@ export default function ApplicationForm() {
                     <Popover>
                       <PopoverTrigger asChild>
                         <Button
-                          variant={"outline"}
+                          variant={"default"}
                           className={cn("w-full flex justify-start text-left font-normal", !date1 && "text-muted-foreground")}
                         >
                           <CalendarIcon className="w-4 h-4 mr-2" />
@@ -1126,7 +1126,7 @@ export default function ApplicationForm() {
                     <Popover>
                       <PopoverTrigger asChild>
                         <Button
-                          variant={"outline"}
+                          variant={"default"}
                           className={cn("w-full flex justify-start text-left font-normal", !date2 && "text-muted-foreground")}
                         >
                           <CalendarIcon className="w-4 h-4 mr-2" />
@@ -1303,7 +1303,7 @@ export default function ApplicationForm() {
                     <Popover>
                       <PopoverTrigger asChild>
                         <Button
-                          variant={"outline"}
+                          variant={"default"}
                           className={cn("w-full flex justify-start text-left font-normal", !date3 && "text-muted-foreground")}
                         >
                           <CalendarIcon className="w-4 h-4 mr-2" />
