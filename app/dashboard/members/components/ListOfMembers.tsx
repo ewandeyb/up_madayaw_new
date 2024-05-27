@@ -8,19 +8,19 @@ import { useUserStore } from "@/lib/store/user";
 import { IPermission } from "@/lib/types";
 import DeleteMember from "./DeleteMember";
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
+	Dialog,
+	DialogContent,
+	DialogDescription,
+	DialogFooter,
+	DialogHeader,
+	DialogTitle,
+	DialogTrigger,
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 
 export default async function ListOfMembers() {
-	const {data:Permissions} = await readMembers();
+	const { data: Permissions } = await readMembers();
 
 
 	const user = useUserStore.getState().user
@@ -35,7 +35,7 @@ export default async function ListOfMembers() {
 						key={index}
 					>
 						<h1>{permission.MemberData.FirstName}</h1>
-						
+
 						<div className="items-center justify-center">
 							<span
 								className={cn(
@@ -74,9 +74,9 @@ export default async function ListOfMembers() {
 									<DeleteMember user_id={permission.MemberData.MembershipID} />
 								</>
 							)}
-							<EditMember 
-							isAdmin={isAdmin}
-							permission={permission}
+							<EditMember
+								isAdmin={isAdmin}
+								permission={permission}
 							/>
 						</div>
 					</div>
