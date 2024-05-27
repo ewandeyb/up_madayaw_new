@@ -34,6 +34,7 @@ import CreateMember from "./components/create/CreateMember";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
+import ElevateMember from "./components/create/ElevateMember";
 interface TData {
   PermissionsID: string;
   created_at: string;
@@ -131,6 +132,9 @@ export function DataTable<TData, TValue>({
           />
           <div className="ml-2">
             <CreateMember />
+          </div>
+          <div className="ml-2">
+            <ElevateMember />
           </div>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>

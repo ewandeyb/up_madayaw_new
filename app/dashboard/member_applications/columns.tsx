@@ -193,7 +193,7 @@ export const columns: ColumnDef<data1>[] = [
       );
     },
   },
-  {
+  /* {
     accessorKey: "SpouseFirstName",
     header: ({ column }) => {
       return (
@@ -252,7 +252,7 @@ export const columns: ColumnDef<data1>[] = [
         </Button>
       );
     },
-  },
+  }, */
   {
     id: "actions",
     cell: ({ row }) => {

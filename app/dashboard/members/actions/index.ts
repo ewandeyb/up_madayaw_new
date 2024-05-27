@@ -2,30 +2,73 @@
 import { readUserSession } from "@/lib/actions";
 import { createSupabaseAdmin, createSupbaseServerClient } from "@/lib/supabase";
 import { revalidatePath, unstable_noStore } from "next/cache";
+import { UUID } from "crypto";
+
+export async function elevateMember(data: {
+  MembershipID: string;
+  Status: string;
+  Role: string;
+  /* Email: string; */
+  password: string;
+  confirm: string;
+}) {
+  const supabase = await createSupabaseAdmin();
+  console.log("reached here!");
+
+  // Insert into Permissions table
+  const permissionResult = await supabase.from("Permissions").insert({
+    Role: data.Role, // Assuming Status is used as Role here
+    Status: data.Status, // Assuming Status is used as Role here
+    PermissionsID: data.MembershipID, // Reference MembershipID
+  });
+
+  const { data: occupationData, error } = await supabase
+    .from("Occupation")
+    .select("NatureOfEmployment")
+    .eq("AssocMemberID", data.MembershipID);
+
+  if (error) {
+    console.error("Error fetching member type:", error.message);
+    return; // Handle the error appropriately
+  }
+
+  let memberType = ""; // Initialize memberType variable
+
+  if (occupationData && occupationData.length > 0) {
+    // Check if occupationData is not empty and has at least one item
+    memberType = occupationData[0]?.NatureOfEmployment || ""; // Extract the NatureOfEmployment
+  } else {
+    console.error("Member type not found for MembershipID:", data.MembershipID);
+    return; // Handle the case where member type is not found
+  }
+
+  const result = await supabase
+    .from("MemberData")
+    .update({ MemberType: memberType })
+    .eq("MembershipID", data.MembershipID);
+
+  if (result.error) {
+    return JSON.stringify({ error: result.error.message });
+  }
+  if (permissionResult.error) {
+    return JSON.stringify({ error: permissionResult.error.message });
+  }
+
+  // Revalidate the path
+  await revalidatePath("/dashboard/member");
+  return JSON.stringify({
+    success: true,
+    permissionResult: permissionResult.data,
+  });
+}
 
 export async function createMember(data: {
-  /*MembershipNo: string,
-  MemberType: string,
-  MiddleName: string,
-  LastName: string,
-  Suffix: string,
-  Sex: string,
-  BirthDate: string,
-  Birthplace: string,
-  SpouseFirstName: string,
-  SpouseMiddleName: string,
-  SpouseLastName: string,
-  SpouseSuffix: string,
-  SpouseOccupation: string,
-  NearestRelativeFirstName: string,
-  NearestRelativeLastName: string, */
-
-  FirstName: string,
-  Role: string,
-  Status: string,
-  Email: string,
-  password: string,
-  confirm: string,
+  FirstName: string;
+  Role: string;
+  Status: string;
+  Email: string;
+  password: string;
+  confirm: string;
 }) {
   //Prevent User from accessing admin stuff
   const { data: userSession } = await readUserSession();
@@ -53,9 +96,11 @@ export async function createMember(data: {
   if (createResult.error?.message) {
     return JSON.stringify(createResult);
   } else {
-    const memberResult = await supabase
-      .from("MemberData")
-      .insert({ FirstName: data.FirstName, MembershipID: createResult.data.user?.id, Email: data.Email });
+    const memberResult = await supabase.from("MemberData").insert({
+      FirstName: data.FirstName,
+      MembershipID: createResult.data.user?.id,
+      Email: data.Email,
+    });
     if (memberResult.error?.message) {
       return JSON.stringify(memberResult);
     } else {
@@ -68,25 +113,26 @@ export async function createMember(data: {
       return JSON.stringify(permissionResult);
     }
   }
-
 }
+
 export async function updateMemberBasicById(
   id: string,
   data: {
-    FirstName: string,
+    FirstName: string;
   }
 ) {
   console.log("hello");
   const supabase = await createSupbaseServerClient();
 
-  const result = await supabase.from("MemberData").update(data).eq("MembershipID", id);
+  const result = await supabase
+    .from("MemberData")
+    .update(data)
+    .eq("MembershipID", id);
   revalidatePath("/dashboard/members");
   return JSON.stringify(result);
-
 }
 
 export async function deleteMemberById(user_id: string) {
-
   const { data: userSession } = await readUserSession();
 
   if (userSession.session?.user.user_metadata.Role !== "admin") {
@@ -101,12 +147,14 @@ export async function deleteMemberById(user_id: string) {
   const deleteResult = await supabaseAdmin.auth.admin.deleteUser(user_id);
 
   if (deleteResult.error?.message) {
-
     return JSON.stringify(deleteResult);
   } else {
     const supbase = await createSupbaseServerClient();
 
-    const result = await supbase.from("MemberData").delete().eq("MembershipID", user_id);
+    const result = await supbase
+      .from("MemberData")
+      .delete()
+      .eq("MembershipID", user_id);
     revalidatePath("/dashboard/members");
     console.log(result);
     return JSON.stringify(result);
@@ -114,10 +162,9 @@ export async function deleteMemberById(user_id: string) {
 }
 
 export async function readMembers() {
-
   unstable_noStore(); //Cache
 
-  const supabase = await createSupbaseServerClient()
+  const supabase = await createSupbaseServerClient();
 
   return await supabase.from("Permissions").select("*,MemberData(*)");
 }

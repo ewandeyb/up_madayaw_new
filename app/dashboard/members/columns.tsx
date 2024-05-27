@@ -15,17 +15,6 @@ import {
 import EditMember from "./components/edit/EditMember";
 import DeleteMember from "./components/DeleteMember";
 import { IPermission } from "@/lib/types";
-export type Applications = {
-  Role: "user" | "admin";
-  Status: "accepted" | "rejected" | "pending" | "active";
-  PermissionsID: string;
-  MembershipID: string;
-  FirstName: string;
-  LastName: string;
-  Email: string;
-  MemberType: "Casual" | "NGS" | "Permanent";
-};
-import { readUserSession } from "@/lib/actions";
 
 export const columns: ColumnDef<IPermission>[] = [
   {
