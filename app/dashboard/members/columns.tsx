@@ -12,8 +12,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-import EditMember from "../members/components/edit/EditMember";
-import DeleteMember from "../members/components/DeleteMember";
+import EditMember from "./components/edit/EditMember";
+import DeleteMember from "./components/DeleteMember";
 import { IPermission } from "@/lib/types";
 export type Applications = {
   Role: "user" | "admin";

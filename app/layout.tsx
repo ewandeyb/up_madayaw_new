@@ -15,7 +15,8 @@ export const metadata: Metadata = {
   authors: {
     name: "chensokheng",
   },
-  description: "Build dashboard with role management using next.js and supabase.",
+  description:
+    "Build dashboard with role management using next.js and supabase.",
   openGraph: {
     title: "UP Madayaw",
     description: "Build dashboard with next.js and supabase",
@@ -27,7 +28,11 @@ export const metadata: Metadata = {
   keywords: ["daily web coding", "chensokheng", "dailywebcoding"],
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="font-verdana antialiased dark:bg-[#09090B]">

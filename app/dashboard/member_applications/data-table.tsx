@@ -90,7 +90,7 @@ export function DataTable<TData, TValue>({
         <div className="flex items-center py-4 ">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="secondary" className="max-w-20">
+              <Button variant="secondary" className="max-w-20 mr-2">
                 Filter by {selectedColumn}
               </Button>
             </DropdownMenuTrigger>
@@ -116,8 +116,8 @@ export function DataTable<TData, TValue>({
             value={
               selectedColumn
                 ? (table
-                  .getColumn(selectedColumn)
-                  ?.getFilterValue() as typeof selectedColumn) ?? ""
+                    .getColumn(selectedColumn)
+                    ?.getFilterValue() as typeof selectedColumn) ?? ""
                 : ""
             }
             onChange={(event) =>
@@ -133,44 +133,6 @@ export function DataTable<TData, TValue>({
               <a href="/apply">Create New Application</a>
             </Button>
           </div>
-          {/* OPTION 1 */}{" "}
-          {/* <Sheet>
-              <SheetTrigger asChild>
-                <Button variant="outline">Columns</Button>
-              </SheetTrigger>
-              <SheetContent className="h-screen overflow-y-auto">
-                <SheetHeader>
-                  <SheetTitle>Edit Columns</SheetTitle>
-                  <SheetDescription>
-                    Make changes to the columns here. Click save when
-                    you&apos;re done.
-                  </SheetDescription>
-                </SheetHeader>
-                <div className="grid gap-4 py-4">
-                  {table
-                    .getAllColumns()
-                    .filter((column) => column.getCanHide())
-                    .map((column) => (
-                      <div key={column.id} className="flex items-center">
-                        <input
-                          type="checkbox"
-                          checked={column.getIsVisible()}
-                          onChange={(e) =>
-                            column.toggleVisibility(e.target.checked)
-                          }
-                        />
-                        <label className="ml-2 capitalize">{column.id}</label>
-                      </div>
-                    ))}
-                </div>
-                <SheetFooter>
-                  <SheetClose asChild>
-                    <Button type="button">Save changes</Button>
-                  </SheetClose>
-                </SheetFooter>
-              </SheetContent>
-            </Sheet> */}
-          {/* Option 2 */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="secondary" className="ml-auto">
@@ -206,13 +168,16 @@ export function DataTable<TData, TValue>({
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id} className="">
+                    <TableHead
+                      key={header.id}
+                      className="bg-upcolor text-white dark:bg-slate-600 dark:text-white dark:font-bold"
+                    >
                       {header.isPlaceholder
                         ? null
                         : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
                     </TableHead>
                   );
                 })}
@@ -228,7 +193,10 @@ export function DataTable<TData, TValue>({
                   className=""
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
+                    <TableCell
+                      key={cell.id}
+                      className="text-center text-sm dark:text-white dark:bg-black "
+                    >
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
@@ -252,7 +220,10 @@ export function DataTable<TData, TValue>({
       </div>
       <div></div>
       <div className="flex items-center justify-end space-x-2 py-5">
-        <p className="mr-auto ">Page of {table.getPageCount()}</p>
+        <p className="mr-auto text-sm">
+          Page {table.getState().pagination.pageIndex + 1} of{" "}
+          {table.getPageCount()}
+        </p>
         <Button
           variant="secondary"
           size="sm"

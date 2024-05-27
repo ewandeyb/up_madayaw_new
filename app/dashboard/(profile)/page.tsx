@@ -13,8 +13,6 @@ import office from "@/components/img/4924628.png";
 import loan from "@/components/img/9903593.png";
 import amount from "@/components/img/5329260.png";
 import payment from "@/components/img/4108843.png";
-import { Mail } from "lucide-react";
-import EditMember from "../members/components/edit/EditMember";
 import { Button } from "@/components/ui/button";
 import { useUserStore } from "@/lib/store/user";
 
@@ -68,7 +66,7 @@ export default async function Profile() {
           <h2 className="mt-2 text-3xl font-bold tracking-tighter text-center md:text-center lg:text-left sm:text-4xl">
             {fullName}
           </h2>
-          <p className="max-w-[900px] text-gray-500 dark:text-white tracking-tighter text-center md:text-center lg:text-left md:text-xl lg:text-base xl:text-xl dark:text-gray-400">
+          <p className="max-w-[900px] text-gray-500 tracking-tighter text-center md:text-center lg:text-left md:text-xl lg:text-base xl:text-xl dark:text-gray-400">
             Membership Number: {MemberData.MembershipNo ?? "NULL"}
           </p>
         </div>

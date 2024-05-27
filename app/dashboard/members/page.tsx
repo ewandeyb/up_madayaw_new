@@ -1,26 +1,38 @@
-import React from "react";
-import MemberTable from "./components/MemberTable";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import SearchMembers from "./components/SearchMembers";
-import CreateMember from "./components/create/CreateMember";
-import { useUserStore } from "@/lib/store/user";
+import { columns } from "./columns";
+import { DataTable } from "./data-table";
+import { createSupbaseServerClient } from "@/lib/supabase";
+import { IPermission } from "@/lib/types";
 
-export default function Members() {
+async function getApplicationData(): Promise<IPermission[]> {
+  const supabase = await createSupbaseServerClient();
 
-	const user = useUserStore.getState().user;
+  try {
+    // Fetch data from the 'permissions' table with a join on 'MemberData'
+    const { data, error } = await supabase
+      .from("Permissions")
+      .select(`*, MemberData (*)`); // Select all columns and nested MemberData
 
-	const isAdmin = user?.user_metadata.Role === "admin"
-	return (
-		<div className="space-y-5 w-full overflow-y-auto px-3">
-			<h1 className="text-3xl font-bold">Members</h1>
-			{isAdmin && (
-				<div className="flex gap-2">
-					<SearchMembers />
-					<CreateMember />
-				</div>
-			)}
-			<MemberTable />
-		</div>
-	);
+    if (error) {
+      throw error; // Handle errors appropriately
+    }
+
+    return data as IPermission[]; // Type cast to your interface for type safety
+  } catch (error) {
+    console.error("Error fetching application data:", error);
+    // Handle errors gracefully (e.g., display a generic error message)
+    return []; // Return an empty array to prevent rendering issues
+  }
 }
+
+const DemoPage = async () => {
+  const data = await getApplicationData();
+
+  return (
+    <div className=" overflow-y-auto space-y-5 w-full">
+      <h1 className="text-3xl font-bold">Members</h1>
+      <DataTable columns={columns} data={data} />
+    </div>
+  );
+};
+
+export default DemoPage;

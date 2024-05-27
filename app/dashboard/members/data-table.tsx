@@ -30,7 +30,7 @@ import {
   TableHeader,
   TableRow,
 } from "../../../components/ui/table";
-import CreateMember from "../members/components/create/CreateMember";
+import CreateMember from "./components/create/CreateMember";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
@@ -91,7 +91,7 @@ export function DataTable<TData, TValue>({
         <div className="flex items-center py-4">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="secondary" className="max-w-20">
+              <Button variant="secondary" className="max-w-24 mr-2">
                 Filter by {selectedColumn}
               </Button>
             </DropdownMenuTrigger>
@@ -117,8 +117,8 @@ export function DataTable<TData, TValue>({
             value={
               selectedColumn
                 ? (table
-                  .getColumn(selectedColumn)
-                  ?.getFilterValue() as typeof selectedColumn) ?? ""
+                    .getColumn(selectedColumn)
+                    ?.getFilterValue() as typeof selectedColumn) ?? ""
                 : ""
             }
             onChange={(event) =>
@@ -167,13 +167,16 @@ export function DataTable<TData, TValue>({
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id} className="">
+                    <TableHead
+                      key={header.id}
+                      className="bg-upcolor text-white dark:bg-slate-600 dark:text-white dark:font-bold"
+                    >
                       {header.isPlaceholder
                         ? null
                         : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
                     </TableHead>
                   );
                 })}
@@ -191,7 +194,7 @@ export function DataTable<TData, TValue>({
                   {row.getVisibleCells().map((cell) => (
                     <TableCell
                       key={cell.id}
-                      className="text-center text-sm dark:text-zinc"
+                      className="text-center text-sm dark:text-white dark:bg-black "
                       onClick={() => {
                         let shouldNavigate = true;
                         if (cell.column.id === "actions") {
@@ -201,7 +204,7 @@ export function DataTable<TData, TValue>({
                           const membershipId =
                             row.original.MemberData.MembershipID;
                           console.log(membershipId);
-                          router.push(`mem_applications/${membershipId}`);
+                          router.push(`members/${membershipId}`);
                         }
                       }}
                     >
@@ -229,8 +232,8 @@ export function DataTable<TData, TValue>({
       <div></div>
       <div className="flex items-center justify-end space-x-2 py-5">
         <p className="mr-auto text-sm">
-          {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}{" "}
-          pages.
+          Page {table.getState().pagination.pageIndex + 1} of{" "}
+          {table.getPageCount()}{" "}
         </p>
         <Button
           variant="secondary"

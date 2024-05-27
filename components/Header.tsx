@@ -57,10 +57,7 @@ export default async function Header() {
             className="hover:underline hover:underline-offset-4 text-sm text-gray font-normal"
             href="/auth"
           >
-            Welcome{" "}
-            <span className="font-normal text-upcolor dark:text-upcolor">
-              {email}
-            </span>
+            Welcome <span className="font-normal text-upcolor ">{email}</span>
           </Link>
         ) : (
           <Link
@@ -73,9 +70,11 @@ export default async function Header() {
         <Button
           size="sm"
           variant="up"
-          className=" text-white font-bold border w-26"
+          className=" text-white font-bold border w-26 dark:bg-upcolor"
         >
-          <a href="/apply">Apply Now</a>
+          <a href="/apply" className=" dark:text-white">
+            Apply Now
+          </a>
         </Button>
       </nav>
       <Sheet>
