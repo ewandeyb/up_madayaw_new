@@ -17,66 +17,59 @@ import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { cn } from "@/lib/utils";
-import { IProfile } from "@/lib/types";
+import { IMemberData } from "@/lib/types";
 import { useTransition } from "react";
 import { updateMemberBasicById } from "../../actions";
-import { MemberSchema } from "../create/schema";
-import { MemberFields } from "../create/types";
 
 const FormSchema = z.object({
-  FirstName: z.string().min(2, {
-    message: "Name must be at least 2 characters.",
-  }),
-  LastName: z.string().min(2, {
-    message: "Name must be at least 2 characters.",
-  }),
-  CivilStatus: z.string().min(2, {
-    message: "Name must be at least 2 characters.",
-  }),
-  BirthDate: z.string().min(2, {
-    message: "Name must be at least 2 characters.",
-  }),
-  Email: z.string().min(2, {
-    message: "Name must be at least 2 characters.",
-  }),
-  MembershipNo: z.string().min(2, {
-    message: "Name must be at least 2 characters.",
-  }),
-  MemberType: z.string().min(2, {
-    message: "Name must be at least 2 characters.",
+  Email: z.string().email({
+    message: "Please enter a valid email address.",
   }),
 });
 
-export default function ContactInfo({ profile }: { profile: IProfile }) {
+export default function ContactInfo({ MemberData2 }: { MemberData2: IMemberData }) {
   const [isPending, startTransition] = useTransition();
+
+  // Ensure profile and MemberData are defined
+  if (!MemberData2) {
+    return <div>Loading...</div>; // or handle the error appropriately
+  }
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      Email: profile.MemberData.Email
+      Email: MemberData2.Email,
     },
   });
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log("reached here");
+  async function onSubmit(data: z.infer<typeof FormSchema>) {
     startTransition(async () => {
-      const { error } = JSON.parse(
-        await updateMemberBasicById(profile.MembershipID, data)
-      );
-      console.log("hi");
+      try {
+        const response = await updateMemberBasicById(MemberData2.MembershipID, data);
+        const parsedResponse = JSON.parse(response);
 
-      if (error?.message) {
+        if (parsedResponse.error) {
+          toast({
+            title: "Failed to update",
+            description: (
+              <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+                <code className="text-white">{parsedResponse.error.message}</code>
+              </pre>
+            ),
+          });
+        } else {
+          toast({
+            title: "Successfully updated",
+          });
+        }
+      } catch (error) {
         toast({
-          title: "Fail to update",
+          title: "Error",
           description: (
             <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-              <code className="text-white">error?.message</code>
+              <code className="text-white">{error.message}</code>
             </pre>
           ),
-        });
-      } else {
-        toast({
-          title: "Sucessfully updated",
         });
       }
     });
@@ -84,7 +77,7 @@ export default function ContactInfo({ profile }: { profile: IProfile }) {
 
   return (
     <Form {...form}>
-      <form className="w-full space-y-6">
+      <form className="w-full space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
         <FormField
           control={form.control}
           name="Email"
@@ -93,7 +86,7 @@ export default function ContactInfo({ profile }: { profile: IProfile }) {
               <FormLabel>Email</FormLabel>
               <FormControl>
                 <Input
-                  placeholder="shadcn"
+                  placeholder="Enter your email"
                   {...field}
                   onChange={field.onChange}
                 />
@@ -106,13 +99,10 @@ export default function ContactInfo({ profile }: { profile: IProfile }) {
           type="submit"
           className="flex gap-2 items-center w-full"
           variant="outline"
-          onClick={(event) => {
-            form.handleSubmit(onSubmit)();
-          }}
         >
           Update{" "}
           <AiOutlineLoading3Quarters
-            className={cn(" animate-spin", "hidden")}
+            className={cn("animate-spin", isPending ? "block" : "hidden")}
           />
         </Button>
       </form>

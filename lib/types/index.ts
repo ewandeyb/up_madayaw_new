@@ -15,16 +15,13 @@ export type IPermission = {
   };
 };
 
-export type IProfile = {
-  MembershipID: string;
-  created_at: string;
-  MemberData: {
-    CivilStatus: string | undefined;
-    BirthDate: string | undefined;
-    MembershipNo: string;
-    FirstName: string;
-    LastName: string;
-    Email: string;
-    MemberType: string;
-  };
-};
+export interface IMemberData {
+  MembershipID: string; // Ensure MembershipID is a part of the member data
+  MembershipNo: string;
+  FirstName: string;
+  LastName: string;
+  CivilStatus: string;
+  BirthDate: string;
+  Email: string;
+  MemberType: string;
+}

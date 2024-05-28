@@ -5,11 +5,12 @@ import MemDetails from "./MemDetails";
 import EmploymentInfo from "./EmploymentInfo";
 import LoanDetails from "./LoanDetails";
 import { cn } from "@/lib/utils";
+import { IMemberData } from "@/lib/types";
 
-export default function EditForm() {
+export default function EditForm({ MemberData2 }: { MemberData2: IMemberData }) {
 	return (
 		<Tabs defaultValue="basic" className="w-full space-y-5">
-			<TabsList className={cn("grid w-full ", "grid-cols-5")}>
+			<TabsList className={cn("grid w-full ", "xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2")}>
 				<TabsTrigger value="basic">Personal Information</TabsTrigger>
 				{(
 					<>
@@ -21,13 +22,13 @@ export default function EditForm() {
 				)}
 			</TabsList>
 			<TabsContent value="basic">
-				<PersonInfo />
+				<PersonInfo MemberData2={MemberData2} />
 			</TabsContent>
 			<TabsContent value="contact">
-				<ContactInfo />
+				<ContactInfo MemberData2={MemberData2} />
 			</TabsContent>
 			<TabsContent value="membership">
-				<MemDetails />
+				<MemDetails MemberData2={MemberData2} />
 			</TabsContent>
 		</Tabs>
 	);

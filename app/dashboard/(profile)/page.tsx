@@ -15,12 +15,13 @@ import amount from "@/components/img/5329260.png";
 import payment from "@/components/img/4108843.png";
 import { Mail } from "lucide-react";
 import EditProfile from "./components/edit/EditProfile";
-import { readMembers } from "../members/actions";
-import { IPermission } from "@/lib/types";
+import { readProfile } from "./actions";
 import { Button } from "@/components/ui/button";
 
 export default async function Profile() {
   const supabase = createClient();
+
+  const { data: MemberData2 } = await readProfile();
 
   // Fetch the currently logged-in user
   const user = await getUser(supabase);
@@ -51,7 +52,7 @@ export default async function Profile() {
   return (
     <section className="w-full p-10 px-4 lg:px-8">
       <div className="flex justify-end">
-        <EditProfile />
+        <EditProfile MemberData2={MemberData2} />
       </div>
       <div className="flex flex-col lg:flex-row items-center justify-start gap-4 lg:gap-6 text-left">
         <div className="inline-block rounded-lg px-3 py-1 text-sm">
@@ -76,7 +77,7 @@ export default async function Profile() {
       <div className="flex justify-center">
         <div className="flex flex-col lg:flex-row justify-between w-full max-w-5xl gap-6">
           <div className="max-w-[600px] mx-auto">
-            <div className="flex flex-col justify-center space-y-4 border-2 border-black dark:border-white bg-white dark:bg-black rounded-xl p-10">
+            <div className="flex flex-col justify-center space-y-4 border-2 border-black dark:border-white bg-white dark:bg-gray-950 rounded-xl p-10">
               <ul className="grid gap-6">
                 <li className="mb-6">
                   <div className="grid gap-6">
@@ -163,7 +164,7 @@ export default async function Profile() {
             </div>
           </div>
           <div className="max-w-[600px] mx-auto">
-            <div className="flex flex-col justify-center space-y-4 border-2 border-black dark:border-white bg-white dark:bg-black rounded-xl p-10">
+            <div className="flex flex-col justify-center space-y-4 border-2 border-black dark:border-white bg-white dark:bg-gray-950 rounded-xl p-10">
               <ul className="grid gap-6">
                 <li className="mb-6">
                   <div className="grid gap-6">

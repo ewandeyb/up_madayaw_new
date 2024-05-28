@@ -17,11 +17,9 @@ import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { cn } from "@/lib/utils";
-import { IProfile } from "@/lib/types";
+import { IMemberData } from "@/lib/types";
 import { useTransition } from "react";
 import { updateMemberBasicById } from "../../actions";
-import { MemberSchema } from "../create/schema";
-import { MemberFields } from "../create/types";
 
 const FormSchema = z.object({
   FirstName: z.string().min(2, {
@@ -47,39 +45,54 @@ const FormSchema = z.object({
   }),
 });
 
-export default function PersonInfo({ profile }: { profile: IProfile }) {
+export default function PersonInfo({ MemberData2 }: { MemberData2: IMemberData }) {
   const [isPending, startTransition] = useTransition();
+
+  if (!MemberData2) {
+    return <div>Loading...</div>;
+  }
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      FirstName: profile.MemberData.FirstName,
-      LastName: profile.MemberData.LastName,
-      CivilStatus: profile.MemberData.CivilStatus,
-      BirthDate: profile.MemberData.BirthDate,
+      FirstName: MemberData2.FirstName,
+      LastName: MemberData2.LastName,
+      CivilStatus: MemberData2.CivilStatus,
+      BirthDate: MemberData2.BirthDate,
+      Email: MemberData2.Email,
+      MembershipNo: MemberData2.MembershipNo,
+      MemberType: MemberData2.MemberType,
     },
   });
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log("reached here");
+  async function onSubmit(data: z.infer<typeof FormSchema>) {
     startTransition(async () => {
-      const { error } = JSON.parse(
-        await updateMemberBasicById(profile.MembershipID, data)
-      );
-      console.log("hi");
+      try {
+        const response = await updateMemberBasicById(MemberData2.MembershipID, data);
+        const parsedResponse = JSON.parse(response);
 
-      if (error?.message) {
+        if (parsedResponse.error) {
+          toast({
+            title: "Failed to update",
+            description: (
+              <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+                <code className="text-white">{parsedResponse.error.message}</code>
+              </pre>
+            ),
+          });
+        } else {
+          toast({
+            title: "Successfully updated",
+          });
+        }
+      } catch (error) {
         toast({
-          title: "Fail to update",
+          title: "Error",
           description: (
             <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-              <code className="text-white">error?.message</code>
+              <code className="text-white">{error.message}</code>
             </pre>
           ),
-        });
-      } else {
-        toast({
-          title: "Sucessfully updated",
         });
       }
     });
@@ -87,7 +100,7 @@ export default function PersonInfo({ profile }: { profile: IProfile }) {
 
   return (
     <Form {...form}>
-      <form className="w-full space-y-6">
+      <form className="w-full space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
         <FormField
           control={form.control}
           name="FirstName"
@@ -95,11 +108,7 @@ export default function PersonInfo({ profile }: { profile: IProfile }) {
             <FormItem>
               <FormLabel>First Name</FormLabel>
               <FormControl>
-                <Input
-                  placeholder="shadcn"
-                  {...field}
-                  onChange={field.onChange}
-                />
+                <Input placeholder="shadcn" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -112,11 +121,7 @@ export default function PersonInfo({ profile }: { profile: IProfile }) {
             <FormItem>
               <FormLabel>Last Name</FormLabel>
               <FormControl>
-                <Input
-                  placeholder="shadcn"
-                  {...field}
-                  onChange={field.onChange}
-                />
+                <Input placeholder="shadcn" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -129,11 +134,7 @@ export default function PersonInfo({ profile }: { profile: IProfile }) {
             <FormItem>
               <FormLabel>Civil Status</FormLabel>
               <FormControl>
-                <Input
-                  placeholder="shadcn"
-                  {...field}
-                  onChange={field.onChange}
-                />
+                <Input placeholder="shadcn" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -146,11 +147,7 @@ export default function PersonInfo({ profile }: { profile: IProfile }) {
             <FormItem>
               <FormLabel>Birth Date</FormLabel>
               <FormControl>
-                <Input
-                  placeholder="shadcn"
-                  {...field}
-                  onChange={field.onChange}
-                />
+                <Input placeholder="shadcn" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -160,13 +157,10 @@ export default function PersonInfo({ profile }: { profile: IProfile }) {
           type="submit"
           className="flex gap-2 items-center w-full"
           variant="outline"
-          onClick={(event) => {
-            form.handleSubmit(onSubmit)();
-          }}
         >
           Update{" "}
           <AiOutlineLoading3Quarters
-            className={cn(" animate-spin", "hidden")}
+            className={cn("animate-spin", isPending ? "block" : "hidden")}
           />
         </Button>
       </form>
