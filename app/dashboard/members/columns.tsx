@@ -1,16 +1,6 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-  DialogClose,
-} from "@/components/ui/dialog";
 import { ArrowUpDown, Edit, MoreHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -22,24 +12,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-import EditMember from "../members/components/edit/EditMember";
-import DeleteMember from "../members/components/DeleteMember";
+import EditMember from "./components/edit/EditMember";
+import DeleteMember from "./components/DeleteMember";
 import { IPermission } from "@/lib/types";
-import { useUserStore } from "@/lib/store/user";
-import { cn } from "@/lib/utils";
-
-export type Applications = {
-  Role: "user" | "admin";
-  Status: "accepted" | "rejected" | "pending" | "active";
-  PermissionsID: string;
-  MembershipID: string;
-  FirstName: string;
-  LastName: string;
-  Email: string;
-  MemberType: "Casual" | "NGS" | "Permanent";
-};
-const user = useUserStore.getState().user;
-const isAdmin = user?.user_metadata.Role === "admin";
 
 export const columns: ColumnDef<IPermission>[] = [
   {
@@ -169,7 +144,9 @@ export const columns: ColumnDef<IPermission>[] = [
     id: "actions",
     cell: ({ row }) => {
       const application = row.original;
-      const isUserAdmin = application.Role === "admin";
+      const isUserAdmin =
+        application.Role === "admin" || application.Role === "user";
+
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -206,14 +183,6 @@ export const columns: ColumnDef<IPermission>[] = [
               }}
             >
               <DeleteMember user_id={application.MemberData.MembershipID} />
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              onClick={(event) => {
-                event.preventDefault();
-              }}
-              className="pl-6"
-            >
-              View full application details
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

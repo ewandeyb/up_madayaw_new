@@ -20,12 +20,7 @@ export default function NavLinks() {
       Icon: PersonIcon,
     },
     {
-      href: "/dashboard/mem_applications",
-      text: "Members New",
-      Icon: ReaderIcon,
-    },
-    {
-      href: "/dashboard/applications",
+      href: "/dashboard/member_applications",
       text: "Member Applications",
       Icon: ReaderIcon,
     },
@@ -41,7 +36,7 @@ export default function NavLinks() {
             href={link.href}
             key={index}
             className={cn("flex items-center gap-2 rounded-sm p-2", {
-              " bg-upcolor dark:bg-green-700 text-white ":
+              " bg-upcolor dark:bg-slate-500 text-white":
                 pathname === link.href,
             })}
           >

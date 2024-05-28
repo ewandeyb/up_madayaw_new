@@ -19,7 +19,7 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { cn } from "@/lib/utils";
 import { IPermission } from "@/lib/types";
 import { useTransition } from "react";
-import { updateMemberBasicById } from "../../actions";
+import { updateMemberBasicById } from "../../../members/actions";
 import { MemberSchema } from "../create/schema";
 import { MemberFields } from "../create/types";
 

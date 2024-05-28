@@ -13,7 +13,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { toast } from "@/components/ui/use-toast";
-
 import {
   Select,
   SelectContent,
@@ -21,62 +20,59 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { createMember } from "../../../members/actions";
+import { elevateMember } from "../../../members/actions";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { cn } from "@/lib/utils";
 import { MemberSchema } from "./schema";
 import { MemberFields } from "./types";
 import { useTransition } from "react";
-
+import { z } from "zod";
+const elevateSchema = z
+  .object({
+    MembershipID: z.string().max(50),
+    /* Email: z.string().email(), */
+    Role: z.enum(["user", "admin"]),
+    Status: z.enum(["active", "resigned"]),
+    password: z.string().min(6, { message: "Password should be 6 characters" }),
+    confirm: z.string().min(6, { message: "Password should be 6 characters" }),
+  })
+  .refine((data) => data.confirm === data.password, {
+    message: "Password doesn't match",
+    path: ["confirm"],
+  });
 export default function MemberForm() {
   const [isPending, startTransition] = useTransition();
   const Roles = ["admin", "user"];
-  const MemberType = ["Regular Membership", "Associate (NGS/Project-Based)"];
   const Status = ["active", "resigned"];
 
-  const form = useForm<MemberFields>({
-    resolver: zodResolver(MemberSchema),
+  const form = useForm<z.infer<typeof elevateSchema>>({
+    resolver: zodResolver(elevateSchema),
     defaultValues: {
-      /* MembershipNo: "1",
-			MemberType: "Regular Membership",
-			MiddleName: "Hue",
-			LastName: "Doe",
-			Suffix: "Jr.",
-			Sex: "Male",
-			BirthDate: "2024/05/06",
-			Birthplace: "Davao",
-			SpouseFirstName: "Jane",
-			SpouseMiddleName: "Go",
-			SpouseLastName: "Tan",
-			SpouseSuffix: "Sr.",
-			SpouseOccupation: "Teacher",
-			NearestRelativeFirstName: "Johnny",
-			NearestRelativeLastName: "Du", */
-      FirstName: "John",
-      Email: "upmadayaw@up.edu.ph",
+      MembershipID: "",
       Role: "user",
       Status: "active",
+      /* Email: "", */
     },
   });
 
-  function onSubmit(data: MemberFields) {
+  function onSubmit(data: z.infer<typeof elevateSchema>) {
+    console.log("hellooo!");
     startTransition(async () => {
-      const result = await createMember(data);
+      const result = await elevateMember(data);
       const { error } = JSON.parse(result || "{}");
-      console.log();
-      if (error?.message) {
+      if (error) {
         toast({
           title: "Failed to create member",
           description: (
             <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-              <code className="text-white">{error.message}</code>
+              <code className="text-white">{error}</code>
             </pre>
           ),
         });
       } else {
-        document.getElementById("create-trigger")?.click();
+        document.getElementById("elevate-trigger")?.click();
         toast({
-          title: "Sucessfully created member",
+          title: "Successfully elevated application to official member",
         });
       }
     });
@@ -84,8 +80,26 @@ export default function MemberForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-6">
+      <form className="w-full space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
         <FormField
+          control={form.control}
+          name="MembershipID"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>MembershipID</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder=""
+                  type="text" // Use type="text" for MembershipID
+                  {...field}
+                  onChange={field.onChange}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        {/* <FormField
           control={form.control}
           name="Email"
           render={({ field }) => (
@@ -102,7 +116,7 @@ export default function MemberForm() {
               <FormMessage />
             </FormItem>
           )}
-        />
+        /> */}
         <FormField
           control={form.control}
           name="password"
@@ -113,6 +127,7 @@ export default function MemberForm() {
                 <Input
                   placeholder="******"
                   type="password"
+                  {...field}
                   onChange={field.onChange}
                 />
               </FormControl>
@@ -130,23 +145,10 @@ export default function MemberForm() {
                 <Input
                   placeholder="******"
                   type="password"
+                  {...field}
                   onChange={field.onChange}
                 />
               </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="FirstName"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Username</FormLabel>
-              <FormControl>
-                <Input placeholder="First Name" onChange={field.onChange} />
-              </FormControl>
-              <FormDescription>This is your first name.</FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -164,16 +166,13 @@ export default function MemberForm() {
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  {Roles.map((role, index) => {
-                    return (
-                      <SelectItem value={role} key={index}>
-                        {role}
-                      </SelectItem>
-                    );
-                  })}
+                  {Roles.map((role, index) => (
+                    <SelectItem value={role} key={index}>
+                      {role}
+                    </SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
-
               <FormMessage />
             </FormItem>
           )}
@@ -191,26 +190,27 @@ export default function MemberForm() {
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  {Status.map((status, index) => {
-                    return (
-                      <SelectItem value={status} key={index}>
-                        {status}
-                      </SelectItem>
-                    );
-                  })}
+                  {Status.map((status, index) => (
+                    <SelectItem value={status} key={index}>
+                      {status}
+                    </SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
-
               <FormMessage />
             </FormItem>
           )}
         />
         <Button
-          type="submit"
+          type="submit" // Use type="submit" for the button
           className="w-full flex gap-2 items-center"
           variant="outline"
+          onClick={() => {
+            console.log("hello!");
+            console.log(form);
+          }}
         >
-          Submit{" "}
+          Submit
           <AiOutlineLoading3Quarters
             className={cn("animate-spin", { hidden: !isPending })}
           />

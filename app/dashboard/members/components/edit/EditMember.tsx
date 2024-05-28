@@ -19,7 +19,7 @@ export default function EditMember({
       Trigger={
         <Button
           variant="dropdown"
-          className=" font-normal max-h-5 justify-start"
+          className="font-normal max-h-5 justify-start"
         >
           <Pencil1Icon />
           Edit
