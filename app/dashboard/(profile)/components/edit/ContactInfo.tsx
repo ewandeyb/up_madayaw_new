@@ -27,25 +27,20 @@ const FormSchema = z.object({
   }),
 });
 
-export default function ContactInfo({ MemberData2 }: { MemberData2: IMemberData }) {
+export default function ContactInfo({ MemberProfile }: { MemberProfile: IMemberData }) {
   const [isPending, startTransition] = useTransition();
-
-  // Ensure profile and MemberData are defined
-  if (!MemberData2) {
-    return <div>Loading...</div>; // or handle the error appropriately
-  }
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      Email: MemberData2.Email,
+      Email: MemberProfile?.Email ?? "",
     },
   });
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     startTransition(async () => {
       try {
-        const response = await updateMemberBasicById(MemberData2.MembershipID, data);
+        const response = await updateMemberBasicById(MemberProfile.MembershipID, data);
         const parsedResponse = JSON.parse(response);
 
         if (parsedResponse.error) {
@@ -61,6 +56,8 @@ export default function ContactInfo({ MemberData2 }: { MemberData2: IMemberData 
           toast({
             title: "Successfully updated",
           });
+          // Reload the page to reflect the changes
+          window.location.reload();
         }
       } catch (error) {
         if (error instanceof Error) {

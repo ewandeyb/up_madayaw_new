@@ -22,7 +22,6 @@ import { Label } from "@/components/ui/label"
 export default async function ListOfMembers() {
 	const { data: Permissions } = await readMembers();
 
-
 	const user = useUserStore.getState().user
 	const isAdmin = user?.user_metadata.Role === "admin";
 

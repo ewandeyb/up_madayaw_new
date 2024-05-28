@@ -23,7 +23,7 @@ export default async function Profile() {
 
   const supabase = createClient();
 
-  const { data: MemberData2 } = await readProfile();
+  const { data: MemberProfile } = await readProfile();
 
   // Fetch the currently logged-in user
   const user = await getUser(supabase);
@@ -54,7 +54,7 @@ export default async function Profile() {
   return (
     <section className="w-full p-10 px-4 lg:px-8">
       <div className="flex justify-end">
-        <EditProfile MemberData2={MemberData2} />
+        <EditProfile MemberProfile={MemberProfile} />
       </div>
       <div className="flex flex-col lg:flex-row items-center justify-start gap-4 lg:gap-6 text-left">
         <div className="inline-block rounded-lg px-3 py-1 text-sm">

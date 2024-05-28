@@ -23,33 +23,28 @@ import { updateMemberBasicById } from "../../actions";
 
 const FormSchema = z.object({
   MembershipNo: z.string().min(2, {
-    message: "Name must be at least 2 characters.",
+    message: "Membership number must be at least 2 characters.",
   }),
   MemberType: z.string().min(2, {
-    message: "Name must be at least 2 characters.",
+    message: "Membership type must be at least 2 characters.",
   }),
 });
 
-export default function MemDetails({ MemberData2 }: { MemberData2: IMemberData }) {
+export default function MemDetails({ MemberProfile }: { MemberProfile: IMemberData }) {
   const [isPending, startTransition] = useTransition();
-
-  // Ensure MemberData2 is defined
-  if (!MemberData2) {
-    return <div>Loading...</div>; // or handle the error appropriately
-  }
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      MembershipNo: MemberData2.MembershipNo,
-      MemberType: MemberData2.MemberType,
+      MembershipNo: MemberProfile?.MembershipNo ?? "",
+      MemberType: MemberProfile?.MemberType ?? "",
     },
   });
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     startTransition(async () => {
       try {
-        const response = await updateMemberBasicById(MemberData2.MembershipID, data);
+        const response = await updateMemberBasicById(MemberProfile.MembershipID, data);
         const parsedResponse = JSON.parse(response);
 
         if (parsedResponse.error) {
@@ -65,6 +60,8 @@ export default function MemDetails({ MemberData2 }: { MemberData2: IMemberData }
           toast({
             title: "Successfully updated",
           });
+          // Reload the page to reflect the changes
+          window.location.reload();
         }
       } catch (error) {
         if (error instanceof Error) {
