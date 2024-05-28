@@ -19,11 +19,11 @@ import { readProfile } from "./actions";
 import { Button } from "@/components/ui/button";
 import { IMemberData } from "@/lib/types";
 
-export default async function Profile() {
+export default async function Profile({ MemberProfile }: { MemberProfile: IMemberData }) {
 
   const supabase = createClient();
 
-  const { data: MemberProfile } = await readProfile();
+
 
   // Fetch the currently logged-in user
   const user = await getUser(supabase);
