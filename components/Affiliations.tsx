@@ -1,5 +1,6 @@
 // components/Affiliations.tsx
 import React from 'react';
+import Image from "next/image";
 
 const affiliations = [
   {
@@ -28,7 +29,7 @@ const Affiliations = () => {
         <div className="space-y-8">
           {affiliations.map((affiliation, index) => (
             <div key={index} className="flex flex-col md:flex-row items-center gap-6 bg-white dark:bg-black p-4 rounded-lg shadow-md">
-              <img
+              <Image
                 src={affiliation.logo}
                 alt={affiliation.name}
                 className="w-30 h-24 object-cover"

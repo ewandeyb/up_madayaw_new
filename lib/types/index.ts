@@ -13,7 +13,7 @@ export type IPermission = {
   };
 };
 
-export interface IMemberData {
+export type IMemberData = {
   MembershipID: string; // Ensure MembershipID is a part of the member data
   MembershipNo: string;
   FirstName: string;

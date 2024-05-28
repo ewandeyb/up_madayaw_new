@@ -36,28 +36,28 @@ const FormSchema = z.object({
   }),
 });
 
-export default function MemDetails({ MemberData2 }: { MemberData2: IMemberData }) {
+export default function MemDetails({ MemberProfile }: { MemberProfile: IMemberData }) {
   const [isPending, startTransition] = useTransition();
-
-  // Ensure MemberData2 is defined
-  if (!MemberData2) {
-    return <div>Loading...</div>; // or handle the error appropriately
-  }
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      FirstName: MemberData2.FirstName,
-      LastName: MemberData2.LastName,
-      CivilStatus: MemberData2.CivilStatus,
-      BirthDate: MemberData2.BirthDate,
+      FirstName: MemberProfile?.FirstName ?? "",
+      LastName: MemberProfile?.LastName ?? "",
+      CivilStatus: MemberProfile?.CivilStatus ?? "",
+      BirthDate: MemberProfile?.BirthDate ?? "",
     },
   });
+
+  // Ensure MemberProfile is defined
+  if (!MemberProfile) {
+    return <div>Loading...</div>; // or handle the error appropriately
+  }
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     startTransition(async () => {
       try {
-        const response = await updateMemberBasicById(MemberData2.MembershipID, data);
+        const response = await updateMemberBasicById(MemberProfile.MembershipID, data);
         const parsedResponse = JSON.parse(response);
 
         if (parsedResponse.error) {
@@ -73,27 +73,18 @@ export default function MemDetails({ MemberData2 }: { MemberData2: IMemberData }
           toast({
             title: "Successfully updated",
           });
+          // Reload the page to reflect the changes
+          window.location.reload();
         }
       } catch (error) {
-        if (error instanceof Error) {
-          toast({
-            title: "Error",
-            description: (
-              <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-                <code className="text-white">{error.message}</code>
-              </pre>
-            ),
-          });
-        } else {
-          toast({
-            title: "Error",
-            description: (
-              <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-                <code className="text-white">An unknown error occurred</code>
-              </pre>
-            ),
-          });
-        }
+        toast({
+          title: "Error",
+          description: (
+            <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+              <code className="text-white">{(error as Error).message}</code>
+            </pre>
+          ),
+        });
       }
     });
   }

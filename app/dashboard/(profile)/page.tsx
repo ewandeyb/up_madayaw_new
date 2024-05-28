@@ -23,7 +23,7 @@ export default async function Profile() {
 
   const supabase = createClient();
 
-  const { data: MemberData2 } = await readProfile();
+  const { data: MemberData } = await readProfile();
 
   // Fetch the currently logged-in user
   const user = await getUser(supabase);
@@ -33,7 +33,7 @@ export default async function Profile() {
   }
 
   // Query to get the user-specific data
-  const { data: MemberData, error } = await supabase
+  const { data: MemberData2, error } = await supabase
     .from("MemberData")
     .select(
       "MembershipNo, FirstName, LastName, CivilStatus, BirthDate, Email, MemberType"
@@ -47,14 +47,15 @@ export default async function Profile() {
 
   // Check if both FirstName and LastName are null
   const fullName =
-    MemberData.FirstName || MemberData.LastName
-      ? `${MemberData.FirstName ?? " "} ${MemberData.LastName ?? " "}`
+    MemberData2.FirstName || MemberData2.LastName
+      ? `${MemberData2.FirstName ?? " "} ${MemberData2.LastName ?? " "}`
       : "NULL";
+
 
   return (
     <section className="w-full p-10 px-4 lg:px-8">
       <div className="flex justify-end">
-        <EditProfile MemberData2={MemberData2} />
+        <EditProfile MemberProfile={MemberData} />
       </div>
       <div className="flex flex-col lg:flex-row items-center justify-start gap-4 lg:gap-6 text-left">
         <div className="inline-block rounded-lg px-3 py-1 text-sm">
@@ -71,7 +72,7 @@ export default async function Profile() {
             {fullName}
           </h2>
           <p className="max-w-[900px] text-gray-500 dark:text-white tracking-tighter text-center md:text-center lg:text-left md:text-xl lg:text-base xl:text-xl dark:text-gray-400">
-            Membership Number: {MemberData.MembershipNo ?? "NULL"}
+            Membership Number: {MemberData2.MembershipNo ?? "NULL"}
           </p>
         </div>
       </div>
@@ -97,7 +98,7 @@ export default async function Profile() {
                       <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
                         Civil Status:{" "}
                         <span className="font-semibold">
-                          {MemberData.CivilStatus ?? "NULL"}
+                          {MemberData2.CivilStatus ?? "NULL"}
                         </span>
                       </p>
                     </div>
@@ -112,7 +113,7 @@ export default async function Profile() {
                       <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
                         Date of Birth:{" "}
                         <span className="font-semibold">
-                          {MemberData.BirthDate ?? "NULL"}
+                          {MemberData2.BirthDate ?? "NULL"}
                         </span>
                       </p>
                     </div>
@@ -134,7 +135,7 @@ export default async function Profile() {
                       <p className="ml-8 text-base text-gray-500 dark:text-gray-400 overflow-auto">
                         Email :{" "}
                         <span className="font-semibold">
-                          {MemberData.Email ?? "NULL"}
+                          {MemberData2.Email ?? "NULL"}
                         </span>
                       </p>
                     </div>
@@ -156,7 +157,7 @@ export default async function Profile() {
                       <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
                         Membership Type:{" "}
                         <span className="font-semibold">
-                          {MemberData.MemberType ?? "NULL"}
+                          {MemberData2.MemberType ?? "NULL"}
                         </span>
                       </p>
                     </div>

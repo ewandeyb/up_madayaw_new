@@ -7,7 +7,7 @@ import LoanDetails from "./LoanDetails";
 import { cn } from "@/lib/utils";
 import { IMemberData } from "@/lib/types";
 
-export default function EditForm({ MemberData2 }: { MemberData2: IMemberData }) {
+export default function EditForm({ MemberProfile }: { MemberProfile: IMemberData }) {
 	return (
 		<Tabs defaultValue="basic" className="w-full space-y-5">
 			<TabsList className={cn("grid w-full ", "grid-cols-3")}>
@@ -20,13 +20,13 @@ export default function EditForm({ MemberData2 }: { MemberData2: IMemberData }) 
 				)}
 			</TabsList>
 			<TabsContent value="basic">
-				<PersonInfo MemberData2={MemberData2} />
+				<PersonInfo MemberProfile={MemberProfile} />
 			</TabsContent>
 			<TabsContent value="contact">
-				<ContactInfo MemberData2={MemberData2} />
+				<ContactInfo MemberProfile={MemberProfile} />
 			</TabsContent>
 			<TabsContent value="membership">
-				<MemDetails MemberData2={MemberData2} />
+				<MemDetails MemberProfile={MemberProfile} />
 			</TabsContent>
 		</Tabs>
 	);

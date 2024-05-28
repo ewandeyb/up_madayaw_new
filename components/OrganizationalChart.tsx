@@ -1,5 +1,6 @@
 // components/OrganizationalChart.tsx
 import React from 'react';
+import Image from "next/image";
 
 const officers = [
   {
@@ -77,7 +78,7 @@ const OrganizationalChart = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {officers.map((officer, index) => (
             <div key={index} className="text-center">
-              <img
+              <Image
                 src={officer.photo}
                 alt={officer.name}
                 className="w-32 h-32 object-cover mx-auto mb-4"

@@ -5,11 +5,7 @@ import { Pencil1Icon } from "@radix-ui/react-icons";
 import EditForm from "./EditorForm";
 import { IMemberData } from "@/lib/types";
 
-export default function Profile({
-  MemberData2,
-}: {
-  MemberData2: IMemberData;
-}) {
+export default function Profile({ MemberProfile }: { MemberProfile: IMemberData }) {
   return (
     <DialogForm
       id="update-trigger"
@@ -23,7 +19,7 @@ export default function Profile({
           Edit
         </Button>
       }
-      form={<EditForm MemberData2={MemberData2} />}
+      form={<EditForm MemberProfile={MemberProfile} />}
     />
   );
 }
