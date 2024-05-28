@@ -4,8 +4,6 @@ export type IPermission = {
   Role: "user" | "admin";
   Status: "active" | "resigned";
   MemberData: {
-    CivilStatus: string | undefined;
-    BirthDate: string | undefined;
     MembershipID: string;
     MembershipNo: string;
     FirstName: string;
