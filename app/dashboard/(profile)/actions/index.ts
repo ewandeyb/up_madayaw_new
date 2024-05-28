@@ -76,12 +76,19 @@ export async function createMember(data: {
 
 const supabase = createClient('https://hudheaqnruaponeloslj.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh1ZGhlYXFucnVhcG9uZWxvc2xqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTQ4MDM0MTQsImV4cCI6MjAzMDM3OTQxNH0.k1V6fGk48AiZWeoeAqkqC0MZEjcUxyjOv2eqxwhd48A');
 
-export async function updateMemberBasicById(MembershipID: string, data: Partial<IMemberData>) {
+export async function updateMemberBasicById(id: string, data: Partial<IMemberData>) {
+
+  unstable_noStore(); //Cache
+
+  const supabase = await createSupbaseServerClient()
+
+  // Fetch the currently logged-in user
+  const user = await getUser(supabase);
 
   const { error } = await supabase
     .from("MemberData")
     .update(data)
-    .eq("MembershipID", MembershipID);
+    .eq("MembershipID", user.id);
 
   return JSON.stringify({ error });
 }
