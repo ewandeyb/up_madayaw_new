@@ -34,22 +34,14 @@ const FormSchema = z.object({
   BirthDate: z.string().min(2, {
     message: "Name must be at least 2 characters.",
   }),
-  Email: z.string().min(2, {
-    message: "Name must be at least 2 characters.",
-  }),
-  MembershipNo: z.string().min(2, {
-    message: "Name must be at least 2 characters.",
-  }),
-  MemberType: z.string().min(2, {
-    message: "Name must be at least 2 characters.",
-  }),
 });
 
-export default function PersonInfo({ MemberData2 }: { MemberData2: IMemberData }) {
+export default function MemDetails({ MemberData2 }: { MemberData2: IMemberData }) {
   const [isPending, startTransition] = useTransition();
 
+  // Ensure MemberData2 is defined
   if (!MemberData2) {
-    return <div>Loading...</div>;
+    return <div>Loading...</div>; // or handle the error appropriately
   }
 
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -59,9 +51,6 @@ export default function PersonInfo({ MemberData2 }: { MemberData2: IMemberData }
       LastName: MemberData2.LastName,
       CivilStatus: MemberData2.CivilStatus,
       BirthDate: MemberData2.BirthDate,
-      Email: MemberData2.Email,
-      MembershipNo: MemberData2.MembershipNo,
-      MemberType: MemberData2.MemberType,
     },
   });
 
@@ -108,7 +97,11 @@ export default function PersonInfo({ MemberData2 }: { MemberData2: IMemberData }
             <FormItem>
               <FormLabel>First Name</FormLabel>
               <FormControl>
-                <Input placeholder="shadcn" {...field} />
+                <Input
+                  placeholder="First Name"
+                  {...field}
+                  onChange={field.onChange}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -121,7 +114,11 @@ export default function PersonInfo({ MemberData2 }: { MemberData2: IMemberData }
             <FormItem>
               <FormLabel>Last Name</FormLabel>
               <FormControl>
-                <Input placeholder="shadcn" {...field} />
+                <Input
+                  placeholder="Last Name"
+                  {...field}
+                  onChange={field.onChange}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -134,7 +131,11 @@ export default function PersonInfo({ MemberData2 }: { MemberData2: IMemberData }
             <FormItem>
               <FormLabel>Civil Status</FormLabel>
               <FormControl>
-                <Input placeholder="shadcn" {...field} />
+                <Input
+                  placeholder="Civil Status"
+                  {...field}
+                  onChange={field.onChange}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -147,7 +148,11 @@ export default function PersonInfo({ MemberData2 }: { MemberData2: IMemberData }
             <FormItem>
               <FormLabel>Birth Date</FormLabel>
               <FormControl>
-                <Input placeholder="shadcn" {...field} />
+                <Input
+                  placeholder="Birth Date"
+                  {...field}
+                  onChange={field.onChange}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
