@@ -17,8 +17,10 @@ import { Mail } from "lucide-react";
 import EditProfile from "./components/edit/EditProfile";
 import { readProfile } from "./actions";
 import { Button } from "@/components/ui/button";
+import { IMemberData } from "@/lib/types";
 
 export default async function Profile() {
+
   const supabase = createClient();
 
   const { data: MemberData2 } = await readProfile();

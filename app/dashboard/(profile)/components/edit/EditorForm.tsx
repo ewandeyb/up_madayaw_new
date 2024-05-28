@@ -10,14 +10,12 @@ import { IMemberData } from "@/lib/types";
 export default function EditForm({ MemberData2 }: { MemberData2: IMemberData }) {
 	return (
 		<Tabs defaultValue="basic" className="w-full space-y-5">
-			<TabsList className={cn("grid w-full ", "xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2")}>
-				<TabsTrigger value="basic">Personal Information</TabsTrigger>
+			<TabsList className={cn("grid w-full ", "grid-cols-3")}>
+				<TabsTrigger value="basic">Personal</TabsTrigger>
 				{(
 					<>
-						<TabsTrigger value="contact">Contact Information</TabsTrigger>
-						<TabsTrigger value="membership">Membership Details</TabsTrigger>
-						<TabsTrigger value="employment">Employment Information</TabsTrigger>
-						<TabsTrigger value="loan">Loan Details</TabsTrigger>
+						<TabsTrigger value="contact">Contact</TabsTrigger>
+						<TabsTrigger value="membership">Membership</TabsTrigger>
 					</>
 				)}
 			</TabsList>

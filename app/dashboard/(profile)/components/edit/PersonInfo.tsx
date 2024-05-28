@@ -75,14 +75,25 @@ export default function MemDetails({ MemberData2 }: { MemberData2: IMemberData }
           });
         }
       } catch (error) {
-        toast({
-          title: "Error",
-          description: (
-            <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-              <code className="text-white">{error.message}</code>
-            </pre>
-          ),
-        });
+        if (error instanceof Error) {
+          toast({
+            title: "Error",
+            description: (
+              <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+                <code className="text-white">{error.message}</code>
+              </pre>
+            ),
+          });
+        } else {
+          toast({
+            title: "Error",
+            description: (
+              <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+                <code className="text-white">An unknown error occurred</code>
+              </pre>
+            ),
+          });
+        }
       }
     });
   }
