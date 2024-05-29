@@ -17,7 +17,7 @@ export async function createApplication(data: {
   Sex: string;
   BirthDate?: Date;
   Birthplace: string;
-  ContactNumber: string,
+  ContactNumber: string;
 
   SpouseFirstName?: string;
   SpouseMiddleName?: string;
@@ -106,8 +106,8 @@ export async function createApplication(data: {
 
   const addContactNumber = await supabase.from("ContactNumbers").insert({
     AssocMemberID: new_uuid,
-    ContactNumber: data.ContactNumber
-  })
+    ContactNumber: data.ContactNumber,
+  });
 
   if (addContactNumber.error?.message) {
     console.log(JSON.stringify(addContactNumber));
@@ -260,10 +260,9 @@ export async function createApplication(data: {
   revalidatePath("/apply");
   return JSON.stringify(addMemberData);
 }
-
 /* CODE BELOW NOT UPDATED */
 
-export async function updateMemberBasicById(
+export async function updateMember(
   id: string,
   data: {
     name: string;
