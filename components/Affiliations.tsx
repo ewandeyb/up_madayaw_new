@@ -33,6 +33,8 @@ const Affiliations = () => {
                 src={affiliation.logo}
                 alt={affiliation.name}
                 className="w-30 h-24 object-cover"
+                width={300} // Provide the width of the image
+                height={240} // You might also need to provide the height depending on your requirements
               />
               <div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-3 dark:text-gray-100">{affiliation.name}</h3>

@@ -38,6 +38,8 @@ const Updates = () => {
                 src={update.picture}
                 alt={update.name}
                 className="w-56 h-56 object-cover mb-4 md:mb-0 md:mr-6"
+                width={560} // Provide the width of the image
+                height={560} // You might also need to provide the height depending on your requirements
               />
               <div>
                 <h3 className="text-2xl font-semibold text-gray-900 mb-3 dark:text-white">{update.name}</h3>
