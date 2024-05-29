@@ -17,13 +17,9 @@ import { Mail } from "lucide-react";
 import EditProfile from "./components/edit/EditProfile";
 import { readProfile } from "./actions";
 import { Button } from "@/components/ui/button";
-import { IMemberData } from "@/lib/types";
 
 export default async function Profile() {
-
   const supabase = createClient();
-
-  const { data: MemberData } = await readProfile();
 
   // Fetch the currently logged-in user
   const user = await getUser(supabase);
@@ -33,10 +29,10 @@ export default async function Profile() {
   }
 
   // Query to get the user-specific data
-  const { data: MemberData2, error } = await supabase
+  const { data: MemberData, error } = await supabase
     .from("MemberData")
     .select(
-      "MembershipNo, FirstName, LastName, CivilStatus, BirthDate, Email, MemberType"
+      "MembershipID, MembershipNo, FirstName, LastName, CivilStatus, BirthDate, Email, MemberType"
     )
     .eq("MembershipID", user.id) // Assuming user_id is the foreign key in your table
     .single();
@@ -47,10 +43,9 @@ export default async function Profile() {
 
   // Check if both FirstName and LastName are null
   const fullName =
-    MemberData2.FirstName || MemberData2.LastName
-      ? `${MemberData2.FirstName ?? " "} ${MemberData2.LastName ?? " "}`
+    MemberData.FirstName || MemberData.LastName
+      ? `${MemberData.FirstName ?? " "} ${MemberData.LastName ?? " "}`
       : "NULL";
-
 
   return (
     <section className="w-full p-10 px-4 lg:px-8">
@@ -72,7 +67,7 @@ export default async function Profile() {
             {fullName}
           </h2>
           <p className="max-w-[900px] text-gray-500 dark:text-white tracking-tighter text-center md:text-center lg:text-left md:text-xl lg:text-base xl:text-xl dark:text-gray-400">
-            Membership Number: {MemberData2.MembershipNo ?? "NULL"}
+            Membership Number: {MemberData.MembershipNo ?? "NULL"}
           </p>
         </div>
       </div>
@@ -80,7 +75,7 @@ export default async function Profile() {
       <div className="flex justify-center">
         <div className="flex flex-col lg:flex-row justify-between w-full max-w-5xl gap-6">
           <div className="max-w-[600px] mx-auto">
-            <div className="flex flex-col justify-center space-y-4 border-2 border-black dark:border-white bg-white dark:bg-gray-950 rounded-xl p-10">
+            <div className="flex flex-col justify-center space-y-4 border-2 border-black dark:border-white bg-white dark:bg-black rounded-xl p-10">
               <ul className="grid gap-6">
                 <li className="mb-6">
                   <div className="grid gap-6">
@@ -98,7 +93,7 @@ export default async function Profile() {
                       <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
                         Civil Status:{" "}
                         <span className="font-semibold">
-                          {MemberData2.CivilStatus ?? "NULL"}
+                          {MemberData.CivilStatus ?? "NULL"}
                         </span>
                       </p>
                     </div>
@@ -113,7 +108,7 @@ export default async function Profile() {
                       <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
                         Date of Birth:{" "}
                         <span className="font-semibold">
-                          {MemberData2.BirthDate ?? "NULL"}
+                          {MemberData.BirthDate ?? "NULL"}
                         </span>
                       </p>
                     </div>
@@ -135,7 +130,7 @@ export default async function Profile() {
                       <p className="ml-8 text-base text-gray-500 dark:text-gray-400 overflow-auto">
                         Email :{" "}
                         <span className="font-semibold">
-                          {MemberData2.Email ?? "NULL"}
+                          {MemberData.Email ?? "NULL"}
                         </span>
                       </p>
                     </div>
@@ -155,9 +150,9 @@ export default async function Profile() {
                         width="60"
                       />
                       <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
-                        Membership Type:{" "}
+                        MemberType:{" "}
                         <span className="font-semibold">
-                          {MemberData2.MemberType ?? "NULL"}
+                          {MemberData.MemberType ?? "NULL"}
                         </span>
                       </p>
                     </div>
@@ -167,7 +162,7 @@ export default async function Profile() {
             </div>
           </div>
           <div className="max-w-[600px] mx-auto">
-            <div className="flex flex-col justify-center space-y-4 border-2 border-black dark:border-white bg-white dark:bg-gray-950 rounded-xl p-10">
+            <div className="flex flex-col justify-center space-y-4 border-2 border-black dark:border-white bg-white dark:bg-black rounded-xl p-10">
               <ul className="grid gap-6">
                 <li className="mb-6">
                   <div className="grid gap-6">
