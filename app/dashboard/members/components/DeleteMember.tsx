@@ -4,14 +4,15 @@ import { TrashIcon } from "@radix-ui/react-icons";
 import { deleteMemberById } from "../../members/actions";
 import React, { useTransition } from "react";
 import { toast } from "@/components/ui/use-toast";
+import { UUID } from "crypto";
 
-export default function DeleteMember({ user_id }: { user_id: string }) {
+export default function DeleteMember({ user_id }: { user_id: UUID }) {
   const [isPending, startTransition] = useTransition();
 
   const onSubmit = () => {
     console.log("i reacherd here");
     startTransition(async () => {
-      const result = JSON.parse(await deleteMemberById(user_id));
+      const result = JSON.parse(await deleteMemberById(user_id as UUID));
       console.log(result);
       if (result?.error?.message) {
         toast({

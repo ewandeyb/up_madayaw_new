@@ -30,7 +30,7 @@ import { z } from "zod";
 const elevateSchema = z
   .object({
     MembershipID: z.string().max(50),
-    /* Email: z.string().email(), */
+    Email: z.string().email(),
     Role: z.enum(["user", "admin"]),
     Status: z.enum(["active", "resigned"]),
     password: z.string().min(6, { message: "Password should be 6 characters" }),
@@ -51,7 +51,7 @@ export default function MemberForm() {
       MembershipID: "",
       Role: "user",
       Status: "active",
-      /* Email: "", */
+      Email: "",
     },
   });
 
@@ -99,7 +99,7 @@ export default function MemberForm() {
             </FormItem>
           )}
         />
-        {/* <FormField
+        <FormField
           control={form.control}
           name="Email"
           render={({ field }) => (
@@ -107,8 +107,8 @@ export default function MemberForm() {
               <FormLabel>Email</FormLabel>
               <FormControl>
                 <Input
-                  placeholder="email@gmail.com"
-                  type="email"
+                  placeholder=""
+                  type="text" // Use type="text" for Email
                   {...field}
                   onChange={field.onChange}
                 />
@@ -116,7 +116,7 @@ export default function MemberForm() {
               <FormMessage />
             </FormItem>
           )}
-        /> */}
+        />
         <FormField
           control={form.control}
           name="password"

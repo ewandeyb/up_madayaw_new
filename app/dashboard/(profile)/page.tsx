@@ -27,14 +27,15 @@ export default async function Profile() {
   if (!user) {
     return <div>Please log in to view your profile.</div>;
   }
-
+  console.log("hello profile!");
+  console.log(user);
   // Query to get the user-specific data
   const { data: MemberData, error } = await supabase
     .from("MemberData")
     .select(
       "MembershipNo, FirstName, LastName, CivilStatus, BirthDate, Email, MemberType"
     )
-    .eq("MembershipID", user.id) // Assuming user_id is the foreign key in your table
+    .eq("Email", user.email) // Assuming user_id is the foreign key in your table
     .single();
 
   if (error) {

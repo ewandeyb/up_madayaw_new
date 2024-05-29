@@ -1,8 +1,8 @@
-"use client"
+"use client";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/use-toast";
-import Link from "next/link"
-import React, { useState } from 'react';
+import Link from "next/link";
+import React, { useState } from "react";
 //Changed Date to string
 /* import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css'; */
@@ -28,31 +28,38 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover"
+} from "@/components/ui/popover";
 
-import { CalendarIcon } from "@radix-ui/react-icons"
-import { Calendar } from "@/components/ui/calendar"
-import { cn } from "@/lib/utils"
-import { format } from "date-fns"
+import { CalendarIcon } from "@radix-ui/react-icons";
+import { Calendar } from "@/components/ui/calendar";
+import { cn } from "@/lib/utils";
+import { format } from "date-fns";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ApplicationFormSchema } from "./schema";
 import { ApplicationFormFields } from "./types";
 import { useForm } from "react-hook-form";
 import { useTransition } from "react";
 import { Input } from "@/components/ui/input";
-import { createApplication } from "../actions"
+import { createApplication } from "../actions";
 
 export default function ApplicationForm() {
   const [isPending, startTransition] = useTransition();
-  const CivilStatus = ["Single", "Married", "Divorced", "Widowed", "Annulled", "Legally Seperated"];
-  const Sex = ["Male", "Female"]
-  const NatureOfEmployment = ["Casual", "NGS", "Permanent"]
-  const [BirthDate, setDate] = React.useState<Date>()
-  const [date1, setDate1] = React.useState<Date>()
-  const [date2, setDate2] = React.useState<Date>()
-  const [date3, setDate3] = React.useState<Date>()
+  const CivilStatus = [
+    "Single",
+    "Married",
+    "Divorced",
+    "Widowed",
+    "Annulled",
+    "Legally Seperated",
+  ];
+  const Sex = ["Male", "Female"];
+  const NatureOfEmployment = ["Casual", "NGS", "Permanent"];
+  const [BirthDate, setDate] = React.useState<Date>();
+  const [date1, setDate1] = React.useState<Date>();
+  const [date2, setDate2] = React.useState<Date>();
+  const [date3, setDate3] = React.useState<Date>();
 
-  const PrevMemberStatus = ["Yes", "No"]
+  const PrevMemberStatus = ["Yes", "No"];
 
   const form = useForm<ApplicationFormFields>({
     resolver: zodResolver(ApplicationFormSchema),
@@ -63,7 +70,7 @@ export default function ApplicationForm() {
       CivilStatus: "Single",
       Email: "example@email.com",
       Birthplace: "PlaceTest",
-      ContactNumber: "555-69420",
+      ContactNumber: "55569420",
 
       PositionTitle: "PosTest",
       NatureOfEmployment: "NGS",
@@ -97,23 +104,21 @@ export default function ApplicationForm() {
 
       PrevMemberStatus: "Yes",
       LeaveReason: "form sucks",
-      ReferralName: "RefName"
+      ReferralName: "RefName",
     },
   });
 
   function onSubmit(data: ApplicationFormFields) {
     startTransition(async () => {
       const result = await createApplication(data);
-      const { error } = JSON.parse(result || '{}');
+      const { error } = JSON.parse(result || "{}");
       if (error?.message) {
         //console.log({error})
         toast({
           title: "Failed to create application",
           description: (
             <pre className="w-full mt-2 rounded-md bg-slate-950 p-4">
-              <code className="text-white">
-                {error.message}
-              </code>
+              <code className="text-white">{error.message}</code>
             </pre>
           ),
         });
@@ -127,18 +132,13 @@ export default function ApplicationForm() {
   }
 
   return (
-    <Form {...form} >
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="p-2"
-      >
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="p-2">
         <hr></hr>
         <div className="p-2">
-
           <h1 className="font-bold text-upcolor">Personal Data</h1>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2 p-2">
-
             <FormField
               control={form.control}
               name="FirstName"
@@ -150,11 +150,10 @@ export default function ApplicationForm() {
                       placeholder="Aaron Dave"
                       type="text"
                       {...field}
-                      onChange={field.onChange} />
+                      onChange={field.onChange}
+                    />
                   </FormControl>
-                  <FormDescription>
-
-                  </FormDescription>
+                  <FormDescription></FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -171,11 +170,10 @@ export default function ApplicationForm() {
                       placeholder="Sia"
                       type="text"
                       {...field}
-                      onChange={field.onChange} />
+                      onChange={field.onChange}
+                    />
                   </FormControl>
-                  <FormDescription>
-
-                  </FormDescription>
+                  <FormDescription></FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -192,11 +190,10 @@ export default function ApplicationForm() {
                       placeholder="Acuna"
                       type="text"
                       {...field}
-                      onChange={field.onChange} />
+                      onChange={field.onChange}
+                    />
                   </FormControl>
-                  <FormDescription>
-
-                  </FormDescription>
+                  <FormDescription></FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -213,11 +210,10 @@ export default function ApplicationForm() {
                       placeholder="Jr./Sr./II/III"
                       type="text"
                       {...field}
-                      onChange={field.onChange} />
+                      onChange={field.onChange}
+                    />
                   </FormControl>
-                  <FormDescription>
-
-                  </FormDescription>
+                  <FormDescription></FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -241,10 +237,7 @@ export default function ApplicationForm() {
                     <SelectContent>
                       {CivilStatus.map((CivilStatus, index) => {
                         return (
-                          <SelectItem
-                            value={CivilStatus}
-                            key={index}
-                          >
+                          <SelectItem value={CivilStatus} key={index}>
                             {CivilStatus}
                           </SelectItem>
                         );
@@ -274,10 +267,7 @@ export default function ApplicationForm() {
                     <SelectContent>
                       {Sex.map((Sex, index) => {
                         return (
-                          <SelectItem
-                            value={Sex}
-                            key={index}
-                          >
+                          <SelectItem value={Sex} key={index}>
                             {Sex}
                           </SelectItem>
                         );
@@ -300,7 +290,8 @@ export default function ApplicationForm() {
                       placeholder="username@example.com"
                       type="email"
                       {...field}
-                      onChange={field.onChange} />
+                      onChange={field.onChange}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -317,10 +308,17 @@ export default function ApplicationForm() {
                     <PopoverTrigger asChild>
                       <Button
                         variant={"default"}
-                        className={cn("w-full flex justify-start text-left font-normal", !BirthDate && "text-muted-foreground")}
+                        className={cn(
+                          "w-full flex justify-start text-left font-normal",
+                          !BirthDate && "text-muted-foreground"
+                        )}
                       >
                         <CalendarIcon className="w-4 h-4 mr-2" />
-                        {BirthDate ? format(BirthDate, "PPP") : <span>Pick a date</span>}
+                        {BirthDate ? (
+                          format(BirthDate, "PPP")
+                        ) : (
+                          <span>Pick a date</span>
+                        )}
                       </Button>
                     </PopoverTrigger>
                     <PopoverContent align="start" className="w-auto p-0">
@@ -328,7 +326,11 @@ export default function ApplicationForm() {
                         mode="single"
                         captionLayout="dropdown-buttons"
                         selected={BirthDate}
-                        onSelect={setDate}
+                        onSelect={(date) => {
+                          setDate(date); // Update the state with the new date
+                          field.onChange(date); // Update the form control with the new date
+                          console.log("Date changed:", date); // Log or track the date change
+                        }}
                         fromYear={1960}
                         toYear={2030}
                       />
@@ -350,11 +352,10 @@ export default function ApplicationForm() {
                       placeholder="Region, City"
                       type="text"
                       {...field}
-                      onChange={field.onChange} />
+                      onChange={field.onChange}
+                    />
                   </FormControl>
-                  <FormDescription>
-
-                  </FormDescription>
+                  <FormDescription></FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -371,11 +372,10 @@ export default function ApplicationForm() {
                       placeholder=""
                       type="text"
                       {...field}
-                      onChange={field.onChange} />
+                      onChange={field.onChange}
+                    />
                   </FormControl>
-                  <FormDescription>
-
-                  </FormDescription>
+                  <FormDescription></FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -398,11 +398,10 @@ export default function ApplicationForm() {
                       placeholder=""
                       type="string"
                       {...field}
-                      onChange={field.onChange} />
+                      onChange={field.onChange}
+                    />
                   </FormControl>
-                  <FormDescription>
-
-                  </FormDescription>
+                  <FormDescription></FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -419,11 +418,10 @@ export default function ApplicationForm() {
                       placeholder=""
                       type="text"
                       {...field}
-                      onChange={field.onChange} />
+                      onChange={field.onChange}
+                    />
                   </FormControl>
-                  <FormDescription>
-
-                  </FormDescription>
+                  <FormDescription></FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -440,11 +438,10 @@ export default function ApplicationForm() {
                       placeholder=""
                       type="text"
                       {...field}
-                      onChange={field.onChange} />
+                      onChange={field.onChange}
+                    />
                   </FormControl>
-                  <FormDescription>
-
-                  </FormDescription>
+                  <FormDescription></FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -461,11 +458,10 @@ export default function ApplicationForm() {
                       placeholder="Jr./Sr./II/III"
                       type="text"
                       {...field}
-                      onChange={field.onChange} />
+                      onChange={field.onChange}
+                    />
                   </FormControl>
-                  <FormDescription>
-
-                  </FormDescription>
+                  <FormDescription></FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -478,14 +474,9 @@ export default function ApplicationForm() {
                 <FormItem>
                   <FormLabel>Occupation</FormLabel>
                   <FormControl>
-                    <Input
-                      type="text"
-                      {...field}
-                      onChange={field.onChange} />
+                    <Input type="text" {...field} onChange={field.onChange} />
                   </FormControl>
-                  <FormDescription>
-
-                  </FormDescription>
+                  <FormDescription></FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -495,7 +486,7 @@ export default function ApplicationForm() {
 
         <hr></hr>
         <div className="p-2">
-          <h1 className="font-bold text-upcolor" >Postal Address</h1>
+          <h1 className="font-bold text-upcolor">Postal Address</h1>
           <div className="">
             <FormField
               control={form.control}
@@ -508,7 +499,8 @@ export default function ApplicationForm() {
                       placeholder=""
                       type="text"
                       {...field}
-                      onChange={field.onChange} />
+                      onChange={field.onChange}
+                    />
                   </FormControl>
                   <FormDescription>
                     Line 1 of your postal address
@@ -530,11 +522,10 @@ export default function ApplicationForm() {
                       placeholder=""
                       type="text"
                       {...field}
-                      onChange={field.onChange} />
+                      onChange={field.onChange}
+                    />
                   </FormControl>
-                  <FormDescription>
-
-                  </FormDescription>
+                  <FormDescription></FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -550,11 +541,10 @@ export default function ApplicationForm() {
                       placeholder=""
                       type="text"
                       {...field}
-                      onChange={field.onChange} />
+                      onChange={field.onChange}
+                    />
                   </FormControl>
-                  <FormDescription>
-
-                  </FormDescription>
+                  <FormDescription></FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -570,11 +560,10 @@ export default function ApplicationForm() {
                       placeholder=""
                       type="text"
                       {...field}
-                      onChange={field.onChange} />
+                      onChange={field.onChange}
+                    />
                   </FormControl>
-                  <FormDescription>
-
-                  </FormDescription>
+                  <FormDescription></FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -590,11 +579,10 @@ export default function ApplicationForm() {
                       placeholder=""
                       type="number"
                       {...field}
-                      onChange={field.onChange} />
+                      onChange={field.onChange}
+                    />
                   </FormControl>
-                  <FormDescription>
-
-                  </FormDescription>
+                  <FormDescription></FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -617,11 +605,10 @@ export default function ApplicationForm() {
                       placeholder=""
                       type="text"
                       {...field}
-                      onChange={field.onChange} />
+                      onChange={field.onChange}
+                    />
                   </FormControl>
-                  <FormDescription>
-
-                  </FormDescription>
+                  <FormDescription></FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -638,10 +625,10 @@ export default function ApplicationForm() {
                       placeholder=""
                       type="text"
                       {...field}
-                      onChange={field.onChange} />
+                      onChange={field.onChange}
+                    />
                   </FormControl>
-                  <FormDescription>
-                  </FormDescription>
+                  <FormDescription></FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -659,7 +646,8 @@ export default function ApplicationForm() {
                     placeholder=""
                     type="text"
                     {...field}
-                    onChange={field.onChange} />
+                    onChange={field.onChange}
+                  />
                 </FormControl>
                 <FormDescription>
                   Line 1 of nearest relative&apos;s postal address
@@ -682,11 +670,10 @@ export default function ApplicationForm() {
                       placeholder=""
                       type="text"
                       {...field}
-                      onChange={field.onChange} />
+                      onChange={field.onChange}
+                    />
                   </FormControl>
-                  <FormDescription>
-
-                  </FormDescription>
+                  <FormDescription></FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -702,11 +689,10 @@ export default function ApplicationForm() {
                       placeholder=""
                       type="text"
                       {...field}
-                      onChange={field.onChange} />
+                      onChange={field.onChange}
+                    />
                   </FormControl>
-                  <FormDescription>
-
-                  </FormDescription>
+                  <FormDescription></FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -722,11 +708,10 @@ export default function ApplicationForm() {
                       placeholder=""
                       type="text"
                       {...field}
-                      onChange={field.onChange} />
+                      onChange={field.onChange}
+                    />
                   </FormControl>
-                  <FormDescription>
-
-                  </FormDescription>
+                  <FormDescription></FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -742,11 +727,10 @@ export default function ApplicationForm() {
                       placeholder=""
                       type="number"
                       {...field}
-                      onChange={field.onChange} />
+                      onChange={field.onChange}
+                    />
                   </FormControl>
-                  <FormDescription>
-
-                  </FormDescription>
+                  <FormDescription></FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -765,10 +749,7 @@ export default function ApplicationForm() {
                 <FormItem>
                   <FormLabel>Position Title</FormLabel>
                   <FormControl>
-                    <Input
-                      type="text"
-                      {...field}
-                      onChange={field.onChange} />
+                    <Input type="text" {...field} onChange={field.onChange} />
                   </FormControl>
                   <FormDescription>
                     What office title do you hold?
@@ -795,10 +776,7 @@ export default function ApplicationForm() {
                     <SelectContent>
                       {NatureOfEmployment.map((NatureOfEmployment, index) => {
                         return (
-                          <SelectItem
-                            value={NatureOfEmployment}
-                            key={index}
-                          >
+                          <SelectItem value={NatureOfEmployment} key={index}>
                             {NatureOfEmployment}
                           </SelectItem>
                         );
@@ -816,10 +794,7 @@ export default function ApplicationForm() {
                 <FormItem>
                   <FormLabel>Office Title</FormLabel>
                   <FormControl>
-                    <Input
-                      type="text"
-                      {...field}
-                      onChange={field.onChange} />
+                    <Input type="text" {...field} onChange={field.onChange} />
                   </FormControl>
                   <FormDescription>
                     What office do you work under?.
@@ -835,10 +810,7 @@ export default function ApplicationForm() {
                 <FormItem>
                   <FormLabel>Years of Service</FormLabel>
                   <FormControl>
-                    <Input
-                      type="number"
-                      {...field}
-                      onChange={field.onChange} />
+                    <Input type="number" {...field} onChange={field.onChange} />
                   </FormControl>
                   <FormDescription>
                     How many years have you been working in this position?
@@ -863,14 +835,9 @@ export default function ApplicationForm() {
                   <FormItem>
                     <FormLabel>First Name</FormLabel>
                     <FormControl>
-                      <Input
-                        type="text"
-                        {...field}
-                        onChange={field.onChange} />
+                      <Input type="text" {...field} onChange={field.onChange} />
                     </FormControl>
-                    <FormDescription>
-
-                    </FormDescription>
+                    <FormDescription></FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -884,14 +851,9 @@ export default function ApplicationForm() {
                   <FormItem>
                     <FormLabel>Middle Name</FormLabel>
                     <FormControl>
-                      <Input
-                        type="text"
-                        {...field}
-                        onChange={field.onChange} />
+                      <Input type="text" {...field} onChange={field.onChange} />
                     </FormControl>
-                    <FormDescription>
-
-                    </FormDescription>
+                    <FormDescription></FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -905,14 +867,9 @@ export default function ApplicationForm() {
                   <FormItem>
                     <FormLabel>Last Name</FormLabel>
                     <FormControl>
-                      <Input
-                        type="text"
-                        {...field}
-                        onChange={field.onChange} />
+                      <Input type="text" {...field} onChange={field.onChange} />
                     </FormControl>
-                    <FormDescription>
-
-                    </FormDescription>
+                    <FormDescription></FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -926,14 +883,9 @@ export default function ApplicationForm() {
                   <FormItem>
                     <FormLabel>Suffix</FormLabel>
                     <FormControl>
-                      <Input
-                        type="text"
-                        {...field}
-                        onChange={field.onChange} />
+                      <Input type="text" {...field} onChange={field.onChange} />
                     </FormControl>
-                    <FormDescription>
-
-                    </FormDescription>
+                    <FormDescription></FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -950,10 +902,17 @@ export default function ApplicationForm() {
                       <PopoverTrigger asChild>
                         <Button
                           variant={"default"}
-                          className={cn("w-full flex justify-start text-left font-normal", !date1 && "text-muted-foreground")}
+                          className={cn(
+                            "w-full flex justify-start text-left font-normal",
+                            !date1 && "text-muted-foreground"
+                          )}
                         >
                           <CalendarIcon className="w-4 h-4 mr-2" />
-                          {date1 ? format(date1, "PPP") : <span>Pick a date</span>}
+                          {date1 ? (
+                            format(date1, "PPP")
+                          ) : (
+                            <span>Pick a date</span>
+                          )}
                         </Button>
                       </PopoverTrigger>
                       <PopoverContent align="start" className="w-auto p-0">
@@ -961,7 +920,11 @@ export default function ApplicationForm() {
                           mode="single"
                           captionLayout="dropdown-buttons"
                           selected={date1}
-                          onSelect={setDate1}
+                          onSelect={(date1) => {
+                            setDate1(date1); // Update the state with the new date
+                            field.onChange(date1); // Update the form control with the new date
+                            console.log("Date changed:", date1); // Log or track the date change
+                          }}
                           fromYear={1960}
                           toYear={2030}
                         />
@@ -980,14 +943,9 @@ export default function ApplicationForm() {
                   <FormItem>
                     <FormLabel>Relation</FormLabel>
                     <FormControl>
-                      <Input
-                        type="text"
-                        {...field}
-                        onChange={field.onChange} />
+                      <Input type="text" {...field} onChange={field.onChange} />
                     </FormControl>
-                    <FormDescription>
-
-                    </FormDescription>
+                    <FormDescription></FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -1012,10 +970,7 @@ export default function ApplicationForm() {
                       <SelectContent>
                         {Sex.map((Sex, index) => {
                           return (
-                            <SelectItem
-                              value={Sex}
-                              key={index}
-                            >
+                            <SelectItem value={Sex} key={index}>
                               {Sex}
                             </SelectItem>
                           );
@@ -1027,7 +982,6 @@ export default function ApplicationForm() {
                 )}
               />
             </div>
-
           </div>
 
           <hr></hr>
@@ -1040,14 +994,9 @@ export default function ApplicationForm() {
                   <FormItem>
                     <FormLabel>First Name</FormLabel>
                     <FormControl>
-                      <Input
-                        type="text"
-                        {...field}
-                        onChange={field.onChange} />
+                      <Input type="text" {...field} onChange={field.onChange} />
                     </FormControl>
-                    <FormDescription>
-
-                    </FormDescription>
+                    <FormDescription></FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -1061,14 +1010,9 @@ export default function ApplicationForm() {
                   <FormItem>
                     <FormLabel>Middle Name</FormLabel>
                     <FormControl>
-                      <Input
-                        type="text"
-                        {...field}
-                        onChange={field.onChange} />
+                      <Input type="text" {...field} onChange={field.onChange} />
                     </FormControl>
-                    <FormDescription>
-
-                    </FormDescription>
+                    <FormDescription></FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -1082,14 +1026,9 @@ export default function ApplicationForm() {
                   <FormItem>
                     <FormLabel>Last Name</FormLabel>
                     <FormControl>
-                      <Input
-                        type="text"
-                        {...field}
-                        onChange={field.onChange} />
+                      <Input type="text" {...field} onChange={field.onChange} />
                     </FormControl>
-                    <FormDescription>
-
-                    </FormDescription>
+                    <FormDescription></FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -1103,14 +1042,9 @@ export default function ApplicationForm() {
                   <FormItem>
                     <FormLabel>Suffix</FormLabel>
                     <FormControl>
-                      <Input
-                        type="text"
-                        {...field}
-                        onChange={field.onChange} />
+                      <Input type="text" {...field} onChange={field.onChange} />
                     </FormControl>
-                    <FormDescription>
-
-                    </FormDescription>
+                    <FormDescription></FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -1127,10 +1061,17 @@ export default function ApplicationForm() {
                       <PopoverTrigger asChild>
                         <Button
                           variant={"default"}
-                          className={cn("w-full flex justify-start text-left font-normal", !date2 && "text-muted-foreground")}
+                          className={cn(
+                            "w-full flex justify-start text-left font-normal",
+                            !date2 && "text-muted-foreground"
+                          )}
                         >
                           <CalendarIcon className="w-4 h-4 mr-2" />
-                          {date2 ? format(date2, "PPP") : <span>Pick a date</span>}
+                          {date2 ? (
+                            format(date2, "PPP")
+                          ) : (
+                            <span>Pick a date</span>
+                          )}
                         </Button>
                       </PopoverTrigger>
                       <PopoverContent align="start" className="w-auto p-0">
@@ -1138,7 +1079,11 @@ export default function ApplicationForm() {
                           mode="single"
                           captionLayout="dropdown-buttons"
                           selected={date2}
-                          onSelect={setDate2}
+                          onSelect={(date2) => {
+                            setDate2(date2); // Update the state with the new date
+                            field.onChange(date2); // Update the form control with the new date
+                            console.log("Date changed:", date2); // Log or track the date change
+                          }}
                           fromYear={1960}
                           toYear={2030}
                         />
@@ -1157,14 +1102,9 @@ export default function ApplicationForm() {
                   <FormItem>
                     <FormLabel>Relation</FormLabel>
                     <FormControl>
-                      <Input
-                        type="text"
-                        {...field}
-                        onChange={field.onChange} />
+                      <Input type="text" {...field} onChange={field.onChange} />
                     </FormControl>
-                    <FormDescription>
-
-                    </FormDescription>
+                    <FormDescription></FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -1189,10 +1129,7 @@ export default function ApplicationForm() {
                       <SelectContent>
                         {Sex.map((Sex, index) => {
                           return (
-                            <SelectItem
-                              value={Sex}
-                              key={index}
-                            >
+                            <SelectItem value={Sex} key={index}>
                               {Sex}
                             </SelectItem>
                           );
@@ -1204,7 +1141,6 @@ export default function ApplicationForm() {
                 )}
               />
             </div>
-
           </div>
 
           <hr></hr>
@@ -1217,14 +1153,9 @@ export default function ApplicationForm() {
                   <FormItem>
                     <FormLabel>First Name</FormLabel>
                     <FormControl>
-                      <Input
-                        type="text"
-                        {...field}
-                        onChange={field.onChange} />
+                      <Input type="text" {...field} onChange={field.onChange} />
                     </FormControl>
-                    <FormDescription>
-
-                    </FormDescription>
+                    <FormDescription></FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -1238,14 +1169,9 @@ export default function ApplicationForm() {
                   <FormItem>
                     <FormLabel>Middle Name</FormLabel>
                     <FormControl>
-                      <Input
-                        type="text"
-                        {...field}
-                        onChange={field.onChange} />
+                      <Input type="text" {...field} onChange={field.onChange} />
                     </FormControl>
-                    <FormDescription>
-
-                    </FormDescription>
+                    <FormDescription></FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -1259,14 +1185,9 @@ export default function ApplicationForm() {
                   <FormItem>
                     <FormLabel>Last Name</FormLabel>
                     <FormControl>
-                      <Input
-                        type="text"
-                        {...field}
-                        onChange={field.onChange} />
+                      <Input type="text" {...field} onChange={field.onChange} />
                     </FormControl>
-                    <FormDescription>
-
-                    </FormDescription>
+                    <FormDescription></FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -1280,14 +1201,9 @@ export default function ApplicationForm() {
                   <FormItem>
                     <FormLabel>Suffix</FormLabel>
                     <FormControl>
-                      <Input
-                        type="text"
-                        {...field}
-                        onChange={field.onChange} />
+                      <Input type="text" {...field} onChange={field.onChange} />
                     </FormControl>
-                    <FormDescription>
-
-                    </FormDescription>
+                    <FormDescription></FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -1304,10 +1220,17 @@ export default function ApplicationForm() {
                       <PopoverTrigger asChild>
                         <Button
                           variant={"default"}
-                          className={cn("w-full flex justify-start text-left font-normal", !date3 && "text-muted-foreground")}
+                          className={cn(
+                            "w-full flex justify-start text-left font-normal",
+                            !date3 && "text-muted-foreground"
+                          )}
                         >
                           <CalendarIcon className="w-4 h-4 mr-2" />
-                          {date3 ? format(date3, "PPP") : <span>Pick a date</span>}
+                          {date3 ? (
+                            format(date3, "PPP")
+                          ) : (
+                            <span>Pick a date</span>
+                          )}
                         </Button>
                       </PopoverTrigger>
                       <PopoverContent align="start" className="w-auto p-0">
@@ -1315,7 +1238,11 @@ export default function ApplicationForm() {
                           mode="single"
                           captionLayout="dropdown-buttons"
                           selected={date3}
-                          onSelect={setDate3}
+                          onSelect={(date3) => {
+                            setDate3(date3); // Update the state with the new date
+                            field.onChange(date3); // Update the form control with the new date
+                            console.log("Date changed:", date3); // Log or track the date change
+                          }}
                           fromYear={1960}
                           toYear={2030}
                         />
@@ -1334,14 +1261,9 @@ export default function ApplicationForm() {
                   <FormItem>
                     <FormLabel>Relation</FormLabel>
                     <FormControl>
-                      <Input
-                        type="text"
-                        {...field}
-                        onChange={field.onChange} />
+                      <Input type="text" {...field} onChange={field.onChange} />
                     </FormControl>
-                    <FormDescription>
-
-                    </FormDescription>
+                    <FormDescription></FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -1366,10 +1288,7 @@ export default function ApplicationForm() {
                       <SelectContent>
                         {Sex.map((Sex, index) => {
                           return (
-                            <SelectItem
-                              value={Sex}
-                              key={index}
-                            >
+                            <SelectItem value={Sex} key={index}>
                               {Sex}
                             </SelectItem>
                           );
@@ -1381,9 +1300,7 @@ export default function ApplicationForm() {
                 )}
               />
             </div>
-
           </div>
-
         </div>
 
         <hr></hr>
@@ -1409,10 +1326,7 @@ export default function ApplicationForm() {
                       <SelectContent>
                         {PrevMemberStatus.map((PrevMemberStatus, index) => {
                           return (
-                            <SelectItem
-                              value={PrevMemberStatus}
-                              key={index}
-                            >
+                            <SelectItem value={PrevMemberStatus} key={index}>
                               {PrevMemberStatus}
                             </SelectItem>
                           );
@@ -1435,10 +1349,7 @@ export default function ApplicationForm() {
                   <FormItem>
                     <FormLabel>Reason for leaving</FormLabel>
                     <FormControl>
-                      <Input
-                        type="text"
-                        {...field}
-                        onChange={field.onChange} />
+                      <Input type="text" {...field} onChange={field.onChange} />
                     </FormControl>
                     <FormDescription>
                       What reasons (if any) did you have for leaving?
@@ -1456,13 +1367,11 @@ export default function ApplicationForm() {
                   <FormItem>
                     <FormLabel>Referral Name</FormLabel>
                     <FormControl>
-                      <Input
-                        type="text"
-                        {...field}
-                        onChange={field.onChange} />
+                      <Input type="text" {...field} onChange={field.onChange} />
                     </FormControl>
                     <FormDescription>
-                      Name of person who referred/recruited you to apply (if any)
+                      Name of person who referred/recruited you to apply (if
+                      any)
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -1473,14 +1382,15 @@ export default function ApplicationForm() {
         </div>
 
         <div className="flex justify-center col-span-3 gap-4">
-          <Button variant="up" type="submit">Submit</Button>
+          <Button variant="up" type="submit">
+            Submit
+          </Button>
           {/* <h6>or</h6>
 				  <Button size="sm" variant="up" className="">
             <a href="">Download Form</a>
           </Button> */}
         </div>
       </form>
-    </Form >
-  )
-
+    </Form>
+  );
 }

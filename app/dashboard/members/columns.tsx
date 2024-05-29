@@ -15,7 +15,7 @@ import {
 import EditMember from "./components/edit/EditMember";
 import DeleteMember from "./components/DeleteMember";
 import { IPermission } from "@/lib/types";
-
+import { UUID } from "crypto";
 export const columns: ColumnDef<IPermission>[] = [
   {
     accessorKey: "created_at",
@@ -179,10 +179,13 @@ export const columns: ColumnDef<IPermission>[] = [
             </DropdownMenuItem>
             <DropdownMenuItem
               onClick={(event) => {
-                console.log("clicked");
+                console.log("delete mem id");
+                console.log(application.MemberData.MembershipID);
               }}
             >
-              <DeleteMember user_id={application.MemberData.MembershipID} />
+              <DeleteMember
+                user_id={application.MemberData.MembershipID as UUID}
+              />
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

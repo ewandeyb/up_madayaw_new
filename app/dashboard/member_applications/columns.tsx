@@ -29,7 +29,7 @@ import { useUserStore } from "@/lib/store/user";
 import { cn } from "@/lib/utils";
 import { data1 } from "@/app/apply/components/schema";
 import { FullApplicationFormSchema } from "@/app/apply/components/schema";
-
+import { UUID } from "crypto";
 const user = useUserStore.getState().user;
 const isAdmin = user?.user_metadata.Role === "admin";
 
@@ -134,7 +134,7 @@ export const columns: ColumnDef<data1>[] = [
       );
     },
   },
-  {
+  /* {
     accessorKey: "Suffix",
     header: ({ column }) => {
       return (
@@ -147,7 +147,7 @@ export const columns: ColumnDef<data1>[] = [
         </Button>
       );
     },
-  },
+  }, */
   {
     accessorKey: "Email",
     header: ({ column }) => {
@@ -179,7 +179,7 @@ export const columns: ColumnDef<data1>[] = [
       );
     },
   },
-  {
+  /* {
     accessorKey: "Sex",
     header: ({ column }) => {
       return (
@@ -192,7 +192,7 @@ export const columns: ColumnDef<data1>[] = [
         </Button>
       );
     },
-  },
+  }, */
   /* {
     accessorKey: "SpouseFirstName",
     header: ({ column }) => {
@@ -276,6 +276,14 @@ export const columns: ColumnDef<data1>[] = [
             >
               Copy Application ID
             </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={(event) => {
+                navigator.clipboard.writeText(application.Email);
+              }}
+              className="pl-6"
+            >
+              Copy Email
+            </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem
               onClick={(event) => {
@@ -291,7 +299,7 @@ export const columns: ColumnDef<data1>[] = [
                 console.log("clicked");
               }}
             >
-              <DeleteMember user_id={application.MembershipID} />
+              <DeleteMember user_id={application.MembershipID as UUID} />
             </DropdownMenuItem>
             <DropdownMenuItem
               onClick={(event) => {

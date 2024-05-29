@@ -6,26 +6,26 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://daily-todo-task.vercel.app/"),
+  metadataBase: new URL("https://upmadayaw.app/"),
 
   title: {
     template: "%s | UP Madayaw",
     default: "UP Madayaw",
   },
   authors: {
-    name: "chensokheng",
+    name: "Aaron Siapuatco",
   },
   description:
     "Build dashboard with role management using next.js and supabase.",
   openGraph: {
     title: "UP Madayaw",
     description: "Build dashboard with next.js and supabase",
-    url: "https://daily-todo-task.vercel.app/",
+    url: "https://upmadayaw.app/",
     siteName: "UP Madayaw",
     images: "/og.png",
     type: "website",
   },
-  keywords: ["daily web coding", "chensokheng", "dailywebcoding"],
+  keywords: ["up", "upmindanao", "dashboard"],
 };
 
 export default function RootLayout({

@@ -24,6 +24,7 @@ export default function ViewApplication() {
   const [occupation, setOccupation] = useState<any>();
   const [survey, setSurvey] = useState<any>();
   const [dependent, setDependent] = useState<any>();
+
   useEffect(() => {
     // Fetch member data when MembershipID changes
     readMembers(MembershipID as UUID)
@@ -142,7 +143,7 @@ export default function ViewApplication() {
       <header className="bg-gray-100 dark:bg-gray-800 py-8 px-4 md:px-6">
         <div className="container mx-auto flex items-center gap-4">
           <Avatar>
-            <AvatarImage alt="User Avatar" src="/placeholder-avatar.jpg" />
+            <AvatarImage alt="User Avatar" />
             <AvatarFallback className="text-upcolor font-semibold">
               UP
             </AvatarFallback>
@@ -173,8 +174,16 @@ export default function ViewApplication() {
 
       <div className="flex flex-col overflow-y-96 ">
         <Card className="">
-          <CardHeader>
+          <CardHeader className="flex flex-row items-center justify-between">
             <CardTitle>Member Details</CardTitle>
+            <Button
+              variant="outline"
+              onClick={() => {
+                router.push(`/dashboard/members/${MembershipID}/edit`);
+              }}
+            >
+              Edit
+            </Button>
           </CardHeader>
           <CardContent>
             {member && member.MemberData ? (
