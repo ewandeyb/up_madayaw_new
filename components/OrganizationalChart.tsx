@@ -82,6 +82,8 @@ const OrganizationalChart = () => {
                 src={officer.photo}
                 alt={officer.name}
                 className="w-32 h-32 object-cover mx-auto mb-4"
+                width={320} // Provide the width of the image
+                height={320} // You might also need to provide the height depending on your requirements
               />
               <h3 className="text-xl font-semibold text-white dark:text-black">{officer.name}</h3>
               <p className="text-white dark:text-black">{officer.title}</p>
