@@ -22,4 +22,4 @@ export type IMemberData = {
   BirthDate: string;
   Email: string;
   MemberType: string;
-}
+};

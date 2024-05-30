@@ -35,7 +35,8 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import ElevateMember from "./components/create/ElevateMember";
-interface TData {
+import { IPermission } from "@/lib/types";
+interface col {
   PermissionsID: string;
   created_at: string;
   Role: "user" | "admin";
@@ -48,7 +49,7 @@ interface TData {
     MemberType: string;
   };
 }
-interface DataTableProps<TValue> {
+interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
 }
@@ -56,7 +57,7 @@ interface DataTableProps<TValue> {
 export function DataTable<TData, TValue>({
   columns,
   data,
-}: DataTableProps<TValue>) {
+}: DataTableProps<IPermission, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -118,8 +119,8 @@ export function DataTable<TData, TValue>({
             value={
               selectedColumn
                 ? (table
-                  .getColumn(selectedColumn)
-                  ?.getFilterValue() as typeof selectedColumn) ?? ""
+                    .getColumn(selectedColumn)
+                    ?.getFilterValue() as typeof selectedColumn) ?? ""
                 : ""
             }
             onChange={(event) =>
@@ -178,9 +179,9 @@ export function DataTable<TData, TValue>({
                       {header.isPlaceholder
                         ? null
                         : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
                     </TableHead>
                   );
                 })}

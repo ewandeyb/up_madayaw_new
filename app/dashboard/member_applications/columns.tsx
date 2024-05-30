@@ -297,17 +297,10 @@ export const columns: ColumnDef<data1>[] = [
             <DropdownMenuItem
               onClick={(event) => {
                 console.log("clicked");
+                console.log(application.MembershipID);
               }}
             >
-              <DeleteMember user_id={application.MembershipID as UUID} />
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              onClick={(event) => {
-                event.preventDefault();
-              }}
-              className="pl-6"
-            >
-              View full application details
+              <DeleteMember user_id={application.MembershipID as string} />
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
