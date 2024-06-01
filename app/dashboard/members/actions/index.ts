@@ -3,6 +3,7 @@ import { readUserSession } from "@/lib/actions";
 import { createSupabaseAdmin, createSupbaseServerClient } from "@/lib/supabase";
 import { revalidatePath, unstable_noStore } from "next/cache";
 import { UUID } from "crypto";
+import { createServerClient } from "@supabase/ssr";
 
 export async function elevateMember(data: {
   MembershipID: string;
@@ -25,58 +26,78 @@ export async function elevateMember(data: {
       Email: data.Email,
     },
   });
+  // Value of oldmembership id before elevated to actual member
+  const old_membershipID = data.MembershipID;
 
   if (createResult.error?.message) {
     return JSON.stringify(createResult);
   } else {
-    // Insert into Permissions table
-    const permissionResult = await supabase.from("Permissions").insert({
-      Role: data.Role, // Assuming Status is used as Role here
-      Status: data.Status, // Assuming Status is used as Role here
-      PermissionsID: data.MembershipID, // Reference MembershipID
-    });
-
-    const { data: occupationData, error } = await supabase
-      .from("Occupation")
-      .select("NatureOfEmployment")
-      .eq("AssocMemberID", data.MembershipID);
-
-    if (error) {
-      console.error("Error fetching member type:", error.message);
-      return; // Handle the error appropriately
-    }
-
-    let memberType = ""; // Initialize memberType variable
-
-    if (occupationData && occupationData.length > 0) {
-      // Check if occupationData is not empty and has at least one item
-      memberType = occupationData[0]?.NatureOfEmployment || ""; // Extract the NatureOfEmployment
-    } else {
-      console.error(
-        "Member type not found for MembershipID:",
-        data.MembershipID
-      );
-      return; // Handle the case where member type is not found
-    }
-
-    const result = await supabase
+    const updateID = await supabase
       .from("MemberData")
-      .update({ MemberType: memberType })
+      .update({ MembershipID: createResult.data.user?.id })
       .eq("MembershipID", data.MembershipID);
 
-    if (result.error) {
-      return JSON.stringify({ error: result.error.message });
-    }
-    if (permissionResult.error) {
-      return JSON.stringify({ error: permissionResult.error.message });
-    }
+    if (updateID.error?.message) {
+      return JSON.stringify(updateID);
+    } else {
+      const permissionsID = createResult.data.user?.id;
+      console.log("PermissionsID:", permissionsID);
+      // Insert into Permissions table
+      const permissionResult = await supabase.from("Permissions").insert({
+        Role: data.Role, // Assuming Status is used as Role here
+        Status: data.Status, // Assuming Status is used as Role here
+        PermissionsID: permissionsID, // Reference MembershipID
+      });
 
-    // Revalidate the path
-    await revalidatePath("/dashboard/member");
-    return JSON.stringify({
-      success: true,
-      permissionResult: permissionResult.data,
-    });
+      if (permissionResult.error) {
+        console.error(
+          "Error inserting into Permissions:",
+          permissionResult.error.message
+        );
+        return JSON.stringify({ error: permissionResult.error.message });
+      } else {
+        console.log("Permission inserted successfully:", permissionResult.data);
+      }
+
+      const { data: occupationData, error } = await supabase
+        .from("Occupation")
+        .select("NatureOfEmployment")
+        .eq("AssocMemberID", createResult.data.user?.id);
+
+      if (error) {
+        console.error("Error fetching member type:", error.message);
+        return; // Handle the error appropriately
+      }
+
+      let memberType = ""; // Initialize memberType variable
+
+      if (occupationData && occupationData.length > 0) {
+        // Check if occupationData is not empty and has at least one item
+        memberType = occupationData[0]?.NatureOfEmployment || ""; // Extract the NatureOfEmployment
+      } else {
+        console.error(
+          "Member type not found for MembershipID:",
+          createResult.data.user?.id
+        );
+        return; // Handle the case where member type is not found
+      }
+
+      const result = await supabase
+        .from("MemberData")
+        .update({ MemberType: memberType })
+        .eq("MembershipID", createResult.data.user?.id);
+
+      if (result.error) {
+        return JSON.stringify({ error: result.error.message });
+      }
+
+      // Revalidate the path
+      await revalidatePath("/dashboard/member");
+      return JSON.stringify({
+        success: true,
+        permissionResult: permissionResult.data,
+      });
+    }
   }
 }
 
@@ -150,7 +171,7 @@ export async function updateMemberBasicById(
   return JSON.stringify(result);
 }
 
-export async function deleteMemberById(user_id: string) {
+export async function deleteMemberById(user_id: UUID) {
   const { data: userSession } = await readUserSession();
 
   if (userSession.session?.user.user_metadata.Role !== "admin") {
@@ -160,7 +181,6 @@ export async function deleteMemberById(user_id: string) {
   }
 
   // delete account
-
   const supabaseAdmin = await createSupabaseAdmin();
 
   const deleteResult = await supabaseAdmin.auth.admin.deleteUser(user_id); // Says cannot find user
@@ -170,15 +190,62 @@ export async function deleteMemberById(user_id: string) {
     console.log("aha!");
     return JSON.stringify(deleteResult);
   } else {
-    const supabase = await createSupbaseServerClient();
-
-    const memberResult = await supabase
+    // Delete member from MemberData table
+    //const supabase = await createSupbaseServerClient();
+    console.log(user_id);
+    const { data: memberResult, error } = await supabaseAdmin
       .from("MemberData")
       .delete()
       .eq("MembershipID", user_id);
 
-    revalidatePath("/dashboard/members");
-    console.log("delete value below");
+    if (error) {
+      console.log("Error deleting member:", error.message);
+      return JSON.stringify({ error: error.message });
+    } else {
+      console.log("Successfully Deleted Member");
+      revalidatePath("/dashboard/members");
+      return JSON.stringify(memberResult);
+    }
+  }
+}
+
+export async function deleteMemberApplicationByID(user_id: UUID) {
+  const { data: userSession } = await readUserSession();
+
+  if (userSession.session?.user.user_metadata.Role !== "admin") {
+    return JSON.stringify({
+      error: { message: "You are not allowed to access this!" },
+    });
+  }
+
+  const supabase = await createSupbaseServerClient();
+  console.log("User ID to delete:", user_id);
+
+  // Log the data before deletion for verification
+  const { data: existingMember, error: fetchError } = await supabase
+    .from("MemberData")
+    .select("*")
+    .eq("MembershipID", user_id)
+    .single();
+
+  if (fetchError) {
+    console.log("Error fetching member data:", fetchError.message);
+    return JSON.stringify({ error: fetchError.message });
+  }
+
+  console.log("Member data to be deleted:", existingMember);
+
+  const { data: memberResult, error: deleteError } = await supabase
+    .from("MemberData")
+    .delete()
+    .eq("MembershipID", user_id);
+
+  if (deleteError) {
+    console.log("Error deleting member application:", deleteError.message);
+    return JSON.stringify({ error: deleteError.message });
+  } else {
+    console.log("Successfully Deleted Member Application");
+    revalidatePath("/dashboard/member_applications");
     return JSON.stringify(memberResult);
   }
 }

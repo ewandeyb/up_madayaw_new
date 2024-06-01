@@ -5,38 +5,24 @@ import { deleteMemberById } from "../../members/actions";
 import React, { useTransition, useCallback } from "react";
 import { toast } from "@/components/ui/use-toast";
 import { UUID } from "crypto";
-interface Props {
-  user_id: string;
-}
-export default function DeleteMember({ user_id }: Props) {
+
+export default function DeleteMember({ user_id }: { user_id: UUID }) {
   const [isPending, startTransition] = useTransition();
 
-  const onSubmit = useCallback(() => {
-    console.log("Button clicked, starting transition");
-
+  const onSubmit = () => {
     startTransition(async () => {
-      try {
-        const result = await deleteMemberById(user_id);
-        console.log(result);
-        const { error } = JSON.parse(result || "{}");
-        console.log("did the hook!");
-        if (error?.message) {
-          toast({
-            title: "Failed to delete member.",
-            description: error.message,
-          });
-        } else {
-          toast({
-            title: "Successfully deleted member.",
-          });
-        }
-      } catch (error) {
+      const result = JSON.parse(await deleteMemberById(user_id as UUID));
+      if (result?.error?.message) {
         toast({
-          title: "Failed to delete member.",
+          title: "Fail to delete member",
+        });
+      } else {
+        toast({
+          title: "Successfully delete member",
         });
       }
     });
-  }, [user_id]);
+  };
 
   return (
     <Button

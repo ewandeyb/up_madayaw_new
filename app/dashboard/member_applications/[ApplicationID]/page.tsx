@@ -160,12 +160,12 @@ export default function ViewApplication() {
           </div>
 
           <Button
-            className="p-2 rounded-md ml-auto bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+            className="p-2 rounded-md ml-auto bg-gray-200 hover:bg-upcolor dark:hover:bg-gray-700 transition-colors"
             onClick={() => {
               router.back();
             }}
           >
-            <ArrowLeftIcon className="w-6 h-6 text-gray-600 dark:text-gray-600" />
+            <ArrowLeftIcon className="w-6 h-6 text-gray-600 hover:text-white dark:text-gray-600" />
             <span className="sr-only">Back</span>
           </Button>
         </div>
