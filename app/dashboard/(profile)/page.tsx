@@ -17,6 +17,7 @@ import { Mail } from "lucide-react";
 import EditProfile from "./components/edit/EditProfile";
 import { readProfile } from "./actions";
 import { Button } from "@/components/ui/button";
+import PasswordChange from "./components/edit/PasswordChange";
 
 export default async function Profile() {
   const supabase = createClient();
@@ -42,6 +43,7 @@ export default async function Profile() {
     return <div>Error: {error.message}</div>;
   }
 
+
   // Check if both FirstName and LastName are null
   const fullName =
     MemberData.FirstName || MemberData.LastName
@@ -50,8 +52,9 @@ export default async function Profile() {
 
   return (
     <section className="w-full p-10 px-4 lg:px-8">
-      <div className="flex justify-end">
+      <div className="gap-1 flex justify-end">
         <EditProfile MemberProfile={MemberData} />
+        <PasswordChange MemberProfile={MemberData} />
       </div>
       <div className="flex flex-col lg:flex-row items-center justify-start gap-4 lg:gap-6 text-left">
         <div className="inline-block rounded-lg px-3 py-1 text-sm">
