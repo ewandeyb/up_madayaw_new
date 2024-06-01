@@ -45,12 +45,12 @@ export default function Home() {
   return (
     <section className="relative flex flex-col min-h-screen bg-gradient-to-r from-[#FFFFFF] to-[#8E8E8E] dark:bg-gradient-to-r dark:from-[#B2B2B2] dark:to-[#202020]">
       <section className="top-0 left-0 w-full h-full flex items-center justify-center text-center flex-col gap-6 z-10 pointer-events-none">
-        <div className="pointer-events-auto flex flex-col items-center space-y-6 w-full px-4">
-          <h1 className="mt-[50px] text-5xl sm:text-5xl md:text-6xl lg:text-6xl font-bold text-black dark:text-white p-4 rounded inline-block ">
+        <div className="pointer-events-auto flex flex-col items-center space-y-6 w-full px-4 mb-8">
+          <h1 className="mt-[50px] text-5xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-black dark:text-white p-4 rounded inline-block ">
             <span className="text-upcolor font-sans">UP Madayaw</span>{" "}
             Multi-Purpose Cooperative
           </h1>
-          <p className="text-sm lg:text-lg text-black dark:text-white p-2 rounded inline-block">
+          <p className="text-sm sm:text-base lg:text-lg text-black dark:text-white p-2 rounded inline-block">
             Empowering communities through sustainable development.
           </p>
           <Button
@@ -60,93 +60,89 @@ export default function Home() {
           >
             <a href="/apply">Apply Now</a>
           </Button>
-          <div className="flex flex-col lg:flex-row justify-between max-w-[1600px] gap-6 ">
-            {" "}
-            {/* Flex container for carousel and announcement */}
-            <div className="flex-1 flex flex-col h-[600px] lg:h-[600px]">
-              {" "}
-              {/* Adjust the height as needed */}
-              <div className="relative h-full md:h-full lg:h-[600px] lg:w-[800px] mx-auto">
+          <div className="flex flex-col lg:flex-row justify-between w-full max-w-[1600px] gap-6">
+            <div className="flex-1 flex flex-col">
+              <div className="relative h-full w-full mx-auto">
                 <Carousel
                   setApi={setApi}
-                  className="w-full object-cover"
+                  className="w-full"
                   opts={{ align: "start", loop: true }}
                 >
                   <CarouselContent>
                     <CarouselItem>
-                      <div className="p-1 h-full">
+                      <div className="p-1 h-full w-full">
                         <Card className="h-full">
                           <CardContent className="flex items-center justify-center h-full p-6">
                             <Image
                               alt="Image1"
                               className="w-full h-full object-cover"
                               src={up}
-                            ></Image>
+                            />
                           </CardContent>
                         </Card>
                       </div>
                     </CarouselItem>
                     <CarouselItem>
-                      <div className="p-1 h-full">
+                      <div className="p-1 h-full w-full">
                         <Card className="h-full">
                           <CardContent className="flex items-center justify-center h-full p-6">
                             <Image
                               alt="Image2"
                               className="w-full h-full object-cover"
                               src={sample1}
-                            ></Image>
+                            />
                           </CardContent>
                         </Card>
                       </div>
                     </CarouselItem>
                     <CarouselItem>
-                      <div className="p-1 h-full">
+                      <div className="p-1 h-full w-full">
                         <Card className="h-full">
                           <CardContent className="flex items-center justify-center h-full p-6">
                             <Image
                               alt="Image3"
                               className="w-full h-full object-cover"
                               src={sample2}
-                            ></Image>
+                            />
                           </CardContent>
                         </Card>
                       </div>
                     </CarouselItem>
                     <CarouselItem>
-                      <div className="p-1 h-full">
+                      <div className="p-1 h-full w-full">
                         <Card className="h-full">
                           <CardContent className="flex items-center justify-center h-full p-6">
                             <Image
                               alt="Image4"
                               className="w-full h-full object-cover"
                               src={sample3}
-                            ></Image>
+                            />
                           </CardContent>
                         </Card>
                       </div>
                     </CarouselItem>
                     <CarouselItem>
-                      <div className="p-1 h-full">
+                      <div className="p-1 h-full w-full">
                         <Card className="h-full">
                           <CardContent className="flex items-center justify-center h-full p-6">
                             <Image
                               alt="Image5"
                               className="w-full h-full object-cover"
                               src={sample4}
-                            ></Image>
+                            />
                           </CardContent>
                         </Card>
                       </div>
                     </CarouselItem>
                     <CarouselItem>
-                      <div className="p-1 h-full">
+                      <div className="p-1 h-full w-full">
                         <Card className="h-full">
                           <CardContent className="flex items-center justify-center h-full p-6">
                             <Image
                               alt="Image6"
                               className="w-full h-full object-cover"
                               src={sample5}
-                            ></Image>
+                            />
                           </CardContent>
                         </Card>
                       </div>
@@ -160,18 +156,14 @@ export default function Home() {
                 </Carousel>
               </div>
             </div>
-            <div className="flex-1 flex flex-col h-[545px] mt-1 mb-6">
-              {" "}
-              {/* Ensure same height as carousel */}
-              <div className="bg-white dark:bg-black p-4 rounded-lg shadow-md h-full overflow-y-auto">
-                {" "}
-                {/* Adjusted for scroll */}
+            <div className="flex-1 flex flex-col">
+              <div className="bg-white dark:bg-black p-4 rounded-lg shadow-md h-[540px] overflow-y-auto">
                 <h2 className="text-lg text-left font-bold mb-4">
                   Announcements
                 </h2>
                 <ul>
                   <li className="mb-2">
-                    <p className="text-md lg:text-lg text-left">
+                    <p className="text-sm sm:text-base md:text-lg text-left">
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                       sed do eiusmod tempor incididunt ut labore et dolore magna
                       aliqua. Porta lorem mollis aliquam ut. Turpis massa
@@ -184,7 +176,7 @@ export default function Home() {
                     </p>
                   </li>
                   <li className="mb-2">
-                    <p className="text-md lg:text-lg text-left">
+                    <p className="text-sm sm:text-base md:text-lg text-left">
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                       sed do eiusmod tempor incididunt ut labore et dolore magna
                       aliqua. Porta lorem mollis aliquam ut. Turpis massa
@@ -197,7 +189,7 @@ export default function Home() {
                     </p>
                   </li>
                   <li className="mb-2">
-                    <p className="text-md lg:text-lg text-left">
+                    <p className="text-sm sm:text-base md:text-lg text-left">
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                       sed do eiusmod tempor incididunt ut labore et dolore magna
                       aliqua. Porta lorem mollis aliquam ut. Turpis massa
