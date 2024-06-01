@@ -60,16 +60,16 @@ export default function Home() {
           >
             <a href="/apply">Apply Now</a>
           </Button>
-          <div className="flex flex-col lg:flex-row justify-between w-full max-w-5xl gap-6">
+          <div className="flex flex-col lg:flex-row justify-between max-w-[1600px] gap-6 ">
             {" "}
             {/* Flex container for carousel and announcement */}
-            <div className="flex-1 flex flex-col h-[400px] lg:h-[500px]">
+            <div className="flex-1 flex flex-col h-[600px] lg:h-[600px]">
               {" "}
               {/* Adjust the height as needed */}
-              <div className="relative h-full">
+              <div className="relative h-full md:h-full lg:h-[600px] lg:w-[800px] mx-auto">
                 <Carousel
                   setApi={setApi}
-                  className="w-full h-full"
+                  className="w-full object-cover"
                   opts={{ align: "start", loop: true }}
                 >
                   <CarouselContent>
@@ -152,15 +152,15 @@ export default function Home() {
                       </div>
                     </CarouselItem>
                   </CarouselContent>
-                  <CarouselPrevious className="absolute left-0 top-[40%] transform -translate-y-1/2" />
-                  <CarouselNext className="absolute right-0 top-[40%] transform -translate-y-1/2" />
+                  <CarouselPrevious className="absolute left-0 top-[45%] transform -translate-y-1/2" />
+                  <CarouselNext className="absolute right-0 top-[45%] transform -translate-y-1/2" />
                   <div className="text-center text-sm text-black dark:text-white mt-3">
                     Slide {current} of {count}
                   </div>
                 </Carousel>
               </div>
             </div>
-            <div className="flex-1 flex flex-col h-[328px] lg:h-[328px] mt-1 mb-6">
+            <div className="flex-1 flex flex-col h-[545px] mt-1 mb-6">
               {" "}
               {/* Ensure same height as carousel */}
               <div className="bg-white dark:bg-black p-4 rounded-lg shadow-md h-full overflow-y-auto">
@@ -171,7 +171,7 @@ export default function Home() {
                 </h2>
                 <ul>
                   <li className="mb-2">
-                    <p className="text-sm text-left">
+                    <p className="text-md lg:text-lg text-left">
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                       sed do eiusmod tempor incididunt ut labore et dolore magna
                       aliqua. Porta lorem mollis aliquam ut. Turpis massa
@@ -181,6 +181,28 @@ export default function Home() {
                       nunc scelerisque. Varius duis at consectetur lorem donec
                       massa sapien faucibus. Sit amet venenatis urna cursus
                       eget. Tellus pellentesque eu.
+                    </p>
+                  </li>
+                  <li className="mb-2">
+                    <p className="text-md lg:text-lg text-left">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                      sed do eiusmod tempor incididunt ut labore et dolore magna
+                      aliqua. Porta lorem mollis aliquam ut. Turpis massa
+                      tincidunt dui ut ornare lectus sit amet. Sed faucibus
+                      turpis in eu mi bibendum. In dictum non consectetur a
+                      erat. Dignissim enim sit amet venenatis urna cursus eget
+                      nunc scelerisque. Varius duis at consectetur lorem donec
+                      massa sapien faucibus. Sit amet venenatis urna cursus
+                      eget. Tellus pellentesque eu.
+                    </p>
+                  </li>
+                  <li className="mb-2">
+                    <p className="text-md lg:text-lg text-left">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                      sed do eiusmod tempor incididunt ut labore et dolore magna
+                      aliqua. Porta lorem mollis aliquam ut. Turpis massa
+                      tincidunt dui ut ornare lectus sit amet. Sed faucibus
+                      turpis in eu mi bibendum.
                     </p>
                   </li>
                   {/* Add more announcements as needed */}
