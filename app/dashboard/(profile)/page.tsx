@@ -19,6 +19,9 @@ import { readProfile } from "./actions";
 import { Button } from "@/components/ui/button";
 import PasswordChange from "./components/edit/PasswordChange";
 
+
+
+
 export default async function Profile() {
   const supabase = createClient();
 

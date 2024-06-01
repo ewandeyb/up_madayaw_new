@@ -67,11 +67,12 @@ export async function updateUserPassword(email: string, pass_data: {
     }
 
     revalidatePath("");
+    const { error } = await supabase.auth.signOut()
     return JSON.stringify(updatePassword);
 
   } else {
 
-    return ("Passwords do not match")
+    return ("{\"error\": {\"message\": \"Passwords do not match.\"}}")
 
   }
 

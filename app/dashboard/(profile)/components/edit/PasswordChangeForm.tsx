@@ -93,6 +93,7 @@ export default function PasswordChange({ MemberProfile }: { MemberProfile: IMemb
                 <FormControl>
                   <Input
                     placeholder="Your current Password"
+                    type="password"
                     {...field}
                     onChange={field.onChange}
                   />
@@ -111,6 +112,7 @@ export default function PasswordChange({ MemberProfile }: { MemberProfile: IMemb
               <FormControl>
                 <Input
                   placeholder="Your new password"
+                  type="password"
                   {...field}
                   onChange={field.onChange}
                 />
@@ -128,6 +130,7 @@ export default function PasswordChange({ MemberProfile }: { MemberProfile: IMemb
               <FormControl>
                 <Input
                   placeholder="Confirm your new password"
+                  type="password"
                   {...field}
                   onChange={field.onChange}
                 />
@@ -141,7 +144,7 @@ export default function PasswordChange({ MemberProfile }: { MemberProfile: IMemb
           className="flex gap-2 items-center w-full"
           variant="outline"
         >
-          Update{" "}
+          Change Password (this will sign you out){" "}
           <AiOutlineLoading3Quarters
             className={cn("animate-spin", isPending ? "block" : "hidden")}
           />
