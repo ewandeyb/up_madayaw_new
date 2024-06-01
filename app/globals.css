@@ -4,19 +4,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* globals.css */
-body {
-  font-family: 'Verdana', Geneva, sans-serif;
-}
 
-.font-verdana {
-  font-family: 'Verdana', Geneva, sans-serif;
-}
-
-/* Ensure other elements inherit the font-family if needed */
-* {
-  font-family: inherit;
-}
 
 @layer base {
   :root {
@@ -94,14 +82,4 @@ body {
 
 .rdp-vhidden {
   @apply hidden;
-}
-
-@font-face {
-  font-family: 'Verdana';
-  src: url('../fonts/verdana.ttf') format('ttf'),
-    url('../fonts/verdana-bold.ttf') format('ttf'),
-    url('../fonts/verdana-bold-italic.ttf') format('ttf');
-
-  font-weight: normal;
-  font-style: normal;
 }

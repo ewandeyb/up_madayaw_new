@@ -43,8 +43,9 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { useState } from "react";
-import { PageProps } from "../../../.next/types/app/(home)/page";
-
+import { IPermission } from "@/lib/types";
+import { useRouter } from "next/navigation";
+import { data1 } from "@/app/apply/components/schema";
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
@@ -53,7 +54,7 @@ interface DataTableProps<TData, TValue> {
 export function DataTable<TData, TValue>({
   columns,
   data,
-}: DataTableProps<TData, TValue>) {
+}: DataTableProps<data1, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -83,7 +84,7 @@ export function DataTable<TData, TValue>({
       columnVisibility,
     },
   });
-
+  const router = useRouter();
   return (
     <div>
       <div>
@@ -196,6 +197,17 @@ export function DataTable<TData, TValue>({
                     <TableCell
                       key={cell.id}
                       className="text-center text-sm dark:text-white dark:bg-black "
+                      onClick={() => {
+                        let shouldNavigate = true;
+                        if (cell.column.id === "actions") {
+                          shouldNavigate = false;
+                        }
+                        if (shouldNavigate) {
+                          const membershipId = row.original.MembershipID;
+                          console.log(membershipId);
+                          router.push(`member_applications/${membershipId}`);
+                        }
+                      }}
                     >
                       {flexRender(
                         cell.column.columnDef.cell,

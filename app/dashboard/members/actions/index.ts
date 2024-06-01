@@ -150,7 +150,7 @@ export async function updateMemberBasicById(
   return JSON.stringify(result);
 }
 
-export async function deleteMemberById(user_id: UUID) {
+export async function deleteMemberById(user_id: string) {
   const { data: userSession } = await readUserSession();
 
   if (userSession.session?.user.user_metadata.Role !== "admin") {
@@ -160,11 +160,14 @@ export async function deleteMemberById(user_id: UUID) {
   }
 
   // delete account
+
   const supabaseAdmin = await createSupabaseAdmin();
 
-  const deleteResult = await supabaseAdmin.auth.admin.deleteUser(user_id);
+  const deleteResult = await supabaseAdmin.auth.admin.deleteUser(user_id); // Says cannot find user
+
   console.log("delete result: ", deleteResult);
   if (deleteResult.error?.message) {
+    console.log("aha!");
     return JSON.stringify(deleteResult);
   } else {
     const supabase = await createSupbaseServerClient();

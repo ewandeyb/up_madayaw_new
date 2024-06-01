@@ -36,7 +36,7 @@ import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import ElevateMember from "./components/create/ElevateMember";
 import { IPermission } from "@/lib/types";
-interface TData {
+interface col {
   PermissionsID: string;
   created_at: string;
   Role: "user" | "admin";
@@ -49,15 +49,15 @@ interface TData {
     MemberType: string;
   };
 }
-interface DataTableProps<TValue> {
-  columns: ColumnDef<IPermission, any>[];
+interface DataTableProps<TData, TValue> {
+  columns: ColumnDef<TData, TValue>[];
   data: TData[];
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
-}: DataTableProps<TValue>) {
+}: DataTableProps<IPermission, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
