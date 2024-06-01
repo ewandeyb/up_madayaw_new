@@ -41,31 +41,41 @@ export async function readProfile() {
 }
 
 export async function updateUserPassword(email: string, pass_data: {
-  PreviousPassword: string,
+  PreviousPassword?: string,
   NewPassword: string,
   ConfirmPassword: string
 }
 ) {
 
-  unstable_noStore(); //Cache
+  unstable_noStore(); // Cache
 
-  console.log("YABBADABBADOO");
+  if (pass_data.NewPassword === pass_data.ConfirmPassword) {
 
-  const supabase = await createSupbaseServerClient()
+    const supabase = await createSupbaseServerClient()
 
-  // Fetch the currently logged-in user
-  const user = await getUser(supabase);
+    // Fetch the currently logged-in user
+    const user = await getUser(supabase);
 
-  const updatePassword = await supabase.auth.updateUser({
-    email: email,
-    password: pass_data.NewPassword,
-  })
+    const updatePassword = await supabase.auth.updateUser({
+      email: email,
+      password: pass_data.NewPassword,
+    })
 
-  if (updatePassword.error?.message) {
-    console.log(JSON.stringify(updatePassword));
+    if (updatePassword.error?.message) {
+      console.log(JSON.stringify(updatePassword));
+      return JSON.stringify(updatePassword);
+    }
+
+    revalidatePath("");
     return JSON.stringify(updatePassword);
+
+  } else {
+
+    return ("Passwords do not match")
+
   }
 
-  revalidatePath("");
-  return JSON.stringify(updatePassword);
+
+
+
 }

@@ -22,7 +22,7 @@ import { useTransition } from "react";
 import { updateUserPassword } from "../../actions";
 
 const FormSchema1 = z.object({
-  PreviousPassword: z.string(),
+  PreviousPassword: z.string().optional(),
   NewPassword: z.string(),
   ConfirmPassword: z.string()
 });
@@ -83,23 +83,25 @@ export default function PasswordChange({ MemberProfile }: { MemberProfile: IMemb
   return (
     <Form {...form1}>
       <form className="w-full space-y-6" onSubmit={form1.handleSubmit(onSubmit)}>
-        <FormField
-          control={form1.control}
-          name="PreviousPassword"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Current Password</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="Your current Password"
-                  {...field}
-                  onChange={field.onChange}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        <div className="hidden">
+          <FormField
+            control={form1.control}
+            name="PreviousPassword"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Current Password</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Your current Password"
+                    {...field}
+                    onChange={field.onChange}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
         <FormField
           control={form1.control}
           name="NewPassword"
