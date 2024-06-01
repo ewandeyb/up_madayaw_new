@@ -9,8 +9,8 @@ import PasswordChangeForm from "./PasswordChangeForm";
 export default function Profile({ MemberProfile }: { MemberProfile: IMemberData }) {
   return (
     <DialogForm
-      id="update-trigger"
-      title="Edit Profile"
+      id="change-password"
+      title="Change Password"
       Trigger={
         <Button
           variant="secondary"
@@ -20,7 +20,7 @@ export default function Profile({ MemberProfile }: { MemberProfile: IMemberData 
           Change Password
         </Button>
       }
-      form={<PasswordChangeForm />}
+      form={<PasswordChangeForm MemberProfile={MemberProfile} />}
     />
   );
 }

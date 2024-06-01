@@ -43,6 +43,7 @@ export default async function Profile() {
     return <div>Error: {error.message}</div>;
   }
 
+
   // Check if both FirstName and LastName are null
   const fullName =
     MemberData.FirstName || MemberData.LastName
