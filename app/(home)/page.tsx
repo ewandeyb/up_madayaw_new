@@ -13,7 +13,7 @@ import sample2 from "@/public/img/2.png";
 import sample3 from "@/public/img/3.png";
 import sample4 from "@/public/img/4.png";
 import sample5 from "@/public/img/5.png";
-
+import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import {
   Carousel,
@@ -43,7 +43,7 @@ export default function Home() {
   }, [api]);
 
   return (
-    <section className="relative flex flex-col min-h-screen bg-gradient-to-r from-[#FFFFFF] to-[#8E8E8E] dark:bg-gradient-to-r dark:from-[#B2B2B2] dark:to-[#202020]">
+    <section className="">
       <section className="top-0 left-0 w-full h-full flex items-center justify-center text-center flex-col gap-6 z-10 pointer-events-none">
         <div className="pointer-events-auto flex flex-col items-center space-y-6 w-full px-4">
           <h1 className="mt-[50px] text-5xl sm:text-5xl md:text-6xl lg:text-6xl font-bold text-black dark:text-white p-4 rounded inline-block ">
@@ -53,13 +53,24 @@ export default function Home() {
           <p className="text-sm lg:text-lg text-black dark:text-white p-2 rounded inline-block">
             Empowering communities through sustainable development.
           </p>
-          <Button
-            size="sm"
-            variant="up"
-            className="text-white font-bold border mr-2 w-26"
-          >
-            <a href="/apply">Apply Now</a>
-          </Button>
+          <div className="flex flex-row">
+            <Button
+              size="sm"
+              variant="up"
+              className="text-white font-bold border mr-2 w-26"
+            >
+              <Link href="/apply">Apply Now</Link>
+            </Button>
+            <Button
+              size="sm"
+              variant="secondary"
+              className="text-white font-bold border mr-2 w-26"
+            >
+              <Link href="./application_form.pdf" className="text-black">
+                Download Form
+              </Link>
+            </Button>
+          </div>
           <div className="flex flex-col lg:flex-row justify-between w-full max-w-5xl gap-6">
             {" "}
             {/* Flex container for carousel and announcement */}

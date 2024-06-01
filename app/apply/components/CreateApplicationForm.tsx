@@ -136,7 +136,9 @@ export default function ApplicationForm() {
       <form onSubmit={form.handleSubmit(onSubmit)} className="p-2">
         <hr></hr>
         <div className="p-2">
-          <h1 className="font-bold text-upcolor">Personal Data</h1>
+          <h1 className="font-bold text-upcolor dark:text-red-600">
+            Personal Data
+          </h1>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2 p-2">
             <FormField
@@ -385,7 +387,9 @@ export default function ApplicationForm() {
 
         <hr></hr>
         <div className="p-2">
-          <h1 className="font-bold text-upcolor">Spouse Data</h1>
+          <h1 className="font-bold text-upcolor dark:text-red-600">
+            Spouse Data
+          </h1>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2 p-2">
             <FormField
               control={form.control}
@@ -486,7 +490,9 @@ export default function ApplicationForm() {
 
         <hr></hr>
         <div className="p-2">
-          <h1 className="font-bold text-upcolor">Postal Address</h1>
+          <h1 className="font-bold text-upcolor dark:text-red-600">
+            Postal Address
+          </h1>
           <div className="">
             <FormField
               control={form.control}
@@ -592,7 +598,9 @@ export default function ApplicationForm() {
 
         <hr></hr>
         <div className="p-2">
-          <h1 className="text-upcolor font-bold">Nearest Relative Data</h1>
+          <h1 className="text-upcolor dark:text-red-600 font-bold">
+            Nearest Relative Data
+          </h1>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2">
             <FormField
               control={form.control}
@@ -740,7 +748,9 @@ export default function ApplicationForm() {
 
         <hr></hr>
         <div className="p-2">
-          <h1 className="text-upcolor font-bold">Occupation</h1>
+          <h1 className="text-upcolor dark:text-red-600 font-bold">
+            Occupation
+          </h1>
           <div className="grid md:grid-cols-2 gap-2">
             <FormField
               control={form.control}
@@ -824,7 +834,9 @@ export default function ApplicationForm() {
 
         <hr></hr>
         <div className="p-2">
-          <h1 className="text-upcolor font-bold">Dependents</h1>
+          <h1 className="text-upcolor dark:text-red-600 font-bold">
+            Dependents
+          </h1>
 
           <div className="grid grid-cols-1 md:grid-cols-7 lg:grid-cols-7 gap-2">
             <div className="col-span-2">
@@ -1305,7 +1317,9 @@ export default function ApplicationForm() {
 
         <hr></hr>
         <div className="p-2">
-          <h1 className="text-upcolor font-bold">Survey Questions</h1>
+          <h1 className="text-upcolor dark:text-red-600 font-bold">
+            Survey Questions
+          </h1>
           <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-6 gap-2">
             <div>
               <FormField
@@ -1382,7 +1396,7 @@ export default function ApplicationForm() {
         </div>
 
         <div className="flex justify-center col-span-3 gap-4">
-          <Button variant="up" type="submit">
+          <Button variant="up" type="submit" className=" w-40">
             Submit
           </Button>
           {/* <h6>or</h6>
