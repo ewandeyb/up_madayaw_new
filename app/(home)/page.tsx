@@ -150,20 +150,20 @@ export default function Home() {
                   </CarouselContent>
                   <CarouselPrevious className="absolute left-0 top-[45%] transform -translate-y-1/2" />
                   <CarouselNext className="absolute right-0 top-[45%] transform -translate-y-1/2" />
-                  <div className="text-center text-sm text-black dark:text-white mt-3">
-                    Slide {current} of {count}
-                  </div>
                 </Carousel>
+              </div>
+              <div className="text-center text-sm text-black dark:text-white mt-3">
+                Slide {current} of {count}
               </div>
             </div>
             <div className="flex-1 flex flex-col">
-              <div className="bg-white dark:bg-black p-4 rounded-lg shadow-md h-[540px] overflow-y-auto">
+              <div className="bg-white dark:bg-black p-4 rounded-lg shadow-md h-full overflow-y-auto">
                 <h2 className="text-lg text-left font-bold mb-4">
                   Announcements
                 </h2>
                 <ul>
                   <li className="mb-2">
-                    <p className="text-sm sm:text-base md:text-lg text-left">
+                    <p className="text-sm sm:text-base md:text-base lg:text-sm xl:text-base 2xl:text-lg text-left">
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                       sed do eiusmod tempor incididunt ut labore et dolore magna
                       aliqua. Porta lorem mollis aliquam ut. Turpis massa
@@ -176,7 +176,7 @@ export default function Home() {
                     </p>
                   </li>
                   <li className="mb-2">
-                    <p className="text-sm sm:text-base md:text-lg text-left">
+                    <p className="text-sm sm:text-base md:text-base lg:text-sm xl:text-base 2xl:text-lg text-left">
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                       sed do eiusmod tempor incididunt ut labore et dolore magna
                       aliqua. Porta lorem mollis aliquam ut. Turpis massa
@@ -184,17 +184,7 @@ export default function Home() {
                       turpis in eu mi bibendum. In dictum non consectetur a
                       erat. Dignissim enim sit amet venenatis urna cursus eget
                       nunc scelerisque. Varius duis at consectetur lorem donec
-                      massa sapien faucibus. Sit amet venenatis urna cursus
-                      eget. Tellus pellentesque eu.
-                    </p>
-                  </li>
-                  <li className="mb-2">
-                    <p className="text-sm sm:text-base md:text-lg text-left">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua. Porta lorem mollis aliquam ut. Turpis massa
-                      tincidunt dui ut ornare lectus sit amet. Sed faucibus
-                      turpis in eu mi bibendum.
+                      massa sapien faucibus.
                     </p>
                   </li>
                   {/* Add more announcements as needed */}
