@@ -170,15 +170,6 @@ export const columns: ColumnDef<IPermission>[] = [
             <DropdownMenuSeparator />
             <DropdownMenuItem
               onClick={(event) => {
-                event.preventDefault();
-                console.log(isUserAdmin); //true or false or undefined
-                console.log(application);
-              }}
-            >
-              <EditMember isAdmin={isUserAdmin} permission={application} />
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              onClick={(event) => {
                 console.log("delete mem id");
                 console.log(application.MemberData.MembershipID);
               }}

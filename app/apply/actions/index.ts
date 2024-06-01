@@ -72,12 +72,30 @@ export async function createApplication(data: {
   PrevMemberStatus: string;
   LeaveReason?: string;
   ReferralName?: string;
-}): Promise<string> {
+}) {
   const new_uuid = crypto.randomUUID();
   const supabase = await createSupbaseServerClient();
-  // modification? may or may not work.
+  const modifiedBirthDate = data.BirthDate
+    ? new Date(data.BirthDate.getTime() + 24 * 60 * 60 * 1000)
+    : undefined;
+  /* // modification? may or may not work.
+  const supabase = await createSupabaseAdmin();
+  // create account
+
+  const createResult = await supabase.auth.admin.createUser({
+    email: data.Email,
+    email_confirm: true,
+    user_metadata: {
+      Email: data.Email,
+    },
+  }); */
+
+  /* if (createResult.error?.message) {
+    return JSON.stringify(createResult);
+  } else { */
   const addMemberData = await supabase.from("MemberData").insert({
     MembershipID: new_uuid,
+    //MembershipID: createResult.data.user?.id,
     MemberType: "PENDING",
     FirstName: data.FirstName,
     MiddleName: data.MiddleName,
@@ -86,7 +104,7 @@ export async function createApplication(data: {
     CivilStatus: data.CivilStatus,
     Email: data.Email,
     Sex: data.Sex,
-    BirthDate: data.BirthDate,
+    BirthDate: modifiedBirthDate,
     Birthplace: data.Birthplace,
 
     SpouseFirstName: data.SpouseFirstName,
@@ -98,11 +116,7 @@ export async function createApplication(data: {
     NearestRelativeFirstName: data.NearestRelativeFirstName,
     NearestRelativeLastName: data.NearestRelativeLastName,
   });
-
-  if (addMemberData.error?.message) {
-    console.log(JSON.stringify(addMemberData));
-    return JSON.stringify(addMemberData);
-  }
+  /* } */
 
   const addContactNumber = await supabase.from("ContactNumbers").insert({
     AssocMemberID: new_uuid,
@@ -258,27 +272,4 @@ export async function createApplication(data: {
   }
 
   revalidatePath("/apply");
-  return JSON.stringify(addMemberData);
-}
-/* CODE BELOW NOT UPDATED */
-
-export async function updateMember(
-  id: string,
-  data: {
-    name: string;
-  }
-) {
-  const supabase = await createSupbaseServerClient();
-
-  const result = await supabase.from("members").update(data).eq("id", id);
-  revalidatePath("/dashboard/members");
-  return JSON.stringify(result);
-}
-
-export async function readMembers() {
-  unstable_noStore(); //Cache
-
-  const supbase = await createSupbaseServerClient();
-
-  return await supbase.from("Permissions").select("*,MemberData(*)");
 }

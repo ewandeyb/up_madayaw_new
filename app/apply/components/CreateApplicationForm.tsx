@@ -71,7 +71,6 @@ export default function ApplicationForm() {
       Email: "example@email.com",
       Birthplace: "PlaceTest",
       ContactNumber: "55569420",
-
       PositionTitle: "PosTest",
       NatureOfEmployment: "NGS",
       OfficeTitle: "OfficeTest",
@@ -98,7 +97,6 @@ export default function ApplicationForm() {
       Dependent2MiddleName: "Dep2M",
       Dependent2LastName: "Dep2L",
       Dependent2Suffix: "Dep2S",
-      Dependent2BirthDate: new Date("2020-04-20"),
       Dependent2Relation: "Dep2Rel",
       Dependent2Sex: "Male",
 
@@ -111,6 +109,7 @@ export default function ApplicationForm() {
   function onSubmit(data: ApplicationFormFields) {
     startTransition(async () => {
       const result = await createApplication(data);
+      console.log(result);
       const { error } = JSON.parse(result || "{}");
       if (error?.message) {
         //console.log({error})
