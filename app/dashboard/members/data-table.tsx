@@ -35,6 +35,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import ElevateMember from "./components/create/ElevateMember";
+import { IPermission } from "@/lib/types";
 interface TData {
   PermissionsID: string;
   created_at: string;
@@ -49,7 +50,7 @@ interface TData {
   };
 }
 interface DataTableProps<TValue> {
-  columns: ColumnDef<TData, TValue>[];
+  columns: ColumnDef<IPermission, any>[];
   data: TData[];
 }
 
