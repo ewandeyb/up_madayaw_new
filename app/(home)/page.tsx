@@ -60,7 +60,7 @@ export default function Home() {
           >
             <a href="/apply">Apply Now</a>
           </Button>
-          <div className="flex flex-col lg:flex-row justify-between w-full max-w-[1600px] gap-6">
+          <div className="flex flex-col lg:flex-row justify-between w-full max-w-full gap-6">
             <div className="flex-1 flex flex-col">
               <div className="relative h-full w-full mx-auto">
                 <Carousel
@@ -158,12 +158,12 @@ export default function Home() {
             </div>
             <div className="flex-1 flex flex-col">
               <div className="bg-white dark:bg-black p-4 rounded-lg shadow-md h-full overflow-y-auto">
-                <h2 className="text-lg text-left font-bold mb-4">
+                <h2 className="text-lg text-left p-4 font-bold">
                   Announcements
                 </h2>
-                <ul>
+                <ul className="h-[270px] p-4 sm:h-[270px] md:h-[270px] lg:h-[285px] xl:h-[370px] 2xl:h-[460px] text-left overflow-y-auto">
                   <li className="mb-2">
-                    <p className="text-sm sm:text-base md:text-base lg:text-sm xl:text-base 2xl:text-lg text-left">
+                    <p className="text-base sm:text-base md:text-base lg:text-base xl:text-base 2xl:text-lg text-left">
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                       sed do eiusmod tempor incididunt ut labore et dolore magna
                       aliqua. Porta lorem mollis aliquam ut. Turpis massa
@@ -176,7 +176,7 @@ export default function Home() {
                     </p>
                   </li>
                   <li className="mb-2">
-                    <p className="text-sm sm:text-base md:text-base lg:text-sm xl:text-base 2xl:text-lg text-left">
+                    <p className="text-base sm:text-base md:text-base lg:text-base xl:text-base 2xl:text-lg text-left">
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit,
                       sed do eiusmod tempor incididunt ut labore et dolore magna
                       aliqua. Porta lorem mollis aliquam ut. Turpis massa
@@ -185,6 +185,19 @@ export default function Home() {
                       erat. Dignissim enim sit amet venenatis urna cursus eget
                       nunc scelerisque. Varius duis at consectetur lorem donec
                       massa sapien faucibus.
+                    </p>
+                  </li>
+                  <li className="mb-2">
+                    <p className="text-base sm:text-base md:text-base lg:text-base xl:text-base 2xl:text-lg text-left">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                      sed do eiusmod tempor incididunt ut labore et dolore magna
+                      aliqua. Porta lorem mollis aliquam ut. Turpis massa
+                      tincidunt dui ut ornare lectus sit amet. Sed faucibus
+                      turpis in eu mi bibendum. In dictum non consectetur a
+                      erat. Dignissim enim sit amet venenatis urna cursus eget
+                      nunc scelerisque. Varius duis at consectetur lorem donec
+                      massa sapien faucibus. Sit amet venenatis urna cursus
+                      eget. Tellus pellentesque eu.
                     </p>
                   </li>
                   {/* Add more announcements as needed */}
