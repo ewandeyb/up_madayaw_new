@@ -22,8 +22,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-import EditMember from "../members/components/edit/EditMember";
-import DeleteMember from "../members/components/DeleteMember";
+import DeleteApplication from "./DeleteApplication";
 import { IPermission } from "@/lib/types";
 import { useUserStore } from "@/lib/store/user";
 import { cn } from "@/lib/utils";
@@ -287,20 +286,11 @@ export const columns: ColumnDef<data1>[] = [
             <DropdownMenuSeparator />
             <DropdownMenuItem
               onClick={(event) => {
-                event.preventDefault();
-                console.log(isAdmin); //true or false or undefined
-                console.log(application);
-              }}
-            >
-              {/* <EditMember isAdmin={isAdmin} permission={application} /> */}
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              onClick={(event) => {
                 console.log("clicked");
                 console.log(application.MembershipID);
               }}
             >
-              <DeleteMember user_id={application.MembershipID as string} />
+              <DeleteApplication user_id={application.MembershipID as UUID} />
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

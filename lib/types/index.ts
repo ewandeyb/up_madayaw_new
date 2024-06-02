@@ -23,3 +23,10 @@ export type IMemberData = {
   Email: string;
   MemberType: string;
 };
+
+export type IMemberPassword = {
+  MembershipID: string;
+  PreviousPassword: string,
+  NewPassword: string,
+  ConfirmPassword: string
+}
