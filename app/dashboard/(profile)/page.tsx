@@ -31,8 +31,8 @@ export default async function Profile() {
   if (!user) {
     return <div>Please log in to view your profile.</div>;
   }
-  console.log("hello profile!");
-  console.log(user);
+  //console.log("hello profile!");
+  // console.log(user);
   // Query to get the user-specific data
   const { data: MemberData, error } = await supabase
     .from("MemberData")
