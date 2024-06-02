@@ -19,7 +19,7 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { cn } from "@/lib/utils";
 import { IMemberData } from "@/lib/types";
 import { useTransition } from "react";
-import { updateUserPassword } from "../../actions";
+import { updateUserPassword } from "../actions";
 
 const FormSchema1 = z.object({
   PreviousPassword: z.string().optional(),
@@ -37,7 +37,7 @@ export default function PasswordChange({ MemberProfile }: { MemberProfile: IMemb
   async function onSubmit(data: z.infer<typeof FormSchema1>) {
     startTransition(async () => {
       try {
-        const response = await updateUserPassword(MemberProfile.Email, data);
+        const response = await updateUserPassword(data);
         const parsedResponse = JSON.parse(response);
 
         if (parsedResponse.error) {

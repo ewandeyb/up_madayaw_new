@@ -19,7 +19,8 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { cn } from "@/lib/utils";
 import { IMemberData } from "@/lib/types";
 import { useTransition } from "react";
-import { updateUserPassword } from "../../actions";
+import { updateUserPassword } from "./actions";
+import { getUser } from "@/utils/supabase/auth";
 
 const FormSchema1 = z.object({
   PreviousPassword: z.string().optional(),
@@ -27,8 +28,10 @@ const FormSchema1 = z.object({
   ConfirmPassword: z.string().min(6)
 });
 
-export default function PasswordChange({ MemberProfile }: { MemberProfile: IMemberData }) {
+export default function PasswordChange() {
   const [isPending, startTransition] = useTransition();
+
+
 
   const form1 = useForm<z.infer<typeof FormSchema1>>({
     resolver: zodResolver(FormSchema1)
@@ -37,7 +40,7 @@ export default function PasswordChange({ MemberProfile }: { MemberProfile: IMemb
   async function onSubmit(data: z.infer<typeof FormSchema1>) {
     startTransition(async () => {
       try {
-        const response = await updateUserPassword(MemberProfile.Email, data);
+        const response = await updateUserPassword(data);
         const parsedResponse = JSON.parse(response);
 
         if (parsedResponse.error) {
@@ -81,18 +84,38 @@ export default function PasswordChange({ MemberProfile }: { MemberProfile: IMemb
   }
 
   return (
-    <Form {...form1}>
-      <form className="w-full space-y-6" onSubmit={form1.handleSubmit(onSubmit)}>
-        <div className="hidden">
+    <div className="p-2 m-5">
+      <Form {...form1}>
+        <form className="w-full space-y-6" onSubmit={form1.handleSubmit(onSubmit)}>
+          <div className="hidden">
+            <FormField
+              control={form1.control}
+              name="PreviousPassword"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Current Password</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Your current Password"
+                      type="password"
+                      {...field}
+                      onChange={field.onChange}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
           <FormField
             control={form1.control}
-            name="PreviousPassword"
+            name="NewPassword"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Current Password</FormLabel>
+                <FormLabel>New Password</FormLabel>
                 <FormControl>
                   <Input
-                    placeholder="Your current Password"
+                    placeholder="Your new password"
                     type="password"
                     {...field}
                     onChange={field.onChange}
@@ -102,54 +125,36 @@ export default function PasswordChange({ MemberProfile }: { MemberProfile: IMemb
               </FormItem>
             )}
           />
-        </div>
-        <FormField
-          control={form1.control}
-          name="NewPassword"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>New Password</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="Your new password"
-                  type="password"
-                  {...field}
-                  onChange={field.onChange}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form1.control}
-          name="ConfirmPassword"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Confirm Password</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="Confirm your new password"
-                  type="password"
-                  {...field}
-                  onChange={field.onChange}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <Button
-          type="submit"
-          className="flex gap-2 items-center w-full"
-          variant="outline"
-        >
-          Change Password (this will sign you out){" "}
-          <AiOutlineLoading3Quarters
-            className={cn("animate-spin", isPending ? "block" : "hidden")}
+          <FormField
+            control={form1.control}
+            name="ConfirmPassword"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Confirm Password</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Confirm your new password"
+                    type="password"
+                    {...field}
+                    onChange={field.onChange}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
           />
-        </Button>
-      </form>
-    </Form>
+          <Button
+            type="submit"
+            className="flex gap-2 items-center w-full"
+            variant="outline"
+          >
+            Change Password (this will sign you out){" "}
+            <AiOutlineLoading3Quarters
+              className={cn("animate-spin", isPending ? "block" : "hidden")}
+            />
+          </Button>
+        </form>
+      </Form>
+    </div>
   );
 }
