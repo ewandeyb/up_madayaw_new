@@ -25,11 +25,18 @@ export async function readMemberData(MembershipID: UUID): Promise<any> {
       .eq("AssocMemberID", MembershipID)
       .single();
 
-    const addresses = await supabase
+    const memberAddresses = await supabase
       .from("Addresses")
       .select("*")
       .eq("AssocMemberID", MembershipID)
-      .order("IsMemberAddress", { ascending: false })
+      .eq("IsMemberAddress", true)
+      .single();
+
+    const relativeAddresses = await supabase
+      .from("Addresses")
+      .select("*")
+      .eq("AssocMemberID", MembershipID)
+      .eq("IsRelativeAddress", true)
       .single();
 
     const dependents = await supabase
@@ -44,12 +51,14 @@ export async function readMemberData(MembershipID: UUID): Promise<any> {
       .eq("AssocMemberID", MembershipID)
       .single();
 
+    console.log(dependents);
     // Return the fetched data
     return {
       memberData: memberData?.data,
       contactNumbers: contactNumbers?.data,
       occupation: occupation?.data,
-      addresses: addresses?.data,
+      memberAddresses: memberAddresses?.data,
+      relativeAddresses: relativeAddresses?.data,
       dependents: dependents?.data,
       surveyData: surveyData?.data,
     };

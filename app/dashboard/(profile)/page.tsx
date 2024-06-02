@@ -19,9 +19,6 @@ import { readProfile } from "./actions";
 import { Button } from "@/components/ui/button";
 import PasswordChange from "./components/edit/PasswordChange";
 
-
-
-
 export default async function Profile() {
   const supabase = createClient();
 
@@ -46,7 +43,6 @@ export default async function Profile() {
     return <div>Error: {error.message}</div>;
   }
 
-
   // Check if both FirstName and LastName are null
   const fullName =
     MemberData.FirstName || MemberData.LastName
@@ -54,7 +50,7 @@ export default async function Profile() {
       : "NULL";
 
   return (
-    <section className="w-full p-10 px-4 lg:px-8">
+    <section className="max-w-screen max-h-90vh p-10 px-4 lg:px-8 border-r">
       <div className="gap-1 flex justify-end">
         <EditProfile MemberProfile={MemberData} />
         <PasswordChange MemberProfile={MemberData} />
@@ -73,7 +69,7 @@ export default async function Profile() {
           <h2 className="mt-2 text-3xl font-bold tracking-tighter text-center md:text-center lg:text-left sm:text-4xl">
             {fullName}
           </h2>
-          <p className="max-w-[900px] text-gray-500 dark:text-white tracking-tighter text-center md:text-center lg:text-left md:text-xl lg:text-base xl:text-xl dark:text-gray-400">
+          <p className="max-w-[900px] text-gray-500 dark:text-white tracking-tighter text-center md:text-center lg:text-left md:text-xl lg:text-base xl:text-xl">
             Membership Number: {MemberData.MembershipNo ?? "NULL"}
           </p>
         </div>
@@ -185,7 +181,8 @@ export default async function Profile() {
                         width="60"
                       />
                       <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
-                        Position Title: {/* Add corresponding data if available */}
+                        Position Title:{" "}
+                        {/* Add corresponding data if available */}
                       </p>
                     </div>
                     <div className="flex items-center">

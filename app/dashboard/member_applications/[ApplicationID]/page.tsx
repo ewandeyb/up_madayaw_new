@@ -196,21 +196,25 @@ export default function ViewApplication() {
             ) : (
               <p>No Member Data Available</p>
             )}
-            <hr className="mt-5 mb-5"></hr>
-            <h1 className=" mb-5 font-bold">Dependent Data</h1>
-            {dependent && dependent[0] ? (
-              <div className="grid grid-cols-2 gap-4">
-                {Object.entries(dependent[0]).map(([key, value]) => (
-                  <div key={key} className="flex flex-col">
-                    <span className="font-bold text-upcolor dark:text-white">
-                      {key}:
-                    </span>
-                    <span className="font-semibold text-black dark:text-slate-500">
-                      {String(value) ?? "N/A"}
-                    </span>
+            {dependent && dependent.length > 0 ? (
+              dependent.map((dependent: any, index: number) => (
+                <div key={index}>
+                  <hr className="mt-5 mb-5"></hr>
+                  <h3 className="mb-5 font-bold">Dependent {index + 1}</h3>
+                  <div className="grid grid-cols-2 gap-4">
+                    {Object.entries(dependent).map(([key, value]) => (
+                      <div key={key} className="flex flex-col">
+                        <span className="font-bold text-upcolor dark:text-white">
+                          {key}:
+                        </span>
+                        <span className="font-semibold text-black dark:text-slate-500">
+                          {String(value) ?? "N/A"}
+                        </span>
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
+                </div>
+              ))
             ) : (
               <p>No dependent data available</p>
             )}

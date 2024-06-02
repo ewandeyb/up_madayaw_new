@@ -6,6 +6,7 @@ import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { useFieldArray } from "react-hook-form";
 //Need for forms
 import {
   Form,
@@ -57,9 +58,8 @@ export default function Edit() {
   const Sex = ["Male", "Female", "Other", "Prefer not to Say"];
   const NatureOfEmployment = ["Casual", "NGS", "Permanent"];
   const [BirthDate, setDate] = React.useState<Date>();
-  const [date1, setDate1] = React.useState<Date>();
-  const [date2, setDate2] = React.useState<Date>();
-  const [date3, setDate3] = React.useState<Date>();
+  const [dates, setDates] = React.useState<Date[]>([]);
+  const [dependent, setDependent] = useState([]); // Initialize dependent as an empty array
 
   const PrevMemberStatus = ["Yes", "No"];
 
@@ -69,11 +69,12 @@ export default function Edit() {
       FirstName: "",
       MiddleName: "",
       LastName: "",
-      CivilStatus: "Single",
       Sex: "Male",
       Email: "",
       Birthplace: "",
+      BirthDate: new Date("2020-02-02"),
       ContactNumber: "",
+      Suffix: "",
 
       PositionTitle: "",
       NatureOfEmployment: "NGS",
@@ -95,76 +96,113 @@ export default function Edit() {
       RelativeProvince: "",
       RelativeZipCode: 420,
 
-      Dependent1FirstName: "",
-
-      Dependent2FirstName: "",
-      Dependent2MiddleName: "",
-      Dependent2LastName: "",
-      Dependent2Suffix: "",
-      Dependent2BirthDate: new Date("2020-04-20"),
-      Dependent2Relation: "",
-      Dependent2Sex: "",
+      dependents: [
+        {
+          id: 1,
+          FirstName: "",
+          MiddleName: "",
+          LastName: "",
+          Suffix: "",
+          Relationship: "",
+          Sex: "Male",
+        },
+      ],
 
       PrevMemberStatus: "",
       LeaveReason: "",
       ReferralName: "",
     },
   });
+  const { fields } = useFieldArray({
+    name: "dependents",
+    control: form.control,
+  });
+
   const { reset } = form;
   useEffect(() => {
     async function fetchData() {
       const response = await readMemberData(MembershipID as UUID);
       console.log("fetchData");
       console.log(response);
+      console.log("Passing Response Dependents", response.dependents);
+      setDependent(response.dependents);
+      const dependentResetValues: Record<string, any> = {};
+      response.dependents.forEach((dependent: any, index: number) => {
+        dependentResetValues[`Dependent${index + 1}FirstName`] =
+          dependent.FirstName;
+        dependentResetValues[`Dependent${index + 1}MiddleName`] =
+          dependent.MiddleName;
+        dependentResetValues[`Dependent${index + 1}LastName`] =
+          dependent.LastName;
+        dependentResetValues[`Dependent${index + 1}Suffix`] = dependent.Suffix;
+        dependentResetValues[`Dependent${index + 1}Relationship`] =
+          dependent.Relationship;
+        dependentResetValues[`Dependent${index + 1}BirthDate`] =
+          dependent.BirthDate;
+        dependentResetValues[`Dependent${index + 1}Sex`] = dependent.Sex;
+      });
+      console.log("Dependent Reset values", dependentResetValues);
       reset({
+        //PERSONAL DATA
         FirstName: response.memberData.FirstName ?? "",
         MiddleName: response.memberData.MiddleName ?? "",
         LastName: response.memberData.LastName ?? "",
         CivilStatus: response.memberData.CivilStatus ?? "Single",
         Email: response.memberData.Email ?? "",
         Birthplace: response.memberData.Birthplace ?? "",
-        ContactNumber: response.memberData.ContactNumber ?? "",
+        ContactNumber: response.contactNumbers.ContactNumber ?? "",
         Sex: response.memberData.Sex ?? "Male",
         BirthDate: response.memberData.BirthDate ?? new Date("2020-04-20"),
-        /*  PositionTitle: data.PositionTitle ?? "",
-        NatureOfEmployment: data.NatureOfEmployment ?? "NGS",
-        OfficeTitle: data.OfficeTitle ?? "",
-        YearsOfService: data.YearsOfService ?? 10,
-        MemLine1: data.MemLine1 ?? "",
-        MemBarangay: data.MemBarangay ?? "",
-        MemMunicipalityCity: data.MemMunicipalityCity ?? "",
-        MemProvince: data.MemProvince ?? "",
-        MemZipCode: data.MemZipCode ?? 69,
-        NearestRelativeFirstName: data.NearestRelativeFirstName ?? "",
-        NearestRelativeLastName: data.NearestRelativeLastName ?? "",
-        RelativeLine1: data.RelativeLine1 ?? "",
-        RelativeBarangay: data.RelativeBarangay ?? "",
-        RelativeMunicipalityCity: data.RelativeMunicipalityCity ?? "",
-        RelativeProvince: data.RelativeProvince ?? "",
-        RelativeZipCode: data.RelativeZipCode ?? 420,
-        Dependent1FirstName: data.Dependent1FirstName ?? "",
-        Dependent2FirstName: data.Dependent2FirstName ?? "",
-        Dependent2MiddleName: data.Dependent2MiddleName ?? "",
-        Dependent2LastName: data.Dependent2LastName ?? "",
-        Dependent2Suffix: data.Dependent2Suffix ?? "",
-        Dependent2BirthDate: data.Dependent2BirthDate
-          ? new Date(data.Dependent2BirthDate)
-          : new Date("2020-04-20"),
-        Dependent2Relation: data.Dependent2Relation ?? "",
-        Dependent2Sex: data.Dependent2Sex ?? "",
-        PrevMemberStatus: data.PrevMemberStatus ?? "",
-        LeaveReason: data.LeaveReason ?? "",
-        ReferralName: data.ReferralName ?? "",  */
+        Suffix: response.memberData.Suffix ?? "",
+
+        // SPOUSE DATA
+        SpouseFirstName: response.memberData.SpouseFirstName,
+        SpouseMiddleName: response.memberData.SpouseMiddleName,
+        SpouseLastName: response.memberData.SpouseLastName,
+        SpouseSuffix: response.memberData.SpouseSuffix,
+        SpouseOccupation: response.memberData.SpouseOccupation,
+
+        // MEMBER ADDRESS
+        MemLine1: response.memberAddresses.Line1,
+        MemBarangay: response.memberAddresses.Barangay,
+        MemMunicipalityCity: response.memberAddresses.MunicipalityCity,
+        MemProvince: response.memberAddresses.Province,
+        MemZipCode: response.memberAddresses.ZipCode,
+
+        // Relative Name (Member Data Table)
+        NearestRelativeFirstName: response.memberData.NearestRelativeFirstName,
+        NearestRelativeLastName: response.memberData.NearestRelativeLastName,
+
+        // Relative Address
+        RelativeLine1: response.relativeAddresses.Line1,
+        RelativeBarangay: response.relativeAddresses.Barangay,
+        RelativeMunicipalityCity: response.relativeAddresses.MunicipalityCity,
+        RelativeProvince: response.relativeAddresses.Province,
+        RelativeZipCode: response.relativeAddresses.ZipCode,
+
+        // Occupation
+        PositionTitle: response.occupation.PositionTitle,
+        NatureOfEmployment: response.occupation.NatureOfEmployment,
+        OfficeTitle: response.occupation.OfficeTitle,
+        YearsOfService: response.occupation.YearsOfService,
+
+        // Dependents
+        ...dependentResetValues,
+
+        // Survey Data
+        PrevMemberStatus: response.surveyData.PrevMemberStatus,
+        LeaveReason: response.surveyData.LeaveReason,
+        ReferralName: response.surveyData.ReferralName,
       });
     }
     fetchData();
   }, [MembershipID, reset]);
 
   function onSubmit(data: ApplicationFormFields) {
+    console.log("Edit Data", data);
     startTransition(async () => {
       const result = await updateMember(MembershipID as UUID, data);
-      console.log("result below");
-      console.log(result);
+      console.log("Results", result);
       const { error } = JSON.parse(result || "{}");
       if (error?.message) {
         //console.log({error})
@@ -295,6 +333,7 @@ export default function Edit() {
                   <FormItem>
                     <FormLabel>Civil Status</FormLabel>
                     <Select
+                      {...field}
                       onValueChange={field.onChange}
                       defaultValue={field.value}
                     >
@@ -325,6 +364,7 @@ export default function Edit() {
                   <FormItem>
                     <FormLabel>Sex</FormLabel>
                     <Select
+                      {...field}
                       onValueChange={field.onChange}
                       defaultValue={field.value}
                     >
@@ -379,12 +419,12 @@ export default function Edit() {
                           variant={"default"}
                           className={cn(
                             "w-full flex justify-start text-left font-normal",
-                            !BirthDate && "text-muted-foreground"
+                            !field.value && "text-muted-foreground"
                           )}
                         >
                           <CalendarIcon className="w-4 h-4 mr-2" />
-                          {BirthDate ? (
-                            format(BirthDate, "PPP")
+                          {field.value ? (
+                            format(field.value, "PPP")
                           ) : (
                             <span>Pick a date</span>
                           )}
@@ -392,11 +432,10 @@ export default function Edit() {
                       </PopoverTrigger>
                       <PopoverContent align="start" className="w-auto p-0">
                         <Calendar
+                          {...field} // Spread the field props to ensure value and onChange are managed correctly
                           mode="single"
                           captionLayout="dropdown-buttons"
-                          selected={BirthDate}
                           onSelect={(date) => {
-                            setDate(date); // Update the state with the new date
                             field.onChange(date); // Update the form control with the new date
                             console.log("Date changed:", date); // Log or track the date change
                           }}
@@ -896,545 +935,220 @@ export default function Edit() {
           </div>
 
           <hr></hr>
-          <div className="p-2">
-            <h1 className="text-upcolor font-bold">Dependents</h1>
 
-            <div className="grid grid-cols-1 md:grid-cols-7 lg:grid-cols-7 gap-2">
-              <div className="col-span-2">
-                <FormField
-                  control={form.control}
-                  name="Dependent1FirstName"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>First Name</FormLabel>
-                      <FormControl>
-                        <Input
-                          type="text"
-                          {...field}
-                          onChange={field.onChange}
-                        />
-                      </FormControl>
-                      <FormDescription></FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-              <div className="col-span-2">
-                <FormField
-                  control={form.control}
-                  name="Dependent1MiddleName"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Middle Name</FormLabel>
-                      <FormControl>
-                        <Input
-                          type="text"
-                          {...field}
-                          onChange={field.onChange}
-                        />
-                      </FormControl>
-                      <FormDescription></FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-              <div className="col-span-2">
-                <FormField
-                  control={form.control}
-                  name="Dependent1LastName"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Last Name</FormLabel>
-                      <FormControl>
-                        <Input
-                          type="text"
-                          {...field}
-                          onChange={field.onChange}
-                        />
-                      </FormControl>
-                      <FormDescription></FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-              <div>
-                <FormField
-                  control={form.control}
-                  name="Dependent1Suffix"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Suffix</FormLabel>
-                      <FormControl>
-                        <Input
-                          type="text"
-                          {...field}
-                          onChange={field.onChange}
-                        />
-                      </FormControl>
-                      <FormDescription></FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-              <div className="col-span-3">
-                <FormField
-                  control={form.control}
-                  name="Dependent1BirthDate"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Date of birth</FormLabel>
-                      <Popover>
-                        <PopoverTrigger asChild>
-                          <Button
-                            variant={"default"}
-                            className={cn(
-                              "w-full flex justify-start text-left font-normal",
-                              !date1 && "text-muted-foreground"
-                            )}
-                          >
-                            <CalendarIcon className="w-4 h-4 mr-2" />
-                            {date1 ? (
-                              format(date1, "PPP")
-                            ) : (
-                              <span>Pick a date</span>
-                            )}
-                          </Button>
-                        </PopoverTrigger>
-                        <PopoverContent align="start" className="w-auto p-0">
-                          <Calendar
-                            mode="single"
-                            captionLayout="dropdown-buttons"
-                            selected={date1}
-                            onSelect={(date1) => {
-                              setDate1(date1); // Update the state with the new date
-                              field.onChange(date1); // Update the form control with the new date
-                              console.log("Date changed:", date1); // Log or track the date change
-                            }}
-                            fromYear={1960}
-                            toYear={2030}
-                          />
-                        </PopoverContent>
-                      </Popover>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-              <div className="col-span-3">
-                <FormField
-                  control={form.control}
-                  name="Dependent1Relation"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Relation</FormLabel>
-                      <FormControl>
-                        <Input
-                          type="text"
-                          {...field}
-                          onChange={field.onChange}
-                        />
-                      </FormControl>
-                      <FormDescription></FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-              <div>
-                <FormField
-                  control={form.control}
-                  name="Dependent1Sex"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Sex</FormLabel>
-                      <Select
-                        onValueChange={field.onChange}
-                        defaultValue={field.value}
-                      >
+          {dependent.map((dependent: any, index: number) => (
+            <div key={index}>
+              <hr className="mt-5 mb-5"></hr>
+              <h3 className="mb-5 font-bold">Dependent {index + 1}</h3>
+              <div className="grid grid-cols-1 md:grid-cols-7 lg:grid-cols-7 gap-2">
+                <div className="col-span-2">
+                  <FormField
+                    control={form.control}
+                    name={
+                      `Dependent${
+                        index + 1
+                      }FirstName` as `dependents.${number}.FirstName`
+                    }
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>First Name</FormLabel>
                         <FormControl>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select Sex" />
-                          </SelectTrigger>
+                          <Input
+                            type="text"
+                            {...field}
+                            onChange={field.onChange}
+                          />
                         </FormControl>
-                        <SelectContent>
-                          {Sex.map((Sex, index) => {
-                            return (
-                              <SelectItem value={Sex} key={index}>
-                                {Sex}
+                        <FormDescription></FormDescription>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                <div className="col-span-2">
+                  <FormField
+                    control={form.control}
+                    name={
+                      `Dependent${
+                        index + 1
+                      }MiddleName` as `dependents.${number}.FirstName`
+                    }
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Middle Name</FormLabel>
+                        <FormControl>
+                          <Input
+                            type="text"
+                            {...field}
+                            onChange={field.onChange}
+                          />
+                        </FormControl>
+                        <FormDescription></FormDescription>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                <div className="col-span-2">
+                  <FormField
+                    control={form.control}
+                    name={
+                      `Dependent${
+                        index + 1
+                      }LastName` as `dependents.${number}.LastName`
+                    }
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Last Name</FormLabel>
+                        <FormControl>
+                          <Input
+                            type="text"
+                            {...field}
+                            onChange={field.onChange}
+                          />
+                        </FormControl>
+                        <FormDescription></FormDescription>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                <div>
+                  <FormField
+                    control={form.control}
+                    name={
+                      `Dependent${
+                        index + 1
+                      }Suffix` as `dependents.${number}.Suffix`
+                    }
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Suffix</FormLabel>
+                        <FormControl>
+                          <Input
+                            type="text"
+                            {...field}
+                            onChange={field.onChange}
+                          />
+                        </FormControl>
+                        <FormDescription></FormDescription>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                <div className="col-span-3">
+                  <FormField
+                    control={form.control}
+                    name={
+                      `Dependent${
+                        index + 1
+                      }BirthDate` as `dependents.${number}.BirthDate`
+                    }
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Date of birth</FormLabel>
+                        <Popover>
+                          <PopoverTrigger asChild>
+                            <Button
+                              variant={"default"}
+                              className={cn(
+                                "w-full flex justify-start text-left font-normal",
+                                !field.value && "text-muted-foreground"
+                              )}
+                            >
+                              <CalendarIcon className="w-4 h-4 mr-2" />
+                              {field.value ? (
+                                format(new Date(field.value), "PPP")
+                              ) : (
+                                <span>Pick a date</span>
+                              )}
+                            </Button>
+                          </PopoverTrigger>
+                          <PopoverContent align="start" className="w-auto p-0">
+                            <Calendar
+                              mode="single"
+                              captionLayout="dropdown-buttons"
+                              selected={
+                                field.value ? new Date(field.value) : undefined
+                              }
+                              onSelect={(date) => {
+                                const newDates = [...dates]; // Create a copy of the dates array
+                                if (date !== undefined) {
+                                  newDates[index + 1] = date; // Update the date at the current index if date is defined
+                                }
+                                setDates(newDates); // Update the state with the new array of dates
+                                field.onChange(date); // Update the form control with the new date
+                                console.log("Date changed:", date); // Log or track the date change
+                              }}
+                              fromYear={1960}
+                              toYear={2030}
+                            />
+                          </PopoverContent>
+                        </Popover>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                <div className="col-span-3">
+                  <FormField
+                    control={form.control}
+                    name={
+                      `Dependent${
+                        index + 1
+                      }Relationship` as `dependents.${number}.Relationship`
+                    }
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Relationship</FormLabel>
+                        <FormControl>
+                          <Input
+                            type="text"
+                            {...field}
+                            onChange={field.onChange}
+                          />
+                        </FormControl>
+                        <FormDescription></FormDescription>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                <div>
+                  <FormField
+                    control={form.control}
+                    name={
+                      `Dependent${index + 1}Sex` as `dependents.${number}.Sex`
+                    }
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Sex</FormLabel>
+                        <Select
+                          onValueChange={field.onChange}
+                          defaultValue={field.value}
+                        >
+                          <FormControl>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select Sex" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            {Sex.map((sex, idx) => (
+                              <SelectItem value={sex} key={idx}>
+                                {sex}
                               </SelectItem>
-                            );
-                          })}
-                        </SelectContent>
-                      </Select>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                            ))}
+                          </SelectContent>
+                        </Select>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
               </div>
             </div>
-
-            <hr></hr>
-            <div className="grid grid-cols-1 md:grid-cols-7 lg:grid-cols-7 gap-2">
-              <div className="col-span-2">
-                <FormField
-                  control={form.control}
-                  name="Dependent2FirstName"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>First Name</FormLabel>
-                      <FormControl>
-                        <Input
-                          type="text"
-                          {...field}
-                          onChange={field.onChange}
-                        />
-                      </FormControl>
-                      <FormDescription></FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-              <div className="col-span-2">
-                <FormField
-                  control={form.control}
-                  name="Dependent2MiddleName"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Middle Name</FormLabel>
-                      <FormControl>
-                        <Input
-                          type="text"
-                          {...field}
-                          onChange={field.onChange}
-                        />
-                      </FormControl>
-                      <FormDescription></FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-              <div className="col-span-2">
-                <FormField
-                  control={form.control}
-                  name="Dependent2LastName"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Last Name</FormLabel>
-                      <FormControl>
-                        <Input
-                          type="text"
-                          {...field}
-                          onChange={field.onChange}
-                        />
-                      </FormControl>
-                      <FormDescription></FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-              <div>
-                <FormField
-                  control={form.control}
-                  name="Dependent2Suffix"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Suffix</FormLabel>
-                      <FormControl>
-                        <Input
-                          type="text"
-                          {...field}
-                          onChange={field.onChange}
-                        />
-                      </FormControl>
-                      <FormDescription></FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-              <div className="col-span-3">
-                <FormField
-                  control={form.control}
-                  name="Dependent2BirthDate"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Date of birth</FormLabel>
-                      <Popover>
-                        <PopoverTrigger asChild>
-                          <Button
-                            variant={"default"}
-                            className={cn(
-                              "w-full flex justify-start text-left font-normal",
-                              !date2 && "text-muted-foreground"
-                            )}
-                          >
-                            <CalendarIcon className="w-4 h-4 mr-2" />
-                            {date2 ? (
-                              format(date2, "PPP")
-                            ) : (
-                              <span>Pick a date</span>
-                            )}
-                          </Button>
-                        </PopoverTrigger>
-                        <PopoverContent align="start" className="w-auto p-0">
-                          <Calendar
-                            mode="single"
-                            captionLayout="dropdown-buttons"
-                            selected={date2}
-                            onSelect={(date2) => {
-                              setDate2(date2); // Update the state with the new date
-                              field.onChange(date2); // Update the form control with the new date
-                              console.log("Date changed:", date2); // Log or track the date change
-                            }}
-                            fromYear={1960}
-                            toYear={2030}
-                          />
-                        </PopoverContent>
-                      </Popover>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-              <div className="col-span-3">
-                <FormField
-                  control={form.control}
-                  name="Dependent2Relation"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Relation</FormLabel>
-                      <FormControl>
-                        <Input
-                          type="text"
-                          {...field}
-                          onChange={field.onChange}
-                        />
-                      </FormControl>
-                      <FormDescription></FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-              <div>
-                <FormField
-                  control={form.control}
-                  name="Dependent2Sex"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Sex</FormLabel>
-                      <Select
-                        onValueChange={field.onChange}
-                        defaultValue={field.value}
-                      >
-                        <FormControl>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select Sex" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          {Sex.map((Sex, index) => {
-                            return (
-                              <SelectItem value={Sex} key={index}>
-                                {Sex}
-                              </SelectItem>
-                            );
-                          })}
-                        </SelectContent>
-                      </Select>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-            </div>
-
-            <hr></hr>
-            <div className="grid grid-cols-1 md:grid-cols-7 lg:grid-cols-7 gap-2">
-              <div className="col-span-2">
-                <FormField
-                  control={form.control}
-                  name="Dependent3FirstName"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>First Name</FormLabel>
-                      <FormControl>
-                        <Input
-                          type="text"
-                          {...field}
-                          onChange={field.onChange}
-                        />
-                      </FormControl>
-                      <FormDescription></FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-              <div className="col-span-2">
-                <FormField
-                  control={form.control}
-                  name="Dependent3MiddleName"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Middle Name</FormLabel>
-                      <FormControl>
-                        <Input
-                          type="text"
-                          {...field}
-                          onChange={field.onChange}
-                        />
-                      </FormControl>
-                      <FormDescription></FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-              <div className="col-span-2">
-                <FormField
-                  control={form.control}
-                  name="Dependent3LastName"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Last Name</FormLabel>
-                      <FormControl>
-                        <Input
-                          type="text"
-                          {...field}
-                          onChange={field.onChange}
-                        />
-                      </FormControl>
-                      <FormDescription></FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-              <div>
-                <FormField
-                  control={form.control}
-                  name="Dependent3Suffix"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Suffix</FormLabel>
-                      <FormControl>
-                        <Input
-                          type="text"
-                          {...field}
-                          onChange={field.onChange}
-                        />
-                      </FormControl>
-                      <FormDescription></FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-              <div className="col-span-3">
-                <FormField
-                  control={form.control}
-                  name="Dependent3BirthDate"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Date of birth</FormLabel>
-                      <Popover>
-                        <PopoverTrigger asChild>
-                          <Button
-                            variant={"default"}
-                            className={cn(
-                              "w-full flex justify-start text-left font-normal",
-                              !date3 && "text-muted-foreground"
-                            )}
-                          >
-                            <CalendarIcon className="w-4 h-4 mr-2" />
-                            {date3 ? (
-                              format(date3, "PPP")
-                            ) : (
-                              <span>Pick a date</span>
-                            )}
-                          </Button>
-                        </PopoverTrigger>
-                        <PopoverContent align="start" className="w-auto p-0">
-                          <Calendar
-                            mode="single"
-                            captionLayout="dropdown-buttons"
-                            selected={date3}
-                            onSelect={(date3) => {
-                              setDate3(date3); // Update the state with the new date
-                              field.onChange(date3); // Update the form control with the new date
-                              console.log("Date changed:", date3); // Log or track the date change
-                            }}
-                            fromYear={1960}
-                            toYear={2030}
-                          />
-                        </PopoverContent>
-                      </Popover>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-              <div className="col-span-3">
-                <FormField
-                  control={form.control}
-                  name="Dependent3Relation"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Relation</FormLabel>
-                      <FormControl>
-                        <Input
-                          type="text"
-                          {...field}
-                          onChange={field.onChange}
-                        />
-                      </FormControl>
-                      <FormDescription></FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-              <div>
-                <FormField
-                  control={form.control}
-                  name="Dependent3Sex"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Sex</FormLabel>
-                      <Select
-                        onValueChange={field.onChange}
-                        defaultValue={field.value}
-                      >
-                        <FormControl>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select Sex" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          {Sex.map((Sex, index) => {
-                            return (
-                              <SelectItem value={Sex} key={index}>
-                                {Sex}
-                              </SelectItem>
-                            );
-                          })}
-                        </SelectContent>
-                      </Select>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-            </div>
-          </div>
+          ))}
 
           <hr></hr>
           <div className="p-2">
@@ -1448,6 +1162,7 @@ export default function Edit() {
                     <FormItem>
                       <FormLabel>Old Member?</FormLabel>
                       <Select
+                        {...field}
                         onValueChange={field.onChange}
                         defaultValue={field.value}
                       >
