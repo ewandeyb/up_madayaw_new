@@ -9,6 +9,7 @@ Welcome to the UP Madayaw Cooperative project! This repository houses the develo
 - [Entity-Relationship Diagram (ERD) Design](#entity-relationship-diagram-erd-design)
 - [Mockups](#mockups)
 - [Setting Up Development](#setting-up-development)
+- [Deployment](#deployment)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -57,7 +58,7 @@ Follow these steps to set up the development environment for the UP Madayaw Coop
 
 - [Node.js](https://nodejs.org/) (v14.x or later)
 - [npm](https://www.npmjs.com/) (v6.x or later) or [yarn](https://yarnpkg.com/)
-- [MySQL](https://www.mysql.com/) (or any compatible SQL database)
+- [Supabase](https://supabase.com/) account and project
 - [Git](https://git-scm.com/)
 
 ### Installation
@@ -81,32 +82,62 @@ Follow these steps to set up the development environment for the UP Madayaw Coop
     yarn install
     ```
 
-3. **Set up the database:**
+3. **Set up Supabase:**
 
-    - Create a database for the application.
-    - Update the database configuration in `config/database.js` with your database credentials.
+    - Create a new project in Supabase.
+    - Copy the `supabaseUrl` and `supabaseKey` from your Supabase project settings.
+    - Create a `.env.local` file in the root of the project and add the following:
 
-4. **Run database migrations:**
-
-    ```sh
-    npm run migrate
+    ```env
+    NEXT_PUBLIC_SUPABASE_URL=your-supabase-url
+    NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
     ```
 
-5. **Start the development server:**
+4. **Configure TypeScript and Tailwind CSS:**
+
+    - Ensure `tsconfig.json` is properly configured for TypeScript.
+    - Ensure `tailwind.config.js` and `postcss.config.js` are set up for Tailwind CSS.
+
+5. **Run database migrations (if any):**
+
+    Configure and run any required database migrations in Supabase.
+
+6. **Start the development server:**
 
     ```sh
-    npm start
+    npm run dev
     ```
 
     or
 
     ```sh
-    yarn start
+    yarn dev
     ```
 
-6. **Access the application:**
+7. **Access the application:**
 
     Open your browser and navigate to `http://localhost:3000`.
+
+## Deployment
+
+The UP Madayaw Cooperative system is deployed on Vercel for seamless and scalable hosting.
+
+### Steps for Deployment:
+
+1. **Connect your repository to Vercel:**
+
+    - Log in to [Vercel](https://vercel.com/).
+    - Create a new project and import your repository.
+    - Configure the environment variables in Vercel using the same keys from your `.env.local` file.
+
+2. **Deploy the project:**
+
+    - Once connected, Vercel will automatically deploy the main branch of your repository.
+    - Any subsequent commits to the main branch will trigger automatic redeployments.
+
+3. **Access your deployed application:**
+
+    - Your application will be available at the URL provided by Vercel.
 
 ## Contributing
 
