@@ -66,7 +66,7 @@ export default function Home() {
               variant="secondary"
               className="text-white font-bold border mr-2 w-26"
             >
-              <Link href="./application_form.pdf" className="text-black">
+              <Link href="./application_form.pdf" className="text-black dark:text-white">
                 Download Form
               </Link>
             </Button>
