@@ -43,7 +43,7 @@ export default function Home() {
   }, [api]);
 
   return (
-    <section className="">
+    <section className="relative flex flex-col min-h-screen bg-gradient-to-r from-[#FFFFFF] to-[#8E8E8E] dark:bg-gradient-to-r dark:from-[#B2B2B2] dark:to-[#202020]">
       <section className="top-0 left-0 w-full h-full flex items-center justify-center text-center flex-col gap-6 z-10 pointer-events-none">
         <div className="pointer-events-auto flex flex-col items-center space-y-6 w-full px-4 mb-8">
           <h1 className="mt-[50px] text-5xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-black dark:text-white p-4 rounded inline-block ">
@@ -73,7 +73,7 @@ export default function Home() {
           </div>
           <div className="flex flex-col lg:flex-row justify-between w-full max-w-[1400px] gap-6">
             <div className="flex-1 flex flex-col">
-              <div className="relative h-full w-full mx-auto">         
+              <div className="relative h-full w-full mx-auto">
                 <Carousel
                   setApi={setApi}
                   className="w-full"
