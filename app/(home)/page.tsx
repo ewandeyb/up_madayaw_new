@@ -60,7 +60,7 @@ export default function Home() {
           >
             <a href="/apply">Apply Now</a>
           </Button>
-          <div className="flex flex-col lg:flex-row justify-between w-full max-w-full gap-6">
+          <div className="flex flex-col lg:flex-row justify-between w-full max-w-[1400px] gap-6">
             <div className="flex-1 flex flex-col">
               <div className="relative h-full w-full mx-auto">
                 <Carousel
@@ -158,10 +158,10 @@ export default function Home() {
             </div>
             <div className="flex-1 flex flex-col">
               <div className="bg-white dark:bg-black p-4 rounded-lg shadow-md h-full overflow-y-auto">
-                <h2 className="text-lg text-left p-4 font-bold">
+                <h2 className="text-2xl text-left p-4 font-bold">
                   Announcements
                 </h2>
-                <ul className="h-[270px] p-4 sm:h-[270px] md:h-[270px] lg:h-[285px] xl:h-[370px] 2xl:h-[460px] text-left overflow-y-auto">
+                <ul className="h-[270px] p-4 sm:h-[270px] md:h-[270px] lg:h-[285px] xl:h-[370px] 2xl:h-[400px] text-left overflow-y-auto">
                   <li className="mb-2">
                     <p className="text-base sm:text-base md:text-base lg:text-base xl:text-base 2xl:text-lg text-left">
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit,
