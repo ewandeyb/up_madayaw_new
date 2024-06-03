@@ -171,33 +171,35 @@ const OrganizationalChart = () => {
   return (
     <section className="py-8 bg-gradient-to-r from-[#B2B2B2] to-[#202020] dark:bg-gradient-to-r dark:from-[#FFFFFF] dark:to-[#8E8E8E]">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-12 text-white dark:text-black">Organizational Chart</h2>
-        <h1 className="text-2xl font-bold text-center mb-12 text-white dark:text-black">Board of Directors</h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
-          {boardOfDirectors.map((boardOfDirectors, index) => (
-            <div key={index} className="text-center">
-              <Image
-                src={boardOfDirectors.photo}
-                alt={boardOfDirectors.name}
-                className="w-32 h-32 object-cover mx-auto mb-4"
-                width={320} // Provide the width of the image
-                height={320} // You might also need to provide the height depending on your requirements
-              />
-              <h3 className="text-xl font-semibold text-white dark:text-black">{boardOfDirectors.name}</h3>
-              <p className="text-white dark:text-black">{boardOfDirectors.title}</p>
-            </div>
-          ))}
+        <h2 className="text-4xl font-bold text-center mb-8 text-white dark:text-black">Organizational Chart</h2>
+        <div className="flex flex-col border-2 p-6">
+          <h1 className="text-2xl font-bold text-center mt-1 mb-12 text-white dark:text-black">Board of Directors</h1>
+          <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-8">
+            {boardOfDirectors.map((boardOfDirectors, index) => (
+              <div key={index} className="text-center">
+                <Image
+                  src={boardOfDirectors.photo}
+                  alt={boardOfDirectors.name}
+                  className="w-32 h-32 object-cover mx-auto mb-4 border-2"
+                  width={320} // Provide the width of the image
+                  height={320} // You might also need to provide the height depending on your requirements
+                />
+                <h3 className="text-xl font-semibold text-white dark:text-black">{boardOfDirectors.name}</h3>
+                <p className="text-white dark:text-black">{boardOfDirectors.title}</p>
+              </div>
+            ))}
+          </div>
         </div>
-        <div className="flex flex-row justify-around">
-          <div className="flex flex-col">
-            <h1 className="text-2xl font-bold text-center mt-12 mb-12 text-white dark:text-black">Audit & Inventory Comm.</h1>
-            <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="flex flex-col lg:flex-row justify-around">
+          <div className="flex flex-col w-full border-2 p-4">
+            <h1 className="text-2xl font-bold text-center mt-3 mb-12 text-white dark:text-black">Audit & Inventory Comm.</h1>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {auditInventoryComm.map((auditInventoryComm, index) => (
                 <div key={index} className="text-center">
                   <Image
                     src={auditInventoryComm.photo}
                     alt={auditInventoryComm.name}
-                    className="w-32 h-32 object-cover mx-auto mb-4"
+                    className="w-32 h-32 object-cover mx-auto mb-4 border-2"
                     width={320} // Provide the width of the image
                     height={320} // You might also need to provide the height depending on your requirements
                   />
@@ -206,15 +208,15 @@ const OrganizationalChart = () => {
               ))}
             </div>
           </div>
-          <div className="flex flex-col">
-            <h1 className="text-2xl font-bold text-center mt-12 mb-12 text-white dark:text-black">Election Committee</h1>
-            <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="flex flex-col w-full border-2 p-4">
+            <h1 className="text-2xl font-bold text-center mt-3 mb-12 text-white dark:text-black">Election Committee</h1>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {electionCommittee.map((electionCommittee, index) => (
                 <div key={index} className="text-center">
                   <Image
                     src={electionCommittee.photo}
                     alt={electionCommittee.name}
-                    className="w-32 h-32 object-cover mx-auto mb-4"
+                    className="w-32 h-32 object-cover mx-auto mb-4 border-2"
                     width={320} // Provide the width of the image
                     height={320} // You might also need to provide the height depending on your requirements
                   />
@@ -224,52 +226,48 @@ const OrganizationalChart = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-row justify-around">
-          <div className="flex flex-col">
-            <h1 className="text-2xl font-bold text-center mt-12 mb-12 text-white dark:text-black">Secretary</h1>
-            <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 gap-8">
-              {secretary.map((secretary, index) => (
-                <div key={index} className="text-center">
-                  <Image
-                    src={secretary.photo}
-                    alt={secretary.name}
-                    className="w-32 h-32 object-cover mx-auto mb-4"
-                    width={320} // Provide the width of the image
-                    height={320} // You might also need to provide the height depending on your requirements
-                  />
-                  <h3 className="text-xl font-semibold text-white dark:text-black">{secretary.name}</h3>
-                </div>
-              ))}
-            </div>
+        <div className="flex flex-col lg:flex-row justify-evenly">
+          <div className="flex flex-col w-full border-2 p-4">
+            <h1 className="text-2xl font-bold text-center mt-3 mb-10 text-white dark:text-black">Secretary</h1>
+            {secretary.map((secretary, index) => (
+              <div key={index} className="text-center">
+                <Image
+                  src={secretary.photo}
+                  alt={secretary.name}
+                  className="w-32 h-32 object-cover mx-auto mb-4 border-2"
+                  width={320} // Provide the width of the image
+                  height={320} // You might also need to provide the height depending on your requirements
+                />
+                <h3 className="text-xl font-semibold text-white dark:text-black">{secretary.name}</h3>
+              </div>
+            ))}
           </div>
-          <div className="flex flex-col">
-            <h1 className="text-2xl font-bold text-center mt-12 mb-12 text-white dark:text-black">Treasurer</h1>
-            <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 gap-8">
-              {treasurer.map((treasurer, index) => (
-                <div key={index} className="text-center">
-                  <Image
-                    src={treasurer.photo}
-                    alt={treasurer.name}
-                    className="w-32 h-32 object-cover mx-auto mb-4"
-                    width={320} // Provide the width of the image
-                    height={320} // You might also need to provide the height depending on your requirements
-                  />
-                  <h3 className="text-xl font-semibold text-white dark:text-black">{treasurer.name}</h3>
-                </div>
-              ))}
-            </div>
+          <div className="flex flex-col w-full border-2 p-4 ">
+            <h1 className="text-2xl font-bold text-center mt-3 mb-10 text-white dark:text-black">Treasurer</h1>
+            {treasurer.map((treasurer, index) => (
+              <div key={index} className="text-center">
+                <Image
+                  src={treasurer.photo}
+                  alt={treasurer.name}
+                  className="w-32 h-32 object-cover mx-auto mb-4 border-2"
+                  width={320} // Provide the width of the image
+                  height={320} // You might also need to provide the height depending on your requirements
+                />
+                <h3 className="text-xl font-semibold text-white dark:text-black">{treasurer.name}</h3>
+              </div>
+            ))}
           </div>
         </div>
-        <div className="flex flex-row justify-around">
-          <div className="flex flex-col">
-            <h1 className="text-2xl font-bold text-center mt-12 mb-12 text-white dark:text-black">Education & Training Comm.</h1>
-            <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="flex flex-col lg:flex-row justify-around">
+          <div className="flex flex-col w-full border-2 p-4">
+            <h1 className="text-2xl font-bold text-center mt-3 mb-12 text-white dark:text-black">Education & Training Comm.</h1>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {educationTrainingComm.map((educationTrainingComm, index) => (
                 <div key={index} className="text-center">
                   <Image
                     src={educationTrainingComm.photo}
                     alt={educationTrainingComm.name}
-                    className="w-32 h-32 object-cover mx-auto mb-4"
+                    className="w-32 h-32 object-cover mx-auto mb-4 border-2"
                     width={320} // Provide the width of the image
                     height={320} // You might also need to provide the height depending on your requirements
                   />
@@ -278,15 +276,15 @@ const OrganizationalChart = () => {
               ))}
             </div>
           </div>
-          <div className="flex flex-col">
-            <h1 className="text-2xl font-bold text-center mt-12 mb-12 text-white dark:text-black">Credit Committee</h1>
-            <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="flex flex-col w-full border-2 p-4">
+            <h1 className="text-2xl font-bold text-center mt-3 mb-12 text-white dark:text-black">Credit Committee</h1>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {creditCommittee.map((creditCommittee, index) => (
                 <div key={index} className="text-center">
                   <Image
                     src={creditCommittee.photo}
                     alt={creditCommittee.name}
-                    className="w-32 h-32 object-cover mx-auto mb-4"
+                    className="w-32 h-32 object-cover mx-auto mb-4 border-2"
                     width={320} // Provide the width of the image
                     height={320} // You might also need to provide the height depending on your requirements
                   />
@@ -296,16 +294,16 @@ const OrganizationalChart = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-row justify-around">
-          <div className="flex flex-col">
-            <h1 className="text-2xl font-bold text-center mt-12 mb-12 text-white dark:text-black">Gender Committee</h1>
-            <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="flex flex-col lg:flex-row justify-around">
+          <div className="flex flex-col w-full border-2 p-4">
+            <h1 className="text-2xl font-bold text-center mt-3 mb-12 text-white dark:text-black">Gender Committee</h1>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {genderCommittee.map((genderCommittee, index) => (
                 <div key={index} className="text-center">
                   <Image
                     src={genderCommittee.photo}
                     alt={genderCommittee.name}
-                    className="w-32 h-32 object-cover mx-auto mb-4"
+                    className="w-32 h-32 object-cover mx-auto mb-4 border-2"
                     width={320} // Provide the width of the image
                     height={320} // You might also need to provide the height depending on your requirements
                   />
@@ -314,15 +312,15 @@ const OrganizationalChart = () => {
               ))}
             </div>
           </div>
-          <div className="flex flex-col">
-            <h1 className="text-2xl font-bold text-center mt-12 mb-12 text-white dark:text-black">Ethics Committee</h1>
-            <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="flex flex-col w-full border-2 p-4">
+            <h1 className="text-2xl font-bold text-center mt-3 mb-12 text-white dark:text-black">Ethics Committee</h1>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {ethicsCommittee.map((ethicsCommittee, index) => (
                 <div key={index} className="text-center">
                   <Image
                     src={ethicsCommittee.photo}
                     alt={ethicsCommittee.name}
-                    className="w-32 h-32 object-cover mx-auto mb-4"
+                    className="w-32 h-32 object-cover mx-auto mb-4 border-2"
                     width={320} // Provide the width of the image
                     height={320} // You might also need to provide the height depending on your requirements
                   />
@@ -332,16 +330,15 @@ const OrganizationalChart = () => {
             </div>
           </div>
         </div>
-
-        <div className="flex flex-col">
-          <h1 className="text-2xl font-bold text-center mt-12 mb-12 text-white dark:text-black">Mediation & Conciliation Comm.</h1>
-          <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="flex flex-col border-2 p-4">
+          <h1 className="text-2xl font-bold text-center mt-3 mb-12 text-white dark:text-black">Mediation & Conciliation Comm.</h1>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 ">
             {mediationConciliationComm.map((mediationConciliationComm, index) => (
               <div key={index} className="text-center">
                 <Image
                   src={mediationConciliationComm.photo}
                   alt={mediationConciliationComm.name}
-                  className="w-32 h-32 object-cover mx-auto mb-4"
+                  className="w-32 h-32 object-cover mx-auto mb-4 border-2"
                   width={320} // Provide the width of the image
                   height={320} // You might also need to provide the height depending on your requirements
                 />
@@ -350,22 +347,23 @@ const OrganizationalChart = () => {
             ))}
           </div>
         </div>
-
-        <h1 className="text-2xl font-bold text-center mt-12 mb-12 text-white dark:text-black">Hired Management</h1>
-        <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 gap-8">
-          {hiredManagement.map((hiredManagement, index) => (
-            <div key={index} className="text-center">
-              <Image
-                src={hiredManagement.photo}
-                alt={hiredManagement.name}
-                className="w-32 h-32 object-cover mx-auto mb-4"
-                width={320} // Provide the width of the image
-                height={320} // You might also need to provide the height depending on your requirements
-              />
-              <h3 className="text-xl font-semibold text-white dark:text-black">{hiredManagement.name}</h3>
-              <p className="text-white dark:text-black">{hiredManagement.title}</p>
-            </div>
-          ))}
+        <div className="flex flex-col border-2 p-4">
+          <h1 className="text-2xl font-bold text-center mt-3 mb-12 text-white dark:text-black">Hired Management</h1>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {hiredManagement.map((hiredManagement, index) => (
+              <div key={index} className="text-center">
+                <Image
+                  src={hiredManagement.photo}
+                  alt={hiredManagement.name}
+                  className="w-32 h-32 object-cover mx-auto mb-4 border-2 "
+                  width={320} // Provide the width of the image
+                  height={320} // You might also need to provide the height depending on your requirements
+                />
+                <h3 className="text-xl font-semibold text-white dark:text-black">{hiredManagement.name}</h3>
+                <p className="text-white dark:text-black">{hiredManagement.title}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

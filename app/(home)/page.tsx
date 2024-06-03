@@ -50,7 +50,7 @@ export default function Home() {
     <section className="relative flex flex-col min-h-screen bg-gradient-to-r from-[#FFFFFF] to-[#8E8E8E] dark:bg-gradient-to-r dark:from-[#B2B2B2] dark:to-[#202020]">
       <section className="relative flex flex-col items-center justify-center text-center gap-6 z-10 w-full h-full pointer-events-none">
         {/* Add a container for the heading, paragraph, and buttons */}
-        <div className="relative w-full max-w-screen-full mx-auto py-6 pointer-events-auto">
+        <div className="relative w-full max-w-screen-full mx-auto py-16 lg:py-32 pointer-events-auto">
           <video
             className="absolute top-0 left-0 w-full h-full object-fill z-0"
             src="/vid/An_ytOQq3P_uCD36bUhg62gDG35HRdsZA111PJEAz_2g_qSiO20wceMcwi50CDcgAHZHoMX2y_B6lozpBns9RP_H.mp4"
@@ -65,7 +65,7 @@ export default function Home() {
             {isMuted ? "Unmute" : "Mute"}
           </button>
           <div className="relative z-10">
-            <h1 className="mt-[50px] text-5xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-black dark:text-white bg-white bg-opacity-80 dark:bg-black dark:bg-opacity-80 p-4 rounded inline-block ">
+            <h1 className="mt-[50px] text-4xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-black dark:text-white bg-white bg-opacity-80 dark:bg-black dark:bg-opacity-80 p-4 rounded inline-block ">
               <span className="text-upcolor font-sans">UP Madayaw</span>{" "}
               Multi-Purpose Cooperative
             </h1>
@@ -96,7 +96,6 @@ export default function Home() {
             </div>
           </div>
         </div>
-
         <div className="flex flex-col lg:flex-row justify-between w-full max-w-[1400px] gap-6 pointer-events-auto">
           <div className="flex-1 flex flex-col">
             <div className="relative h-full w-full mx-auto">
@@ -112,7 +111,7 @@ export default function Home() {
                         <CardContent className="flex items-center justify-center h-[475px] p-6">
                           <Image
                             alt="Image1"
-                            className="w-full h-full object-fill"
+                            className="w-full h-full object-contain"
                             src={pic1}
                           />
                         </CardContent>
@@ -125,7 +124,7 @@ export default function Home() {
                         <CardContent className="flex items-center justify-center h-[475px] p-6">
                           <Image
                             alt="Image2"
-                            className="w-full h-full object-fill"
+                            className="w-full h-full object-contain"
                             src={pic2}
                           />
                         </CardContent>
@@ -138,7 +137,7 @@ export default function Home() {
                         <CardContent className="flex items-center justify-center h-[475px] p-6">
                           <Image
                             alt="Image3"
-                            className="w-full h-full object-fill"
+                            className="w-full h-full object-contain"
                             src={pic3}
                           />
                         </CardContent>
@@ -151,7 +150,7 @@ export default function Home() {
                         <CardContent className="flex items-center justify-center h-[475px] p-6">
                           <Image
                             alt="Image4"
-                            className="w-full h-full object-fill"
+                            className="w-full h-full object-contain"
                             src={pic4}
                           />
                         </CardContent>
@@ -164,7 +163,7 @@ export default function Home() {
                         <CardContent className="flex items-center justify-center h-[475px] p-6">
                           <Image
                             alt="Image5"
-                            className="w-[350px] h-full object-fill"
+                            className="w-full h-full object-contain"
                             src={pic5}
                           />
                         </CardContent>
