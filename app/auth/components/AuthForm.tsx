@@ -21,8 +21,8 @@ import { cn } from "@/lib/utils";
 import { useState, useTransition } from "react";
 import { loginWithEmailAndPassword } from "../actions";
 import { AuthTokenResponse } from "@supabase/supabase-js";
-import Image from "next/image";
-import coop from "@/components/img/coop_logo.jpg";
+import ForgotPassword from "./ForgotPassword";
+
 const FormSchema = z.object({
   email: z.string().email(),
   password: z.string().min(1, { message: "Password can not be empty" }),
@@ -109,6 +109,7 @@ export default function AuthForm() {
               </FormItem>
             )}
           />
+          <ForgotPassword />
           <Button
             type="submit"
             variant="up"

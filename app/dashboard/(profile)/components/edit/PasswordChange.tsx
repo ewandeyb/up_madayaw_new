@@ -2,7 +2,6 @@ import React from "react";
 import DialogForm from "../DialogForm";
 import { Button } from "@/components/ui/button";
 import { Pencil1Icon } from "@radix-ui/react-icons";
-import EditForm from "./EditorForm";
 import { IMemberData } from "@/lib/types";
 import PasswordChangeForm from "./PasswordChangeForm";
 

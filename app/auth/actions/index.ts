@@ -13,6 +13,13 @@ export async function loginWithEmailAndPassword(data: {
   return JSON.stringify(result);
 }
 
+export async function sendPasswordResetRequest(data: {
+  email: string;
+}) {
+
+}
+
+
 export async function logout() {
   const supabase = await createSupbaseServerClient();
 
