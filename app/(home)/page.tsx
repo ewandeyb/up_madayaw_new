@@ -50,7 +50,7 @@ export default function Home() {
     <section className="relative flex flex-col min-h-screen bg-gradient-to-r from-[#FFFFFF] to-[#8E8E8E] dark:bg-gradient-to-r dark:from-[#B2B2B2] dark:to-[#202020]">
       <section className="relative flex flex-col items-center justify-center text-center gap-6 z-10 w-full h-full pointer-events-none">
         {/* Add a container for the heading, paragraph, and buttons */}
-        <div className="relative w-full max-w-screen-full mx-auto py-16 lg:py-32 pointer-events-auto">
+        <div className="relative w-full max-w-screen-full mx-auto py-20 lg:py-40 pointer-events-auto">
           <video
             className="absolute top-0 left-0 w-full h-full object-fill z-0"
             src="/vid/An_ytOQq3P_uCD36bUhg62gDG35HRdsZA111PJEAz_2g_qSiO20wceMcwi50CDcgAHZHoMX2y_B6lozpBns9RP_H.mp4"
