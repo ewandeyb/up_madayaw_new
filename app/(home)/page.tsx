@@ -6,6 +6,7 @@ import Header from "../../components/Header";
 import Footer from "@/components/Footer";
 import Image from "next/image";
 
+import announcement from "@/public/img/435670229_10229073373972540_655227071983454797_n.jpg";
 import pic1 from "@/public/img/441991842_909479770998104_3806478304152707033_n.png";
 import pic2 from "@/public/img/441990033_1444290863143208_8684292486800113276_n.png";
 import pic3 from "@/public/img/442513757_1194265108603502_5056427485082478971_n.png";
@@ -180,51 +181,75 @@ export default function Home() {
             </div>
           </div>
           <div className="flex-1 flex flex-col">
-            <div className="bg-white dark:bg-black p-4 rounded-lg shadow-md h-full overflow-y-auto mb-11">
+            <div className="bg-white dark:bg-black p-4 rounded-lg shadow-md h-full overflow-y-auto mb-9">
               <h2 className="text-2xl text-left p-4 font-bold">
                 Announcements
               </h2>
-              <ul className="h-[270px] p-4 sm:h-[270px] md:h-[270px] lg:h-[390px] xl:h-[395px] 2xl:h-[400px] text-left overflow-y-auto p-4">
-                <li className="mb-2">
-                  <p className="text-base sm:text-base md:text-base lg:text-base xl:text-base 2xl:text-lg text-left">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Porta lorem mollis aliquam ut. Turpis massa
-                    tincidunt dui ut ornare lectus sit amet. Sed faucibus
-                    turpis in eu mi bibendum. In dictum non consectetur a
-                    erat. Dignissim enim sit amet venenatis urna cursus eget
-                    nunc scelerisque. Varius duis at consectetur lorem donec
-                    massa sapien faucibus. Sit amet venenatis urna cursus
-                    eget. Tellus pellentesque eu.
-                  </p>
-                </li>
-                <li className="mb-2">
-                  <p className="text-base sm:text-base md:text-base lg:text-base xl:text-base 2xl:text-lg text-left">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Porta lorem mollis aliquam ut. Turpis massa
-                    tincidunt dui ut ornare lectus sit amet. Sed faucibus
-                    turpis in eu mi bibendum. In dictum non consectetur a
-                    erat. Dignissim enim sit amet venenatis urna cursus eget
-                    nunc scelerisque. Varius duis at consectetur lorem donec
-                    massa sapien faucibus.
-                  </p>
-                </li>
-                <li className="mb-2">
-                  <p className="text-base sm:text-base md:text-base lg:text-base xl:text-base 2xl:text-lg text-left">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Porta lorem mollis aliquam ut. Turpis massa
-                    tincidunt dui ut ornare lectus sit amet. Sed faucibus
-                    turpis in eu mi bibendum. In dictum non consectetur a
-                    erat. Dignissim enim sit amet venenatis urna cursus eget
-                    nunc scelerisque. Varius duis at consectetur lorem donec
-                    massa sapien faucibus. Sit amet venenatis urna cursus
-                    eget. Tellus pellentesque eu.
-                  </p>
-                </li>
-                {/* Add more announcements as needed */}
-              </ul>
+              <div className="flex flex-col lg:flex-row items-center gap-6">
+                <Image
+                  alt="Image5"
+                  className="w-full h-full lg:w-56 lg:h-56 xl:w-80 xl:h-80 object-contain p-4"
+                  src={announcement}
+                />
+                <ul className=" w-full h-[270px] p-4 sm:h-[270px] md:h-[270px] lg:h-[400px] xl:h-[400px] 2xl:h-[405px] text-left overflow-y-auto p-4">
+                  <li className="mb-2">
+                    <p className="text-base sm:text-base md:text-base lg:text-base xl:text-base 2xl:text-lg text-left">
+                      Meet the New Team
+                    </p>
+                  </li>
+                  <li className="mb-2">
+                    <p className="text-base sm:text-base md:text-base lg:text-base xl:text-base 2xl:text-lg text-left">
+                      UPMMPC Board of Directors 2024-2025
+                    </p>
+                  </li>
+                  <li className="mb-2">
+                    <p className="text-base sm:text-base md:text-base lg:text-base xl:text-base 2xl:text-lg text-left">
+                      Chairperson - Michael Gatela
+                    </p>
+                  </li>
+                  <li className="mb-2">
+                    <p className="text-base sm:text-base md:text-base lg:text-base xl:text-base 2xl:text-lg text-left">
+                      Vice Chairperson - Marilou Montiflor
+                    </p>
+                  </li>
+                  <li className="mb-2">
+                    <p className="text-base sm:text-base md:text-base lg:text-base xl:text-base 2xl:text-lg text-left">
+                      Board Director - Jo-An Garcia
+                    </p>
+                  </li>
+                  <li className="mb-2">
+                    <p className="text-base sm:text-base md:text-base lg:text-base xl:text-base 2xl:text-lg text-left">
+                      Board Director - Lynda Buenaobra
+                    </p>
+                  </li>
+                  <li className="mb-2">
+                    <p className="text-base sm:text-base md:text-base lg:text-base xl:text-base 2xl:text-lg text-left">
+                      Board Director- Liza Fulvadora
+                    </p>
+                  </li>
+                  <li className="mb-2">
+                    <p className="text-base sm:text-base md:text-base lg:text-base xl:text-base 2xl:text-lg text-left">
+                      Board Secretary - Ruelyn Peronilla
+                    </p>
+                  </li>
+                  <li className="mb-2">
+                    <p className="text-base sm:text-base md:text-base lg:text-base xl:text-base 2xl:text-lg text-left">
+                      Board Treasurer - Annalyn Paz Pasaol
+                    </p>
+                  </li>
+                  <li className="mb-2">
+                    <p className="text-base sm:text-base md:text-base lg:text-base xl:text-base 2xl:text-lg text-left">
+                      Daghang salamat sa inyong padayon na Pagsalig Kanamo!!!
+                    </p>
+                  </li>
+                  <li className="mb-2">
+                    <p className="text-base sm:text-base md:text-base lg:text-base xl:text-base 2xl:text-lg text-left">
+                      UPMMPC, Serving the University Community!!!
+                    </p>
+                  </li>
+                  {/* Add more announcements as needed */}
+                </ul>
+              </div>
             </div>
           </div>
         </div>
