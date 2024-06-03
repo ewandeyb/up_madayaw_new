@@ -193,7 +193,7 @@ const OrganizationalChart = () => {
         <div className="flex flex-col lg:flex-row justify-around">
           <div className="flex flex-col w-full border-2 p-4">
             <h1 className="text-2xl font-bold text-center mt-3 mb-12 text-white dark:text-black">Audit & Inventory Comm.</h1>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-8">
               {auditInventoryComm.map((auditInventoryComm, index) => (
                 <div key={index} className="text-center">
                   <Image
@@ -210,7 +210,7 @@ const OrganizationalChart = () => {
           </div>
           <div className="flex flex-col w-full border-2 p-4">
             <h1 className="text-2xl font-bold text-center mt-3 mb-12 text-white dark:text-black">Election Committee</h1>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-8">
               {electionCommittee.map((electionCommittee, index) => (
                 <div key={index} className="text-center">
                   <Image
@@ -261,7 +261,7 @@ const OrganizationalChart = () => {
         <div className="flex flex-col lg:flex-row justify-around">
           <div className="flex flex-col w-full border-2 p-4">
             <h1 className="text-2xl font-bold text-center mt-3 mb-12 text-white dark:text-black">Education & Training Comm.</h1>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-8">
               {educationTrainingComm.map((educationTrainingComm, index) => (
                 <div key={index} className="text-center">
                   <Image
@@ -278,7 +278,7 @@ const OrganizationalChart = () => {
           </div>
           <div className="flex flex-col w-full border-2 p-4">
             <h1 className="text-2xl font-bold text-center mt-3 mb-12 text-white dark:text-black">Credit Committee</h1>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-8">
               {creditCommittee.map((creditCommittee, index) => (
                 <div key={index} className="text-center">
                   <Image
@@ -297,7 +297,7 @@ const OrganizationalChart = () => {
         <div className="flex flex-col lg:flex-row justify-around">
           <div className="flex flex-col w-full border-2 p-4">
             <h1 className="text-2xl font-bold text-center mt-3 mb-12 text-white dark:text-black">Gender Committee</h1>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-8">
               {genderCommittee.map((genderCommittee, index) => (
                 <div key={index} className="text-center">
                   <Image
@@ -314,7 +314,7 @@ const OrganizationalChart = () => {
           </div>
           <div className="flex flex-col w-full border-2 p-4">
             <h1 className="text-2xl font-bold text-center mt-3 mb-12 text-white dark:text-black">Ethics Committee</h1>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-8">
               {ethicsCommittee.map((ethicsCommittee, index) => (
                 <div key={index} className="text-center">
                   <Image
@@ -332,7 +332,7 @@ const OrganizationalChart = () => {
         </div>
         <div className="flex flex-col border-2 p-4">
           <h1 className="text-2xl font-bold text-center mt-3 mb-12 text-white dark:text-black">Mediation & Conciliation Comm.</h1>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 ">
+          <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-8 ">
             {mediationConciliationComm.map((mediationConciliationComm, index) => (
               <div key={index} className="text-center">
                 <Image
@@ -349,7 +349,7 @@ const OrganizationalChart = () => {
         </div>
         <div className="flex flex-col border-2 p-4">
           <h1 className="text-2xl font-bold text-center mt-3 mb-12 text-white dark:text-black">Hired Management</h1>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-8">
             {hiredManagement.map((hiredManagement, index) => (
               <div key={index} className="text-center">
                 <Image
