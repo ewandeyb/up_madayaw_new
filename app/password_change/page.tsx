@@ -31,8 +31,6 @@ const FormSchema1 = z.object({
 export default function PasswordChange() {
   const [isPending, startTransition] = useTransition();
 
-
-
   const form1 = useForm<z.infer<typeof FormSchema1>>({
     resolver: zodResolver(FormSchema1)
   });

@@ -26,6 +26,7 @@ export async function updateUserPassword(pass_data: {
     })
 
     if (updatePassword.error?.message) {
+      console.log("ASJDIAOSDJOIASJD")
       console.log(JSON.stringify(updatePassword));
       return JSON.stringify(updatePassword);
     }

@@ -16,9 +16,14 @@ export async function loginWithEmailAndPassword(data: {
 export async function sendPasswordResetRequest(data: {
   email: string;
 }) {
+  const supabase = await createSupbaseServerClient();
 
+  const result = await supabase.auth.resetPasswordForEmail(data.email, {
+    redirectTo: 'localhost:3000/password_change',
+  })
+
+  return JSON.stringify(result)
 }
-
 
 export async function logout() {
   const supabase = await createSupbaseServerClient();

@@ -1,5 +1,7 @@
 "use client";
 
+import { createClient } from '@supabase/supabase-js'
+
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import Header from "../../components/Header";
@@ -22,8 +24,31 @@ import {
   CarouselPrevious,
   type CarouselApi,
 } from "@/components/ui/carousel";
+import { redirect, useParams, useSearchParams } from "next/navigation";
 
 export default function Home() {
+
+  const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!)
+
+  const { data } = supabase.auth.onAuthStateChange((event, session) => {
+    console.log(event, session)
+
+    if (event === 'INITIAL_SESSION') {
+      // handle initial session
+    } else if (event === 'SIGNED_IN') {
+      redirect("/dashboard");
+    } else if (event === 'SIGNED_OUT') {
+      // handle sign out event
+    } else if (event === 'PASSWORD_RECOVERY') {
+      redirect("/password_change");
+    } else if (event === 'TOKEN_REFRESHED') {
+      // handle token refreshed event
+    } else if (event === 'USER_UPDATED') {
+      // handle user updated event
+    }
+  })
+
+
   const [api, setApi] = React.useState<CarouselApi>();
   const [current, setCurrent] = React.useState(0);
   const [count, setCount] = React.useState(0);

@@ -14,11 +14,13 @@ export default function DialogForm({
 	id,
 	title,
 	form,
+	description,
 }: {
 	title: string;
 	Trigger: ReactNode;
 	id: string;
 	form: ReactNode;
+	description: string;
 }) {
 	return (
 		<Dialog>
@@ -29,7 +31,7 @@ export default function DialogForm({
 				<DialogHeader>
 					<DialogTitle>{title}</DialogTitle>
 					<DialogDescription>
-						Make change to profile here.
+						{description}
 					</DialogDescription>
 				</DialogHeader>
 				{form}

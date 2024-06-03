@@ -22,7 +22,7 @@ import { useTransition } from "react";
 import { sendPasswordResetRequest } from "../actions";
 
 const FormSchema = z.object({
-  Email: z.string().email()
+  email: z.string().email()
 });
 
 export default function PasswordChange() {
@@ -36,7 +36,7 @@ export default function PasswordChange() {
     startTransition(async () => {
       try {
         const response = await sendPasswordResetRequest(data);
-        const parsedResponse = JSON.parse(FormSchema);
+        const parsedResponse = JSON.parse(response);
 
         if (parsedResponse.error) {
           toast({
@@ -84,7 +84,7 @@ export default function PasswordChange() {
         <div className="">
           <FormField
             control={form1.control}
-            name="Email"
+            name="email"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Email</FormLabel>
@@ -106,7 +106,7 @@ export default function PasswordChange() {
           className="flex gap-2 items-center w-full"
           variant="outline"
         >
-          Change Password (this will sign you out){" "}
+          Send Request (please check your email){" "}
           <AiOutlineLoading3Quarters
             className={cn("animate-spin", isPending ? "block" : "hidden")}
           />

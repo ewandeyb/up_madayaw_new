@@ -9,12 +9,12 @@ import Link from "next/link";
 export default function Profile() {
   return (
     <DialogForm
-      id="change-password"
-      title="Change Password"
+      id="send-password-reset"
+      title="Send Password Reset"
+      description="Please type in the email you used to register."
       Trigger={
         <Link href="">
-          <Pencil1Icon />
-          Change Password
+          Forgot Password?
         </Link>
       }
       form={<ForgotPassswordForm />}
