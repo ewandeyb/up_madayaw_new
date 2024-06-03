@@ -115,6 +115,19 @@ export const FullApplicationFormSchema = z.object({
   RelativeProvince: z.string().min(2),
   RelativeZipCode: z.coerce.number(),
 
+  dependents: z.array(
+    z.object({
+      id: z.number(),
+      FirstName: z.string().min(1, "First Name is required"),
+      MiddleName: z.string().optional(),
+      LastName: z.string().min(1, "Last Name is required"),
+      Suffix: z.string().max(10).optional(),
+      BirthDate: z.date().optional(),
+      Relationship: z.string().min(1, "Relation is required"),
+      Sex: z.enum(["Male", "Female"]),
+    })
+  ),
+
   Dependent1FirstName: z.string().optional(),
   Dependent1MiddleName: z.string().optional(),
   Dependent1LastName: z.string().optional(),

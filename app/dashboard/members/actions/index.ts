@@ -3,7 +3,6 @@ import { readUserSession } from "@/lib/actions";
 import { createSupabaseAdmin, createSupbaseServerClient } from "@/lib/supabase";
 import { revalidatePath, unstable_noStore } from "next/cache";
 import { UUID } from "crypto";
-import { createServerClient } from "@supabase/ssr";
 
 export async function elevateMember(data: {
   MembershipID: string;
