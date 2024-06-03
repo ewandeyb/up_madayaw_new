@@ -1,6 +1,6 @@
 "use client";
 
-import { createClient } from '@supabase/supabase-js'
+import { createClient } from "@supabase/supabase-js";
 
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -27,27 +27,28 @@ import {
 import { redirect, useParams, useSearchParams } from "next/navigation";
 
 export default function Home() {
-
-  const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!)
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  );
 
   const { data } = supabase.auth.onAuthStateChange((event, session) => {
-    console.log(event, session)
+    console.log(event, session);
 
-    if (event === 'INITIAL_SESSION') {
+    if (event === "INITIAL_SESSION") {
       // handle initial session
-    } else if (event === 'SIGNED_IN') {
+    } else if (event === "SIGNED_IN") {
       redirect("/dashboard");
-    } else if (event === 'SIGNED_OUT') {
+    } else if (event === "SIGNED_OUT") {
       // handle sign out event
-    } else if (event === 'PASSWORD_RECOVERY') {
+    } else if (event === "PASSWORD_RECOVERY") {
       redirect("/password_change");
-    } else if (event === 'TOKEN_REFRESHED') {
+    } else if (event === "TOKEN_REFRESHED") {
       // handle token refreshed event
-    } else if (event === 'USER_UPDATED') {
+    } else if (event === "USER_UPDATED") {
       // handle user updated event
     }
-  })
-
+  });
 
   const [api, setApi] = React.useState<CarouselApi>();
   const [current, setCurrent] = React.useState(0);
@@ -91,13 +92,14 @@ export default function Home() {
             {isMuted ? "Unmute" : "Mute"}
           </button>
           <div className="relative z-10">
-            <h1 className="mt-[50px] text-4xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-black dark:text-white bg-white bg-opacity-80 dark:bg-black dark:bg-opacity-80 p-4 rounded inline-block ">
-              <span className="text-upcolor font-sans">UP Madayaw</span>{" "}
+            <h1 className="mt-[30px] text-4xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white dark:text-gray-200 p-4 rounded inline-block text-shadow-glow animate-glow">
+              <span className="text-red-600 font-sans">UP Madayaw</span>{" "}
               Multi-Purpose Cooperative
             </h1>
+
             <div className="relative">
-              <div className="bg-white bg-opacity-80 dark:bg-black dark:bg-opacity-80 p-2 rounded inline-block mt-6">
-                <p className="text-sm sm:text-base lg:text-lg text-black dark:text-white">
+              <div className="bg-opacity-80 dark:bg-black dark:bg-opacity-80 p-2 rounded inline-block mt-6">
+                <p className="text-white sm:text-base lg:text-lg  font-semibold dark:text-white text-shadow-glow animate-glow">
                   Empowering communities through sustainable development.
                 </p>
               </div>
@@ -115,7 +117,10 @@ export default function Home() {
                 variant="secondary"
                 className="text-white font-bold border mr-2 w-26"
               >
-                <Link href="./application_form.pdf" className="text-black dark:text-white">
+                <Link
+                  href="./application_form.pdf"
+                  className="text-black dark:text-white"
+                >
                   Download Form
                 </Link>
               </Button>
