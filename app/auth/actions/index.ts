@@ -3,6 +3,11 @@
 import { createSupbaseServerClient } from "@/lib/supabase";
 import { redirect } from "next/navigation";
 
+interface UrlParameters {
+  code?: string;
+
+}
+
 export async function loginWithEmailAndPassword(data: {
   email: string;
   password: string;
@@ -13,13 +18,13 @@ export async function loginWithEmailAndPassword(data: {
   return JSON.stringify(result);
 }
 
-export async function sendPasswordResetRequest(data: {
+export async function sendPasswordResetRequest(data1: {
   email: string;
 }) {
   const supabase = await createSupbaseServerClient();
 
-  const result = await supabase.auth.resetPasswordForEmail(data.email, {
-    redirectTo: 'localhost:3000/password_change',
+  const result = await supabase.auth.resetPasswordForEmail(data1.email, {
+    redirectTo: 'localhost:3000/dashboard',
   })
 
   return JSON.stringify(result)

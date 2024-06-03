@@ -103,13 +103,12 @@ export default function AuthForm() {
                   <Input placeholder="*******" {...field} type="password" />
                 </FormControl>
                 <FormDescription>
-
+                  If you forgot your password, please contact your administrator
                 </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
           />
-          <ForgotPassword />
           <Button
             type="submit"
             variant="up"
