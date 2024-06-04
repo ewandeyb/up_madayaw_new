@@ -42,6 +42,7 @@ export default function PasswordChange() {
   async function onSubmit(data: z.infer<typeof FormSchema1>) {
     startTransition(async () => {
       try {
+        console.log("FIRING FROM PAGE.TSX")
         const response = await updateUserPassword(params.get("code")!, data);
         const parsedResponse = JSON.parse(response);
 
