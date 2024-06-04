@@ -41,14 +41,7 @@ The mockups give a visual preview of the user interface, showcasing the design a
 ### Member Management
 ![Member Management Mockup](path_to_member_management_mockup_image)
 
-### Financial Transactions
-![Financial Transactions Mockup](path_to_financial_transactions_mockup_image)
 
-### Inventory Control
-![Inventory Control Mockup](path_to_inventory_control_mockup_image)
-
-### Reporting
-![Reporting Mockup](path_to_reporting_mockup_image)
 
 ## Setting Up Development
 

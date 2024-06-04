@@ -5,7 +5,6 @@ import { redirect } from "next/navigation";
 
 interface UrlParameters {
   code?: string;
-
 }
 
 export async function loginWithEmailAndPassword(data: {
@@ -24,7 +23,7 @@ export async function sendPasswordResetRequest(data1: {
   const supabase = await createSupbaseServerClient();
 
   const result = await supabase.auth.resetPasswordForEmail(data1.email, {
-    redirectTo: 'localhost:3000/dashboard',
+    redirectTo: 'localhost:3000/password_change',
   })
 
   return JSON.stringify(result)

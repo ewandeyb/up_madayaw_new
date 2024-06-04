@@ -109,6 +109,10 @@ export default function AuthForm() {
               </FormItem>
             )}
           />
+          <div className="">
+            <ForgotPassword />
+          </div>
+
           <Button
             type="submit"
             variant="up"

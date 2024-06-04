@@ -1,33 +1,31 @@
-"use client";
-import { createSupbaseServerClient } from "@/lib/supabase";
 import { revalidatePath, unstable_noStore } from "next/cache";
-import { createClient } from '@supabase/supabase-js';
 import { getUser } from "@/utils/supabase/auth"; // Assuming you have an auth utility to get the logged-in user
 import { useParams } from "next/navigation";
+import { access } from "fs";
+import { createBrowserClient } from "@supabase/ssr"
+import { createClient } from "@supabase/supabase-js";
 
-const supabase = await createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!)
+// 
 
-export async function updateUserPassword(pass_data: {
+export async function updateUserPassword(access_code: string, pass_data: {
   PreviousPassword?: string,
   NewPassword: string,
   ConfirmPassword: string
 }
 ) {
-
   unstable_noStore(); // Cache
 
   if (pass_data.NewPassword === pass_data.ConfirmPassword) {
+    console.log("osijasoijfaoipdfj[aodisjfasd")
+    const supabase_url = "https://hudheaqnruaponeloslj.supabase.co"
+    const anon_key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh1ZGhlYXFucnVhcG9uZWxvc2xqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTQ4MDM0MTQsImV4cCI6MjAzMDM3OTQxNH0.k1V6fGk48AiZWeoeAqkqC0MZEjcUxyjOv2eqxwhd48A"
+    const supabase = await createBrowserClient(supabase_url, anon_key)
 
-
-    const params = useParams<{ code: string; }>()
-    console.log(1)
-    console.log(params.code)
-
-    const { error, data } = await supabase.auth.exchangeCodeForSession(params.code!)
-
-    console.log(2)
+    const { data, error } = await supabase.auth.exchangeCodeForSession(access_code);
     // Fetch the currently logged-in user
     const user = await getUser(supabase);
+    console.log(user);
+
     const updatePassword = await supabase.auth.updateUser({
       password: pass_data.NewPassword,
     })

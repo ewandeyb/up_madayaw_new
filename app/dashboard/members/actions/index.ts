@@ -256,3 +256,14 @@ export async function readMembers() {
 
   return await supabase.from("Permissions").select("*,MemberData(*)");
 }
+
+export async function updateMemberPassword(user_id: UUID, new_password: string) {
+  unstable_noStore();
+
+  const supabase = await createSupbaseServerClient();
+
+  const { data: user, error } = await supabase.auth.admin.updateUserById(
+    user_id,
+    { password: new_password }
+  )
+}
