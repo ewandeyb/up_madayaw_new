@@ -63,32 +63,29 @@ export default function ApplicationForm() {
   const form = useForm<ApplicationFormFields>({
     resolver: zodResolver(ApplicationFormSchema),
     defaultValues: {
-      FirstName: "Jane",
-      MiddleName: "MTest",
-      LastName: "LTest",
+      FirstName: "",
+      MiddleName: "",
+      LastName: "",
       CivilStatus: "Single",
-      Email: "example@email.com",
-      Birthplace: "PlaceTest",
-      ContactNumber: "55569420",
-      PositionTitle: "PosTest",
+      Email: "",
+      Birthplace: "",
+      ContactNumber: "",
+      PositionTitle: "",
       NatureOfEmployment: "NGS",
-      OfficeTitle: "OfficeTest",
-      YearsOfService: 42,
+      OfficeTitle: "",
 
-      MemLine1: "Line1",
-      MemBarangay: "Barangay",
-      MemMunicipalityCity: "Municipality",
-      MemProvince: "Province",
-      MemZipCode: 69,
+      MemLine1: "",
+      MemBarangay: "",
+      MemMunicipalityCity: "",
+      MemProvince: "",
 
-      NearestRelativeFirstName: "RelativeFirst",
-      NearestRelativeLastName: "RelativeLast",
+      NearestRelativeFirstName: "",
+      NearestRelativeLastName: "",
 
-      RelativeLine1: "RelLine1",
-      RelativeBarangay: "RelBaran",
-      RelativeMunicipalityCity: "RelCity",
-      RelativeProvince: "RelProvicnce",
-      RelativeZipCode: 420,
+      RelativeLine1: "",
+      RelativeBarangay: "",
+      RelativeMunicipalityCity: "",
+      RelativeProvince: "",
 
       dependents: [
         {
@@ -102,9 +99,9 @@ export default function ApplicationForm() {
         },
       ],
 
-      PrevMemberStatus: "Yes",
-      LeaveReason: "form sucks",
-      ReferralName: "RefName",
+      PrevMemberStatus: "",
+      LeaveReason: "",
+      ReferralName: "",
     },
   });
 
@@ -158,6 +155,7 @@ export default function ApplicationForm() {
                     <Input
                       placeholder="Aaron Dave"
                       type="text"
+                      className="selected:drop-shadow"
                       {...field}
                       onChange={field.onChange}
                     />
