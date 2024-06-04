@@ -103,20 +103,20 @@ export default function AuthForm() {
                   <Input placeholder="*******" {...field} type="password" />
                 </FormControl>
                 <FormDescription>
-                  If you forgot your password, please contact your administrator
+                  Please contact administrator in case you forgot your password.
                 </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
           />
-          <div className="">
+          {/* <div className="float-right hover:underline pb-5">
             <ForgotPassword />
-          </div>
+          </div> */}
 
           <Button
             type="submit"
             variant="up"
-            className="w-full flex items-center gap-2"
+            className="w-full flex items-center gap-2 mt-10"
           >
             Login{" "}
             <AiOutlineLoading3Quarters

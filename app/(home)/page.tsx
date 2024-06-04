@@ -92,14 +92,14 @@ export default function Home() {
             {isMuted ? "Unmute" : "Mute"}
           </button>
           <div className="relative z-10">
-            <h1 className="mt-[30px] text-4xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white dark:text-gray-200 p-4 rounded inline-block text-shadow-glow animate-glow">
+            <h1 className="mt-[30px] text-4xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white dark:text-gray-200 p-4 rounded inline-block ">
               <span className="text-red-600 font-sans">UP Madayaw</span>{" "}
               Multi-Purpose Cooperative
             </h1>
 
             <div className="relative">
               <div className="bg-opacity-80 dark:bg-black dark:bg-opacity-80 p-2 rounded inline-block mt-6">
-                <p className="text-white sm:text-base lg:text-lg  font-semibold dark:text-white text-shadow-glow animate-glow">
+                <p className="text-white sm:text-base lg:text-lg  font-semibold dark:text-white ">
                   Empowering communities through sustainable development.
                 </p>
               </div>

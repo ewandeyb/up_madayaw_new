@@ -13,7 +13,7 @@ export default function Profile() {
       title="Send Password Reset"
       description="Please type in the email you used to register."
       Trigger={
-        <Link href="">
+        <Link href="" className=" text-sm">
           Forgot Password?
         </Link>
       }
