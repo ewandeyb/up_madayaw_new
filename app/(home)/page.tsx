@@ -77,7 +77,7 @@ export default function Home() {
     <section className="relative flex flex-col min-h-screen bg-gradient-to-r from-[#FFFFFF] to-[#8E8E8E] dark:bg-gradient-to-r dark:from-[#B2B2B2] dark:to-[#202020]">
       <section className="relative flex flex-col items-center justify-center text-center gap-6 z-10 w-full h-full pointer-events-none">
         {/* Add a container for the heading, paragraph, and buttons */}
-        <div className="relative w-full max-w-screen-full mx-auto py-20 lg:py-40 pointer-events-auto">
+        <div className="relative w-full max-w-screen-full mx-auto py-10 lg:py-40 pointer-events-auto">
           <video
             className="absolute top-0 left-0 w-full h-full object-fill z-0"
             src="/vid/An_ytOQq3P_uCD36bUhg62gDG35HRdsZA111PJEAz_2g_qSiO20wceMcwi50CDcgAHZHoMX2y_B6lozpBns9RP_H.mp4"
@@ -91,15 +91,16 @@ export default function Home() {
           >
             {isMuted ? "Unmute" : "Mute"}
           </button>
-          <div className="relative z-10">
-            <h1 className="mt-[30px] text-4xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white dark:text-gray-200 p-4 rounded inline-block ">
-              <span className="text-red-600 font-sans">UP Madayaw</span>{" "}
-              Multi-Purpose Cooperative
-            </h1>
-
+          <div className="relative z-10 bg-white bg-opacity-70 dark:bg-black dark:bg-opacity-70 p-6 rounded inline-block mt-6 max-w-md md:max-w-screen-sm lg:max-w-screen-md xl:max-w-screen-xl">
+            <div className="p-2 rounded inline-block mt-6">
+              <h1 className="text-4xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-black dark:text-white p-4 rounded inline-block">
+                <span className="text-red-600 font-sans">UP Madayaw</span>{" "}
+                Multi-Purpose Cooperative
+              </h1>
+            </div>
             <div className="relative">
-              <div className="bg-opacity-80 dark:bg-black dark:bg-opacity-80 p-2 rounded inline-block mt-6">
-                <p className="text-white sm:text-base lg:text-lg  font-semibold dark:text-white ">
+              <div className="p-2 rounded inline-block mt-6">
+                <p className="text-black dark:text-white sm:text-base lg:text-lg font-semibold dark:text-white ">
                   Empowering communities through sustainable development.
                 </p>
               </div>
@@ -114,7 +115,7 @@ export default function Home() {
               </Button>
               <Button
                 size="sm"
-                variant="secondary"
+                variant="default"
                 className="text-white font-bold border mr-2 w-26"
               >
                 <Link

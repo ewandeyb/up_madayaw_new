@@ -3,12 +3,13 @@ import Link from "next/link";
 export default function Footer() {
   return (
     <>
+      <hr className="border-r"></hr>
       <footer
-        className="p-6 md:py-12 bg-gray dark:bg-black text-center text-white "
-        /* style={{
-        backgroundColor: "#7b1113",
-        backgroundImage: "linear-gradient(355deg, #7b1113 0%, #f1f3f5 100%)",
-      }} */
+        className="p-6 md:py-12 bg-gray dark:bg-black text-center text-white"
+      /* style={{
+      backgroundColor: "#7b1113",
+      backgroundImage: "linear-gradient(355deg, #7b1113 0%, #f1f3f5 100%)",
+    }} */
       >
         <div className="flex flex-col items-center gap-2 text-sm text-white">
           <div className="flex gap-4">
