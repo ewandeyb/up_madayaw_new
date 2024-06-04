@@ -21,6 +21,7 @@ import { IMemberData } from "@/lib/types";
 import { useTransition } from "react";
 import { updateUserPassword } from "./actions";
 import { getUser } from "@/utils/supabase/auth";
+import { useParams } from "next/navigation";
 
 const FormSchema1 = z.object({
   PreviousPassword: z.string().optional(),
@@ -29,6 +30,9 @@ const FormSchema1 = z.object({
 });
 
 export default function PasswordChange() {
+  const site = new URL((window.location.href).toString());
+  const params = new URLSearchParams(site.search);
+
   const [isPending, startTransition] = useTransition();
 
   const form1 = useForm<z.infer<typeof FormSchema1>>({
@@ -38,7 +42,7 @@ export default function PasswordChange() {
   async function onSubmit(data: z.infer<typeof FormSchema1>) {
     startTransition(async () => {
       try {
-        const response = await updateUserPassword(data);
+        const response = await updateUserPassword(params.get("code")!, data);
         const parsedResponse = JSON.parse(response);
 
         if (parsedResponse.error) {
