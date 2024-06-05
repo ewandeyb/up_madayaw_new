@@ -19,7 +19,7 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { cn } from "@/lib/utils";
 import { IMemberData } from "@/lib/types";
 import { useTransition } from "react";
-import { updateMemberBasicById } from "../../actions";
+import { updateMemberBasicByEmail } from "../../actions";
 
 const FormSchema = z.object({
   Email: z.string().email({
@@ -40,7 +40,7 @@ export default function ContactInfo({ MemberProfile }: { MemberProfile: IMemberD
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     startTransition(async () => {
       try {
-        const response = await updateMemberBasicById(MemberProfile.MembershipID, data);
+        const response = await updateMemberBasicByEmail(MemberProfile.Email, data);
         const parsedResponse = JSON.parse(response);
 
         if (parsedResponse.error) {

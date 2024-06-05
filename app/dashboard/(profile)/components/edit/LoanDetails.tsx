@@ -19,7 +19,7 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { cn } from "@/lib/utils";
 import { IPermission } from "@/lib/types";
 import { useTransition } from "react";
-import { updateMemberBasicById } from "../../actions";
+import { updateMemberBasicByEmail } from "../../actions";
 import { MemberSchema } from "../create/schema";
 import { MemberFields } from "../create/types";
 
@@ -52,7 +52,7 @@ export default function LoanDetails() {
     console.log("reached here");
     startTransition(async () => {
        const { error } = JSON.parse(
-        await updateMemberBasicById(permission.PermissionsID, data)
+        await updateMemberBasicByEmail(permission.PermissionsID, data)
       );
       console.log("hi"); 
 

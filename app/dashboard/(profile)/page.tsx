@@ -48,7 +48,7 @@ export default async function Profile() {
       : "NULL";
 
   return (
-    <section className="max-w-screen max-h-90vh p-10 px-4 lg:px-8 border-r">
+    <section className="max-w-screen max-h-90vh p-10 px-4 lg:px-8 border-2">
       <div className="gap-1 flex justify-end">
         <Button variant="secondary">
           <Link href="/loan_form.pdf" className=" font-normal">
@@ -91,12 +91,12 @@ export default async function Profile() {
                     <div className="flex items-center">
                       <Image
                         alt="Civil Status"
-                        className="overflow-hidden rounded-xl object-cover"
+                        className="object-contain"
                         height="60"
                         src={civil}
                         width="60"
                       />
-                      <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
+                      <p className="ml-8 text-xl text-gray-500 dark:text-gray-400">
                         Civil Status:{" "}
                         <span className="font-semibold">
                           {MemberData.CivilStatus ?? "NULL"}
@@ -106,12 +106,12 @@ export default async function Profile() {
                     <div className="flex items-center">
                       <Image
                         alt="Date of Birth"
-                        className="overflow-hidden rounded-xl object-cover"
+                        className="object-contain"
                         height="60"
                         src={birth}
                         width="60"
                       />
-                      <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
+                      <p className="ml-8 text-xl text-gray-500 dark:text-gray-400">
                         Date of Birth:{" "}
                         <span className="font-semibold">
                           {MemberData.BirthDate ?? "NULL"}
@@ -128,12 +128,12 @@ export default async function Profile() {
                     <div className="flex items-center">
                       <Image
                         alt="Email"
-                        className="rounded-xl object-cover"
+                        className="object-contain"
                         height="60"
                         src={email}
                         width="60"
                       />
-                      <p className="ml-8 text-base text-gray-500 dark:text-gray-400 overflow-auto">
+                      <p className="ml-8 text-xl text-gray-500 dark:text-gray-400 overflow-auto">
                         Email :{" "}
                         <span className="font-semibold">
                           {MemberData.Email ?? "NULL"}
@@ -150,12 +150,12 @@ export default async function Profile() {
                     <div className="flex items-center">
                       <Image
                         alt="Membership Type"
-                        className="overflow-hidden rounded-xl object-cover"
+                        className="object-contain"
                         height="60"
                         src={memtype}
                         width="60"
                       />
-                      <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
+                      <p className="ml-8 text-xl text-gray-500 dark:text-gray-400">
                         MemberType:{" "}
                         <span className="font-semibold">
                           {MemberData.MemberType ?? "NULL"}
@@ -178,12 +178,12 @@ export default async function Profile() {
                     <div className="flex items-center">
                       <Image
                         alt="Position"
-                        className="overflow-hidden rounded-xl object-cover"
+                        className="object-contain"
                         height="60"
                         src={position}
                         width="60"
                       />
-                      <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
+                      <p className="ml-8 text-xl text-gray-500 dark:text-gray-400">
                         Position Title:{" "}
                         {/* Add corresponding data if available */}
                       </p>
@@ -191,12 +191,12 @@ export default async function Profile() {
                     <div className="flex items-center">
                       <Image
                         alt="Office"
-                        className="overflow-hidden rounded-xl object-cover"
+                        className="object-contain"
                         height="60"
                         src={office}
                         width="60"
                       />
-                      <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
+                      <p className="ml-8 text-xl text-gray-500 dark:text-gray-400">
                         Office/Unit: {/* Add corresponding data if available */}
                       </p>
                     </div>
@@ -210,12 +210,12 @@ export default async function Profile() {
                     <div className="flex items-center">
                       <Image
                         alt="Loan"
-                        className="overflow-hidden rounded-xl object-cover"
+                        className="object-contain"
                         height="60"
                         src={loan}
                         width="60"
                       />
-                      <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
+                      <p className="ml-8 text-xl text-gray-500 dark:text-gray-400">
                         I would like to apply for:{" "}
                         {/* Add corresponding data if available */}
                       </p>
@@ -223,14 +223,14 @@ export default async function Profile() {
                     <div className="flex items-center">
                       <Image
                         alt="Amount"
-                        className="overflow-hidden rounded-xl object-cover"
+                        className="object-contain"
                         height="60"
                         src={amount}
                         width="60"
                       />
-                      <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
+                      <p className="ml-8 text-xl text-gray-500 dark:text-gray-400">
                         Amount in words:
-                        <span className="block text-base text-black dark:text-black">
+                        <span className="block text-black dark:text-black">
                           {/* Add corresponding data if available */}
                         </span>
                       </p>
@@ -238,12 +238,12 @@ export default async function Profile() {
                     <div className="flex items-center">
                       <Image
                         alt="Payment"
-                        className="overflow-hidden rounded-xl object-cover"
+                        className="object-contain"
                         height="60"
                         src={payment}
                         width="60"
                       />
-                      <p className="ml-8 text-base text-gray-500 dark:text-gray-400">
+                      <p className="ml-8 text-xl text-gray-500 dark:text-gray-400">
                         Payable in: {/* Add corresponding data if available */}
                       </p>
                     </div>

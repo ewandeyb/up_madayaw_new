@@ -10,7 +10,7 @@ import { string } from "zod";
 
 const supabase = createClient('https://hudheaqnruaponeloslj.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh1ZGhlYXFucnVhcG9uZWxvc2xqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTQ4MDM0MTQsImV4cCI6MjAzMDM3OTQxNH0.k1V6fGk48AiZWeoeAqkqC0MZEjcUxyjOv2eqxwhd48A');
 
-export async function updateMemberBasicById(id: string, data: Partial<IMemberData>) {
+export async function updateMemberBasicByEmail(email: string, data: Partial<IMemberData>) {
 
   unstable_noStore(); //Cache
 
@@ -19,7 +19,7 @@ export async function updateMemberBasicById(id: string, data: Partial<IMemberDat
   // Fetch the currently logged-in user
   const user = await getUser(supabase);
 
-  const result = await supabase.from("MemberData").update(data).eq("MembershipID", user.id);
+  const result = await supabase.from("MemberData").update(data).eq("Email", user.email);
   revalidatePath("/dashboard");
   return JSON.stringify(result);
 }
