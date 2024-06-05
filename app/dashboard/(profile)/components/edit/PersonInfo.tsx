@@ -36,7 +36,11 @@ const FormSchema = z.object({
   }),
 });
 
-export default function MemDetails({ MemberProfile }: { MemberProfile: IMemberData }) {
+export default function MemDetails({
+  MemberProfile,
+}: {
+  MemberProfile: IMemberData;
+}) {
   const [isPending, startTransition] = useTransition();
 
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -57,7 +61,10 @@ export default function MemDetails({ MemberProfile }: { MemberProfile: IMemberDa
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     startTransition(async () => {
       try {
-        const response = await updateMemberBasicByEmail(MemberProfile.Email, data);
+        const response = await updateMemberBasicByEmail(
+          MemberProfile.Email,
+          data
+        );
         const parsedResponse = JSON.parse(response);
 
         if (parsedResponse.error) {
@@ -65,7 +72,9 @@ export default function MemDetails({ MemberProfile }: { MemberProfile: IMemberDa
             title: "Failed to update",
             description: (
               <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-                <code className="text-white">{parsedResponse.error.message}</code>
+                <code className="text-white">
+                  {parsedResponse.error.message}
+                </code>
               </pre>
             ),
           });

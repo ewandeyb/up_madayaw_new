@@ -22,7 +22,7 @@ export default async function Profile() {
 
   // Fetch the currently logged-in user
   const user = await getUser(supabase);
-
+  console.log(user);
   if (!user) {
     return <div>Please log in to view your profile.</div>;
   }
@@ -34,9 +34,13 @@ export default async function Profile() {
     .select(
       "MembershipID, MembershipNo, FirstName, LastName, CivilStatus, BirthDate, Email, MemberType"
     )
-    .eq("Email", user.email) // Assuming user_id is the foreign key in your table
+    .eq("MembershipID", user.id) // Assuming user_id is the foreign key in your table
     .single();
-
+  const { data: EmploymentInfo } = await supabase
+    .from("Occupation")
+    .select("PositionTitle, OfficeTitle")
+    .eq("AssocMemberID", user.id)
+    .single();
   if (error) {
     return <div>Error: {error.message}</div>;
   }
@@ -48,9 +52,9 @@ export default async function Profile() {
       : "NULL";
 
   return (
-    <section className="max-w-screen max-h-90vh p-10 px-4 lg:px-8 border-2">
-      <div className="gap-1 flex justify-end">
-        <Button variant="secondary">
+    <section className="max-w-screen max-h-90vh p-10 px-4 lg:px-8 border-2 dark:bg-graident-dark">
+      <div className="grid grid-cols-1 gap-1 mb-4 items-center justify-start md:grid-cols-w-1/2 lg:float-right">
+        <Button variant="secondary" className="">
           <Link href="/loan_form.pdf" className=" font-normal">
             Loan Application
           </Link>
@@ -78,11 +82,11 @@ export default async function Profile() {
         </div>
       </div>
       <hr className="h-px my-6 bg-black border-0 dark:bg-white"></hr>
-      <div className="flex justify-center">
-        <div className="flex flex-col lg:flex-row justify-between w-full max-w-5xl gap-6">
-          <div className="max-w-[600px] mx-auto">
-            <div className="flex flex-col justify-center space-y-4 border-2 border-black dark:border-white bg-white dark:bg-black rounded-xl p-10">
-              <ul className="grid gap-6">
+      <div className="flex justify-center items-center">
+        <div className="flex flex-col lg:flex-row w-full max-w-5xl gap-6">
+          <div className="max-w-[600px] md:ml-6">
+            <div className="flex flex-col justify-center space-y-4 border-2 border-black dark:border-white bg-white dark:bg-black rounded-xl">
+              <ul className="grid gap-6 p-2">
                 <li className="mb-6">
                   <div className="grid gap-6">
                     <h3 className="text-3xl font-bold text-upcolor dark:text-white">
@@ -98,7 +102,7 @@ export default async function Profile() {
                       />
                       <p className="ml-8 text-xl text-gray-500 dark:text-gray-400">
                         Civil Status:{" "}
-                        <span className="font-semibold">
+                        <span className="font-semibold text-wrap">
                           {MemberData.CivilStatus ?? "NULL"}
                         </span>
                       </p>
@@ -133,9 +137,9 @@ export default async function Profile() {
                         src={email}
                         width="60"
                       />
-                      <p className="ml-8 text-xl text-gray-500 dark:text-gray-400 overflow-auto">
+                      <p className="ml-8 text-xl text-gray-500 dark:text-gray-400  ">
                         Email :{" "}
-                        <span className="font-semibold">
+                        <span className="font-semibold text-xs md:text-normal lg:text-xl">
                           {MemberData.Email ?? "NULL"}
                         </span>
                       </p>
@@ -167,9 +171,9 @@ export default async function Profile() {
               </ul>
             </div>
           </div>
-          <div className="max-w-[600px] mx-auto">
-            <div className="flex flex-col justify-center space-y-4 border-2 border-black dark:border-white bg-white dark:bg-black rounded-xl p-10">
-              <ul className="grid gap-6">
+          <div className="mx-auto justify-center">
+            <div className="flex flex-col justify-center space-y-4 border-2 border-black dark:border-white bg-white dark:bg-black rounded-xl">
+              <ul className="grid gap-6 p-2">
                 <li className="mb-6">
                   <div className="grid gap-6">
                     <h3 className="text-3xl font-bold text-upcolor dark:text-white">
@@ -185,7 +189,9 @@ export default async function Profile() {
                       />
                       <p className="ml-8 text-xl text-gray-500 dark:text-gray-400">
                         Position Title:{" "}
-                        {/* Add corresponding data if available */}
+                        <span className="font-semibold text-xs md:text-normal lg:text-xl">
+                          {EmploymentInfo?.PositionTitle ?? "NULL"}
+                        </span>
                       </p>
                     </div>
                     <div className="flex items-center">
@@ -197,7 +203,10 @@ export default async function Profile() {
                         width="60"
                       />
                       <p className="ml-8 text-xl text-gray-500 dark:text-gray-400">
-                        Office/Unit: {/* Add corresponding data if available */}
+                        Office/Unit:
+                        <span className="font-semibold text-xs md:text-normal lg:text-xl">
+                          {EmploymentInfo?.OfficeTitle ?? "NULL"}
+                        </span>
                       </p>
                     </div>
                   </div>

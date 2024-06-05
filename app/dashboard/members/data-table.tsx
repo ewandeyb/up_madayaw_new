@@ -90,10 +90,10 @@ export function DataTable<TData, TValue>({
   return (
     <div>
       <div>
-        <div className="flex items-center py-4">
+        <div className="flex flex-wrap gap-2 items-center py-4">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="secondary" className="max-w-24 mr-2">
+              <Button variant="secondary" className="max-w-24">
                 Filter by {selectedColumn}
               </Button>
             </DropdownMenuTrigger>
@@ -134,7 +134,7 @@ export function DataTable<TData, TValue>({
           {/* <div className="ml-2">
             <CreateMember />
           </div> */}
-          <div className="ml-2">
+          <div className="">
             <ElevateMember />
           </div>
           <DropdownMenu>
@@ -143,6 +143,7 @@ export function DataTable<TData, TValue>({
                 Columns
               </Button>
             </DropdownMenuTrigger>
+
             <DropdownMenuContent align="end">
               {table
                 .getAllColumns()
@@ -234,15 +235,19 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-      <div></div>
-      <div className="flex items-center justify-end space-x-2 py-5">
-        <p className="mr-auto text-sm">
-          Page {table.getState().pagination.pageIndex + 1} of{" "}
-          {table.getPageCount()}{" "}
+
+      <div className="flex flex-wrap items-center justify-end gap-4 py-5">
+        <p className="mr-auto text-sm ">
+          Page{" "}
+          <span className="font-bold">
+            {table.getState().pagination.pageIndex + 1}{" "}
+          </span>
+          of {table.getPageCount()}{" "}
         </p>
         <Button
           variant="secondary"
           size="sm"
+          className="w-20"
           onClick={() => table.setPageIndex(0)}
         >
           First Page
@@ -250,6 +255,7 @@ export function DataTable<TData, TValue>({
         <Button
           variant="secondary"
           size="sm"
+          className="w-20"
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
         >
@@ -258,6 +264,7 @@ export function DataTable<TData, TValue>({
         <Button
           variant="secondary"
           size="sm"
+          className="w-20"
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
         >
@@ -266,6 +273,7 @@ export function DataTable<TData, TValue>({
         <Button
           variant="secondary"
           size="sm"
+          className="w-20"
           onClick={() => table.setPageIndex(table.getPageCount() - 1)}
           disabled={!table.getCanNextPage()}
         >

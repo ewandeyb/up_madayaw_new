@@ -26,7 +26,7 @@ export type IMemberData = {
 
 export type IMemberPassword = {
   MembershipID: string;
-  PreviousPassword: string,
-  NewPassword: string,
-  ConfirmPassword: string
-}
+  PreviousPassword: string;
+  NewPassword: string;
+  ConfirmPassword: string;
+};

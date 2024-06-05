@@ -3,7 +3,6 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { SheetTrigger, SheetContent, Sheet } from "@/components/ui/sheet";
 import { AlignJustify } from "lucide-react";
-import logo from "../components/img/logo.png";
 import { readUserSession } from "@/lib/actions";
 import ModeToggle from "./ToggleDarkMode";
 import coop from "@/components/img/coop_no_bg.png";
@@ -17,7 +16,6 @@ export default async function Header() {
   const email = userSession.session?.user.email;
   const isDarkMode = true;
 
-  const isDarkModeClass = cn({ dark: isDarkMode });
   return (
     <header className="flex h-16 w-full items-center justify-between bg-up_color px-4 shadow-sm dark:bg-gray-950 sm:px-6 lg:px-8">
       <div className="flex items-center gap-2">
@@ -125,7 +123,7 @@ export default async function Header() {
               variant="up"
               className=" text-white font-bold border "
             >
-              Apply
+              Apply Now!
             </Button>
             <Image
               src={coop}

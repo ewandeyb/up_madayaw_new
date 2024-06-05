@@ -21,7 +21,7 @@ export default async function Layout({ children }: { children: ReactNode }) {
         <MobileSideNav />
       </div>
 
-      <div className="w-full sm:flex-1 p-5 sm:p-10 space-y-5 border-l">
+      <div className="w-full sm:flex-1 p-5 sm:p-10 space-y-5 border-l dark:bg-graident-dark">
         <ToggleSidebar />
         {children}
       </div>

@@ -847,7 +847,7 @@ export default function ApplicationForm() {
               key={item.id}
               className="grid grid-cols-1 md:grid-cols-7 lg:grid-cols-7 gap-2"
             >
-              <div className="col-span-2">
+              <div className="col-span-3 md:col-span-4">
                 <FormField
                   control={form.control}
                   name={`dependents.${index}.FirstName`}
@@ -867,7 +867,7 @@ export default function ApplicationForm() {
                   )}
                 />
               </div>
-              <div className="col-span-2">
+              <div className="col-span-3 md:col-span-3">
                 <FormField
                   control={form.control}
                   name={`dependents.${index}.MiddleName`}
@@ -887,7 +887,7 @@ export default function ApplicationForm() {
                   )}
                 />
               </div>
-              <div className="col-span-2">
+              <div className="col-span-3">
                 <FormField
                   control={form.control}
                   name={`dependents.${index}.LastName`}
@@ -907,7 +907,7 @@ export default function ApplicationForm() {
                   )}
                 />
               </div>
-              <div>
+              <div className="col-span-3 md:col-span-1">
                 <FormField
                   control={form.control}
                   name={`dependents.${index}.Suffix`}
@@ -977,7 +977,7 @@ export default function ApplicationForm() {
                   )}
                 />
               </div>
-              <div className="col-span-3">
+              <div className="col-span-3 md:col-span-4">
                 <FormField
                   control={form.control}
                   name={`dependents.${index}.Relationship`}
@@ -997,7 +997,7 @@ export default function ApplicationForm() {
                   )}
                 />
               </div>
-              <div>
+              <div className="col-span-3">
                 <FormField
                   control={form.control}
                   name={`dependents.${index}.Sex`}

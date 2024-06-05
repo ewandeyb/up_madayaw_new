@@ -35,7 +35,7 @@ const DemoPage = () => {
       if (isAdmin) {
         // Render the DataTable if the user is admin
         return (
-          <div className="overflow-y-auto space-y-5 w-full">
+          <div className="overflow-y-auto space-y-5 w-full ">
             <h1 className="text-3xl font-bold">Members</h1>
             <DataTable columns={columns} data={data} />
           </div>

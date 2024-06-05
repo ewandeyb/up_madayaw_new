@@ -140,7 +140,7 @@ export default function ViewApplication() {
 
   return (
     <>
-      <header className="bg-gray-100 dark:bg-gray-800 py-8 px-4 md:px-6">
+      <header className="max-w-screen bg-gray-100 dark:bg-gray-800 py-8 px-4 md:px-6">
         <div className="container mx-auto flex items-center gap-4">
           <Avatar>
             <AvatarImage alt="User Avatar" />
@@ -187,7 +187,7 @@ export default function ViewApplication() {
           </CardHeader>
           <CardContent>
             {member && member.MemberData ? (
-              <div className="grid grid-cols-3 gap-2">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
                 {Object.entries(member.MemberData).map(([key, value]) => (
                   <React.Fragment key={key}>
                     <div className="flex text-sm gap-2 p-4">
@@ -210,7 +210,7 @@ export default function ViewApplication() {
                 <div key={index}>
                   <hr className="mt-5 mb-5"></hr>
                   <h3 className="mb-5 font-bold">Dependent {index + 1}</h3>
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
                     {Object.entries(dependent).map(([key, value]) => (
                       <div key={key} className="flex flex-col">
                         <span className="font-bold text-upcolor dark:text-white">
@@ -237,7 +237,7 @@ export default function ViewApplication() {
           </CardHeader>
           <CardContent>
             {address && address[0] ? (
-              <div className="grid grid-cols-3 gap-2">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                 {Object.entries({
                   ...address[0],
                 }).map(([key, value]) => (
@@ -266,7 +266,7 @@ export default function ViewApplication() {
           </CardHeader>
           <CardContent>
             {address && address[1] ? (
-              <div className="grid grid-cols-3 gap-2">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                 {Object.entries({
                   ...address[1],
                 }).map(([key, value]) => (
@@ -296,7 +296,7 @@ export default function ViewApplication() {
           </CardHeader>
           <CardContent>
             {contact ? (
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                 {Object.entries(contact).map(([key, value]) => (
                   <div key={key} className="flex flex-col">
                     <span className="font-bold text-upcolor dark:text-white">
@@ -314,7 +314,7 @@ export default function ViewApplication() {
             <hr className="mt-5 mb-5"></hr>
             <h1 className=" mb-5 font-bold">Occupation</h1>
             {occupation && occupation[0] ? (
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
                 {Object.entries(occupation[0]).map(([key, value]) => (
                   <div key={key} className="flex flex-col">
                     <span className="font-bold text-upcolor dark:text-white">
@@ -332,7 +332,7 @@ export default function ViewApplication() {
             <hr className="mt-5 mb-5"></hr>
             <h1 className=" mb-5 font-bold">Survey Data</h1>
             {survey && survey[0] ? (
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 ">
                 {Object.entries(survey[0]).map(([key, value]) => (
                   <div key={key} className="flex flex-col">
                     <span className="font-bold text-upcolor dark:text-white">

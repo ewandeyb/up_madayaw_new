@@ -7,9 +7,7 @@ import { Button } from "@/components/ui/button";
 import SignOut from "./SignOut";
 
 export default function SideNav() {
-  return (
-    <SideBar className="h-screen hidden lg:block dark:bg-graident-dark flex-1" />
-  );
+  return <SideBar className="h-screen hidden lg:block  flex-1" />;
 }
 
 export const SideBar = ({ className }: { className?: string }) => {

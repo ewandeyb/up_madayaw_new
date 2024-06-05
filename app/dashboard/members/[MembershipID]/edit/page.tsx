@@ -941,7 +941,7 @@ export default function Edit() {
               <hr className="mt-5 mb-5"></hr>
               <h3 className="mb-5 font-bold">Dependent {index + 1}</h3>
               <div className="grid grid-cols-1 md:grid-cols-7 lg:grid-cols-7 gap-2">
-                <div className="col-span-2">
+                <div className="col-span-3 md:col-span-4 lg:col-span-4">
                   <FormField
                     control={form.control}
                     name={
@@ -965,7 +965,7 @@ export default function Edit() {
                     )}
                   />
                 </div>
-                <div className="col-span-2">
+                <div className="col-span-3 md:col-span-3">
                   <FormField
                     control={form.control}
                     name={
@@ -989,7 +989,7 @@ export default function Edit() {
                     )}
                   />
                 </div>
-                <div className="col-span-2">
+                <div className="col-span-3 md:col-span-4">
                   <FormField
                     control={form.control}
                     name={
@@ -1013,7 +1013,7 @@ export default function Edit() {
                     )}
                   />
                 </div>
-                <div>
+                <div className="col-span-3 md:col-span-1">
                   <FormField
                     control={form.control}
                     name={
@@ -1037,7 +1037,7 @@ export default function Edit() {
                     )}
                   />
                 </div>
-                <div className="col-span-3">
+                <div className="col-span-2">
                   <FormField
                     control={form.control}
                     name={
@@ -1091,7 +1091,7 @@ export default function Edit() {
                     )}
                   />
                 </div>
-                <div className="col-span-3">
+                <div className="col-span-3 md:col-span-3">
                   <FormField
                     control={form.control}
                     name={
@@ -1115,7 +1115,7 @@ export default function Edit() {
                     )}
                   />
                 </div>
-                <div>
+                <div className="col-span-3 md:col-span-4">
                   <FormField
                     control={form.control}
                     name={
@@ -1150,11 +1150,11 @@ export default function Edit() {
             </div>
           ))}
 
-          <hr></hr>
+          <hr className="py-2"></hr>
           <div className="p-2">
             <h1 className="text-upcolor font-bold">Survey Questions</h1>
             <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-6 gap-2">
-              <div>
+              <div className="col-span-3 md:col-span-2">
                 <FormField
                   control={form.control}
                   name="PrevMemberStatus"
@@ -1189,29 +1189,7 @@ export default function Edit() {
                   )}
                 />
               </div>
-              <div className="col-span-3">
-                <FormField
-                  control={form.control}
-                  name="LeaveReason"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Reason for leaving</FormLabel>
-                      <FormControl>
-                        <Input
-                          type="text"
-                          {...field}
-                          onChange={field.onChange}
-                        />
-                      </FormControl>
-                      <FormDescription>
-                        What reasons (if any) did you have for leaving?
-                      </FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-              <div className="col-span-2">
+              <div className="col-span-3 md:col-span-4">
                 <FormField
                   control={form.control}
                   name="ReferralName"
@@ -1228,6 +1206,28 @@ export default function Edit() {
                       <FormDescription>
                         Name of person who referred/recruited you to apply (if
                         any)
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+              <div className="col-span-3 md:col-span-6">
+                <FormField
+                  control={form.control}
+                  name="LeaveReason"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Reason for leaving</FormLabel>
+                      <FormControl>
+                        <Input
+                          type="text"
+                          {...field}
+                          onChange={field.onChange}
+                        />
+                      </FormControl>
+                      <FormDescription>
+                        What reasons (if any) did you have for leaving?
                       </FormDescription>
                       <FormMessage />
                     </FormItem>
