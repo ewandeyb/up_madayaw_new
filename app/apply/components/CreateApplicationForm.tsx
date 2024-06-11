@@ -149,7 +149,7 @@ export default function ApplicationForm() {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="p-2">
         <Tabs defaultValue="personal">
-          <TabsList className="grid w-full grid-cols-7">
+          <TabsList className="grid w-full grid-cols-1 overflow-x-auto md:grid-cols-3 lg:grid-cols-7">
             <TabsTrigger value="personal">Personal Data</TabsTrigger>
             <TabsTrigger value="spouse">Spouse Data</TabsTrigger>
             <TabsTrigger value="address">Address Data</TabsTrigger>
