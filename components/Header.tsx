@@ -6,7 +6,6 @@ import { AlignJustify } from "lucide-react";
 import { readUserSession } from "@/lib/actions";
 import ModeToggle from "./ToggleDarkMode";
 import coop from "@/components/img/coop_no_bg.png";
-import { cn } from "@/lib/utils";
 
 export default async function Header() {
   const { data: userSession } = await readUserSession();
@@ -70,9 +69,9 @@ export default async function Header() {
           variant="up"
           className=" text-white font-bold border w-26 dark:bg-upcolor"
         >
-          <a href="/apply" className=" dark:text-white">
+          <Link href="/apply" className=" dark:text-white">
             Apply Now
-          </a>
+          </Link>
         </Button>
       </nav>
       <Sheet>
@@ -123,7 +122,9 @@ export default async function Header() {
               variant="up"
               className=" text-white font-bold border "
             >
-              Apply Now!
+              <Link href="/apply" className=" dark:text-white">
+                Apply Now
+              </Link>
             </Button>
             <Image
               src={coop}

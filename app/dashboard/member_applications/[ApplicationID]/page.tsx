@@ -15,7 +15,7 @@ import readOccupation from "../../members/hooks/fetchOccupationData";
 import readSurvey from "../../members/hooks/fetchSurveyData";
 import readDependent from "../../members/hooks/fetchDependentData";
 import readApplication from "../../members/hooks/fetchApplication";
-
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 export default function ViewApplication() {
   const { ApplicationID } = useParams();
   const router = useRouter();
@@ -172,174 +172,262 @@ export default function ViewApplication() {
       </header>
 
       <div className="flex flex-col overflow-y-96 ">
-        <Card className="">
-          <CardHeader className="flex flex-row items-center justify-between">
-            <CardTitle>Member Details</CardTitle>
-          </CardHeader>
-          <CardContent>
-            {member ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
-                {Object.entries(member).map(([key, value]) => (
-                  <React.Fragment key={key}>
-                    <div className="flex text-sm gap-2 p-4">
-                      <span className="font-bold text-upcolor dark:text-white">
-                        {key}:{" "}
-                      </span>
-                      {"   "}
-                      <span className="font-semibold text-black dark:text-slate-500">
-                        {String(value) ?? "N/A"}
-                      </span>
-                    </div>
-                  </React.Fragment>
-                ))}
-              </div>
-            ) : (
-              <p>No Member Data Available</p>
-            )}
-            {dependent && dependent.length > 0 ? (
-              dependent.map((dependent: any, index: number) => (
-                <div key={index}>
-                  <hr className="mt-5 mb-5"></hr>
-                  <h3 className="mb-5 font-bold">Dependent {index + 1}</h3>
+        <Tabs defaultValue="member">
+          <TabsList className="grid w-full grid-cols-1 overflow-x-auto md:grid-cols-3 lg:grid-cols-7">
+            <TabsTrigger value="member">Member Data</TabsTrigger>
+            <TabsTrigger value="dependents">Dependent Data</TabsTrigger>
+            <TabsTrigger value="address">Address Data</TabsTrigger>
+            <TabsTrigger value="relative">Relative Data</TabsTrigger>
+            <TabsTrigger value="contact">Contact Data</TabsTrigger>
+            <TabsTrigger value="occupation">Occupation Data</TabsTrigger>
+            <TabsTrigger value="survey">Survey Data</TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="member">
+            <Card className="">
+              <CardHeader className="flex flex-row items-center justify-between">
+                <CardTitle>Member Details</CardTitle>
+                <Button
+                  variant="outline"
+                  onClick={() => {
+                    router.push(`/dashboard/members/${ApplicationID}/edit`);
+                  }}
+                  className="w-1/6 mt-5 ml-auto mb-5"
+                >
+                  Edit
+                </Button>
+              </CardHeader>
+              <CardContent>
+                {member ? (
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
-                    {Object.entries(dependent).map(([key, value]) => (
-                      <div key={key} className="flex flex-col">
-                        <span className="font-bold text-upcolor dark:text-white">
-                          {key}:
-                        </span>
-                        <span className="font-semibold text-black dark:text-slate-500">
-                          {String(value) ?? "N/A"}
-                        </span>
+                    {Object.entries(member)
+                      .filter(([key]) => key != "MembershipID")
+                      .map(([key, value]) => (
+                        <React.Fragment key={key}>
+                          <div className="flex text-sm gap-2 p-4">
+                            <span className="font-bold text-upcolor dark:text-white">
+                              {key}:{" "}
+                            </span>
+                            {"   "}
+                            <span className="font-semibold text-black dark:text-slate-500">
+                              {String(value) ?? "N/A"}
+                            </span>
+                          </div>
+                        </React.Fragment>
+                      ))}
+                  </div>
+                ) : (
+                  <p>No Member Data Available</p>
+                )}
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="dependents">
+            <Card>
+              <CardHeader>
+                <CardTitle>Dependent Details</CardTitle>
+              </CardHeader>
+              <CardContent>
+                {dependent && dependent.length > 0 ? (
+                  dependent.map((dependent: any, index: number) => (
+                    <div key={index}>
+                      <hr className="mt-5 mb-5"></hr>
+                      <h3 className="mb-5 font-bold">Dependent {index + 1}</h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+                        {Object.entries(dependent)
+                          .filter(
+                            ([key]) =>
+                              key != "AssocMemberID" &&
+                              key != "created_at" &&
+                              key != "DependentID"
+                          )
+                          .map(([key, value]) => (
+                            <div key={key} className="flex flex-col">
+                              <span className="font-bold text-upcolor dark:text-white">
+                                {key}:
+                              </span>
+                              <span className="font-semibold text-black dark:text-slate-500">
+                                {String(value) ?? "N/A"}
+                              </span>
+                            </div>
+                          ))}
                       </div>
-                    ))}
-                  </div>
-                </div>
-              ))
-            ) : (
-              <p>No dependent data available</p>
-            )}
-          </CardContent>
-        </Card>
-
-        {/* ADDRESS OF PERSON */}
-        <Card className="h-3/6">
-          <CardHeader>
-            <CardTitle>Address Details</CardTitle>
-          </CardHeader>
-          <CardContent>
-            {address && address[0] ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
-                {Object.entries({
-                  ...address[0],
-                }).map(([key, value]) => (
-                  <React.Fragment key={key}>
-                    <div className="flex text-sm gap-2 p-4">
-                      <span className="font-bold text-upcolor dark:text-white">
-                        {key}:{" "}
-                      </span>
-                      {"   "}
-                      <span className="font-semibold text-black dark:text-slate-500">
-                        {String(value) ?? "N/A"}
-                      </span>
                     </div>
-                  </React.Fragment>
-                ))}
-              </div>
-            ) : (
-              <p>No address details available</p>
-            )}
-          </CardContent>
-        </Card>
-        {/* ADDRESS OF RELATIVE PERSON */}
-        <Card className="h-3/6">
-          <CardHeader>
-            <CardTitle>Address Relative Details</CardTitle>
-          </CardHeader>
-          <CardContent>
-            {address && address[1] ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
-                {Object.entries({
-                  ...address[1],
-                }).map(([key, value]) => (
-                  <React.Fragment key={key}>
-                    <div className="flex text-sm gap-2 p-4">
-                      <span className="font-bold text-upcolor dark:text-white">
-                        {key}:{" "}
-                      </span>
-                      {"   "}
-                      <span className="font-semibold text-black dark:text-slate-500">
-                        {String(value) ?? "N/A"}
-                      </span>
-                    </div>
-                  </React.Fragment>
-                ))}
-              </div>
-            ) : (
-              <p>No address details available</p>
-            )}
-          </CardContent>
-        </Card>
+                  ))
+                ) : (
+                  <p>No dependent data available</p>
+                )}
+              </CardContent>
+            </Card>
+          </TabsContent>
 
-        {/* Contact */}
-        <Card className="">
-          <CardHeader>
-            <CardTitle>Contact Details</CardTitle>
-          </CardHeader>
-          <CardContent>
-            {contact ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
-                {Object.entries(contact).map(([key, value]) => (
-                  <div key={key} className="flex flex-col">
-                    <span className="font-bold text-upcolor dark:text-white">
-                      {key}:
-                    </span>
-                    <span className="font-semibold text-black dark:text-slate-500">
-                      {String(value) ?? "N/A"}
-                    </span>
+          <TabsContent value="address">
+            <Card className="h-3/6">
+              <CardHeader>
+                <CardTitle>Address Details</CardTitle>
+              </CardHeader>
+              <CardContent>
+                {address && address[0] ? (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                    {Object.entries({
+                      ...address[0],
+                    })
+                      .filter(
+                        ([key]) =>
+                          key != "created_at" &&
+                          key != "AssocMemberID" &&
+                          key != "IsMemberAddress" &&
+                          key != "IsRelativeAddress"
+                      )
+                      .map(([key, value]) => (
+                        <React.Fragment key={key}>
+                          <div className="flex text-sm gap-2 p-4">
+                            <span className="font-bold text-upcolor dark:text-white">
+                              {key}:{" "}
+                            </span>
+                            {"   "}
+                            <span className="font-semibold text-black dark:text-slate-500">
+                              {String(value) ?? "N/A"}
+                            </span>
+                          </div>
+                        </React.Fragment>
+                      ))}
                   </div>
-                ))}
-              </div>
-            ) : (
-              <p>No contact details available</p>
-            )}
-            <hr className="mt-5 mb-5"></hr>
-            <h1 className=" mb-5 font-bold">Occupation</h1>
-            {occupation && occupation[0] ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
-                {Object.entries(occupation[0]).map(([key, value]) => (
-                  <div key={key} className="flex flex-col">
-                    <span className="font-bold text-upcolor dark:text-white">
-                      {key}:
-                    </span>
-                    <span className="font-semibold text-black dark:text-slate-500">
-                      {String(value) ?? "N/A"}
-                    </span>
+                ) : (
+                  <p>No address details available</p>
+                )}
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="relative">
+            <Card className="h-3/6">
+              <CardHeader>
+                <CardTitle>Address Relative Details</CardTitle>
+              </CardHeader>
+              <CardContent>
+                {address && address[1] ? (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                    {Object.entries({
+                      ...address[1],
+                    })
+                      .filter(
+                        ([key]) =>
+                          key != "created_at" &&
+                          key != "AssocMemberID" &&
+                          key != "IsMemberAddress" &&
+                          key != "IsRelativeAddress"
+                      )
+                      .map(([key, value]) => (
+                        <React.Fragment key={key}>
+                          <div className="flex text-sm gap-2 p-4">
+                            <span className="font-bold text-upcolor dark:text-white">
+                              {key}:{" "}
+                            </span>
+                            {"   "}
+                            <span className="font-semibold text-black dark:text-slate-500">
+                              {String(value) ?? "N/A"}
+                            </span>
+                          </div>
+                        </React.Fragment>
+                      ))}
                   </div>
-                ))}
-              </div>
-            ) : (
-              <p>No occupation data available</p>
-            )}
-            <hr className="mt-5 mb-5"></hr>
-            <h1 className=" mb-5 font-bold">Survey Data</h1>
-            {survey && survey[0] ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
-                {Object.entries(survey[0]).map(([key, value]) => (
-                  <div key={key} className="flex flex-col">
-                    <span className="font-bold text-upcolor dark:text-white">
-                      {key}:
-                    </span>
-                    <span className="font-semibold text-black dark:text-slate-500">
-                      {String(value) ?? "N/A"}
-                    </span>
+                ) : (
+                  <p>No address details available</p>
+                )}
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="contact">
+            <Card className="">
+              <CardHeader>
+                <CardTitle>Contact Details</CardTitle>
+              </CardHeader>
+              <CardContent>
+                {contact ? (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                    {Object.entries(contact)
+                      .filter(([key]) => key != "AssocMemberID")
+                      .map(([key, value]) => (
+                        <div key={key} className="flex flex-col">
+                          <span className="font-bold text-upcolor dark:text-white">
+                            {key}:
+                          </span>
+                          <span className="font-semibold text-black dark:text-slate-500">
+                            {String(value) ?? "N/A"}
+                          </span>
+                        </div>
+                      ))}
                   </div>
-                ))}
-              </div>
-            ) : (
-              <p>No survey data available</p>
-            )}
-          </CardContent>
-        </Card>
+                ) : (
+                  <p>No contact details available</p>
+                )}
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="occupation">
+            <Card>
+              <CardHeader>
+                <CardTitle>Occupation Details</CardTitle>
+              </CardHeader>
+              <CardContent>
+                {occupation && occupation[0] ? (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+                    {Object.entries(occupation[0])
+                      .filter(
+                        ([key]) => key != "AssocMemberID" && key != "created_at"
+                      )
+                      .map(([key, value]) => (
+                        <div key={key} className="flex flex-col">
+                          <span className="font-bold text-upcolor dark:text-white">
+                            {key}:
+                          </span>
+                          <span className="font-semibold text-black dark:text-slate-500">
+                            {String(value) ?? "N/A"}
+                          </span>
+                        </div>
+                      ))}
+                  </div>
+                ) : (
+                  <p>No occupation data available</p>
+                )}
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="survey">
+            <Card>
+              <CardHeader>
+                <CardTitle>Survey Details</CardTitle>
+              </CardHeader>
+              <CardContent>
+                {survey && survey[0] ? (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 ">
+                    {Object.entries(survey[0])
+                      .filter(
+                        ([key]) => key != "AssocMemberID" && key != "created_at"
+                      )
+                      .map(([key, value]) => (
+                        <div key={key} className="flex flex-col">
+                          <span className="font-bold text-upcolor dark:text-white">
+                            {key}:
+                          </span>
+                          <span className="font-semibold text-black dark:text-slate-500">
+                            {String(value) ?? "N/A"}
+                          </span>
+                        </div>
+                      ))}
+                  </div>
+                ) : (
+                  <p>No survey data available</p>
+                )}
+              </CardContent>
+            </Card>
+          </TabsContent>
+        </Tabs>
       </div>
     </>
   );
