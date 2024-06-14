@@ -100,7 +100,7 @@ export default function Home() {
             </div>
             <div className="relative">
               <div className="p-2 rounded inline-block mt-6">
-                <p className="text-black dark:text-white sm:text-base lg:text-lg font-semibold dark:text-white ">
+                <p className="text-black dark:text-white sm:text-base lg:text-lg font-semibold">
                   Empowering communities through sustainable development.
                 </p>
               </div>
@@ -222,7 +222,7 @@ export default function Home() {
                   className="w-full h-full lg:w-56 lg:h-56 xl:w-80 xl:h-80 object-contain p-4"
                   src={announcement}
                 />
-                <ul className=" w-full h-[270px] p-4 sm:h-[270px] md:h-[270px] lg:h-[400px] xl:h-[400px] 2xl:h-[405px] text-left overflow-y-auto p-4">
+                <ul className=" w-full h-[270px] sm:h-[270px] md:h-[270px] lg:h-[400px] xl:h-[400px] 2xl:h-[405px] text-left overflow-y-auto p-4">
                   <li className="mb-2">
                     <p className="text-base sm:text-base md:text-base lg:text-base xl:text-base 2xl:text-lg text-left">
                       Meet the New Team
