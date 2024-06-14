@@ -38,6 +38,11 @@ export default function NavLinks() {
         href: "/dashboard/member_applications",
         text: "Member Applications",
         Icon: ReaderIcon,
+      },
+      {
+        href: "/dashboard/loan_applications",
+        text: "Loan Applications",
+        Icon: ReaderIcon,
       }
     );
   }
