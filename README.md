@@ -132,9 +132,6 @@ The UP Madayaw Cooperative system is deployed on Vercel for seamless and scalabl
 
     - Your application will be available at the URL provided by Vercel.
 
-## Contributing
-
-We welcome contributions to improve the UP Madayaw Cooperative system! Please check our [contribution guidelines](CONTRIBUTING.md) for more details.
 
 ## License
 
